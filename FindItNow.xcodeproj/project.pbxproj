@@ -1,0 +1,458 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		09BBB5D6135D8259009FC6BA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09BBB5D5135D8259009FC6BA /* UIKit.framework */; };
+		09BBB5D8135D825A009FC6BA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09BBB5D7135D8259009FC6BA /* Foundation.framework */; };
+		09BBB5DA135D825A009FC6BA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09BBB5D9135D825A009FC6BA /* CoreGraphics.framework */; };
+		09BBB5E0135D825A009FC6BA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 09BBB5DE135D825A009FC6BA /* InfoPlist.strings */; };
+		09BBB5E3135D825A009FC6BA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 09BBB5E2135D825A009FC6BA /* main.m */; };
+		09BBB5E6135D825A009FC6BA /* FindItNowAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 09BBB5E5135D825A009FC6BA /* FindItNowAppDelegate.m */; };
+		09BBB5E9135D825A009FC6BA /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09BBB5E7135D825A009FC6BA /* MainWindow.xib */; };
+		09BBB5EC135D825A009FC6BA /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09BBB5EB135D825A009FC6BA /* RootViewController.m */; };
+		09BBB5EF135D825A009FC6BA /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09BBB5ED135D825A009FC6BA /* RootViewController.xib */; };
+		09BBB5F6135D825A009FC6BA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09BBB5D5135D8259009FC6BA /* UIKit.framework */; };
+		09BBB5F7135D825A009FC6BA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09BBB5D7135D8259009FC6BA /* Foundation.framework */; };
+		09BBB5F8135D825A009FC6BA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09BBB5D9135D825A009FC6BA /* CoreGraphics.framework */; };
+		09BBB600135D825A009FC6BA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 09BBB5FE135D825A009FC6BA /* InfoPlist.strings */; };
+		09BBB603135D825A009FC6BA /* FindItNowTests.h in Resources */ = {isa = PBXBuildFile; fileRef = 09BBB602135D825A009FC6BA /* FindItNowTests.h */; };
+		09BBB605135D825A009FC6BA /* FindItNowTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 09BBB604135D825A009FC6BA /* FindItNowTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		09BBB5F9135D825A009FC6BA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 09BBB5C8135D8259009FC6BA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 09BBB5D0135D8259009FC6BA;
+			remoteInfo = FindItNow;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		09BBB5D1135D8259009FC6BA /* FindItNow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FindItNow.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		09BBB5D5135D8259009FC6BA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		09BBB5D7135D8259009FC6BA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		09BBB5D9135D825A009FC6BA /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		09BBB5DD135D825A009FC6BA /* FindItNow-Info.plist */ = {isa = PBXFileReference; path = "FindItNow-Info.plist"; sourceTree = "<group>"; };
+		09BBB5DF135D825A009FC6BA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		09BBB5E1135D825A009FC6BA /* FindItNow-Prefix.pch */ = {isa = PBXFileReference; path = "FindItNow-Prefix.pch"; sourceTree = "<group>"; };
+		09BBB5E2135D825A009FC6BA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		09BBB5E4135D825A009FC6BA /* FindItNowAppDelegate.h */ = {isa = PBXFileReference; path = FindItNowAppDelegate.h; sourceTree = "<group>"; };
+		09BBB5E5135D825A009FC6BA /* FindItNowAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FindItNowAppDelegate.m; sourceTree = "<group>"; };
+		09BBB5E8135D825A009FC6BA /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
+		09BBB5EA135D825A009FC6BA /* RootViewController.h */ = {isa = PBXFileReference; path = RootViewController.h; sourceTree = "<group>"; };
+		09BBB5EB135D825A009FC6BA /* RootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		09BBB5EE135D825A009FC6BA /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/RootViewController.xib; sourceTree = "<group>"; };
+		09BBB5F5135D825A009FC6BA /* FindItNowTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FindItNowTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		09BBB5FD135D825A009FC6BA /* FindItNowTests-Info.plist */ = {isa = PBXFileReference; path = "FindItNowTests-Info.plist"; sourceTree = "<group>"; };
+		09BBB5FF135D825A009FC6BA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		09BBB601135D825A009FC6BA /* FindItNowTests-Prefix.pch */ = {isa = PBXFileReference; path = "FindItNowTests-Prefix.pch"; sourceTree = "<group>"; };
+		09BBB602135D825A009FC6BA /* FindItNowTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FindItNowTests.h; sourceTree = "<group>"; };
+		09BBB604135D825A009FC6BA /* FindItNowTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FindItNowTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		09BBB5CE135D8259009FC6BA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				09BBB5D6135D8259009FC6BA /* UIKit.framework in Frameworks */,
+				09BBB5D8135D825A009FC6BA /* Foundation.framework in Frameworks */,
+				09BBB5DA135D825A009FC6BA /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		09BBB5F1135D825A009FC6BA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				09BBB5F6135D825A009FC6BA /* UIKit.framework in Frameworks */,
+				09BBB5F7135D825A009FC6BA /* Foundation.framework in Frameworks */,
+				09BBB5F8135D825A009FC6BA /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		09BBB5C6135D8259009FC6BA = {
+			isa = PBXGroup;
+			children = (
+				09BBB5DB135D825A009FC6BA /* FindItNow */,
+				09BBB5FB135D825A009FC6BA /* FindItNowTests */,
+				09BBB5D4135D8259009FC6BA /* Frameworks */,
+				09BBB5D2135D8259009FC6BA /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		09BBB5D2135D8259009FC6BA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				09BBB5D1135D8259009FC6BA /* FindItNow.app */,
+				09BBB5F5135D825A009FC6BA /* FindItNowTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		09BBB5D4135D8259009FC6BA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				09BBB5D5135D8259009FC6BA /* UIKit.framework */,
+				09BBB5D7135D8259009FC6BA /* Foundation.framework */,
+				09BBB5D9135D825A009FC6BA /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		09BBB5DB135D825A009FC6BA /* FindItNow */ = {
+			isa = PBXGroup;
+			children = (
+				09BBB5E4135D825A009FC6BA /* FindItNowAppDelegate.h */,
+				09BBB5E5135D825A009FC6BA /* FindItNowAppDelegate.m */,
+				09BBB5E7135D825A009FC6BA /* MainWindow.xib */,
+				09BBB5EA135D825A009FC6BA /* RootViewController.h */,
+				09BBB5EB135D825A009FC6BA /* RootViewController.m */,
+				09BBB5ED135D825A009FC6BA /* RootViewController.xib */,
+				09BBB5DC135D825A009FC6BA /* Supporting Files */,
+			);
+			path = FindItNow;
+			sourceTree = "<group>";
+		};
+		09BBB5DC135D825A009FC6BA /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				09BBB5DD135D825A009FC6BA /* FindItNow-Info.plist */,
+				09BBB5DE135D825A009FC6BA /* InfoPlist.strings */,
+				09BBB5E1135D825A009FC6BA /* FindItNow-Prefix.pch */,
+				09BBB5E2135D825A009FC6BA /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		09BBB5FB135D825A009FC6BA /* FindItNowTests */ = {
+			isa = PBXGroup;
+			children = (
+				09BBB602135D825A009FC6BA /* FindItNowTests.h */,
+				09BBB604135D825A009FC6BA /* FindItNowTests.m */,
+				09BBB5FC135D825A009FC6BA /* Supporting Files */,
+			);
+			path = FindItNowTests;
+			sourceTree = "<group>";
+		};
+		09BBB5FC135D825A009FC6BA /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				09BBB5FD135D825A009FC6BA /* FindItNowTests-Info.plist */,
+				09BBB5FE135D825A009FC6BA /* InfoPlist.strings */,
+				09BBB601135D825A009FC6BA /* FindItNowTests-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		09BBB5D0135D8259009FC6BA /* FindItNow */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 09BBB608135D825A009FC6BA /* Build configuration list for PBXNativeTarget "FindItNow" */;
+			buildPhases = (
+				09BBB5CD135D8259009FC6BA /* Sources */,
+				09BBB5CE135D8259009FC6BA /* Frameworks */,
+				09BBB5CF135D8259009FC6BA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FindItNow;
+			productName = FindItNow;
+			productReference = 09BBB5D1135D8259009FC6BA /* FindItNow.app */;
+			productType = "com.apple.product-type.application";
+		};
+		09BBB5F4135D825A009FC6BA /* FindItNowTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 09BBB60B135D825A009FC6BA /* Build configuration list for PBXNativeTarget "FindItNowTests" */;
+			buildPhases = (
+				09BBB5F0135D825A009FC6BA /* Sources */,
+				09BBB5F1135D825A009FC6BA /* Frameworks */,
+				09BBB5F2135D825A009FC6BA /* Resources */,
+				09BBB5F3135D825A009FC6BA /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				09BBB5FA135D825A009FC6BA /* PBXTargetDependency */,
+			);
+			name = FindItNowTests;
+			productName = FindItNowTests;
+			productReference = 09BBB5F5135D825A009FC6BA /* FindItNowTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		09BBB5C8135D8259009FC6BA /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 09BBB5CB135D8259009FC6BA /* Build configuration list for PBXProject "FindItNow" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 09BBB5C6135D8259009FC6BA;
+			productRefGroup = 09BBB5D2135D8259009FC6BA /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				09BBB5D0135D8259009FC6BA /* FindItNow */,
+				09BBB5F4135D825A009FC6BA /* FindItNowTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		09BBB5CF135D8259009FC6BA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				09BBB5E0135D825A009FC6BA /* InfoPlist.strings in Resources */,
+				09BBB5E9135D825A009FC6BA /* MainWindow.xib in Resources */,
+				09BBB5EF135D825A009FC6BA /* RootViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		09BBB5F2135D825A009FC6BA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				09BBB600135D825A009FC6BA /* InfoPlist.strings in Resources */,
+				09BBB603135D825A009FC6BA /* FindItNowTests.h in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		09BBB5F3135D825A009FC6BA /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		09BBB5CD135D8259009FC6BA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				09BBB5E3135D825A009FC6BA /* main.m in Sources */,
+				09BBB5E6135D825A009FC6BA /* FindItNowAppDelegate.m in Sources */,
+				09BBB5EC135D825A009FC6BA /* RootViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		09BBB5F0135D825A009FC6BA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				09BBB605135D825A009FC6BA /* FindItNowTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		09BBB5FA135D825A009FC6BA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 09BBB5D0135D8259009FC6BA /* FindItNow */;
+			targetProxy = 09BBB5F9135D825A009FC6BA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		09BBB5DE135D825A009FC6BA /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				09BBB5DF135D825A009FC6BA /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		09BBB5E7135D825A009FC6BA /* MainWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				09BBB5E8135D825A009FC6BA /* en */,
+			);
+			name = MainWindow.xib;
+			sourceTree = "<group>";
+		};
+		09BBB5ED135D825A009FC6BA /* RootViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				09BBB5EE135D825A009FC6BA /* en */,
+			);
+			name = RootViewController.xib;
+			sourceTree = "<group>";
+		};
+		09BBB5FE135D825A009FC6BA /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				09BBB5FF135D825A009FC6BA /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		09BBB606135D825A009FC6BA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		09BBB607135D825A009FC6BA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+			};
+			name = Release;
+		};
+		09BBB609135D825A009FC6BA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FindItNow/FindItNow-Prefix.pch";
+				INFOPLIST_FILE = "FindItNow/FindItNow-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		09BBB60A135D825A009FC6BA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FindItNow/FindItNow-Prefix.pch";
+				INFOPLIST_FILE = "FindItNow/FindItNow-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		09BBB60C135D825A009FC6BA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/FindItNow.app/FindItNow";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FindItNowTests/FindItNowTests-Prefix.pch";
+				INFOPLIST_FILE = "FindItNowTests/FindItNowTests-Info.plist";
+				OTHER_LDFLAGS = (
+					"-framework",
+					SenTestingKit,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		09BBB60D135D825A009FC6BA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/FindItNow.app/FindItNow";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FindItNowTests/FindItNowTests-Prefix.pch";
+				INFOPLIST_FILE = "FindItNowTests/FindItNowTests-Info.plist";
+				OTHER_LDFLAGS = (
+					"-framework",
+					SenTestingKit,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		09BBB5CB135D8259009FC6BA /* Build configuration list for PBXProject "FindItNow" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				09BBB606135D825A009FC6BA /* Debug */,
+				09BBB607135D825A009FC6BA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		09BBB608135D825A009FC6BA /* Build configuration list for PBXNativeTarget "FindItNow" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				09BBB609135D825A009FC6BA /* Debug */,
+				09BBB60A135D825A009FC6BA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		09BBB60B135D825A009FC6BA /* Build configuration list for PBXNativeTarget "FindItNowTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				09BBB60C135D825A009FC6BA /* Debug */,
+				09BBB60D135D825A009FC6BA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 09BBB5C8135D8259009FC6BA /* Project object */;
+}
