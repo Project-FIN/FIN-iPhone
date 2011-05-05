@@ -39,20 +39,20 @@
 		09BBB5D5135D8259009FC6BA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		09BBB5D7135D8259009FC6BA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		09BBB5D9135D825A009FC6BA /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		09BBB5DD135D825A009FC6BA /* FindItNow-Info.plist */ = {isa = PBXFileReference; path = "FindItNow-Info.plist"; sourceTree = "<group>"; };
+		09BBB5DD135D825A009FC6BA /* FindItNow-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FindItNow-Info.plist"; sourceTree = "<group>"; };
 		09BBB5DF135D825A009FC6BA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		09BBB5E1135D825A009FC6BA /* FindItNow-Prefix.pch */ = {isa = PBXFileReference; path = "FindItNow-Prefix.pch"; sourceTree = "<group>"; };
+		09BBB5E1135D825A009FC6BA /* FindItNow-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FindItNow-Prefix.pch"; sourceTree = "<group>"; };
 		09BBB5E2135D825A009FC6BA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		09BBB5E4135D825A009FC6BA /* FindItNowAppDelegate.h */ = {isa = PBXFileReference; path = FindItNowAppDelegate.h; sourceTree = "<group>"; };
+		09BBB5E4135D825A009FC6BA /* FindItNowAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FindItNowAppDelegate.h; sourceTree = "<group>"; };
 		09BBB5E5135D825A009FC6BA /* FindItNowAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FindItNowAppDelegate.m; sourceTree = "<group>"; };
 		09BBB5E8135D825A009FC6BA /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
-		09BBB5EA135D825A009FC6BA /* RootViewController.h */ = {isa = PBXFileReference; path = RootViewController.h; sourceTree = "<group>"; };
+		09BBB5EA135D825A009FC6BA /* RootViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		09BBB5EB135D825A009FC6BA /* RootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		09BBB5EE135D825A009FC6BA /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/RootViewController.xib; sourceTree = "<group>"; };
 		09BBB5F5135D825A009FC6BA /* FindItNowTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FindItNowTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
-		09BBB5FD135D825A009FC6BA /* FindItNowTests-Info.plist */ = {isa = PBXFileReference; path = "FindItNowTests-Info.plist"; sourceTree = "<group>"; };
+		09BBB5FD135D825A009FC6BA /* FindItNowTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FindItNowTests-Info.plist"; sourceTree = "<group>"; };
 		09BBB5FF135D825A009FC6BA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		09BBB601135D825A009FC6BA /* FindItNowTests-Prefix.pch */ = {isa = PBXFileReference; path = "FindItNowTests-Prefix.pch"; sourceTree = "<group>"; };
+		09BBB601135D825A009FC6BA /* FindItNowTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FindItNowTests-Prefix.pch"; sourceTree = "<group>"; };
 		09BBB602135D825A009FC6BA /* FindItNowTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FindItNowTests.h; sourceTree = "<group>"; };
 		09BBB604135D825A009FC6BA /* FindItNowTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FindItNowTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
