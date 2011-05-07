@@ -22,6 +22,7 @@
 		1330EDFD1375CE1100940DDB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1330EDFB1375CE1100940DDB /* InfoPlist.strings */; };
 		1330EE001375CE1100940DDB /* FindItNowTests.h in Resources */ = {isa = PBXBuildFile; fileRef = 1330EDFF1375CE1100940DDB /* FindItNowTests.h */; };
 		1330EE021375CE1100940DDB /* FindItNowTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1330EE011375CE1100940DDB /* FindItNowTests.m */; };
+		1330EE0C1375CE3E00940DDB /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1330EE0B1375CE3E00940DDB /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,22 +40,23 @@
 		1330EDD21375CE1100940DDB /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		1330EDD41375CE1100940DDB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1330EDD61375CE1100940DDB /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		1330EDDA1375CE1100940DDB /* FindItNow-Info.plist */ = {isa = PBXFileReference; path = "FindItNow-Info.plist"; sourceTree = "<group>"; };
+		1330EDDA1375CE1100940DDB /* FindItNow-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FindItNow-Info.plist"; sourceTree = "<group>"; };
 		1330EDDC1375CE1100940DDB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		1330EDDE1375CE1100940DDB /* FindItNow-Prefix.pch */ = {isa = PBXFileReference; path = "FindItNow-Prefix.pch"; sourceTree = "<group>"; };
+		1330EDDE1375CE1100940DDB /* FindItNow-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FindItNow-Prefix.pch"; sourceTree = "<group>"; };
 		1330EDDF1375CE1100940DDB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		1330EDE11375CE1100940DDB /* FindItNowAppDelegate.h */ = {isa = PBXFileReference; path = FindItNowAppDelegate.h; sourceTree = "<group>"; };
+		1330EDE11375CE1100940DDB /* FindItNowAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FindItNowAppDelegate.h; sourceTree = "<group>"; };
 		1330EDE21375CE1100940DDB /* FindItNowAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FindItNowAppDelegate.m; sourceTree = "<group>"; };
 		1330EDE51375CE1100940DDB /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
-		1330EDE71375CE1100940DDB /* FindItNowViewController.h */ = {isa = PBXFileReference; path = FindItNowViewController.h; sourceTree = "<group>"; };
+		1330EDE71375CE1100940DDB /* FindItNowViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FindItNowViewController.h; sourceTree = "<group>"; };
 		1330EDE81375CE1100940DDB /* FindItNowViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FindItNowViewController.m; sourceTree = "<group>"; };
 		1330EDEB1375CE1100940DDB /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/FindItNowViewController.xib; sourceTree = "<group>"; };
 		1330EDF21375CE1100940DDB /* FindItNowTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FindItNowTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
-		1330EDFA1375CE1100940DDB /* FindItNowTests-Info.plist */ = {isa = PBXFileReference; path = "FindItNowTests-Info.plist"; sourceTree = "<group>"; };
+		1330EDFA1375CE1100940DDB /* FindItNowTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FindItNowTests-Info.plist"; sourceTree = "<group>"; };
 		1330EDFC1375CE1100940DDB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		1330EDFE1375CE1100940DDB /* FindItNowTests-Prefix.pch */ = {isa = PBXFileReference; path = "FindItNowTests-Prefix.pch"; sourceTree = "<group>"; };
+		1330EDFE1375CE1100940DDB /* FindItNowTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FindItNowTests-Prefix.pch"; sourceTree = "<group>"; };
 		1330EDFF1375CE1100940DDB /* FindItNowTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FindItNowTests.h; sourceTree = "<group>"; };
 		1330EE011375CE1100940DDB /* FindItNowTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FindItNowTests.m; sourceTree = "<group>"; };
+		1330EE0B1375CE3E00940DDB /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1330EE0C1375CE3E00940DDB /* MapKit.framework in Frameworks */,
 				1330EDD31375CE1100940DDB /* UIKit.framework in Frameworks */,
 				1330EDD51375CE1100940DDB /* Foundation.framework in Frameworks */,
 				1330EDD71375CE1100940DDB /* CoreGraphics.framework in Frameworks */,
@@ -84,6 +87,7 @@
 		1330EDC31375CE1000940DDB = {
 			isa = PBXGroup;
 			children = (
+				1330EE0B1375CE3E00940DDB /* MapKit.framework */,
 				1330EDD81375CE1100940DDB /* FindItNow */,
 				1330EDF81375CE1100940DDB /* FindItNowTests */,
 				1330EDD11375CE1000940DDB /* Frameworks */,
