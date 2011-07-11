@@ -23,7 +23,6 @@
 		1330EE001375CE1100940DDB /* FindItNowTests.h in Resources */ = {isa = PBXBuildFile; fileRef = 1330EDFF1375CE1100940DDB /* FindItNowTests.h */; };
 		1330EE021375CE1100940DDB /* FindItNowTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1330EE011375CE1100940DDB /* FindItNowTests.m */; };
 		1330EE0C1375CE3E00940DDB /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1330EE0B1375CE3E00940DDB /* MapKit.framework */; };
-		13ED46A31376199A00E3BCC0 /* MenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13ED46A21376199A00E3BCC0 /* MenuView.xib */; };
 		EAB1995713CA843600B6428C /* MapView.m in Sources */ = {isa = PBXBuildFile; fileRef = EAB1995613CA843500B6428C /* MapView.m */; };
 		EAD02F1D13C6D17300F54449 /* MenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = EAD02F1C13C6D17300F54449 /* MenuView.m */; };
 /* End PBXBuildFile section */
@@ -60,7 +59,6 @@
 		1330EDFF1375CE1100940DDB /* FindItNowTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FindItNowTests.h; sourceTree = "<group>"; };
 		1330EE011375CE1100940DDB /* FindItNowTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FindItNowTests.m; sourceTree = "<group>"; };
 		1330EE0B1375CE3E00940DDB /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		13ED46A21376199A00E3BCC0 /* MenuView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuView.xib; sourceTree = "<group>"; };
 		EAB1995513CA843500B6428C /* MapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapView.h; sourceTree = "<group>"; };
 		EAB1995613CA843500B6428C /* MapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapView.m; sourceTree = "<group>"; };
 		EAD02F1B13C6D17300F54449 /* MenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuView.h; sourceTree = "<group>"; };
@@ -133,7 +131,6 @@
 				1330EDEA1375CE1100940DDB /* FindItNowViewController.xib */,
 				EAB1995513CA843500B6428C /* MapView.h */,
 				EAB1995613CA843500B6428C /* MapView.m */,
-				13ED46A21376199A00E3BCC0 /* MenuView.xib */,
 				EAD02F1B13C6D17300F54449 /* MenuView.h */,
 				EAD02F1C13C6D17300F54449 /* MenuView.m */,
 				1330EDD91375CE1100940DDB /* Supporting Files */,
@@ -245,7 +242,6 @@
 				1330EDDD1375CE1100940DDB /* InfoPlist.strings in Resources */,
 				1330EDE61375CE1100940DDB /* MainWindow.xib in Resources */,
 				1330EDEC1375CE1100940DDB /* FindItNowViewController.xib in Resources */,
-				13ED46A31376199A00E3BCC0 /* MenuView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
