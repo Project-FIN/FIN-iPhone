@@ -12,7 +12,12 @@
 
 @interface MenuView : UIView {
     IBOutlet MapView *mapView;
-
+    UILabel *text;
 }
+@property (nonatomic, retain) IBOutlet UILabel *text;
+@property (nonatomic, retain) IBOutlet MapView *mapView;
+
+- (IBAction) getCategory ;
+- (IBAction)map ;
 
 @end

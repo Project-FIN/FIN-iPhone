@@ -11,6 +11,9 @@
 
 @implementation MenuView
 
+@synthesize text;
+@synthesize mapView;
+
 - (void)dealloc
 {
     [super dealloc];
@@ -24,6 +27,12 @@
 
 - (IBAction)map {
     [self addSubview:mapView];
+}
+
+- (IBAction) getCategory {
+    NSURL *URL=[[NSURL alloc] initWithString:@"http://www.fincdn.org/getCategories.php"];
+    NSString *results = [[NSString alloc] initWithContentsOfURL :URL];
+    [text setText:results ];
 }
 
 @end
