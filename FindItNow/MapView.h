@@ -12,5 +12,5 @@
 @interface MapView : UIView {
     
 }
-
+-(IBAction) removeMap;
 @end

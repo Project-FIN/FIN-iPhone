@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+@class MenuView;
 
 @interface FindItNowViewController : UIViewController {
     
 }
 
+@property (nonatomic, retain) IBOutlet MenuView *menuView;
 @end

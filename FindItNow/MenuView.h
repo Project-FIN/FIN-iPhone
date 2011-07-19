@@ -16,8 +16,10 @@
 }
 @property (nonatomic, retain) IBOutlet UILabel *text;
 @property (nonatomic, retain) IBOutlet MapView *mapView;
+@property (nonatomic, retain) IBOutlet UIScrollView *btnGrid;
 
 - (IBAction) getCategory ;
 - (IBAction)map ;
-
+- (void) initOnStart;
+- (void) initBtnGrid;
 @end

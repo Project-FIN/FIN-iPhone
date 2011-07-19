@@ -18,4 +18,9 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+- (IBAction) removeMap
+{
+    [self removeFromSuperview];
+}
+
 @end
