@@ -23,6 +23,8 @@
 		1330EE001375CE1100940DDB /* FindItNowTests.h in Resources */ = {isa = PBXBuildFile; fileRef = 1330EDFF1375CE1100940DDB /* FindItNowTests.h */; };
 		1330EE021375CE1100940DDB /* FindItNowTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1330EE011375CE1100940DDB /* FindItNowTests.m */; };
 		1330EE0C1375CE3E00940DDB /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1330EE0B1375CE3E00940DDB /* MapKit.framework */; };
+		EA6007FA13E12A6F00ECE0F8 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6007F813E12A6F00ECE0F8 /* MenuViewController.m */; };
+		EA6007FB13E12A6F00ECE0F8 /* MenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA6007F913E12A6F00ECE0F8 /* MenuViewController.xib */; };
 		EAB1995713CA843600B6428C /* MapView.m in Sources */ = {isa = PBXBuildFile; fileRef = EAB1995613CA843500B6428C /* MapView.m */; };
 		EAD02F1D13C6D17300F54449 /* MenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = EAD02F1C13C6D17300F54449 /* MenuView.m */; };
 /* End PBXBuildFile section */
@@ -59,6 +61,9 @@
 		1330EDFF1375CE1100940DDB /* FindItNowTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FindItNowTests.h; sourceTree = "<group>"; };
 		1330EE011375CE1100940DDB /* FindItNowTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FindItNowTests.m; sourceTree = "<group>"; };
 		1330EE0B1375CE3E00940DDB /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		EA6007F713E12A6F00ECE0F8 /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
+		EA6007F813E12A6F00ECE0F8 /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
+		EA6007F913E12A6F00ECE0F8 /* MenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuViewController.xib; sourceTree = "<group>"; };
 		EAB1995513CA843500B6428C /* MapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapView.h; sourceTree = "<group>"; };
 		EAB1995613CA843500B6428C /* MapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapView.m; sourceTree = "<group>"; };
 		EAD02F1B13C6D17300F54449 /* MenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuView.h; sourceTree = "<group>"; };
@@ -133,6 +138,9 @@
 				EAB1995613CA843500B6428C /* MapView.m */,
 				EAD02F1B13C6D17300F54449 /* MenuView.h */,
 				EAD02F1C13C6D17300F54449 /* MenuView.m */,
+				EA6007F713E12A6F00ECE0F8 /* MenuViewController.h */,
+				EA6007F813E12A6F00ECE0F8 /* MenuViewController.m */,
+				EA6007F913E12A6F00ECE0F8 /* MenuViewController.xib */,
 				1330EDD91375CE1100940DDB /* Supporting Files */,
 			);
 			path = FindItNow;
@@ -242,6 +250,7 @@
 				1330EDDD1375CE1100940DDB /* InfoPlist.strings in Resources */,
 				1330EDE61375CE1100940DDB /* MainWindow.xib in Resources */,
 				1330EDEC1375CE1100940DDB /* FindItNowViewController.xib in Resources */,
+				EA6007FB13E12A6F00ECE0F8 /* MenuViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,6 +291,7 @@
 				1330EDE91375CE1100940DDB /* FindItNowViewController.m in Sources */,
 				EAD02F1D13C6D17300F54449 /* MenuView.m in Sources */,
 				EAB1995713CA843600B6428C /* MapView.m in Sources */,
+				EA6007FA13E12A6F00ECE0F8 /* MenuViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
