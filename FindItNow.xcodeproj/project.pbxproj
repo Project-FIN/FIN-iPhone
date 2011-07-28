@@ -25,8 +25,9 @@
 		1330EE0C1375CE3E00940DDB /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1330EE0B1375CE3E00940DDB /* MapKit.framework */; };
 		EA6007FA13E12A6F00ECE0F8 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6007F813E12A6F00ECE0F8 /* MenuViewController.m */; };
 		EA6007FB13E12A6F00ECE0F8 /* MenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA6007F913E12A6F00ECE0F8 /* MenuViewController.xib */; };
+		EA6007FF13E12E5100ECE0F8 /* BuildingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6007FD13E12E5100ECE0F8 /* BuildingViewController.m */; };
+		EA60080013E12E5100ECE0F8 /* BuildingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA6007FE13E12E5100ECE0F8 /* BuildingViewController.xib */; };
 		EAB1995713CA843600B6428C /* MapView.m in Sources */ = {isa = PBXBuildFile; fileRef = EAB1995613CA843500B6428C /* MapView.m */; };
-		EAD02F1D13C6D17300F54449 /* MenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = EAD02F1C13C6D17300F54449 /* MenuView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,10 +65,11 @@
 		EA6007F713E12A6F00ECE0F8 /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
 		EA6007F813E12A6F00ECE0F8 /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
 		EA6007F913E12A6F00ECE0F8 /* MenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuViewController.xib; sourceTree = "<group>"; };
+		EA6007FC13E12E5100ECE0F8 /* BuildingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildingViewController.h; sourceTree = "<group>"; };
+		EA6007FD13E12E5100ECE0F8 /* BuildingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuildingViewController.m; sourceTree = "<group>"; };
+		EA6007FE13E12E5100ECE0F8 /* BuildingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BuildingViewController.xib; sourceTree = "<group>"; };
 		EAB1995513CA843500B6428C /* MapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapView.h; sourceTree = "<group>"; };
 		EAB1995613CA843500B6428C /* MapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapView.m; sourceTree = "<group>"; };
-		EAD02F1B13C6D17300F54449 /* MenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuView.h; sourceTree = "<group>"; };
-		EAD02F1C13C6D17300F54449 /* MenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,10 +136,11 @@
 				1330EDE71375CE1100940DDB /* FindItNowViewController.h */,
 				1330EDE81375CE1100940DDB /* FindItNowViewController.m */,
 				1330EDEA1375CE1100940DDB /* FindItNowViewController.xib */,
+				EA6007FC13E12E5100ECE0F8 /* BuildingViewController.h */,
+				EA6007FD13E12E5100ECE0F8 /* BuildingViewController.m */,
+				EA6007FE13E12E5100ECE0F8 /* BuildingViewController.xib */,
 				EAB1995513CA843500B6428C /* MapView.h */,
 				EAB1995613CA843500B6428C /* MapView.m */,
-				EAD02F1B13C6D17300F54449 /* MenuView.h */,
-				EAD02F1C13C6D17300F54449 /* MenuView.m */,
 				EA6007F713E12A6F00ECE0F8 /* MenuViewController.h */,
 				EA6007F813E12A6F00ECE0F8 /* MenuViewController.m */,
 				EA6007F913E12A6F00ECE0F8 /* MenuViewController.xib */,
@@ -251,6 +254,7 @@
 				1330EDE61375CE1100940DDB /* MainWindow.xib in Resources */,
 				1330EDEC1375CE1100940DDB /* FindItNowViewController.xib in Resources */,
 				EA6007FB13E12A6F00ECE0F8 /* MenuViewController.xib in Resources */,
+				EA60080013E12E5100ECE0F8 /* BuildingViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -289,9 +293,9 @@
 				1330EDE01375CE1100940DDB /* main.m in Sources */,
 				1330EDE31375CE1100940DDB /* FindItNowAppDelegate.m in Sources */,
 				1330EDE91375CE1100940DDB /* FindItNowViewController.m in Sources */,
-				EAD02F1D13C6D17300F54449 /* MenuView.m in Sources */,
 				EAB1995713CA843600B6428C /* MapView.m in Sources */,
 				EA6007FA13E12A6F00ECE0F8 /* MenuViewController.m in Sources */,
+				EA6007FF13E12E5100ECE0F8 /* BuildingViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -12,18 +12,17 @@
 		</object>
 		<object class="NSArray" key="IBDocument.IntegratedClassDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<string>IBUIBarButtonItem</string>
-			<string>IBUILabel</string>
-			<string>IBUINavigationBar</string>
 			<string>IBProxyObject</string>
-			<string>IBUINavigationItem</string>
-			<string>IBUITabBar</string>
-			<string>IBUIToolbar</string>
-			<string>IBUITabBarItem</string>
-			<string>IBUIView</string>
-			<string>IBMKMapView</string>
+			<string>IBUIBarButtonItem</string>
 			<string>IBUIViewController</string>
+			<string>IBUIToolbar</string>
 			<string>IBUITabBarController</string>
+			<string>IBUITabBarItem</string>
+			<string>IBUITabBar</string>
+			<string>IBUINavigationBar</string>
+			<string>IBMKMapView</string>
+			<string>IBUINavigationItem</string>
+			<string>IBUIView</string>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -55,49 +54,12 @@
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 				<bool key="IBUIHorizontal">NO</bool>
 				<object class="IBUIViewController" key="IBUISelectedViewController" id="153409194">
-					<object class="IBUIView" key="IBUIView" id="687425181">
-						<reference key="NSNextResponder"/>
-						<int key="NSvFlags">274</int>
-						<object class="NSMutableArray" key="NSSubviews">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBUILabel" id="451258831">
-								<reference key="NSNextResponder" ref="687425181"/>
-								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{112, 126}, {42, 21}}</string>
-								<reference key="NSSuperview" ref="687425181"/>
-								<reference key="NSNextKeyView" ref="674210495"/>
-								<bool key="IBUIOpaque">NO</bool>
-								<bool key="IBUIClipsSubviews">YES</bool>
-								<int key="IBUIContentMode">7</int>
-								<bool key="IBUIUserInteractionEnabled">NO</bool>
-								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<string key="IBUIText">Label</string>
-								<object class="NSColor" key="IBUITextColor">
-									<int key="NSColorSpace">1</int>
-									<bytes key="NSRGB">MCAwIDAAA</bytes>
-								</object>
-								<nil key="IBUIHighlightedColor"/>
-								<int key="IBUIBaselineAdjustment">1</int>
-								<float key="IBUIMinimumFontSize">10</float>
-							</object>
-						</object>
-						<string key="NSFrameSize">{320, 480}</string>
-						<reference key="NSSuperview"/>
-						<reference key="NSNextKeyView" ref="451258831"/>
-						<object class="NSColor" key="IBUIBackgroundColor">
-							<int key="NSColorSpace">3</int>
-							<bytes key="NSWhite">MQA</bytes>
-							<object class="NSColorSpace" key="NSCustomColorSpace" id="551151372">
-								<int key="NSID">2</int>
-							</object>
-						</object>
-						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-					</object>
 					<object class="IBUITabBarItem" key="IBUITabBarItem" id="444962729">
 						<string key="IBUITitle">Buildings</string>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					</object>
 					<reference key="IBUIParentViewController" ref="675665679"/>
+					<string key="IBUINibName">BuildingViewController</string>
 					<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
 						<int key="IBUIInterfaceOrientation">1</int>
 						<int key="interfaceOrientation">1</int>
@@ -126,8 +88,9 @@
 				<object class="IBUITabBar" key="IBUITabBar" id="674210495">
 					<reference key="NSNextResponder"/>
 					<int key="NSvFlags">266</int>
-					<string key="NSFrame">{{0, 480}, {320, 49}}</string>
+					<string key="NSFrame">{{0, 431}, {320, 49}}</string>
 					<reference key="NSSuperview"/>
+					<reference key="NSNextKeyView"/>
 					<object class="NSColor" key="IBUIBackgroundColor">
 						<int key="NSColorSpace">3</int>
 						<bytes key="NSWhite">MCAwAA</bytes>
@@ -208,7 +171,9 @@
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
 					<bytes key="NSWhite">MC43NQA</bytes>
-					<reference key="NSCustomColorSpace" ref="551151372"/>
+					<object class="NSColorSpace" key="NSCustomColorSpace" id="551151372">
+						<int key="NSID">2</int>
+					</object>
 				</object>
 				<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
 				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
@@ -383,7 +348,6 @@
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="444962729"/>
-							<reference ref="687425181"/>
 						</object>
 						<reference key="parent" ref="675665679"/>
 					</object>
@@ -397,20 +361,6 @@
 						<reference key="object" ref="917767097"/>
 						<reference key="parent" ref="0"/>
 					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">106</int>
-						<reference key="object" ref="687425181"/>
-						<object class="NSMutableArray" key="children">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="451258831"/>
-						</object>
-						<reference key="parent" ref="153409194"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">107</int>
-						<reference key="object" ref="451258831"/>
-						<reference key="parent" ref="687425181"/>
-					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -421,8 +371,6 @@
 					<string>-2.CustomClassName</string>
 					<string>10.IBPluginDependency</string>
 					<string>104.IBPluginDependency</string>
-					<string>106.IBPluginDependency</string>
-					<string>107.IBPluginDependency</string>
 					<string>41.IBPluginDependency</string>
 					<string>42.IBPluginDependency</string>
 					<string>45.IBPluginDependency</string>
@@ -436,6 +384,7 @@
 					<string>85.IBPluginDependency</string>
 					<string>86.CustomClassName</string>
 					<string>86.IBPluginDependency</string>
+					<string>87.CustomClassName</string>
 					<string>87.IBPluginDependency</string>
 					<string>9.IBPluginDependency</string>
 				</object>
@@ -443,8 +392,6 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>FindItNowViewController</string>
 					<string>UIResponder</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -460,6 +407,7 @@
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>MenuViewController</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<string>BuildingViewController</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				</object>
