@@ -30,6 +30,7 @@
         butt.frame = CGRectMake(25+((i%2)*(btnSize+50)), 25+((i/2)*btnSize), btnSize, btnSize);
         
         [butt setTitle:[categories objectAtIndex:i] forState:UIControlStateNormal];
+        [butt addTarget:self action:@selector(map) forControlEvents:UIControlEventTouchDown];
         [btnGrid addSubview:butt];
         [buttons addObject:butt];
     }
