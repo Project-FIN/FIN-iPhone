@@ -12,6 +12,6 @@
 @interface FindItNowViewController : UIViewController {
     
 }
+@property (nonatomic, retain) IBOutlet UITabBarController *tabBarController;
 
-@property (nonatomic, retain) IBOutlet MenuView *menuView;
 @end

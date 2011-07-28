@@ -11,7 +11,7 @@
 
 @implementation FindItNowViewController
 
-@synthesize menuView;
+@synthesize tabBarController;
 
 - (void)dealloc
 {
@@ -30,10 +30,13 @@
 
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
+//where inits go
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [menuView initOnStart];
+    self.view = tabBarController.view;
+    
+//    [menuViewController initOnStart]; w
 }
 
 
