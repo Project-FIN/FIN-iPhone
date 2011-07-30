@@ -23,6 +23,14 @@
 		1330EE001375CE1100940DDB /* FindItNowTests.h in Resources */ = {isa = PBXBuildFile; fileRef = 1330EDFF1375CE1100940DDB /* FindItNowTests.h */; };
 		1330EE021375CE1100940DDB /* FindItNowTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1330EE011375CE1100940DDB /* FindItNowTests.m */; };
 		1330EE0C1375CE3E00940DDB /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1330EE0B1375CE3E00940DDB /* MapKit.framework */; };
+		1346537C13E495C6009E6A53 /* BuildingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1346536E13E495C6009E6A53 /* BuildingViewController.m */; };
+		1346537D13E495C6009E6A53 /* BuildingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1346536F13E495C6009E6A53 /* BuildingViewController.xib */; };
+		1346537E13E495C6009E6A53 /* FindItNowViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1346537113E495C6009E6A53 /* FindItNowViewController.xib */; };
+		1346537F13E495C6009E6A53 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1346537313E495C6009E6A53 /* InfoPlist.strings */; };
+		1346538013E495C6009E6A53 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1346537513E495C6009E6A53 /* MainWindow.xib */; };
+		1346538113E495C6009E6A53 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 1346537813E495C6009E6A53 /* JSONKit.m */; };
+		1346538213E495C6009E6A53 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1346537A13E495C6009E6A53 /* MenuViewController.m */; };
+		1346538313E495C6009E6A53 /* MenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1346537B13E495C6009E6A53 /* MenuViewController.xib */; };
 		EAB1995713CA843600B6428C /* MapView.m in Sources */ = {isa = PBXBuildFile; fileRef = EAB1995613CA843500B6428C /* MapView.m */; };
 		EAD02F1D13C6D17300F54449 /* MenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = EAD02F1C13C6D17300F54449 /* MenuView.m */; };
 /* End PBXBuildFile section */
@@ -59,6 +67,17 @@
 		1330EDFF1375CE1100940DDB /* FindItNowTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FindItNowTests.h; sourceTree = "<group>"; };
 		1330EE011375CE1100940DDB /* FindItNowTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FindItNowTests.m; sourceTree = "<group>"; };
 		1330EE0B1375CE3E00940DDB /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		1346536D13E495C6009E6A53 /* BuildingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildingViewController.h; sourceTree = "<group>"; };
+		1346536E13E495C6009E6A53 /* BuildingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuildingViewController.m; sourceTree = "<group>"; };
+		1346536F13E495C6009E6A53 /* BuildingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BuildingViewController.xib; sourceTree = "<group>"; };
+		1346537213E495C6009E6A53 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = FindItNowViewController.xib; sourceTree = "<group>"; };
+		1346537413E495C6009E6A53 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = InfoPlist.strings; sourceTree = "<group>"; };
+		1346537613E495C6009E6A53 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = MainWindow.xib; sourceTree = "<group>"; };
+		1346537713E495C6009E6A53 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
+		1346537813E495C6009E6A53 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
+		1346537913E495C6009E6A53 /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
+		1346537A13E495C6009E6A53 /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
+		1346537B13E495C6009E6A53 /* MenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuViewController.xib; sourceTree = "<group>"; };
 		EAB1995513CA843500B6428C /* MapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapView.h; sourceTree = "<group>"; };
 		EAB1995613CA843500B6428C /* MapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapView.m; sourceTree = "<group>"; };
 		EAD02F1B13C6D17300F54449 /* MenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuView.h; sourceTree = "<group>"; };
@@ -123,6 +142,15 @@
 		1330EDD81375CE1100940DDB /* FindItNow */ = {
 			isa = PBXGroup;
 			children = (
+				1346536D13E495C6009E6A53 /* BuildingViewController.h */,
+				1346536E13E495C6009E6A53 /* BuildingViewController.m */,
+				1346536F13E495C6009E6A53 /* BuildingViewController.xib */,
+				1346537013E495C6009E6A53 /* en.lproj */,
+				1346537713E495C6009E6A53 /* JSONKit.h */,
+				1346537813E495C6009E6A53 /* JSONKit.m */,
+				1346537913E495C6009E6A53 /* MenuViewController.h */,
+				1346537A13E495C6009E6A53 /* MenuViewController.m */,
+				1346537B13E495C6009E6A53 /* MenuViewController.xib */,
 				1330EDE11375CE1100940DDB /* FindItNowAppDelegate.h */,
 				1330EDE21375CE1100940DDB /* FindItNowAppDelegate.m */,
 				1330EDE41375CE1100940DDB /* MainWindow.xib */,
@@ -167,6 +195,16 @@
 				1330EDFE1375CE1100940DDB /* FindItNowTests-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		1346537013E495C6009E6A53 /* en.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				1346537113E495C6009E6A53 /* FindItNowViewController.xib */,
+				1346537313E495C6009E6A53 /* InfoPlist.strings */,
+				1346537513E495C6009E6A53 /* MainWindow.xib */,
+			);
+			path = en.lproj;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -242,6 +280,11 @@
 				1330EDDD1375CE1100940DDB /* InfoPlist.strings in Resources */,
 				1330EDE61375CE1100940DDB /* MainWindow.xib in Resources */,
 				1330EDEC1375CE1100940DDB /* FindItNowViewController.xib in Resources */,
+				1346537D13E495C6009E6A53 /* BuildingViewController.xib in Resources */,
+				1346537E13E495C6009E6A53 /* FindItNowViewController.xib in Resources */,
+				1346537F13E495C6009E6A53 /* InfoPlist.strings in Resources */,
+				1346538013E495C6009E6A53 /* MainWindow.xib in Resources */,
+				1346538313E495C6009E6A53 /* MenuViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,6 +325,9 @@
 				1330EDE91375CE1100940DDB /* FindItNowViewController.m in Sources */,
 				EAD02F1D13C6D17300F54449 /* MenuView.m in Sources */,
 				EAB1995713CA843600B6428C /* MapView.m in Sources */,
+				1346537C13E495C6009E6A53 /* BuildingViewController.m in Sources */,
+				1346538113E495C6009E6A53 /* JSONKit.m in Sources */,
+				1346538213E495C6009E6A53 /* MenuViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -334,6 +380,30 @@
 				1330EDFC1375CE1100940DDB /* en */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		1346537113E495C6009E6A53 /* FindItNowViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1346537213E495C6009E6A53 /* en */,
+			);
+			name = FindItNowViewController.xib;
+			sourceTree = "<group>";
+		};
+		1346537313E495C6009E6A53 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1346537413E495C6009E6A53 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		1346537513E495C6009E6A53 /* MainWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1346537613E495C6009E6A53 /* en */,
+			);
+			name = MainWindow.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
