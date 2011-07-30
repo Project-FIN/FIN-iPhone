@@ -7,6 +7,7 @@
 //
 
 #import "MenuView.h"
+#import "JSONKit.h"
 
 @implementation MenuView
 
@@ -25,7 +26,8 @@
     NSURL *URL=[[NSURL alloc] initWithString:@"http://www.fincdn.org/getCategories.php"];
     NSString *results = [[NSString alloc] initWithContentsOfURL :URL];
     
-    NSArray *categories = [results componentsSeparatedByString:@","];
+    NSDictionary *categories = [results objectFromJSONString];
+
     NSMutableArray *buttons = [[NSMutableArray alloc] initWithCapacity:[categories count]];
     int btnSize = ( CGRectGetHeight(btnGrid.frame) - 50 )/([categories count]/2);
     //int btnWidth = CGRectGetWidth(btnGrid.frame) / ([categories count

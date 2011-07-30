@@ -19,5 +19,7 @@
 - (IBAction) getCategory ;
 - (IBAction)map ;
 - (void) initBtnGrid;
+- (void) saveCategory;
+- (void) getCategoryList;
 
 @end

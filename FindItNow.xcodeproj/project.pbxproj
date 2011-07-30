@@ -31,6 +31,7 @@
 		1346538113E495C6009E6A53 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 1346537813E495C6009E6A53 /* JSONKit.m */; };
 		1346538213E495C6009E6A53 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1346537A13E495C6009E6A53 /* MenuViewController.m */; };
 		1346538313E495C6009E6A53 /* MenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1346537B13E495C6009E6A53 /* MenuViewController.xib */; };
+		1365764713E4AF990074429F /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1365764613E4AF990074429F /* libsqlite3.dylib */; };
 		EAB1995713CA843600B6428C /* MapView.m in Sources */ = {isa = PBXBuildFile; fileRef = EAB1995613CA843500B6428C /* MapView.m */; };
 		EAD02F1D13C6D17300F54449 /* MenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = EAD02F1C13C6D17300F54449 /* MenuView.m */; };
 /* End PBXBuildFile section */
@@ -78,6 +79,7 @@
 		1346537913E495C6009E6A53 /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
 		1346537A13E495C6009E6A53 /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
 		1346537B13E495C6009E6A53 /* MenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuViewController.xib; sourceTree = "<group>"; };
+		1365764613E4AF990074429F /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		EAB1995513CA843500B6428C /* MapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapView.h; sourceTree = "<group>"; };
 		EAB1995613CA843500B6428C /* MapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapView.m; sourceTree = "<group>"; };
 		EAD02F1B13C6D17300F54449 /* MenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuView.h; sourceTree = "<group>"; };
@@ -89,6 +91,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1365764713E4AF990074429F /* libsqlite3.dylib in Frameworks */,
 				1330EE0C1375CE3E00940DDB /* MapKit.framework in Frameworks */,
 				1330EDD31375CE1100940DDB /* UIKit.framework in Frameworks */,
 				1330EDD51375CE1100940DDB /* Foundation.framework in Frameworks */,
@@ -112,6 +115,7 @@
 		1330EDC31375CE1000940DDB = {
 			isa = PBXGroup;
 			children = (
+				1365764613E4AF990074429F /* libsqlite3.dylib */,
 				1330EE0B1375CE3E00940DDB /* MapKit.framework */,
 				1330EDD81375CE1100940DDB /* FindItNow */,
 				1330EDF81375CE1100940DDB /* FindItNowTests */,
@@ -450,7 +454,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FindItNow/FindItNow-Prefix.pch";
 				INFOPLIST_FILE = "FindItNow/FindItNow-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALIDATE_PRODUCT = NO;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -463,6 +469,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FindItNow/FindItNow-Prefix.pch";
 				INFOPLIST_FILE = "FindItNow/FindItNow-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
