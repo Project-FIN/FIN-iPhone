@@ -32,6 +32,7 @@
 		1346538213E495C6009E6A53 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1346537A13E495C6009E6A53 /* MenuViewController.m */; };
 		1346538313E495C6009E6A53 /* MenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1346537B13E495C6009E6A53 /* MenuViewController.xib */; };
 		1365764713E4AF990074429F /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1365764613E4AF990074429F /* libsqlite3.dylib */; };
+		EA0D7C7113E514E900AE9E14 /* InfoPopUpView.m in Sources */ = {isa = PBXBuildFile; fileRef = EA0D7C7013E514E900AE9E14 /* InfoPopUpView.m */; };
 		EAB1995713CA843600B6428C /* MapView.m in Sources */ = {isa = PBXBuildFile; fileRef = EAB1995613CA843500B6428C /* MapView.m */; };
 /* End PBXBuildFile section */
 
@@ -79,6 +80,8 @@
 		1346537A13E495C6009E6A53 /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
 		1346537B13E495C6009E6A53 /* MenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuViewController.xib; sourceTree = "<group>"; };
 		1365764613E4AF990074429F /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		EA0D7C6F13E514E900AE9E14 /* InfoPopUpView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoPopUpView.h; sourceTree = "<group>"; };
+		EA0D7C7013E514E900AE9E14 /* InfoPopUpView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoPopUpView.m; sourceTree = "<group>"; };
 		EAB1995513CA843500B6428C /* MapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapView.h; sourceTree = "<group>"; };
 		EAB1995613CA843500B6428C /* MapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -160,6 +163,8 @@
 				1330EDEA1375CE1100940DDB /* FindItNowViewController.xib */,
 				EAB1995513CA843500B6428C /* MapView.h */,
 				EAB1995613CA843500B6428C /* MapView.m */,
+				EA0D7C6F13E514E900AE9E14 /* InfoPopUpView.h */,
+				EA0D7C7013E514E900AE9E14 /* InfoPopUpView.m */,
 				1330EDD91375CE1100940DDB /* Supporting Files */,
 			);
 			path = FindItNow;
@@ -326,6 +331,7 @@
 				1346537C13E495C6009E6A53 /* BuildingViewController.m in Sources */,
 				1346538113E495C6009E6A53 /* JSONKit.m in Sources */,
 				1346538213E495C6009E6A53 /* MenuViewController.m in Sources */,
+				EA0D7C7113E514E900AE9E14 /* InfoPopUpView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
