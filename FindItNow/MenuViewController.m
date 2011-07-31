@@ -32,12 +32,12 @@
     
    // NSArray *categories = [results componentsSeparatedByString:@","];
     NSMutableArray *buttons = [[NSMutableArray alloc] initWithCapacity:[categories count]];
-    int btnSize = ( CGRectGetHeight(btnGrid.frame) - 50 )/([categories count]/2);
+    int btnSize = ( CGRectGetHeight(btnGrid.frame) - 60 )/([categories count]/2);
     //int btnWidth = CGRectGetWidth(btnGrid.frame) / ([categories count
     for (int i=0; i < [categories count]; i = i+1) {
         UIButton *butt = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         
-        butt.frame = CGRectMake(25+((i%2)*(btnSize+50)), 25+((i/2)*btnSize), btnSize, btnSize);
+        butt.frame = CGRectMake(btnSize/2+((i%2)*(btnSize+60)), (10+(i/2)*(15+btnSize)), btnSize, btnSize);
         
         [butt setTitle:[categories objectAtIndex:i] forState:UIControlStateNormal];
         [butt addTarget:self action:@selector(map) forControlEvents:UIControlEventTouchDown];

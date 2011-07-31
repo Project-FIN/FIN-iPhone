@@ -107,7 +107,6 @@
 						<string key="NSFrame">{{21, 35}, {279, 365}}</string>
 						<reference key="NSSuperview" ref="930405662"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MC43MDQwNTA0MDM5IDAuOTg5MTMwNDM0OCAwLjc2NzA3MzQ5OTYAA</bytes>
@@ -119,6 +118,7 @@
 						<double key="IBUIContentInset.bottom">2</double>
 						<double key="IBUIContentInset.left">2</double>
 						<double key="IBUIContentInset.right">0.0</double>
+						<bool key="IBUIAlwaysBounceVertical">YES</bool>
 						<double key="IBUIScrollIndicatorInsets.top">2</double>
 						<double key="IBUIScrollIndicatorInsets.bottom">2</double>
 						<double key="IBUIScrollIndicatorInsets.left">2</double>
