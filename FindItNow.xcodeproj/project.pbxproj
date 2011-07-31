@@ -33,7 +33,6 @@
 		1346538313E495C6009E6A53 /* MenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1346537B13E495C6009E6A53 /* MenuViewController.xib */; };
 		1365764713E4AF990074429F /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1365764613E4AF990074429F /* libsqlite3.dylib */; };
 		EAB1995713CA843600B6428C /* MapView.m in Sources */ = {isa = PBXBuildFile; fileRef = EAB1995613CA843500B6428C /* MapView.m */; };
-		EAD02F1D13C6D17300F54449 /* MenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = EAD02F1C13C6D17300F54449 /* MenuView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,8 +81,6 @@
 		1365764613E4AF990074429F /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		EAB1995513CA843500B6428C /* MapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapView.h; sourceTree = "<group>"; };
 		EAB1995613CA843500B6428C /* MapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapView.m; sourceTree = "<group>"; };
-		EAD02F1B13C6D17300F54449 /* MenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuView.h; sourceTree = "<group>"; };
-		EAD02F1C13C6D17300F54449 /* MenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,8 +160,6 @@
 				1330EDEA1375CE1100940DDB /* FindItNowViewController.xib */,
 				EAB1995513CA843500B6428C /* MapView.h */,
 				EAB1995613CA843500B6428C /* MapView.m */,
-				EAD02F1B13C6D17300F54449 /* MenuView.h */,
-				EAD02F1C13C6D17300F54449 /* MenuView.m */,
 				1330EDD91375CE1100940DDB /* Supporting Files */,
 			);
 			path = FindItNow;
@@ -327,7 +322,6 @@
 				1330EDE01375CE1100940DDB /* main.m in Sources */,
 				1330EDE31375CE1100940DDB /* FindItNowAppDelegate.m in Sources */,
 				1330EDE91375CE1100940DDB /* FindItNowViewController.m in Sources */,
-				EAD02F1D13C6D17300F54449 /* MenuView.m in Sources */,
 				EAB1995713CA843600B6428C /* MapView.m in Sources */,
 				1346537C13E495C6009E6A53 /* BuildingViewController.m in Sources */,
 				1346538113E495C6009E6A53 /* JSONKit.m in Sources */,
