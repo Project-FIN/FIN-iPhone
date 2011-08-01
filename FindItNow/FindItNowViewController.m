@@ -59,7 +59,7 @@
     // www.applausible.com/blog/?p=489
     
     //Create a popup
-    InfoPopUpView *popup = [ [InfoPopUpView alloc] initWithFrame:CGRectMake(50, 100, 250, 100)];
+    InfoPopUpView *popup = [ [InfoPopUpView alloc] initWithFrame:CGRectMake(50, 100, 250, 300)];
     
     //Perform animation
     //[popup appear];

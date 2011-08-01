@@ -7,7 +7,7 @@
 //
 
 #import "InfoPopUpView.h"
-
+#import "BuildingViewController.h"
 
 @implementation InfoPopUpView
 
@@ -43,6 +43,14 @@
         [label setTextColor:[UIColor purpleColor]];
         [self addSubview:label];
         [label release];
+        
+        UITableView *table = [ [UITableView alloc] initWithFrame:CGRectMake(10, 50, CGRectGetWidth(frame)-20, 150)];
+        //[table set
+        BuildingViewController *infoTable = [ [BuildingViewController alloc] init];
+        infoTable.tableView = table;
+        
+        
+        [self addSubview:table];
         
     }
     return self;
