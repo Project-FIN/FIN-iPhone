@@ -7,7 +7,7 @@
 //
 
 #import "MapView.h"
-
+#import "InfoPopUpView.h"
 
 @implementation MapView
 
@@ -22,5 +22,28 @@
 {
     [self removeFromSuperview];
 }
+
+-(IBAction) openPopup:(id)sender
+{
+    //LOOK@
+    // www.applausible.com/blog/?p=489
+    
+    //create a dark overlay over the map
+    UIView *overlay = [ [UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame))];
+    [overlay setBackgroundColor:[UIColor colorWithWhite:0 alpha:0.75]];
+    [self addSubview:overlay];
+    
+    //Create a popup
+    InfoPopUpView *popup = [ [InfoPopUpView alloc] initWithFrame:CGRectMake(50, 100, 250, 300)];
+    
+    //Perform animation
+    //[popup appear];
+    //need a UIViewAppear class
+    
+    [overlay addSubview:popup];
+    [popup addExitTapGesture];
+    //  [popup release];
+}
+
 
 @end

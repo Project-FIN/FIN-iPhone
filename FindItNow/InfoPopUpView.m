@@ -29,31 +29,78 @@
 {
     if ((self = [super initWithFrame:frame]))
     {
-        [self setBackgroundColor:[UIColor blackColor]];
-        [self setOpaque:YES];
-        [self setAlpha:0.85];
+        [self setBackgroundColor:[UIColor whiteColor]];
         
         //Add a button
        // UIButton *button = [[UIButton alloc]];
         
-        //Lavel
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 50, 20)];
-        [label setText:@"This is a test for the popUP"];
-        [label setBackgroundColor:[UIColor clearColor]];
-        [label setTextColor:[UIColor purpleColor]];
-        [self addSubview:label];
-        [label release];
+        //Building Name
+        UILabel *buildingName = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, CGRectGetWidth(frame)-20, 20)];
+        buildingName.font = [UIFont boldSystemFontOfSize:16.0f];
+        [buildingName setText:@"Meany Hall (Hardcoded)"];
+        [buildingName setBackgroundColor:[UIColor clearColor]];
+        [buildingName setTextColor:[UIColor purpleColor]];
+        [self addSubview:buildingName];
+        [buildingName release];
         
-        UITableView *table = [ [UITableView alloc] initWithFrame:CGRectMake(10, 50, CGRectGetWidth(frame)-20, 150)];
-        //[table set
+        //Category Type
+        UILabel *categoryLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 30, CGRectGetWidth(frame)-20, 15)];
+        categoryLabel.font = [UIFont boldSystemFontOfSize:14.0f];
+        [categoryLabel setText:@"Vending (Hardcoded)"];
+        [self addSubview:categoryLabel];
+        [categoryLabel release];
+        
+        //Distance
+        UILabel *distanceLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 70, CGRectGetWidth(frame)-20, 20)];
+        distanceLabel.font = [UIFont systemFontOfSize:14.0f];
+        [distanceLabel setText:@"Distance to Here: 0.14 mi (Hardcoded)"];
+        [self addSubview:distanceLabel];
+        [distanceLabel release];
+        
+        //Walking Time
+        UILabel *walkingLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 90, CGRectGetWidth(frame)-20, 20)];
+        walkingLabel.font = [UIFont systemFontOfSize:14.0f];
+        [walkingLabel setText:@"Walking Time: 10 Minutes"];
+        [self addSubview:walkingLabel];
+        [walkingLabel release];
+        
+        
+        //information table
+        UITableView *table = [ [UITableView alloc] initWithFrame:CGRectMake(10, 110, CGRectGetWidth(frame)-20, 150)];
         BuildingViewController *infoTable = [ [BuildingViewController alloc] init];
         infoTable.tableView = table;
+        [table setBackgroundColor:[UIColor brownColor]];
         
         
         [self addSubview:table];
-        
+
     }
     return self;
+}
+
+-(void) addExitTapGesture{
+    if (self.superview == nil){
+        NSLog(@"tjlrjtlf");
+    }
+    
+    UITapGestureRecognizer *exitTap = 
+    [[UITapGestureRecognizer alloc] initWithTarget:self
+                                            action:@selector(exit:)];
+    [self.superview addGestureRecognizer:exitTap];
+}
+
+- (IBAction) exit:(UITapGestureRecognizer *)recognizer
+{
+    CGPoint location = [recognizer locationInView:self.superview];
+
+    if ( !CGRectContainsPoint(self.frame, location) )
+    {
+        UIView *overlay = self.superview;
+        [self removeFromSuperview];
+        [overlay removeGestureRecognizer:recognizer];
+        [overlay removeFromSuperview];
+
+    }
 }
 
 @end

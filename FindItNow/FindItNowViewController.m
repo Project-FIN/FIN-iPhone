@@ -7,7 +7,6 @@
 //
 
 #import "FindItNowViewController.h"
-#import "InfoPopUpView.h"
 
 @implementation FindItNowViewController
 
@@ -53,21 +52,8 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
--(IBAction) openPopup:(id)sender
-{
-    //LOOK@
-    // www.applausible.com/blog/?p=489
-    
-    //Create a popup
-    InfoPopUpView *popup = [ [InfoPopUpView alloc] initWithFrame:CGRectMake(50, 100, 250, 300)];
-    
-    //Perform animation
-    //[popup appear];
-    //need a UIViewAppear class
-    
-    [self.view addSubview:popup];
-    
-    //  [popup release];
-}
+
+
+
 
 @end

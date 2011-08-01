@@ -12,5 +12,6 @@
 @interface InfoPopUpView : UIView {
     
 }
+-(void) addExitTapGesture;
 
 @end

@@ -12,5 +12,8 @@
 @interface MapView : UIView {
     
 }
+
+-(IBAction)openPopup:(id)sender;
 -(IBAction) removeMap;
+
 @end

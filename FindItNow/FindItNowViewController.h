@@ -13,5 +13,5 @@
     
 }
 @property (nonatomic, retain) IBOutlet UITabBarController *tabBarController;
--(IBAction)openPopup:(id)sender;
+
 @end
