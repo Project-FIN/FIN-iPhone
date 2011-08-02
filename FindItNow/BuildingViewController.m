@@ -7,7 +7,7 @@
 //
 
 #import "BuildingViewController.h"
-
+#import "MenuViewController.h"
 
 @implementation BuildingViewController
 @synthesize buildingTable;
@@ -132,6 +132,9 @@
      [self.navigationController pushViewController:detailViewController animated:YES];
      [detailViewController release];
      */
+    MenuViewController *test = [ [MenuViewController alloc] initWithNibName:@"MenuViewController" bundle: self.nibBundle];
+    [self.view addSubview:test.view];
+    
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
