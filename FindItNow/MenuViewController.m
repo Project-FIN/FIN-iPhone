@@ -22,13 +22,11 @@
     NSString *results = [[NSString alloc] initWithContentsOfURL :URL];
     
     NSDictionary *categoriesJson = [results objectFromJSONString];
-    NSLog(@"%@", [categoriesJson description]);
         
     NSMutableArray *categories = [[NSMutableArray alloc] init];
     for (NSDictionary *category in categoriesJson) {
         [categories addObject:[category objectForKey:@"full_name"]];
     }
-    NSLog(@"%@", categories);
     
    // NSArray *categories = [results componentsSeparatedByString:@","];
     NSMutableArray *buttons = [[NSMutableArray alloc] initWithCapacity:[categories count]];
@@ -95,9 +93,9 @@
         
         sqlite3_open(dbpath, &FIN_LOCAL);
         char *errMsg;
-        const char *sql_stmt = "CREATE TABLE IF NOT EXISTS categories (cat_id INTEGER PRIMARY KEY, name TEXT, full_name TEXT, parent INTEGER)";
+        const char *sql_stmt = "CREATE TABLE IF NOT EXISTS categories (cat_id INTEGER PRIMARY KEY, name TEXT, full_name TEXT, parent INTEGER deleted INTEGER)";
         
-        sqlite3_exec(FIN_LOCAL, sql_stmt, NULL, NULL, &errMsg);
+        int execution_result = sqlite3_exec(FIN_LOCAL, sql_stmt, NULL, NULL, &errMsg);
         sqlite3_close(FIN_LOCAL);
     }
     
@@ -128,15 +126,39 @@
     
     const char *dbpath = [databasePath UTF8String];
     
+    NSURL *URL=[[NSURL alloc] initWithString:@"http://www.fincdn.org/getCategories.php"];
+    NSString *results = [[NSString alloc] initWithContentsOfURL :URL];
+    
+    NSDictionary *categoriesJson = [results objectFromJSONString];
+    
     if (sqlite3_open(dbpath, &FIN_LOCAL) == SQLITE_OK)
     {
-        const char *insert_stmt = "INSERT OR REPLACE INTO categories (cat_id, name, full_name, parent) VALUES (1, 'coffee', 'Coffee', 0)";
-                
-        if ((sqlite3_prepare_v2(FIN_LOCAL, insert_stmt, -1, &statement, NULL) == SQLITE_OK)) {
-            sqlite3_step(statement);
-            sqlite3_finalize(statement);
-            sqlite3_close(FIN_LOCAL);
+        NSMutableArray *categories = [[NSMutableArray alloc] init];
+        for (NSDictionary *category in categoriesJson) {
+            NSString *cat_id = [category objectForKey:@"cat_id"];
+            NSString *name = [category objectForKey:@"name"];
+            NSString *full_name = [category objectForKey:@"full_name"];
+            NSString *parent = [category objectForKey:@"parent"];
+            NSString *deleted = [category objectForKey:@"deleted"];
+            NSLog(@"%@", [parent description]);
+
+            NSString *insertSQL = [NSString stringWithFormat:@"INSERT OR REPLACE INTO categories (cat_id, name, full_name, parent, deleted) VALUES (%@, '%@', '%@', %@, %@)", cat_id, name, full_name, parent, deleted];
+            const char *insert_stmt = [insertSQL UTF8String];
+            const char *insert_stmt_2 = "INSERT OR REPLACE INTO categories (cat_id, name, full_name, parent, deleted) VALUES (8, 'vending', 'Vending', 0, 0)";
+            NSLog(@"%@", [insertSQL description]);
+            printf(insert_stmt_2);
+            
+            int execution_result = sqlite3_prepare_v2(FIN_LOCAL, insert_stmt_2, -1, &statement, NULL);
+            printf("Result is %d", execution_result);
+            if (sqlite3_prepare_v2(FIN_LOCAL, insert_stmt_2, -1, &statement, NULL) == SQLITE_OK) {
+                if (sqlite3_step(statement) == SQLITE_DONE) {
+                    printf("HOORAY!!\n");
+                }
+            }
         }
+        
+        sqlite3_finalize(statement);
+        sqlite3_close(FIN_LOCAL);
     }
 }
 
