@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class MapViewController;
 
 @interface BuildingViewController : UITableViewController {
     UITableView *buildingTable;
 }
-@property (nonatomic, retain) IBOutlet UITableView *buildingTable;
+@property (nonatomic, retain) IBOutlet MapViewController *mapView;
 @end

@@ -7,10 +7,10 @@
 //
 
 #import "BuildingViewController.h"
-#import "InfoPopUpView.h"
+#import "MapViewController.h"
 
 @implementation BuildingViewController
-@synthesize buildingTable;
+@synthesize mapView;
 
 /*- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -132,14 +132,17 @@
      [self.navigationController pushViewController:detailViewController animated:YES];
      [detailViewController release];
      */
-    //MenuViewController *test = [ [MenuViewController alloc] initWithNibName:@"MenuViewController" bundle: self.nibBundle];
-    UIView *overlay = [ [UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.tabBarController.view.frame), CGRectGetHeight(self.tabBarController.view.frame))];
+
+    //sample code to add popup on the tabbar 
+    /*UIView *overlay = [ [UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.tabBarController.view.frame), CGRectGetHeight(self.tabBarController.view.frame))];
     [overlay setBackgroundColor:[UIColor colorWithWhite:0 alpha:0.75]];
     [self.tabBarController.view addSubview:overlay];
 
     InfoPopUpView *test = [ [InfoPopUpView alloc] initWithFrame:CGRectMake(10, 40, 150, 300) ];
     [overlay addSubview:test];
-    [test addExitTapGesture];
+    [test addExitTapGesture];*/
+    [self.tabBarController.view addSubview: mapView.view];
+
 
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }

@@ -1,19 +1,19 @@
 //
-//  MapView.h
+//  MapViewController.h
 //  FindItNow
 //
-//  Created by Eric Hare on 2011/7/7.
+//  Created by Chanel Huang on 2011/8/2.
 //  Copyright 2011年 University of Washington. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
 
-@interface MapView : UIView {
+@interface MapViewController : UIViewController {
     
 }
 
 -(IBAction)openPopup:(id)sender;
--(IBAction) removeMap;
+-(IBAction) removeMap:(id)sender;
 
 @end

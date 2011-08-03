@@ -7,7 +7,7 @@
 //
 
 #import "MenuViewController.h"
-#import "MapView.h"
+#import "MapViewController.h"
 #import "JSONKit.h"
 #import "sqlite3.h"
 
@@ -214,8 +214,7 @@
 
 
 - (IBAction)map {
-    //MapView *temp = [ [MapView alloc] init];
-    [self.tabBarController.view addSubview:mapView];
+    [self.tabBarController.view addSubview:mapView.view];
 }
 
 - (IBAction) getCategory {

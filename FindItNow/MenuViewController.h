@@ -7,12 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-@class MapView;
+@class MapViewController;
 
 @interface MenuViewController : UIViewController {
     
 }
-@property (nonatomic, retain) IBOutlet MapView *mapView;
+@property (nonatomic, retain) IBOutlet MapViewController *mapView;
 @property (nonatomic, retain) IBOutlet UILabel *text;
 @property (nonatomic, retain) IBOutlet UIScrollView *btnGrid;
 
