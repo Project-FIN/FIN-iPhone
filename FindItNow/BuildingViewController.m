@@ -7,7 +7,7 @@
 //
 
 #import "BuildingViewController.h"
-#import "MenuViewController.h"
+#import "InfoPopUpView.h"
 
 @implementation BuildingViewController
 @synthesize buildingTable;
@@ -132,9 +132,15 @@
      [self.navigationController pushViewController:detailViewController animated:YES];
      [detailViewController release];
      */
-    MenuViewController *test = [ [MenuViewController alloc] initWithNibName:@"MenuViewController" bundle: self.nibBundle];
-    [self.view addSubview:test.view];
-    
+    //MenuViewController *test = [ [MenuViewController alloc] initWithNibName:@"MenuViewController" bundle: self.nibBundle];
+    UIView *overlay = [ [UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.tabBarController.view.frame), CGRectGetHeight(self.tabBarController.view.frame))];
+    [overlay setBackgroundColor:[UIColor colorWithWhite:0 alpha:0.75]];
+    [self.tabBarController.view addSubview:overlay];
+
+    InfoPopUpView *test = [ [InfoPopUpView alloc] initWithFrame:CGRectMake(10, 40, 150, 300) ];
+    [overlay addSubview:test];
+    [test addExitTapGesture];
+
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
