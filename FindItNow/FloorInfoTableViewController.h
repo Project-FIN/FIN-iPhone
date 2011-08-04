@@ -10,7 +10,8 @@
 
 
 @interface FloorInfoTableViewController : UITableViewController {
-    
+    NSInteger numRow;
 }
+@property  (nonatomic, retain) NSIndexPath *selectedIndex;
 
 @end
