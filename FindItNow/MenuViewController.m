@@ -9,7 +9,6 @@
 #import "MenuViewController.h"
 #import "MapViewController.h"
 #import "JSONKit.h"
-#import "sqlite3.h"
 
 @implementation MenuViewController
 @synthesize mapView;
@@ -18,15 +17,7 @@
 
 - (void) initBtnGrid
 {
-    NSURL *URL=[[NSURL alloc] initWithString:@"http://www.fincdn.org/getCategories.php"];
-    NSString *results = [[NSString alloc] initWithContentsOfURL :URL];
-    
-    NSDictionary *categoriesJson = [results objectFromJSONString];
-        
-    NSMutableArray *categories = [[NSMutableArray alloc] init];
-    for (NSDictionary *category in categoriesJson) {
-        [categories addObject:[category objectForKey:@"full_name"]];
-    }
+    NSArray *categories = [self getCategoryList];
     
    // NSArray *categories = [results componentsSeparatedByString:@","];
     NSMutableArray *buttons = [[NSMutableArray alloc] initWithCapacity:[categories count]];
@@ -71,132 +62,52 @@
 
 - (void)viewDidLoad
 {
-    NSString *docsDir;
-    NSArray *dirPaths;
-    NSString *databasePath;
-    
-    sqlite3 *FIN_LOCAL;
-    
-    // Get the documents directory
-    dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    
-    docsDir = [dirPaths objectAtIndex:0];
-    
-    // Build the path to the database file
-    databasePath = [[NSString alloc] initWithString: [docsDir stringByAppendingPathComponent: @"FIN_LOCAL.db"]];
-    
-    NSFileManager *filemgr = [NSFileManager defaultManager];
-    
-    if ([filemgr fileExistsAtPath: databasePath ] == NO)
-    {
-		const char *dbpath = [databasePath UTF8String];
-        
-        sqlite3_open(dbpath, &FIN_LOCAL);
-        char *errMsg;
-        const char *sql_stmt = "CREATE TABLE IF NOT EXISTS categories (cat_id INTEGER PRIMARY KEY, name TEXT, full_name TEXT, parent INTEGER deleted INTEGER)";
-        
-        int execution_result = sqlite3_exec(FIN_LOCAL, sql_stmt, NULL, NULL, &errMsg);
-        sqlite3_close(FIN_LOCAL);
-    }
-    
-    [filemgr release];
     [super viewDidLoad];
     
-    [self initBtnGrid];
+    dbManager = [[SQLiteManager alloc] initWithDatabaseNamed:@"FIN_LOCAL.db"];
+            
+    NSError *error = [dbManager doQuery:@"CREATE TABLE IF NOT EXISTS categories (cat_id INTEGER PRIMARY KEY, name TEXT, full_name TEXT, parent INTEGER, deleted INTEGER)"];
+    if (error != nil) {
+        NSLog(@"Error: %@",[error localizedDescription]);
+    }
+        
     [self saveCategory];
-    [self getCategoryList];
+    [self initBtnGrid];
 }
 
 - (void)saveCategory
 {
-    sqlite3_stmt *statement;
-    NSString *docsDir;
-    NSArray *dirPaths;
-    NSString *databasePath;
-    
-    sqlite3 *FIN_LOCAL;
-    
-    // Get the documents directory
-    dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    
-    docsDir = [dirPaths objectAtIndex:0];
-    
-    // Build the path to the database file
-    databasePath = [[NSString alloc] initWithString: [docsDir stringByAppendingPathComponent: @"FIN_LOCAL.db"]];
-    
-    const char *dbpath = [databasePath UTF8String];
-    
     NSURL *URL=[[NSURL alloc] initWithString:@"http://www.fincdn.org/getCategories.php"];
     NSString *results = [[NSString alloc] initWithContentsOfURL :URL];
     
     NSDictionary *categoriesJson = [results objectFromJSONString];
     
-    if (sqlite3_open(dbpath, &FIN_LOCAL) == SQLITE_OK)
-    {
-        NSMutableArray *categories = [[NSMutableArray alloc] init];
-        for (NSDictionary *category in categoriesJson) {
-            NSString *cat_id = [category objectForKey:@"cat_id"];
-            NSString *name = [category objectForKey:@"name"];
-            NSString *full_name = [category objectForKey:@"full_name"];
-            NSString *parent = [category objectForKey:@"parent"];
-            NSString *deleted = [category objectForKey:@"deleted"];
-            NSLog(@"%@", [parent description]);
-
-            NSString *insertSQL = [NSString stringWithFormat:@"INSERT OR REPLACE INTO categories (cat_id, name, full_name, parent, deleted) VALUES (%@, '%@', '%@', %@, %@)", cat_id, name, full_name, parent, deleted];
-            const char *insert_stmt = [insertSQL UTF8String];
-            const char *insert_stmt_2 = "INSERT OR REPLACE INTO categories (cat_id, name, full_name, parent, deleted) VALUES (8, 'vending', 'Vending', 0, 0)";
-            NSLog(@"%@", [insertSQL description]);
-            printf(insert_stmt_2);
-            
-            int execution_result = sqlite3_prepare_v2(FIN_LOCAL, insert_stmt_2, -1, &statement, NULL);
-            printf("Result is %d", execution_result);
-            if (sqlite3_prepare_v2(FIN_LOCAL, insert_stmt_2, -1, &statement, NULL) == SQLITE_OK) {
-                if (sqlite3_step(statement) == SQLITE_DONE) {
-                    printf("HOORAY!!\n");
-                }
-            }
-        }
+    for (NSDictionary *category in categoriesJson) {
+        int cat_id = [[category objectForKey:@"cat_id"] intValue];
+        const char *name = (const char *) [[category objectForKey:@"name"] UTF8String];
+        const char *full_name = (const char *) [[category objectForKey:@"full_name"] UTF8String];
+        int parent = [[category objectForKey:@"parent"] intValue];
+        int deleted = [[category objectForKey:@"deleted"] intValue];
         
-        sqlite3_finalize(statement);
-        sqlite3_close(FIN_LOCAL);
+        NSString *sqlStr = [NSString stringWithFormat:@"INSERT OR REPLACE INTO categories (cat_id, name, full_name, parent, deleted) VALUES (%d, '%s', '%s', %d, %d)", cat_id, name, full_name, parent, deleted];
+        NSError *error = [dbManager doQuery:sqlStr];
+        if (error != nil) {
+            NSLog(@"Error: %@",[error localizedDescription]);
+        }
     }
 }
 
-- (void)getCategoryList
-{
-    sqlite3_stmt *statement;
-    NSString *docsDir;
-    NSArray *dirPaths;
-    NSString *databasePath;
+- (NSArray*)getCategoryList
+{   
+    NSString *sqlStr = [NSString stringWithFormat:@"SELECT full_name FROM categories WHERE parent = 0"];
+    NSArray *categoriesList = [dbManager getRowsForQuery:sqlStr];
     
-    sqlite3 *FIN_LOCAL;
-    
-    // Get the documents directory
-    dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    
-    docsDir = [dirPaths objectAtIndex:0];
-    
-    // Build the path to the database file
-    databasePath = [[NSString alloc] initWithString: [docsDir stringByAppendingPathComponent: @"FIN_LOCAL.db"]];
-    const char *dbpath = [databasePath UTF8String];
-
-    
-    if (sqlite3_open(dbpath, &FIN_LOCAL) == SQLITE_OK)
-    {
-        const char *query_stmt = "SELECT * FROM categories";
-        
-        if (sqlite3_prepare_v2(FIN_LOCAL, query_stmt, -1, &statement, NULL) == SQLITE_OK)
-        {
-            if (sqlite3_step(statement) == SQLITE_ROW)
-            {
-                NSString *fullName = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(statement, 2)];
-                NSLog(@"%@", [fullName description]);
-            } else {
-            }
-            sqlite3_finalize(statement);
-        }
-        sqlite3_close(FIN_LOCAL);
+    NSMutableArray *categories = [[NSMutableArray alloc] init];
+    for (NSDictionary *dict in categoriesList) {
+        [categories addObject:[dict objectForKey:@"full_name"]];
     }
+        
+    return categories;
 }
 
 - (void)viewDidUnload

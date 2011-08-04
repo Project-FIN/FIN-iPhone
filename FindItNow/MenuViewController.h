@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SQLiteManager.h"
 @class MapViewController;
 
 @interface MenuViewController : UIViewController {
+    
+    SQLiteManager *dbManager;
     
 }
 @property (nonatomic, retain) IBOutlet MapViewController *mapView;
@@ -20,6 +23,6 @@
 - (IBAction)map ;
 - (void) initBtnGrid;
 - (void) saveCategory;
-- (void) getCategoryList;
+- (NSArray*) getCategoryList;
 
 @end
