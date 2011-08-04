@@ -32,6 +32,11 @@
         NSLog(@"Error: %@",[error localizedDescription]);
     }
     
+    error = [dbManager doQuery:@"CREATE TABLE IF NOT EXISTS floors (fid INTEGER PRIMARY KEY, bid INTEGER, fnum INTEGER, name TEXT, deleted INTEGER)"];
+    if (error != nil) {
+        NSLog(@"Error: %@",[error localizedDescription]);
+    }
+    
     [self saveBuilding];
 }
 
@@ -122,6 +127,21 @@
         int latitude = [[building objectForKey:@"latitude"] intValue];
         int longitude = [[building objectForKey:@"longitude"] intValue];
         int deleted = [[building objectForKey:@"deleted"] intValue];
+        
+        NSArray *fids = [building objectForKey:@"fid"];
+        NSArray *fnums = [building objectForKey:@"fnum"];
+        NSArray *fnames = [building objectForKey:@"floor_names"];
+        NSArray *deletedFloors = [building objectForKey:@"deletedFloors"];
+        
+        int i;
+        for (i = 0; i < [fids count]; i++) {
+            const char *fname = (const char *)[[fnames objectAtIndex:i] UTF8String];
+            NSString *sqlStr = [NSString stringWithFormat:@"INSERT OR REPLACE INTO floors (fid, bid, fnum, name, deleted) VALUES (%d, %d, %d, '%s', %d)", [[fids objectAtIndex:i] intValue], bid, [[fnums objectAtIndex:i] intValue], fname, [[deletedFloors objectAtIndex:i] intValue]];
+            NSError *error = [dbManager doQuery:sqlStr];
+            if (error != nil) {
+                NSLog(@"Error: %@",[error localizedDescription]);
+            }
+        }
         
         NSString *sqlStr = [NSString stringWithFormat:@"INSERT OR REPLACE INTO buildings (bid, name, latitude, longitude, deleted) VALUES (%d, '%s', %d, %d, %d)", bid, name, latitude, longitude, deleted];
         NSError *error = [dbManager doQuery:sqlStr];
