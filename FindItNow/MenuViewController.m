@@ -25,7 +25,13 @@
         
     NSMutableArray *categories = [[NSMutableArray alloc] init];
     for (NSDictionary *category in categoriesJson) {
+        
+        /*NSNumber *parent = [category objectForKey:@"parent"];
+        NSNumber *noParent = [NSNumber numberWithInt:92554656];
+        
+        if ( [parent isEqualToNumber:noParent] ){*/
         [categories addObject:[category objectForKey:@"full_name"]];
+       // }
     }
     
    // NSArray *categories = [results componentsSeparatedByString:@","];
