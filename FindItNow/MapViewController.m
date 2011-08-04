@@ -54,7 +54,7 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-- (IBAction) removeMap:(id)sender
+- (IBAction) removeMap
 {
     [self.view removeFromSuperview];
 }

@@ -10,12 +10,13 @@
 
 
 @implementation FloorInfoTableViewController
+@synthesize selectedIndex;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
     if (self) {
-        // Custom initialization
+            numRow = 5;
     }
     return self;
 }
@@ -84,13 +85,13 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 5;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return 1;
+    return numRow;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -101,15 +102,18 @@
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
-    cell.textLabel.text = @"Testing";
-    
+    if (selectedIndex.row+1 == indexPath.row){
+        cell.textLabel.text = [NSMutableString stringWithFormat:@"TestA %d", [indexPath row] ];
+    }else{
+        cell.textLabel.text = [NSMutableString stringWithFormat:@"Test %d", [indexPath row] ];
+    }
     // Configure the cell.
     return cell;
 }
 
 /*
 // Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)i ndexPath
 {
     // Return NO if you do not want the specified item to be editable.
     return YES;
@@ -158,11 +162,18 @@
      [self.navigationController pushViewController:detailViewController animated:YES];
      [detailViewController release];
      */
-    UIAlertView *alert = [[UIAlertView alloc]
+    /*UIAlertView *alert = [[UIAlertView alloc]
                           initWithTitle:@"Testing" message:@"This is a test!!"
                           delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
     [alert show]; 
-    [alert autorelease];
+    [alert autorelease];*/
+    selectedIndex = indexPath;
+    numRow++;
+    NSArray *insert = [NSArray arrayWithObject:[NSIndexPath indexPathForRow:[indexPath row]+1 inSection:0]];
+    
+    [tableView beginUpdates];
+    [tableView insertRowsAtIndexPaths:insert withRowAnimation:UITableViewRowAnimationTop];
+    [tableView endUpdates];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 

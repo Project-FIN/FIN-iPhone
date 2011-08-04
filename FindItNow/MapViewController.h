@@ -14,6 +14,6 @@
 }
 
 -(IBAction)openPopup:(id)sender;
--(IBAction) removeMap:(id)sender;
+-(IBAction) removeMap;
 
 @end
