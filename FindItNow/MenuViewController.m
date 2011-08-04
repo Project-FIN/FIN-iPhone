@@ -8,7 +8,6 @@
 
 #import "MenuViewController.h"
 #import "MapViewController.h"
-#import "JSONKit.h"
 
 @implementation MenuViewController
 @synthesize mapView;
@@ -98,7 +97,7 @@
 
 - (NSArray*)getCategoryList
 {   
-    NSString *sqlStr = [NSString stringWithFormat:@"SELECT full_name FROM categories WHERE parent = 0"];
+    NSString *sqlStr = [NSString stringWithFormat:@"SELECT full_name FROM categories WHERE parent = 0 AND deleted = 0"];
     NSArray *categoriesList = [dbManager getRowsForQuery:sqlStr];
     
     NSMutableArray *categories = [[NSMutableArray alloc] init];

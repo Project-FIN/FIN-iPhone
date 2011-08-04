@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "SQLiteManager.h"
+#import "JSONKit.h"
+
 @class MapViewController;
 
 @interface MenuViewController : UIViewController {

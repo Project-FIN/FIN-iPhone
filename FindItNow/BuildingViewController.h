@@ -7,10 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SQLiteManager.h"
+#import "JSONKit.h"
+
 @class MapViewController;
 
 @interface BuildingViewController : UITableViewController {
+    SQLiteManager *dbManager;
+    
     UITableView *buildingTable;
 }
 @property (nonatomic, retain) IBOutlet MapViewController *mapView;
+
+- (void) saveBuilding;
+- (NSArray*) getBuildingsList;
+
 @end

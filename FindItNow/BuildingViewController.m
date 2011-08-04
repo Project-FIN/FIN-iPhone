@@ -24,6 +24,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    dbManager = [[SQLiteManager alloc] initWithDatabaseNamed:@"FIN_LOCAL.db"];
+    
+    NSError *error = [dbManager doQuery:@"CREATE TABLE IF NOT EXISTS buildings (bid INTEGER PRIMARY KEY, name TEXT, latitude INTEGER, longitude INTEGER, deleted INTEGER)"];
+    if (error != nil) {
+        NSLog(@"Error: %@",[error localizedDescription]);
+    }
+    
+    [self saveBuilding];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -68,18 +77,58 @@
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+    NSArray *buildings = [self getBuildingsList];
+    
+    NSString *firstBuilding = [buildings objectAtIndex:0];
+    
     static NSString *CellIdentifier = @"Cell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
-    cell.textLabel.text = @"Testing";
-    
-    
+    cell.textLabel.text = firstBuilding;
     
     // Configure the cell.
     return cell;
+}
+
+- (NSArray*)getBuildingsList
+{   
+    NSString *sqlStr = [NSString stringWithFormat:@"SELECT name FROM buildings WHERE deleted = 0"];
+    NSArray *buildingsList = [dbManager getRowsForQuery:sqlStr];
+    
+    NSLog(@"%@", buildingsList);
+    
+    NSMutableArray *buildings = [[NSMutableArray alloc] init];
+    for (NSDictionary *dict in buildingsList) {
+        [buildings addObject:[dict objectForKey:@"name"]];
+    }
+    
+    return buildings;
+}
+
+- (void)saveBuilding
+{
+    NSURL *URL=[[NSURL alloc] initWithString:@"http://www.fincdn.org/getBuildings.php?rid=1"];
+    NSString *results = [[NSString alloc] initWithContentsOfURL :URL];
+    
+    NSDictionary *buildingsJson = [results objectFromJSONString];
+    
+    for (NSDictionary *building in buildingsJson) {
+        int bid = [[building objectForKey:@"bid"] intValue];
+        const char *name = (const char *) [[building objectForKey:@"name"] UTF8String];
+        int latitude = [[building objectForKey:@"latitude"] intValue];
+        int longitude = [[building objectForKey:@"longitude"] intValue];
+        int deleted = [[building objectForKey:@"deleted"] intValue];
+        
+        NSString *sqlStr = [NSString stringWithFormat:@"INSERT OR REPLACE INTO buildings (bid, name, latitude, longitude, deleted) VALUES (%d, '%s', %d, %d, %d)", bid, name, latitude, longitude, deleted];
+        NSError *error = [dbManager doQuery:sqlStr];
+        if (error != nil) {
+            NSLog(@"Error: %@",[error localizedDescription]);
+        }
+    }
 }
 
 /*
