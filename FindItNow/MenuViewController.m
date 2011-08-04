@@ -19,7 +19,6 @@
 {
     NSArray *categories = [self getCategoryList];
     
-   // NSArray *categories = [results componentsSeparatedByString:@","];
     NSMutableArray *buttons = [[NSMutableArray alloc] initWithCapacity:[categories count]];
     int btnSize = ( CGRectGetHeight(btnGrid.frame) - 60 )/([categories count]/2);
     //int btnWidth = CGRectGetWidth(btnGrid.frame) / ([categories count
