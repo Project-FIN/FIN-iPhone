@@ -156,7 +156,7 @@
 {
     // Navigation logic may go here. Create and push another view controller.
     /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
+     DetailViewController *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
      // ...
      // Pass the selected object to the new view controller.
      [self.navigationController pushViewController:detailViewController animated:YES];
@@ -170,9 +170,11 @@
     selectedIndex = indexPath;
     numRow++;
     NSArray *insert = [NSArray arrayWithObject:[NSIndexPath indexPathForRow:[indexPath row]+1 inSection:0]];
-    
+    NSArray *reload = [NSArray arrayWithObject:[NSIndexPath indexPathForRow:[indexPath row] inSection:0]];
+                       
     [tableView beginUpdates];
     [tableView insertRowsAtIndexPaths:insert withRowAnimation:UITableViewRowAnimationTop];
+    [tableView reloadRowsAtIndexPaths:reload withRowAnimation:UITableViewRowAnimationMiddle ];
     [tableView endUpdates];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }

@@ -107,6 +107,7 @@
 						<string key="NSFrame">{{21, 35}, {279, 365}}</string>
 						<reference key="NSSuperview" ref="930405662"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MC43MDQwNTA0MDM5IDAuOTg5MTMwNDM0OCAwLjc2NzA3MzQ5OTYAA</bytes>
@@ -267,22 +268,43 @@
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<object class="IBPartialClassDescription">
-					<string key="className">MapView</string>
-					<string key="superclassName">UIView</string>
+					<string key="className">MapViewController</string>
+					<string key="superclassName">UIViewController</string>
 					<object class="NSMutableDictionary" key="actions">
-						<string key="NS.key.0">removeMap</string>
-						<string key="NS.object.0">id</string>
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="NSArray" key="dict.sortedKeys">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>openPopup:</string>
+							<string>removeMap</string>
+						</object>
+						<object class="NSMutableArray" key="dict.values">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
+							<string>id</string>
+						</object>
 					</object>
 					<object class="NSMutableDictionary" key="actionInfosByName">
-						<string key="NS.key.0">removeMap</string>
-						<object class="IBActionInfo" key="NS.object.0">
-							<string key="name">removeMap</string>
-							<string key="candidateClassName">id</string>
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="NSArray" key="dict.sortedKeys">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>openPopup:</string>
+							<string>removeMap</string>
+						</object>
+						<object class="NSMutableArray" key="dict.values">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<object class="IBActionInfo">
+								<string key="name">openPopup:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">removeMap</string>
+								<string key="candidateClassName">id</string>
+							</object>
 						</object>
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/MapView.h</string>
+						<string key="minorKey">./Classes/MapViewController.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
@@ -331,7 +353,7 @@
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>UIScrollView</string>
-							<string>MapView</string>
+							<string>MapViewController</string>
 							<string>UILabel</string>
 						</object>
 					</object>
@@ -351,7 +373,7 @@
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">mapView</string>
-								<string key="candidateClassName">MapView</string>
+								<string key="candidateClassName">MapViewController</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">text</string>

@@ -16,6 +16,7 @@
     SQLiteManager *dbManager;
     
     UITableView *buildingTable;
+    NSArray *buildings;
 }
 @property (nonatomic, retain) IBOutlet MapViewController *mapView;
 

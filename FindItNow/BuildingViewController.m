@@ -38,6 +38,7 @@
     }
     
     [self saveBuilding];
+    buildings = [self getBuildingsList];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -71,29 +72,24 @@
 // Customize the number of sections in the table view.
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 10;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 1;
+    return [buildings count];
 }
 
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    NSArray *buildings = [self getBuildingsList];
-    
-    NSString *firstBuilding = [buildings objectAtIndex:0];
-    
     static NSString *CellIdentifier = @"Cell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
-    cell.textLabel.text = firstBuilding;
+    cell.textLabel.text = [buildings objectAtIndex: [indexPath row]];
     
     // Configure the cell.
     return cell;
@@ -106,12 +102,12 @@
     
     NSLog(@"%@", buildingsList);
     
-    NSMutableArray *buildings = [[NSMutableArray alloc] init];
+    NSMutableArray *building = [[NSMutableArray alloc] init];
     for (NSDictionary *dict in buildingsList) {
-        [buildings addObject:[dict objectForKey:@"name"]];
+        [building addObject:[dict objectForKey:@"name"]];
     }
     
-    return buildings;
+    return building;
 }
 
 - (void)saveBuilding

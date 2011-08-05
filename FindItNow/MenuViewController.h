@@ -26,5 +26,6 @@
 - (void) initBtnGrid;
 - (void) saveCategory;
 - (NSArray*) getCategoryList;
+- (NSDictionary*) getCategoryIconDictionary;
 
 @end

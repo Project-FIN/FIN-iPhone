@@ -17,6 +17,7 @@
 - (void) initBtnGrid
 {
     NSArray *categories = [self getCategoryList];
+    NSDictionary *icons = [self getCategoryIconDictionary];
     
     NSMutableArray *buttons = [[NSMutableArray alloc] initWithCapacity:[categories count]];
     int btnSize = ( CGRectGetHeight(btnGrid.frame) - 60 )/([categories count]/2);
@@ -27,6 +28,7 @@
         butt.frame = CGRectMake(btnSize/2+((i%2)*(btnSize+60)), (10+(i/2)*(15+btnSize)), btnSize, btnSize);
         
         [butt setTitle:[categories objectAtIndex:i] forState:UIControlStateNormal];
+        [butt setImage:[UIImage imageNamed: [icons objectForKey:[categories objectAtIndex:i] ]] forState:UIControlStateNormal];
         [butt addTarget:self action:@selector(map) forControlEvents:UIControlEventTouchDown];
         [btnGrid addSubview:butt];
         [buttons addObject:butt];
@@ -106,6 +108,18 @@
     }
         
     return categories;
+}
+
+- (NSDictionary*) getCategoryIconDictionary
+{    
+    NSString *sqlStr = [NSString stringWithFormat:@"SELECT name, full_name FROM categories WHERE parent = 0 AND deleted = 0"];
+    NSArray *categoriesList = [dbManager getRowsForQuery:sqlStr];
+    
+    NSMutableDictionary *icons = [[NSMutableDictionary alloc] init];
+    for (NSDictionary *dict in categoriesList) {
+        [icons setObject:[dict objectForKey:@"name"] forKey:[dict objectForKey:@"full_name"]];
+    }
+    return icons;
 }
 
 - (void)viewDidUnload
