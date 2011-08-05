@@ -70,7 +70,7 @@
     [self.view addSubview:overlay];
     
     //Create a popup
-    InfoPopUpView *popup = [ [InfoPopUpView alloc] initWithFrame:CGRectMake(50, 100, 250, 300)];
+    InfoPopUpView *popup = [ [InfoPopUpView alloc] initWithFrame:CGRectMake(50, 100, 250, 175)];
     
     //Perform animation
     //[popup appear];

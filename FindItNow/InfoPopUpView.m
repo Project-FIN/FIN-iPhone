@@ -64,21 +64,41 @@
         [self addSubview:walkingLabel];
         [walkingLabel release];
         
+        //Show Info Button:
+        isInfoHidden = true;
+        UIButton *showHide = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        [showHide setTitle:@"Show Table" forState:UIControlStateNormal];
+        [showHide addTarget:self action:@selector(addRemInfoTable) forControlEvents:UIControlEventTouchDown];
+        showHide.frame = CGRectMake(100, 120, 120, 30);
+        [self addSubview:showHide];
         
-        //information table
-        UITableView *table = [ [UITableView alloc] initWithFrame:CGRectMake(10, 110, CGRectGetWidth(frame)-20, 150)];
-        FloorInfoTableViewController *infoTable = [ [FloorInfoTableViewController alloc] init];
-        infoTable.tableView = table;
-        [table setBackgroundColor:[UIColor brownColor]];
-       // [infoTable 
-        
-        
-        [self addSubview:table];
-
     }
     return self;
 }
+-(IBAction) addRemInfoTable
+{
+    int tableHeight = 150;
+    
+    if (!isInfoHidden)
+    {
+        self.frame = CGRectMake(CGRectGetMinX(self.frame),CGRectGetMinY(self.frame), CGRectGetWidth(self.frame), CGRectGetHeight(self.frame)-tableHeight);
+        [infoTable removeFromSuperview];
+        isInfoHidden = true;
+    }
+    else
+    {
+        isInfoHidden = false;
+        self.frame = CGRectMake(CGRectGetMinX(self.frame),CGRectGetMinY(self.frame), CGRectGetWidth(self.frame), CGRectGetHeight(self.frame)+tableHeight);
+    
+        //information table
+        infoTable = [ [UITableView alloc] initWithFrame:CGRectMake(10, 160, CGRectGetWidth(self.frame)-20, 150)];
+        FloorInfoTableViewController *infoTableCtrl = [ [FloorInfoTableViewController alloc] init];
+        infoTableCtrl.tableView = infoTable;
+        [infoTable setBackgroundColor:[UIColor brownColor]];
+        [self addSubview:infoTable];
+    }
 
+}
 -(void) addExitTapGesture{  
         
     //the top block

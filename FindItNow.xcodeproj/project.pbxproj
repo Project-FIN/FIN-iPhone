@@ -192,10 +192,10 @@
 				1330EDE81375CE1100940DDB /* FindItNowViewController.m */,
 				1330EDEA1375CE1100940DDB /* FindItNowViewController.xib */,
 				EA0D7C6F13E514E900AE9E14 /* InfoPopUpView.h */,
+				EA0D7C7013E514E900AE9E14 /* InfoPopUpView.m */,
 				EA6A605E13E9210100386C8D /* MapViewController.h */,
 				EA6A605F13E9210100386C8D /* MapViewController.m */,
 				EA6A606013E9210200386C8D /* MapViewController.xib */,
-				EA0D7C7013E514E900AE9E14 /* InfoPopUpView.m */,
 				1330EDD91375CE1100940DDB /* Supporting Files */,
 			);
 			path = FindItNow;
