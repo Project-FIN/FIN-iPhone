@@ -99,9 +99,7 @@
 {   
     NSString *sqlStr = [NSString stringWithFormat:@"SELECT name FROM buildings WHERE deleted = 0"];
     NSArray *buildingsList = [dbManager getRowsForQuery:sqlStr];
-    
-    NSLog(@"%@", buildingsList);
-    
+        
     NSMutableArray *building = [[NSMutableArray alloc] init];
     for (NSDictionary *dict in buildingsList) {
         [building addObject:[dict objectForKey:@"name"]];

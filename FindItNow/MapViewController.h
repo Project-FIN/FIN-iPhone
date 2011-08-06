@@ -7,13 +7,23 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "SQLiteManager.h"
+#import "JSONKit.h"
+#import "CoreLocation/CLLocation.h"
+#import "MapKit/MapKit.h"
+#import "MapKit/MKGeometry.h"
+#import "MapKit/MKOverlayView.h"
 
 @interface MapViewController : UIViewController {
+    
+    SQLiteManager *dbManager;
+    MKMapView *mapView;
     
 }
 
 -(IBAction)openPopup:(id)sender;
 -(IBAction) removeMap;
+-(void) saveItems;
+-(MKMapPoint*) getItemsOfCategory:(const char*)category;
 
 @end

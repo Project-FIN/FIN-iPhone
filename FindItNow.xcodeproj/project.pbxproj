@@ -22,7 +22,6 @@
 		1330EDFD1375CE1100940DDB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1330EDFB1375CE1100940DDB /* InfoPlist.strings */; };
 		1330EE001375CE1100940DDB /* FindItNowTests.h in Resources */ = {isa = PBXBuildFile; fileRef = 1330EDFF1375CE1100940DDB /* FindItNowTests.h */; };
 		1330EE021375CE1100940DDB /* FindItNowTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1330EE011375CE1100940DDB /* FindItNowTests.m */; };
-		1330EE0C1375CE3E00940DDB /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1330EE0B1375CE3E00940DDB /* MapKit.framework */; };
 		1346537C13E495C6009E6A53 /* BuildingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1346536E13E495C6009E6A53 /* BuildingViewController.m */; };
 		1346537D13E495C6009E6A53 /* BuildingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1346536F13E495C6009E6A53 /* BuildingViewController.xib */; };
 		1346537E13E495C6009E6A53 /* FindItNowViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1346537113E495C6009E6A53 /* FindItNowViewController.xib */; };
@@ -31,7 +30,9 @@
 		1346538113E495C6009E6A53 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 1346537813E495C6009E6A53 /* JSONKit.m */; };
 		1346538213E495C6009E6A53 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1346537A13E495C6009E6A53 /* MenuViewController.m */; };
 		1346538313E495C6009E6A53 /* MenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1346537B13E495C6009E6A53 /* MenuViewController.xib */; };
-		1365764713E4AF990074429F /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1365764613E4AF990074429F /* libsqlite3.dylib */; };
+		136E920613ED93E5003799B6 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1330EE0B1375CE3E00940DDB /* MapKit.framework */; };
+		136E920713ED93E8003799B6 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 136E91FF13ED9358003799B6 /* CoreLocation.framework */; };
+		136E920813ED93EA003799B6 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1365764613E4AF990074429F /* libsqlite3.dylib */; };
 		13EE3C0313E8BB290018A7C8 /* SQLiteManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 13EE3C0213E8BB290018A7C8 /* SQLiteManager.m */; };
 		EA0D7C7113E514E900AE9E14 /* InfoPopUpView.m in Sources */ = {isa = PBXBuildFile; fileRef = EA0D7C7013E514E900AE9E14 /* InfoPopUpView.m */; };
 		EA10F54113E7CAA300908E24 /* FloorInfoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA10F54013E7CAA300908E24 /* FloorInfoTableViewController.m */; };
@@ -92,6 +93,7 @@
 		1346537A13E495C6009E6A53 /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
 		1346537B13E495C6009E6A53 /* MenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuViewController.xib; sourceTree = "<group>"; };
 		1365764613E4AF990074429F /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		136E91FF13ED9358003799B6 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		13EE3C0113E8BB290018A7C8 /* SQLiteManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQLiteManager.h; sourceTree = "<group>"; };
 		13EE3C0213E8BB290018A7C8 /* SQLiteManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQLiteManager.m; sourceTree = "<group>"; };
 		EA0D7C6F13E514E900AE9E14 /* InfoPopUpView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoPopUpView.h; sourceTree = "<group>"; };
@@ -117,10 +119,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1365764713E4AF990074429F /* libsqlite3.dylib in Frameworks */,
-				1330EE0C1375CE3E00940DDB /* MapKit.framework in Frameworks */,
+				136E920613ED93E5003799B6 /* MapKit.framework in Frameworks */,
+				136E920813ED93EA003799B6 /* libsqlite3.dylib in Frameworks */,
 				1330EDD31375CE1100940DDB /* UIKit.framework in Frameworks */,
 				1330EDD51375CE1100940DDB /* Foundation.framework in Frameworks */,
+				136E920713ED93E8003799B6 /* CoreLocation.framework in Frameworks */,
 				1330EDD71375CE1100940DDB /* CoreGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -141,8 +144,6 @@
 		1330EDC31375CE1000940DDB = {
 			isa = PBXGroup;
 			children = (
-				1365764613E4AF990074429F /* libsqlite3.dylib */,
-				1330EE0B1375CE3E00940DDB /* MapKit.framework */,
 				1330EDD81375CE1100940DDB /* FindItNow */,
 				1330EDF81375CE1100940DDB /* FindItNowTests */,
 				1330EDD11375CE1000940DDB /* Frameworks */,
@@ -162,6 +163,9 @@
 		1330EDD11375CE1000940DDB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1365764613E4AF990074429F /* libsqlite3.dylib */,
+				1330EE0B1375CE3E00940DDB /* MapKit.framework */,
+				136E91FF13ED9358003799B6 /* CoreLocation.framework */,
 				1330EDD21375CE1100940DDB /* UIKit.framework */,
 				1330EDD41375CE1100940DDB /* Foundation.framework */,
 				1330EDD61375CE1100940DDB /* CoreGraphics.framework */,
