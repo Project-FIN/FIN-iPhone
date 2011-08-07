@@ -12,7 +12,9 @@
 @interface InfoPopUpView : UIView {
     BOOL isInfoHidden;
     UITableView *infoTable;
+    NSMutableArray *exitAreas;
 }
 -(void) addExitTapGesture;
 -(IBAction) addRemInfoTable;
+-(void) removeExitTapArea;
 @end

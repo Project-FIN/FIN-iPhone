@@ -16,7 +16,8 @@
 {
     self = [super initWithStyle:style];
     if (self) {
-            numRow = 5;
+        numRow = 5;
+       // selectedIndex = [NSIndexPath indexPathForRow:0  inSection:0 ];
     }
     return self;
 }
@@ -167,16 +168,31 @@
                           delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
     [alert show]; 
     [alert autorelease];*/
-    selectedIndex = indexPath;
-    numRow++;
-    NSArray *insert = [NSArray arrayWithObject:[NSIndexPath indexPathForRow:[indexPath row]+1 inSection:0]];
-    NSArray *reload = [NSArray arrayWithObject:[NSIndexPath indexPathForRow:[indexPath row] inSection:0]];
+    if ( [selectedIndex isEqual:indexPath] )
+    {
+        numRow--;
+        NSArray *delete = [NSArray arrayWithObject:[NSIndexPath indexPathForRow:[indexPath row] inSection:0]];
+        
+        [tableView beginUpdates];
+        [tableView deleteRowsAtIndexPaths:delete withRowAnimation:UITableViewRowAnimationBottom];
+        [tableView reloadData];
+        [tableView endUpdates];
+        
+    }else
+    {
+        selectedIndex = indexPath;
+        numRow++;
+        NSArray *insert = [NSArray arrayWithObject:[NSIndexPath indexPathForRow:[indexPath row]+1 inSection:0]];
+        NSArray *reload = [NSArray arrayWithObject:[NSIndexPath indexPathForRow:[indexPath row] inSection:0]];
                        
-    [tableView beginUpdates];
-    [tableView insertRowsAtIndexPaths:insert withRowAnimation:UITableViewRowAnimationTop];
-    [tableView reloadRowsAtIndexPaths:reload withRowAnimation:UITableViewRowAnimationMiddle ];
-    [tableView endUpdates];
+        [tableView beginUpdates];
+        [tableView insertRowsAtIndexPaths:insert withRowAnimation:UITableViewRowAnimationTop];
+        [tableView reloadRowsAtIndexPaths:reload withRowAnimation:UITableViewRowAnimationMiddle ];
+        [tableView endUpdates];
+        
+    }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+
 }
 
 @end

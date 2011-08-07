@@ -79,6 +79,8 @@
 {
     int tableHeight = 150;
     
+    [self removeExitTapArea];
+    
     if (!isInfoHidden)
     {
         self.frame = CGRectMake(CGRectGetMinX(self.frame),CGRectGetMinY(self.frame), CGRectGetWidth(self.frame), CGRectGetHeight(self.frame)-tableHeight);
@@ -97,10 +99,11 @@
         [infoTable setBackgroundColor:[UIColor brownColor]];
         [self addSubview:infoTable];
     }
-
+    [self addExitTapGesture];
 }
 -(void) addExitTapGesture{  
         
+    exitAreas = [[NSMutableArray alloc] initWithCapacity:4];
     //the top block
     UITapGestureRecognizer *exitTap = 
     [[UITapGestureRecognizer alloc] initWithTarget:self
@@ -109,6 +112,7 @@
     [topTapArea setBackgroundColor:[UIColor clearColor]];
     [topTapArea addGestureRecognizer:exitTap];
     [self.superview addSubview:topTapArea];
+    [exitAreas addObject:topTapArea];
     [exitTap release];
     
     //the left block
@@ -118,6 +122,7 @@
     [leftTapArea setBackgroundColor:[UIColor clearColor]];
     [leftTapArea addGestureRecognizer:exitTap];
     [self.superview addSubview:leftTapArea];
+    [exitAreas addObject:leftTapArea];
     [exitTap release];
     
     //the right block
@@ -129,6 +134,7 @@
     [rightTapArea setBackgroundColor:[UIColor clearColor]];
     [rightTapArea addGestureRecognizer:exitTap];
     [self.superview addSubview:rightTapArea];
+    [exitAreas addObject:rightTapArea];
     [exitTap release];
     
     //the bottom block
@@ -139,8 +145,23 @@
     [bottomTapArea setBackgroundColor:[UIColor clearColor]];
     [bottomTapArea addGestureRecognizer:exitTap];
     [self.superview addSubview:bottomTapArea];
+    [exitAreas addObject:bottomTapArea];
     [exitTap release];
-    
+
+}
+
+-(void) removeExitTapArea
+{
+    NSLog(@"Test");
+
+    for (UIView *subView in exitAreas)
+    {
+        [subView removeFromSuperview];
+        for (int i=0; i<[subView.gestureRecognizers count]; i++)
+        {
+            [subView removeGestureRecognizer:[subView.gestureRecognizers objectAtIndex:i]];
+        }
+    }
 }
 
 - (IBAction) exit:(UITapGestureRecognizer *)recognizer
@@ -152,11 +173,8 @@
     if ( CGRectContainsPoint(recognizer.view.frame, location) )
     {
         UIView *overlay = self.superview;
-        for(UIView *subView in overlay.subviews)
-        {
-            [subView removeFromSuperview];
-            [subView removeGestureRecognizer:recognizer];
-        }
+        [self removeExitTapArea];
+        [self removeFromSuperview];
         [overlay removeFromSuperview];
     }
 }
