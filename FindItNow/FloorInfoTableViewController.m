@@ -121,10 +121,12 @@
     if ( [self selectionIncludesSection:indexPath.section] && 1 == indexPath.row){
         cell.textLabel.text = [NSMutableString stringWithFormat:@"TestA %d", [indexPath section] ];
         
-       /* UIButton *butt = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        butt.frame = CGRectMake(40, 45, 40, 30);
+        UIButton *butt = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        butt.frame = CGRectMake(CGRectGetMaxX(cell.frame)-50, 30, 40, 30);
         [butt setTitle:@"Test" forState:UIControlStateNormal];
-        [cell addSubview:butt];*/
+        [cell.contentView addSubview:butt];
+        
+        [indexAssociatedSubviews setObject:butt forKey:indexPath];
     }else{
         cell.textLabel.text = [NSMutableString stringWithFormat:@"Test %d", [indexPath section] ];
     }
@@ -180,6 +182,13 @@
     {
         //NSArray *delete = [NSArray arrayWithObject:[NSIndexPath indexPathForRow:[indexPath row] inSection:[indexPath section]] ];
         
+        NSIndexPath *childCell = [NSIndexPath indexPathForRow:indexPath.row+1 inSection:indexPath.section];
+
+        for(UIView *subView in [tableView cellForRowAtIndexPath:childCell].contentView.subviews)
+        {
+            [subView removeFromSuperview];
+        }
+            
         [selectedRowIndeices removeObject:indexPath];
         //[tableView beginUpdates];
         //[tableView deleteRowsAtIndexPaths:delete withRowAnimation:UITableViewRowAnimationBottom];
