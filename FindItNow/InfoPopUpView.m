@@ -152,8 +152,6 @@
 
 -(void) removeExitTapArea
 {
-    NSLog(@"Test");
-
     for (UIView *subView in exitAreas)
     {
         [subView removeFromSuperview];

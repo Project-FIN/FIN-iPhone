@@ -10,14 +10,13 @@
 
 
 @implementation FloorInfoTableViewController
-@synthesize selectedIndex;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
     if (self) {
-        numRow = 5;
-       // selectedIndex = [NSIndexPath indexPathForRow:0  inSection:0 ];
+        numSection = 5;
+        selectedRowIndeices = [[NSMutableArray alloc] initWithCapacity:numSection];
     }
     return self;
 }
@@ -41,11 +40,6 @@
 {
     [super viewDidLoad];
 
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void)viewDidUnload
@@ -86,13 +80,34 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 1;
+    return numSection;
+}
+
+-(BOOL) selectionIncludesSection:(NSInteger) section
+{
+    for (NSIndexPath *index in selectedRowIndeices)
+    {
+        if (index.section == section)
+            return YES;
+    }
+    return NO;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return numRow;
+    if ([self selectionIncludesSection:section])
+    {
+        return 2;
+    }
+    return 1;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([self selectionIncludesSection:indexPath.section] && indexPath.row == 1)
+        return 65;
+    return 45;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -103,10 +118,15 @@
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
-    if (selectedIndex.row+1 == indexPath.row){
-        cell.textLabel.text = [NSMutableString stringWithFormat:@"TestA %d", [indexPath row] ];
+    if ( [self selectionIncludesSection:indexPath.section] && 1 == indexPath.row){
+        cell.textLabel.text = [NSMutableString stringWithFormat:@"TestA %d", [indexPath section] ];
+        
+       /* UIButton *butt = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        butt.frame = CGRectMake(40, 45, 40, 30);
+        [butt setTitle:@"Test" forState:UIControlStateNormal];
+        [cell addSubview:butt];*/
     }else{
-        cell.textLabel.text = [NSMutableString stringWithFormat:@"Test %d", [indexPath row] ];
+        cell.textLabel.text = [NSMutableString stringWithFormat:@"Test %d", [indexPath section] ];
     }
     // Configure the cell.
     return cell;
@@ -155,40 +175,26 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     DetailViewController *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     [detailViewController release];
-     */
-    /*UIAlertView *alert = [[UIAlertView alloc]
-                          initWithTitle:@"Testing" message:@"This is a test!!"
-                          delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
-    [alert show]; 
-    [alert autorelease];*/
-    if ( [selectedIndex isEqual:indexPath] )
+
+    if ( [selectedRowIndeices containsObject:indexPath] )
     {
-        numRow--;
-        NSArray *delete = [NSArray arrayWithObject:[NSIndexPath indexPathForRow:[indexPath row] inSection:0]];
+        //NSArray *delete = [NSArray arrayWithObject:[NSIndexPath indexPathForRow:[indexPath row] inSection:[indexPath section]] ];
         
-        [tableView beginUpdates];
-        [tableView deleteRowsAtIndexPaths:delete withRowAnimation:UITableViewRowAnimationBottom];
+        [selectedRowIndeices removeObject:indexPath];
+        //[tableView beginUpdates];
+        //[tableView deleteRowsAtIndexPaths:delete withRowAnimation:UITableViewRowAnimationBottom];
         [tableView reloadData];
-        [tableView endUpdates];
-        
-    }else
+        //[tableView endUpdates];
+    }else if(indexPath.row == 0)
     {
-        selectedIndex = indexPath;
-        numRow++;
-        NSArray *insert = [NSArray arrayWithObject:[NSIndexPath indexPathForRow:[indexPath row]+1 inSection:0]];
-        NSArray *reload = [NSArray arrayWithObject:[NSIndexPath indexPathForRow:[indexPath row] inSection:0]];
+        [selectedRowIndeices addObject:indexPath];
+        
+        //NSArray *insert = [NSArray arrayWithObject:[NSIndexPath indexPathForRow:[indexPath row] inSection:indexPath.section+1]];
                        
-        [tableView beginUpdates];
-        [tableView insertRowsAtIndexPaths:insert withRowAnimation:UITableViewRowAnimationTop];
-        [tableView reloadRowsAtIndexPaths:reload withRowAnimation:UITableViewRowAnimationMiddle ];
-        [tableView endUpdates];
+        //[tableView beginUpdates];
+        [tableView reloadData];
+        //[tableView reloadRowsAtIndexPaths:insert withRowAnimation:UITableViewRowAnimationTop];
+        //[tableView endUpdates];
         
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];

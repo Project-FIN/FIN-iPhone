@@ -10,8 +10,8 @@
 
 
 @interface FloorInfoTableViewController : UITableViewController {
-    NSInteger numRow;
+    NSInteger numSection;
+    NSMutableArray *selectedRowIndeices;
 }
-@property  (nonatomic, retain) NSIndexPath *selectedIndex;
-
+-(BOOL) selectionIncludesSection:(NSInteger)section;
 @end
