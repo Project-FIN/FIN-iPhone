@@ -38,15 +38,6 @@
 		EA10F54113E7CAA300908E24 /* FloorInfoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA10F54013E7CAA300908E24 /* FloorInfoTableViewController.m */; };
 		EA6A606113E9210200386C8D /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6A605F13E9210100386C8D /* MapViewController.m */; };
 		EA6A606213E9210200386C8D /* MapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA6A606013E9210200386C8D /* MapViewController.xib */; };
-		EAA868B013EBBEA6002DE6AF /* atms.png in Resources */ = {isa = PBXBuildFile; fileRef = EAA868A713EBBEA6002DE6AF /* atms.png */; };
-		EAA868B113EBBEA6002DE6AF /* bike_racks.png in Resources */ = {isa = PBXBuildFile; fileRef = EAA868A813EBBEA6002DE6AF /* bike_racks.png */; };
-		EAA868B213EBBEA6002DE6AF /* buildings.png in Resources */ = {isa = PBXBuildFile; fileRef = EAA868A913EBBEA6002DE6AF /* buildings.png */; };
-		EAA868B313EBBEA6002DE6AF /* coffee.png in Resources */ = {isa = PBXBuildFile; fileRef = EAA868AA13EBBEA6002DE6AF /* coffee.png */; };
-		EAA868B413EBBEA6002DE6AF /* dining.png in Resources */ = {isa = PBXBuildFile; fileRef = EAA868AB13EBBEA6002DE6AF /* dining.png */; };
-		EAA868B513EBBEA6002DE6AF /* mailboxes.png in Resources */ = {isa = PBXBuildFile; fileRef = EAA868AC13EBBEA6002DE6AF /* mailboxes.png */; };
-		EAA868B613EBBEA6002DE6AF /* restrooms.png in Resources */ = {isa = PBXBuildFile; fileRef = EAA868AD13EBBEA6002DE6AF /* restrooms.png */; };
-		EAA868B713EBBEA6002DE6AF /* school_supplies.png in Resources */ = {isa = PBXBuildFile; fileRef = EAA868AE13EBBEA6002DE6AF /* school_supplies.png */; };
-		EAA868B813EBBEA6002DE6AF /* vending.png in Resources */ = {isa = PBXBuildFile; fileRef = EAA868AF13EBBEA6002DE6AF /* vending.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,15 +94,6 @@
 		EA6A605E13E9210100386C8D /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
 		EA6A605F13E9210100386C8D /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
 		EA6A606013E9210200386C8D /* MapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapViewController.xib; sourceTree = "<group>"; };
-		EAA868A713EBBEA6002DE6AF /* atms.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = atms.png; sourceTree = "<group>"; };
-		EAA868A813EBBEA6002DE6AF /* bike_racks.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bike_racks.png; sourceTree = "<group>"; };
-		EAA868A913EBBEA6002DE6AF /* buildings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buildings.png; sourceTree = "<group>"; };
-		EAA868AA13EBBEA6002DE6AF /* coffee.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = coffee.png; sourceTree = "<group>"; };
-		EAA868AB13EBBEA6002DE6AF /* dining.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dining.png; sourceTree = "<group>"; };
-		EAA868AC13EBBEA6002DE6AF /* mailboxes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mailboxes.png; sourceTree = "<group>"; };
-		EAA868AD13EBBEA6002DE6AF /* restrooms.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = restrooms.png; sourceTree = "<group>"; };
-		EAA868AE13EBBEA6002DE6AF /* school_supplies.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = school_supplies.png; sourceTree = "<group>"; };
-		EAA868AF13EBBEA6002DE6AF /* vending.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = vending.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -208,15 +190,6 @@
 		1330EDD91375CE1100940DDB /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				EAA868A713EBBEA6002DE6AF /* atms.png */,
-				EAA868A813EBBEA6002DE6AF /* bike_racks.png */,
-				EAA868A913EBBEA6002DE6AF /* buildings.png */,
-				EAA868AA13EBBEA6002DE6AF /* coffee.png */,
-				EAA868AB13EBBEA6002DE6AF /* dining.png */,
-				EAA868AC13EBBEA6002DE6AF /* mailboxes.png */,
-				EAA868AD13EBBEA6002DE6AF /* restrooms.png */,
-				EAA868AE13EBBEA6002DE6AF /* school_supplies.png */,
-				EAA868AF13EBBEA6002DE6AF /* vending.png */,
 				1330EDDA1375CE1100940DDB /* FindItNow-Info.plist */,
 				1330EDDB1375CE1100940DDB /* InfoPlist.strings */,
 				1330EDDE1375CE1100940DDB /* FindItNow-Prefix.pch */,
@@ -334,15 +307,6 @@
 				1346538013E495C6009E6A53 /* MainWindow.xib in Resources */,
 				1346538313E495C6009E6A53 /* MenuViewController.xib in Resources */,
 				EA6A606213E9210200386C8D /* MapViewController.xib in Resources */,
-				EAA868B013EBBEA6002DE6AF /* atms.png in Resources */,
-				EAA868B113EBBEA6002DE6AF /* bike_racks.png in Resources */,
-				EAA868B213EBBEA6002DE6AF /* buildings.png in Resources */,
-				EAA868B313EBBEA6002DE6AF /* coffee.png in Resources */,
-				EAA868B413EBBEA6002DE6AF /* dining.png in Resources */,
-				EAA868B513EBBEA6002DE6AF /* mailboxes.png in Resources */,
-				EAA868B613EBBEA6002DE6AF /* restrooms.png in Resources */,
-				EAA868B713EBBEA6002DE6AF /* school_supplies.png in Resources */,
-				EAA868B813EBBEA6002DE6AF /* vending.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
