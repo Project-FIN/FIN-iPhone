@@ -38,6 +38,7 @@
 		EA10F54113E7CAA300908E24 /* FloorInfoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA10F54013E7CAA300908E24 /* FloorInfoTableViewController.m */; };
 		EA6A606113E9210200386C8D /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6A605F13E9210100386C8D /* MapViewController.m */; };
 		EA6A606213E9210200386C8D /* MapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA6A606013E9210200386C8D /* MapViewController.xib */; };
+		EA783DC213F1100B00C5B918 /* icons in Resources */ = {isa = PBXBuildFile; fileRef = EA783DC113F1100B00C5B918 /* icons */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,6 +95,7 @@
 		EA6A605E13E9210100386C8D /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
 		EA6A605F13E9210100386C8D /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
 		EA6A606013E9210200386C8D /* MapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapViewController.xib; sourceTree = "<group>"; };
+		EA783DC113F1100B00C5B918 /* icons */ = {isa = PBXFileReference; lastKnownFileType = folder; path = icons; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -190,6 +192,7 @@
 		1330EDD91375CE1100940DDB /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				EA783DC113F1100B00C5B918 /* icons */,
 				1330EDDA1375CE1100940DDB /* FindItNow-Info.plist */,
 				1330EDDB1375CE1100940DDB /* InfoPlist.strings */,
 				1330EDDE1375CE1100940DDB /* FindItNow-Prefix.pch */,
@@ -307,6 +310,7 @@
 				1346538013E495C6009E6A53 /* MainWindow.xib in Resources */,
 				1346538313E495C6009E6A53 /* MenuViewController.xib in Resources */,
 				EA6A606213E9210200386C8D /* MapViewController.xib in Resources */,
+				EA783DC213F1100B00C5B918 /* icons in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
