@@ -22,7 +22,7 @@
 @property (nonatomic, retain) IBOutlet UIScrollView *btnGrid;
 
 - (IBAction) getCategory ;
-- (IBAction)map;
+- (IBAction)map:(id) sender;
 - (void) initBtnGrid;
 - (void) saveCategory;
 - (NSArray*) getCategoryList;

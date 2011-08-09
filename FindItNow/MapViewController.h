@@ -18,9 +18,9 @@
     
     SQLiteManager *dbManager;
     MKMapView *mapView;
-    
+    NSString *mapCategory;
 }
-
+-(void) setCurrentCategory:(NSString*)category;
 -(IBAction)openPopup:(id)sender;
 -(IBAction) removeMap;
 -(void) saveItems;

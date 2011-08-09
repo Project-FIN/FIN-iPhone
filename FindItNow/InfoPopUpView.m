@@ -69,7 +69,7 @@
         UIButton *showHide = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         [showHide setTitle:@"Show Table" forState:UIControlStateNormal];
         [showHide addTarget:self action:@selector(addRemInfoTable) forControlEvents:UIControlEventTouchDown];
-        showHide.frame = CGRectMake(100, 120, 120, 30);
+        showHide.frame = CGRectMake(CGRectGetMaxX(frame)-150, 120, 120, 30);
         [self addSubview:showHide];
         
     }
@@ -77,23 +77,23 @@
 }
 -(IBAction) addRemInfoTable
 {
-    int tableHeight = 150;
+    int tableHeight = 180;  //about 4 cells' height
     
     [self removeExitTapArea];
     
     if (!isInfoHidden)
     {
-        self.frame = CGRectMake(CGRectGetMinX(self.frame),CGRectGetMinY(self.frame), CGRectGetWidth(self.frame), CGRectGetHeight(self.frame)-tableHeight);
+        self.frame = CGRectMake(CGRectGetMinX(self.frame),CGRectGetMinY(self.frame)+(tableHeight/2), CGRectGetWidth(self.frame), CGRectGetHeight(self.frame)-tableHeight-20);
         [infoTable removeFromSuperview];
         isInfoHidden = true;
     }
     else
     {
         isInfoHidden = false;
-        self.frame = CGRectMake(CGRectGetMinX(self.frame),CGRectGetMinY(self.frame), CGRectGetWidth(self.frame), CGRectGetHeight(self.frame)+tableHeight);
+        self.frame = CGRectMake(CGRectGetMinX(self.frame),CGRectGetMinY(self.frame)-(tableHeight/2), CGRectGetWidth(self.frame), CGRectGetHeight(self.frame)+tableHeight+20);
     
         //information table
-        infoTable = [ [UITableView alloc] initWithFrame:CGRectMake(10, 160, CGRectGetWidth(self.frame)-20, 150)];
+        infoTable = [ [UITableView alloc] initWithFrame:CGRectMake(10, 160, CGRectGetWidth(self.frame)-20, tableHeight)];
         FloorInfoTableViewController *infoTableCtrl = [ [FloorInfoTableViewController alloc] init];
         infoTableCtrl.tableView = infoTable;
         [infoTable setBackgroundColor:[UIColor brownColor]];

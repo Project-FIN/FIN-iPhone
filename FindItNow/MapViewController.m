@@ -34,6 +34,10 @@
 }
 
 #pragma mark - View lifecycle
+-(void) setCurrentCategory:(NSString*)category
+{
+    mapCategory = category;
+}
 
 - (void)viewDidLoad
 {
@@ -137,7 +141,8 @@
     [self.view addSubview:overlay];
     
     //Create a popup
-    InfoPopUpView *popup = [ [InfoPopUpView alloc] initWithFrame:CGRectMake(50, 100, 250, 175)];
+    int yCoord = CGRectGetMidY(self.view.frame) - (160/2);
+    InfoPopUpView *popup = [ [InfoPopUpView alloc] initWithFrame:CGRectMake(20, yCoord, CGRectGetWidth(self.view.frame)-40, 160)];
     
     //Perform animation
     //[popup appear];

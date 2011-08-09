@@ -29,7 +29,7 @@
         
         [butt setTitle:[categories objectAtIndex:i] forState:UIControlStateNormal];
         [butt setImage:[UIImage imageNamed: [icons objectForKey:[categories objectAtIndex:i] ]] forState:UIControlStateNormal];
-        [butt addTarget:self action:@selector(map) forControlEvents:UIControlEventTouchDown];
+        [butt addTarget:self action:@selector(map:) forControlEvents:UIControlEventTouchDown];
         [btnGrid addSubview:butt];
         [buttons addObject:butt];
     }
@@ -136,8 +136,9 @@
 }
 
 
-- (IBAction)map {
-    
+- (IBAction)map:(id) sender {
+    UIButton *butt = sender;
+    [mapView setCurrentCategory:butt.titleLabel.text];
     [self.tabBarController.view addSubview:mapView.view];
 }
 
