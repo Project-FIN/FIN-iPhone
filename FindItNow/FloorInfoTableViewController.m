@@ -11,6 +11,12 @@
 
 @implementation FloorInfoTableViewController
 
+const int detailcellMargin = 10;
+const int fontSizeSpace = 15;
+const int reportBtnHeight = 30;
+const int reportBtnWidth = 60;
+
+
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -106,7 +112,11 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([self selectionIncludesSection:indexPath.section] && indexPath.row == 1)
-        return 65;
+    {
+        NSString *str = @"Snack, Soda\nOpen 25 hr 7 days a week\nAnd 366 Days a Year\nFor TESTING ONLY";
+        NSArray *textline = [str componentsSeparatedByString:@"\n"];
+        return [textline count]*fontSizeSpace + reportBtnHeight + detailcellMargin;
+    }
     return 45;
 }
 
@@ -119,58 +129,30 @@
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
     if ( [self selectionIncludesSection:indexPath.section] && 1 == indexPath.row){
-        cell.textLabel.text = [NSMutableString stringWithFormat:@"TestA %d", [indexPath section] ];
+        cell.textLabel.text = @"";
+        UILabel *detail = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, CGRectGetWidth(tableView.frame)-10, 45)];
+        detail.font = [UIFont boldSystemFontOfSize:10.0f];
+        [detail setBackgroundColor:[UIColor clearColor]];
+        detail.textAlignment = UITextAlignmentLeft;
+        detail.numberOfLines = 0;
+        NSString *str = @"Snack, Soda\nOpen 25 hr 7 days a week\nAnd 366 Days a Year\nFor TESTING ONLY";
+        [detail setText:str];
+        NSArray *textline = [str componentsSeparatedByString:@"\n"];
+        detail.frame = CGRectMake(CGRectGetMinX(detail.frame), CGRectGetMinY(detail.frame), CGRectGetWidth(detail.frame),[textline count]*fontSizeSpace );
+        [cell.contentView addSubview:detail];
+        
         
         UIButton *butt = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        butt.frame = CGRectMake(CGRectGetMaxX(cell.frame)-50, 30, 40, 30);
-        [butt setTitle:@"Test" forState:UIControlStateNormal];
+        butt.frame = CGRectMake(CGRectGetMaxX(tableView.frame)-(reportBtnWidth+detailcellMargin), CGRectGetMaxY(detail.frame), reportBtnWidth, reportBtnHeight);
+        [butt setTitle:@"Report!" forState:UIControlStateNormal];
         [cell.contentView addSubview:butt];
         
     }else{
-        cell.textLabel.text = [NSMutableString stringWithFormat:@"Test %d", [indexPath section] ];
+        cell.textLabel.text = [NSMutableString stringWithFormat:@"Floor %d", [indexPath section] ];
     }
-    // Configure the cell.
     return cell;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)i ndexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 #pragma mark - Table view delegate
 
