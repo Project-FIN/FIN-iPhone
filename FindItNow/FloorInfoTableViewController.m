@@ -126,7 +126,6 @@
         [butt setTitle:@"Test" forState:UIControlStateNormal];
         [cell.contentView addSubview:butt];
         
-        [indexAssociatedSubviews setObject:butt forKey:indexPath];
     }else{
         cell.textLabel.text = [NSMutableString stringWithFormat:@"Test %d", [indexPath section] ];
     }
