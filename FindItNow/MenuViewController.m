@@ -28,7 +28,8 @@
         butt.frame = CGRectMake(btnSize/2+((i%2)*(btnSize+60)), (10+(i/2)*(15+btnSize)), btnSize, btnSize);
         
         [butt setTitle:[categories objectAtIndex:i] forState:UIControlStateNormal];
-        [butt setImage:[UIImage imageNamed: [icons objectForKey:[categories objectAtIndex:i] ]] forState:UIControlStateNormal];
+        NSString *iconName = [NSString stringWithFormat:@"%@_big",  [icons objectForKey:[categories objectAtIndex:i]] ];
+        [butt setImage:[UIImage imageNamed:iconName] forState:UIControlStateNormal];
         [butt addTarget:self action:@selector(map:) forControlEvents:UIControlEventTouchDown];
         [btnGrid addSubview:butt];
         [buttons addObject:butt];
