@@ -13,8 +13,20 @@
     BOOL isInfoHidden;
     UITableView *infoTable;
     NSMutableArray *exitAreas;
+    NSString *buildingName;
+    NSString *category;
+    double distance;
+    int   walkingTime;
+    NSArray *floorName;
+    NSMutableDictionary *floorDetail;
+    
 }
 -(void) addExitTapGesture;
 -(IBAction) addRemInfoTable;
 -(void) removeExitTapArea;
+-(void) constructView;
+
+- (id) initWithFrame:(CGRect)frame WithBName:(NSString*)building category:(NSString*)cat distance:(double)dist walkTime: (int)walk
+                data:(NSMutableDictionary*) data;
+
 @end

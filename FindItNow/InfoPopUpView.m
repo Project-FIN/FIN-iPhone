@@ -25,56 +25,62 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-- (id) initWithFrame:(CGRect)frame
+- (id) initWithFrame:(CGRect)frame WithBName:(NSString*)building category:(NSString*)cat distance:(double)dist walkTime: (int)walk
+                data:(NSMutableDictionary*) data
 {
+    buildingName = building;
+    category = cat;
+    distance = dist;
+    walkingTime = walk;
+    floorDetail = data;
     if ((self = [super initWithFrame:frame]))
     {
         [self setBackgroundColor:[UIColor whiteColor]];
-        
-        //Add a button
-       // UIButton *button = [[UIButton alloc]];
-        
-        //Building Name
-        UILabel *buildingName = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, CGRectGetWidth(frame)-20, 20)];
-        buildingName.font = [UIFont boldSystemFontOfSize:16.0f];
-        [buildingName setText:@"Meany Hall (Hardcoded)"];
-        [buildingName setBackgroundColor:[UIColor clearColor]];
-        [buildingName setTextColor:[UIColor purpleColor]];
-        [self addSubview:buildingName];
-        [buildingName release];
-        
-        //Category Type
-        UILabel *categoryLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 30, CGRectGetWidth(frame)-20, 15)];
-        categoryLabel.font = [UIFont boldSystemFontOfSize:14.0f];
-        [categoryLabel setText:@"Vending (Hardcoded)"];
-        [self addSubview:categoryLabel];
-        [categoryLabel release];
-        
-        //Distance
-        UILabel *distanceLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 70, CGRectGetWidth(frame)-20, 20)];
-        distanceLabel.font = [UIFont systemFontOfSize:14.0f];
-        [distanceLabel setText:@"Distance to Here: 0.14 mi (Hardcoded)"];
-        [self addSubview:distanceLabel];
-        [distanceLabel release];
-        
-        //Walking Time
-        UILabel *walkingLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 90, CGRectGetWidth(frame)-20, 20)];
-        walkingLabel.font = [UIFont systemFontOfSize:14.0f];
-        [walkingLabel setText:@"Walking Time: 10 Minutes"];
-        [self addSubview:walkingLabel];
-        [walkingLabel release];
-        
-        //Show Info Button:
-        isInfoHidden = true;
-        UIButton *showHide = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        [showHide setTitle:@"Show Table" forState:UIControlStateNormal];
-        [showHide addTarget:self action:@selector(addRemInfoTable) forControlEvents:UIControlEventTouchDown];
-        showHide.frame = CGRectMake(CGRectGetMaxX(frame)-150, 120, 120, 30);
-        [self addSubview:showHide];
-        
+        [self constructView];
     }
     return self;
 }
+-(void) constructView
+{
+    //Building Name
+    UILabel *buildingNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, CGRectGetWidth(self.frame)-20, 20)];
+    buildingNameLabel.font = [UIFont boldSystemFontOfSize:16.0f];
+    [buildingNameLabel setText:buildingName];
+    [buildingNameLabel setBackgroundColor:[UIColor clearColor]];
+    [buildingNameLabel setTextColor:[UIColor purpleColor]];
+    [self addSubview:buildingNameLabel];
+    [buildingNameLabel release];
+    
+    //Category Type
+    UILabel *categoryLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 30, CGRectGetWidth(self.frame)-20, 15)];
+    categoryLabel.font = [UIFont boldSystemFontOfSize:14.0f];
+    [categoryLabel setText:category];
+    [self addSubview:categoryLabel];
+    [categoryLabel release];
+    
+    //Distance
+    UILabel *distanceLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 70, CGRectGetWidth(self.frame)-20, 20)];
+    distanceLabel.font = [UIFont systemFontOfSize:14.0f];
+    [distanceLabel setText:[NSString stringWithFormat:@"Distance to here: %f mi", distance]];
+    [self addSubview:distanceLabel];
+    [distanceLabel release];
+    
+    //Walking Time
+    UILabel *walkingLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 90, CGRectGetWidth(self.frame)-20, 20)];
+    walkingLabel.font = [UIFont systemFontOfSize:14.0f];
+    [walkingLabel setText:[NSString stringWithFormat:@"Walking Time: %d Minutes", walkingTime]];
+    [self addSubview:walkingLabel];
+    [walkingLabel release];
+    
+    //Show Info Button:
+    isInfoHidden = true;
+    UIButton *showHide = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [showHide setTitle:@"Show Table" forState:UIControlStateNormal];
+    [showHide addTarget:self action:@selector(addRemInfoTable) forControlEvents:UIControlEventTouchDown];
+    showHide.frame = CGRectMake(CGRectGetMaxX(self.frame)-150, 120, 120, 30);
+    [self addSubview:showHide];
+}
+
 -(IBAction) addRemInfoTable
 {
     int tableHeight = 180;  //about 4 cells' height
@@ -94,13 +100,14 @@
     
         //information table
         infoTable = [ [UITableView alloc] initWithFrame:CGRectMake(10, 160, CGRectGetWidth(self.frame)-20, tableHeight)];
-        FloorInfoTableViewController *infoTableCtrl = [ [FloorInfoTableViewController alloc] init];
+        FloorInfoTableViewController *infoTableCtrl = [ [FloorInfoTableViewController alloc] initWithDict:floorDetail];
         infoTableCtrl.tableView = infoTable;
         [infoTable setBackgroundColor:[UIColor brownColor]];
         [self addSubview:infoTable];
     }
     [self addExitTapGesture];
 }
+
 -(void) addExitTapGesture{  
         
     exitAreas = [[NSMutableArray alloc] initWithCapacity:4];

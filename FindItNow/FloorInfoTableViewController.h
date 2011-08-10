@@ -12,6 +12,11 @@
 @interface FloorInfoTableViewController : UITableViewController {
     NSInteger numSection;
     NSMutableArray *selectedRowIndeices;
+    NSMutableDictionary *dataDict;
+    NSMutableArray *floors;
 }
 -(BOOL) selectionIncludesSection:(NSInteger)section;
+-(void) setData:(NSMutableDictionary*) data;
+-(id) initWithDict:(NSMutableDictionary*) data;
+-(void) removeSubviewsForIndexPath:(NSIndexPath*) indexPath;
 @end

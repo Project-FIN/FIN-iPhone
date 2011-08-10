@@ -21,8 +21,18 @@ const int reportBtnWidth = 60;
 {
     self = [super initWithStyle:style];
     if (self) {
-        numSection = 5;
         selectedRowIndeices = [[NSMutableArray alloc] initWithCapacity:numSection];
+        floors = [[NSMutableArray alloc] initWithCapacity:20];
+    }
+    return self;
+}
+- (id)initWithDict:(NSMutableDictionary*) data
+{
+    self = [super init];
+    if (self){
+        selectedRowIndeices = [[NSMutableArray alloc] initWithCapacity:numSection];
+        floors = [[NSMutableArray alloc] initWithCapacity:20];
+        [self setData:data];
     }
     return self;
 }
@@ -86,7 +96,7 @@ const int reportBtnWidth = 60;
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return numSection;
+    return [floors count];
 }
 
 -(BOOL) selectionIncludesSection:(NSInteger) section
@@ -113,7 +123,7 @@ const int reportBtnWidth = 60;
 {
     if ([self selectionIncludesSection:indexPath.section] && indexPath.row == 1)
     {
-        NSString *str = @"Snack, Soda\nOpen 25 hr 7 days a week\nAnd 366 Days a Year\nFor TESTING ONLY";
+        NSString *str = [dataDict objectForKey:[floors objectAtIndex:indexPath.section]];
         NSArray *textline = [str componentsSeparatedByString:@"\n"];
         return [textline count]*fontSizeSpace + reportBtnHeight + detailcellMargin;
     }
@@ -123,37 +133,50 @@ const int reportBtnWidth = 60;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
-    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
     if ( [self selectionIncludesSection:indexPath.section] && 1 == indexPath.row){
+        [self removeSubviewsForIndexPath:indexPath];
+        
         cell.textLabel.text = @"";
         UILabel *detail = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, CGRectGetWidth(tableView.frame)-10, 45)];
         detail.font = [UIFont boldSystemFontOfSize:10.0f];
         [detail setBackgroundColor:[UIColor clearColor]];
         detail.textAlignment = UITextAlignmentLeft;
         detail.numberOfLines = 0;
-        NSString *str = @"Snack, Soda\nOpen 25 hr 7 days a week\nAnd 366 Days a Year\nFor TESTING ONLY";
+        NSString *str = [dataDict objectForKey:[floors objectAtIndex:indexPath.section]];
         [detail setText:str];
         NSArray *textline = [str componentsSeparatedByString:@"\n"];
         detail.frame = CGRectMake(CGRectGetMinX(detail.frame), CGRectGetMinY(detail.frame), CGRectGetWidth(detail.frame),[textline count]*fontSizeSpace );
         [cell.contentView addSubview:detail];
-        
-        
+                
         UIButton *butt = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         butt.frame = CGRectMake(CGRectGetMaxX(tableView.frame)-(reportBtnWidth+detailcellMargin), CGRectGetMaxY(detail.frame), reportBtnWidth, reportBtnHeight);
         [butt setTitle:@"Report!" forState:UIControlStateNormal];
         [cell.contentView addSubview:butt];
         
     }else{
-        cell.textLabel.text = [NSMutableString stringWithFormat:@"Floor %d", [indexPath section] ];
+        cell.textLabel.text =[floors objectAtIndex:indexPath.section];
     }
     return cell;
 }
-
-
+-(void) setData:(NSMutableDictionary*) data
+{
+    dataDict = data;
+    for(NSString* str in [dataDict keyEnumerator])
+    {
+        [floors addObject:str];
+    }
+}
+-(void) removeSubviewsForIndexPath:(NSIndexPath*)indexPath
+{
+     for(UIView *subView in [self.tableView cellForRowAtIndexPath:indexPath].contentView.subviews)
+    {
+        [subView removeFromSuperview];
+    }
+}
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -164,12 +187,9 @@ const int reportBtnWidth = 60;
         //NSArray *delete = [NSArray arrayWithObject:[NSIndexPath indexPathForRow:[indexPath row] inSection:[indexPath section]] ];
         
         NSIndexPath *childCell = [NSIndexPath indexPathForRow:indexPath.row+1 inSection:indexPath.section];
-
-        for(UIView *subView in [tableView cellForRowAtIndexPath:childCell].contentView.subviews)
-        {
-            [subView removeFromSuperview];
-        }
-            
+        
+        [self removeSubviewsForIndexPath:childCell];
+        
         [selectedRowIndeices removeObject:indexPath];
         //[tableView beginUpdates];
         //[tableView deleteRowsAtIndexPaths:delete withRowAnimation:UITableViewRowAnimationBottom];
