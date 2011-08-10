@@ -20,18 +20,31 @@
     NSDictionary *icons = [self getCategoryIconDictionary];
     
     NSMutableArray *buttons = [[NSMutableArray alloc] initWithCapacity:[categories count]];
-    int btnSize = ( CGRectGetHeight(btnGrid.frame) - 60 )/([categories count]/2);
+    int btnSize = ( CGRectGetWidth(btnGrid.frame) - 140 )/2;
     //int btnWidth = CGRectGetWidth(btnGrid.frame) / ([categories count
     for (int i=0; i < [categories count]; i = i+1) {
+        UIView *btnView = [[UIView alloc] initWithFrame:CGRectMake(((i%2)*(btnSize+80)), (10+(i/2)*(50+btnSize)), btnSize+60, btnSize+40)];
+        [btnView setBackgroundColor:[UIColor colorWithRed:185/255.0 green:245/255.0 blue:108/255.0 alpha:1]];
+        [btnGrid addSubview:btnView];
+        
+        UILabel *cat = [[UILabel alloc] initWithFrame:CGRectMake(0,5,btnSize+60,20)];
+        [cat setText:[categories objectAtIndex:i]];
+        [cat setBackgroundColor:[UIColor clearColor]];
+        [cat setTextAlignment:UITextAlignmentCenter];
+        [btnView addSubview:cat];
+        
         UIButton *butt = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        
-        butt.frame = CGRectMake(btnSize/2+((i%2)*(btnSize+60)), (10+(i/2)*(15+btnSize)), btnSize, btnSize);
-        
+        butt.frame = CGRectMake(30, 30, btnSize, btnSize);
         [butt setTitle:[categories objectAtIndex:i] forState:UIControlStateNormal];
+        [butt.titleLabel setAlpha:0];
         NSString *iconName = [NSString stringWithFormat:@"%@_big",  [icons objectForKey:[categories objectAtIndex:i]] ];
-        [butt setImage:[UIImage imageNamed:iconName] forState:UIControlStateNormal];
+        UIImage *image = [UIImage imageNamed:iconName];
+        
+        [butt setImage:image forState:UIControlStateNormal];
+        [butt.imageView setBackgroundColor:[UIColor clearColor]];
+        
         [butt addTarget:self action:@selector(map:) forControlEvents:UIControlEventTouchDown];
-        [btnGrid addSubview:butt];
+        [btnView addSubview:butt];
         [buttons addObject:butt];
     }
 }
