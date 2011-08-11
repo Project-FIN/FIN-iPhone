@@ -27,5 +27,6 @@
 - (void) saveCategory;
 - (NSArray*) getCategoryList;
 - (NSDictionary*) getCategoryIconDictionary;
+- (NSArray*) hasChildrenCategory:(NSString*) cate;
 
 @end

@@ -38,6 +38,10 @@
 {
     mapCategory = category;
 }
+-(void) setCurrentBuilding:(NSString*)build
+{
+    building = build;
+}
 
 - (void)viewDidLoad
 {

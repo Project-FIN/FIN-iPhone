@@ -8,6 +8,7 @@
 
 #import "MenuViewController.h"
 #import "MapViewController.h"
+#import "SubcategoryListController.h"
 
 @implementation MenuViewController
 @synthesize mapView;
@@ -47,6 +48,7 @@
         [btnView addSubview:butt];
         [buttons addObject:butt];
     }
+    btnGrid.contentSize = CGSizeMake( 2*(btnSize+60), [buttons count]*(btnSize+40));
 }
 
 
@@ -149,11 +151,41 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-
+- (NSArray*) hasChildrenCategory:(NSString*) cate
+{
+    NSString *sqlStr = [NSString stringWithFormat:@"SELECT cat_id FROM categories WHERE full_name = '%@'", cate];
+    NSArray *result = [dbManager getRowsForQuery:sqlStr];
+    
+    NSInteger cat_id = [[[result objectAtIndex:0] objectForKey:@"cat_id"] intValue];
+    
+    sqlStr = [NSString stringWithFormat:@"SELECT full_name FROM categories WHERE parent = %d", cat_id];
+    result = [dbManager getRowsForQuery:sqlStr];
+    
+    NSArray *categoriesList = [dbManager getRowsForQuery:sqlStr];
+    NSMutableArray *categories = [[NSMutableArray alloc] init];
+    for (NSDictionary *dict in categoriesList) {
+        [categories addObject:[dict objectForKey:@"full_name"]];
+    }
+    
+    return categories;
+}
 - (IBAction)map:(id) sender {
     UIButton *butt = sender;
-    [mapView setCurrentCategory:butt.titleLabel.text];
-    [self.tabBarController.view addSubview:mapView.view];
+    
+    NSArray* subCategories = [self hasChildrenCategory:butt.titleLabel.text];
+    
+    if (subCategories.count == 0)
+    {
+        [mapView setCurrentCategory:butt.titleLabel.text];
+        [mapView setCurrentBuilding:@""];
+        [self.tabBarController.view addSubview:mapView.view];
+    } else
+    {
+        UITableView *tableView = [ [UITableView alloc] initWithFrame:CGRectMake(0,0, CGRectGetWidth(self.tabBarController.view.frame),CGRectGetHeight(self.tabBarController.view.frame))];
+        SubcategoryListController *subCategoryList = [[SubcategoryListController alloc] initWithStyle:UITableViewStylePlain WithSubcategory:subCategories MapView:mapView];
+        subCategoryList.tableView = tableView;
+        [self.tabBarController.view addSubview:tableView];
+    }
 }
 
 - (IBAction) getCategory {

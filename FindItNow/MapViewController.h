@@ -19,11 +19,13 @@
     SQLiteManager *dbManager;
     MKMapView *mapView;
     NSString *mapCategory;
+    NSString *building;
 }
 -(void) setCurrentCategory:(NSString*)category;
 -(IBAction)openPopup:(id)sender;
 -(IBAction) removeMap;
 -(void) saveItems;
 -(MKMapPoint*) getItemsOfCategory:(const char*)category;
+-(void) setCurrentBuilding:(NSString*)build;
 
 @end
