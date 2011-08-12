@@ -146,16 +146,16 @@
     
     //temporary data
     NSMutableDictionary *dataDict = [[NSMutableDictionary alloc] initWithCapacity:6 ];
-    [dataDict setObject:@"This is a test" forKey:@"Floor A"];
-    [dataDict setObject:@"This is a test\nSecond Line" forKey:@"Floor B"];
-    [dataDict setObject:@"This is a test\nwith lot of text and so this is fun" forKey:@"Floor C"];
+    //[dataDict setObject:@"This is a test" forKey:@"Floor A"];
+    //[dataDict setObject:@"This is a test\nSecond Line" forKey:@"Floor B"];
+    //[dataDict setObject:@"This is a test\nwith lot of text and so this is fun" forKey:@"Floor C"];
     [dataDict setObject:@"This is a test\n\n\nt fourth line?" forKey:@"Floor D"];
-    [dataDict setObject:@"" forKey:@"Floor E"];
-    [dataDict setObject:@"hour:??" forKey:@"Floor F"];
+    //[dataDict setObject:@"" forKey:@"Floor E"];
+    //[dataDict setObject:@"hour:??" forKey:@"Floor F"];
     
     //Create a popup
     int yCoord = CGRectGetMidY(self.view.frame) - (160/2);
-    InfoPopUpView *popup = [ [InfoPopUpView alloc] initWithFrame:CGRectMake(20, yCoord, CGRectGetWidth(self.view.frame)-40, 160)WithBName:@"Test Building" category:@"Test Cate." distance:0.1334 walkTime:130 data:dataDict];
+    InfoPopUpView *popup = [ [InfoPopUpView alloc] initWithFrame:CGRectMake(20, yCoord, CGRectGetWidth(self.view.frame)-40, 160)WithBName:@"Test Building" category:@"Test Cate." distance:0.1334 walkTime:130 data:dataDict IsOutdoor:YES];
     //Perform animation
     //[popup appear];
     //need a UIViewAppear class

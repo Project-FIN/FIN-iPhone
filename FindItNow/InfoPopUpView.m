@@ -26,7 +26,7 @@
 }
 
 - (id) initWithFrame:(CGRect)frame WithBName:(NSString*)building category:(NSString*)cat distance:(double)dist walkTime: (int)walk
-                data:(NSMutableDictionary*) data
+                data:(NSMutableDictionary*) data IsOutdoor:(BOOL)isOutdoor
 {
     buildingName = building;
     category = cat;
@@ -36,11 +36,68 @@
     if ((self = [super initWithFrame:frame]))
     {
         [self setBackgroundColor:[UIColor whiteColor]];
-        [self constructView];
+        if (isOutdoor)
+            [self constructOutdoorView];
+        else
+            [self constructIndoorView];
     }
     return self;
 }
--(void) constructView
+
+-(void) constructOutdoorView
+{
+    //Building Name
+    UILabel *buildingNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, CGRectGetWidth(self.frame)-20, 20)];
+    buildingNameLabel.font = [UIFont boldSystemFontOfSize:16.0f];
+    [buildingNameLabel setText:buildingName];
+    [buildingNameLabel setBackgroundColor:[UIColor clearColor]];
+    [buildingNameLabel setTextColor:[UIColor purpleColor]];
+    [self addSubview:buildingNameLabel];
+    [buildingNameLabel release];
+    
+    //Category Type
+    UILabel *categoryLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 30, CGRectGetWidth(self.frame)-20, 15)];
+    categoryLabel.font = [UIFont boldSystemFontOfSize:14.0f];
+    [categoryLabel setText:category];
+    [self addSubview:categoryLabel];
+    [categoryLabel release];
+    
+    
+    //Indoor Detail
+    NSString *key = [[[floorDetail keyEnumerator] allObjects] objectAtIndex:0];
+    NSString *str = [floorDetail objectForKey: key];
+    CGFloat detailHeight = 0;
+    if (![str isEqualToString:@""])
+    {
+        NSArray *textline = [str componentsSeparatedByString:@"\n"];
+        detailHeight = [textline count]*20;
+        UILabel *detailLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 50, CGRectGetWidth(self.frame)-20, detailHeight)];
+        detailLabel.font = [UIFont systemFontOfSize:14.0f];
+        detailLabel.textAlignment = UITextAlignmentLeft;
+        detailLabel.numberOfLines = 0;    
+        [detailLabel setText:str];
+        [self addSubview:detailLabel];
+        [detailLabel release];    
+    }
+    
+    //Distance
+    UILabel *distanceLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, detailHeight + 70, CGRectGetWidth(self.frame)-20, 20)];
+    distanceLabel.font = [UIFont systemFontOfSize:14.0f];
+    [distanceLabel setText:[NSString stringWithFormat:@"Distance to here: %f mi", distance]];
+    [self addSubview:distanceLabel];
+    [distanceLabel release];
+    
+    //Walking Time
+    UILabel *walkingLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, detailHeight + 90, CGRectGetWidth(self.frame)-20, 20)];
+    walkingLabel.font = [UIFont systemFontOfSize:14.0f];
+    [walkingLabel setText:[NSString stringWithFormat:@"Walking Time: %d Minutes", walkingTime]];
+    [self addSubview:walkingLabel];
+    [walkingLabel release];
+    
+    self.frame = CGRectMake(CGRectGetMinX(self.frame), CGRectGetMinY(self.frame), CGRectGetWidth(self.frame),CGRectGetMaxY(walkingLabel.frame)+20);
+}
+
+-(void) constructIndoorView
 {
     //Building Name
     UILabel *buildingNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, CGRectGetWidth(self.frame)-20, 20)];

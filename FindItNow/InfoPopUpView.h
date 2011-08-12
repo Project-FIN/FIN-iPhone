@@ -24,9 +24,10 @@
 -(void) addExitTapGesture;
 -(IBAction) addRemInfoTable;
 -(void) removeExitTapArea;
--(void) constructView;
+-(void) constructIndoorView;
+-(void) constructOutdoorView;
 
 - (id) initWithFrame:(CGRect)frame WithBName:(NSString*)building category:(NSString*)cat distance:(double)dist walkTime: (int)walk
-                data:(NSMutableDictionary*) data;
+                data:(NSMutableDictionary*) data IsOutdoor:(BOOL) isOutdoor;
 
 @end
