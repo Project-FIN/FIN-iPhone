@@ -115,7 +115,7 @@ const int reportBtnWidth = 60;
     // Return the number of rows in the section.
     if ([self selectionIncludesSection:section])
     {
-        return 2;
+        return (isDoubleExpendable)? [dataDict count]*2+1:2;
     }
     return 1;
 }
@@ -127,11 +127,6 @@ const int reportBtnWidth = 60;
         NSString *str = [dataDict objectForKey:[floors objectAtIndex:indexPath.section]];
         NSArray *textline = [str componentsSeparatedByString:@"\n"];
         return [textline count]*fontSizeSpace + reportBtnHeight + detailcellMargin;
-    }
-    if ([self selectionIncludesSection:indexPath.section] && indexPath.row == 1 && isDoubleExpendable)
-    {
-        return 45*[dataDict count];
-       // return [cellTable contentSize].height;
     }
     return 45;
 }
@@ -145,38 +140,49 @@ const int reportBtnWidth = 60;
     }
     if ( [self selectionIncludesSection:indexPath.section] && 1 == indexPath.row && !isDoubleExpendable){
         [self removeSubviewsForIndexPath:indexPath];
-        
-        cell.textLabel.text = @"";
-        UILabel *detail = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, CGRectGetWidth(tableView.frame)-10, 45)];
-        detail.font = [UIFont boldSystemFontOfSize:10.0f];
-        [detail setBackgroundColor:[UIColor clearColor]];
-        detail.textAlignment = UITextAlignmentLeft;
-        detail.numberOfLines = 0;
-        NSString *str = [dataDict objectForKey:[floors objectAtIndex:indexPath.section]];
-        [detail setText:str];
-        NSArray *textline = [str componentsSeparatedByString:@"\n"];
-        detail.frame = CGRectMake(CGRectGetMinX(detail.frame), CGRectGetMinY(detail.frame), CGRectGetWidth(detail.frame),[textline count]*fontSizeSpace );
-        [cell.contentView addSubview:detail];
-                
-        UIButton *butt = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        butt.frame = CGRectMake(CGRectGetMaxX(tableView.frame)-(reportBtnWidth+detailcellMargin), CGRectGetMaxY(detail.frame), reportBtnWidth, reportBtnHeight);
-        [butt setTitle:@"Report!" forState:UIControlStateNormal];
-        [cell.contentView addSubview:butt];
-        
-    }else if ([self selectionIncludesSection:indexPath.section] && 1 == indexPath.row)
+        [self setCellForDetailView:cell WithTableView:tableView index:indexPath.section];
+    }else if ([self selectionIncludesSection:indexPath.section] && 0 != indexPath.row)
     {
-        cell.textLabel.text = @"";
-        UITableView *infoTable = [ [UITableView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.tableView.frame), 45*[dataDict count])];
+        if (indexPath.row % 2 == 1)
+            cell.textLabel.text = [floors objectAtIndex:(indexPath.row-1)/2];
+        else
+        {
+            [self removeSubviewsForIndexPath:indexPath];
+            [self setCellForDetailView:cell WithTableView:tableView index:(indexPath.row-1)/2];
+        }
+        
+        /*UITableView *infoTable = [ [UITableView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.tableView.frame), 45*[dataDict count])];
         FloorInfoTableViewController *infoTableCtrl = [ [FloorInfoTableViewController alloc] initWithDict:dataDict andIsDoubleExpendable:NO];
         infoTableCtrl.tableView = infoTable;
         [infoTable setBackgroundColor:[UIColor whiteColor]];
-        [cell.contentView addSubview:infoTable];
+        [cell.contentView addSubview:infoTable];*/
     }
     else{
         cell.textLabel.text =[floors objectAtIndex:indexPath.section];
     }
     return cell;
 }
+-(void) setCellForDetailView:(UITableViewCell *) cell WithTableView:(UITableView *) tableView index:(int) index
+{    
+    cell.textLabel.text = @"";
+    UILabel *detail = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, CGRectGetWidth(tableView.frame)-10, 45)];
+    detail.font = [UIFont boldSystemFontOfSize:10.0f];
+    [detail setBackgroundColor:[UIColor clearColor]];
+    detail.textAlignment = UITextAlignmentLeft;
+    detail.numberOfLines = 0;
+    NSString *str = [dataDict objectForKey:[floors objectAtIndex:index]];
+    [detail setText:str];
+    NSArray *textline = [str componentsSeparatedByString:@"\n"];
+    detail.frame = CGRectMake(CGRectGetMinX(detail.frame), CGRectGetMinY(detail.frame), CGRectGetWidth(detail.frame),[textline count]*fontSizeSpace );
+    [cell.contentView addSubview:detail];
+    
+    UIButton *butt = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    butt.frame = CGRectMake(CGRectGetMaxX(tableView.frame)-(reportBtnWidth+detailcellMargin), CGRectGetMaxY(detail.frame), reportBtnWidth, reportBtnHeight);
+    [butt setTitle:@"Report!" forState:UIControlStateNormal];
+    [cell.contentView addSubview:butt];
+    
+}
+
 -(void) setData:(NSMutableDictionary*) data
 {
     dataDict = data;

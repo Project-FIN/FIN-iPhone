@@ -20,4 +20,5 @@
 -(void) setData:(NSMutableDictionary*) data;
 - (id)initWithDict:(NSMutableDictionary*) data andIsDoubleExpendable:(BOOL) isDouble;
 -(void) removeSubviewsForIndexPath:(NSIndexPath*) indexPath;
+-(void) setCellForDetailView:(UITableViewCell *) cell WithTableView:(UITableView *) tableView index:(int) index;
 @end
