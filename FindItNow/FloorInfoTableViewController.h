@@ -14,9 +14,10 @@
     NSMutableArray *selectedRowIndeices;
     NSMutableDictionary *dataDict;
     NSMutableArray *floors;
+    BOOL isDoubleExpendable;
 }
 -(BOOL) selectionIncludesSection:(NSInteger)section;
 -(void) setData:(NSMutableDictionary*) data;
--(id) initWithDict:(NSMutableDictionary*) data;
+- (id)initWithDict:(NSMutableDictionary*) data andIsDoubleExpendable:(BOOL) isDouble;
 -(void) removeSubviewsForIndexPath:(NSIndexPath*) indexPath;
 @end

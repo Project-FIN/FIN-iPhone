@@ -157,8 +157,9 @@
     
         //information table
         infoTable = [ [UITableView alloc] initWithFrame:CGRectMake(10, 160, CGRectGetWidth(self.frame)-20, tableHeight)];
-        FloorInfoTableViewController *infoTableCtrl = [ [FloorInfoTableViewController alloc] initWithDict:floorDetail];
+        FloorInfoTableViewController *infoTableCtrl = [ [FloorInfoTableViewController alloc] initWithDict:floorDetail andIsDoubleExpendable:YES];
         infoTableCtrl.tableView = infoTable;
+        infoTable.alwaysBounceVertical = NO;
         [infoTable setBackgroundColor:[UIColor brownColor]];
         [self addSubview:infoTable];
     }

@@ -26,12 +26,13 @@ const int reportBtnWidth = 60;
     }
     return self;
 }
-- (id)initWithDict:(NSMutableDictionary*) data
+- (id)initWithDict:(NSMutableDictionary*) data andIsDoubleExpendable:(BOOL) isDouble
 {
     self = [super init];
     if (self){
         selectedRowIndeices = [[NSMutableArray alloc] initWithCapacity:numSection];
         floors = [[NSMutableArray alloc] initWithCapacity:20];
+        isDoubleExpendable = isDouble;
         [self setData:data];
     }
     return self;
@@ -121,11 +122,16 @@ const int reportBtnWidth = 60;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([self selectionIncludesSection:indexPath.section] && indexPath.row == 1)
+    if ([self selectionIncludesSection:indexPath.section] && indexPath.row == 1 && !isDoubleExpendable)
     {
         NSString *str = [dataDict objectForKey:[floors objectAtIndex:indexPath.section]];
         NSArray *textline = [str componentsSeparatedByString:@"\n"];
         return [textline count]*fontSizeSpace + reportBtnHeight + detailcellMargin;
+    }
+    if ([self selectionIncludesSection:indexPath.section] && indexPath.row == 1 && isDoubleExpendable)
+    {
+        return 45*[dataDict count];
+       // return [cellTable contentSize].height;
     }
     return 45;
 }
@@ -137,7 +143,7 @@ const int reportBtnWidth = 60;
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
-    if ( [self selectionIncludesSection:indexPath.section] && 1 == indexPath.row){
+    if ( [self selectionIncludesSection:indexPath.section] && 1 == indexPath.row && !isDoubleExpendable){
         [self removeSubviewsForIndexPath:indexPath];
         
         cell.textLabel.text = @"";
@@ -157,7 +163,16 @@ const int reportBtnWidth = 60;
         [butt setTitle:@"Report!" forState:UIControlStateNormal];
         [cell.contentView addSubview:butt];
         
-    }else{
+    }else if ([self selectionIncludesSection:indexPath.section] && 1 == indexPath.row)
+    {
+        cell.textLabel.text = @"";
+        UITableView *infoTable = [ [UITableView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.tableView.frame), 45*[dataDict count])];
+        FloorInfoTableViewController *infoTableCtrl = [ [FloorInfoTableViewController alloc] initWithDict:dataDict andIsDoubleExpendable:NO];
+        infoTableCtrl.tableView = infoTable;
+        [infoTable setBackgroundColor:[UIColor whiteColor]];
+        [cell.contentView addSubview:infoTable];
+    }
+    else{
         cell.textLabel.text =[floors objectAtIndex:indexPath.section];
     }
     return cell;
