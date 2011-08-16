@@ -31,6 +31,7 @@ const int reportBtnWidth = 60;
     self = [super init];
     if (self){
         selectedRowIndeices = [[NSMutableArray alloc] initWithCapacity:numSection];
+        selectedChildRow = [[NSMutableArray alloc] initWithCapacity:numSection];
         floors = [[NSMutableArray alloc] initWithCapacity:20];
         isDoubleExpendable = isDouble;
         [self setData:data];
@@ -115,7 +116,7 @@ const int reportBtnWidth = 60;
     // Return the number of rows in the section.
     if ([self selectionIncludesSection:section])
     {
-        return (isDoubleExpendable)? [dataDict count]*2+1:2;
+        return (isDoubleExpendable)? [dataDict count]+1+[selectedChildRow count]: 2;
     }
     return 1;
 }
@@ -162,6 +163,16 @@ const int reportBtnWidth = 60;
     }
     return cell;
 }
+
+- (NSInteger)tableView:(UITableView *)tableView indentationLevelForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if ( indexPath.row==1 ) {
+        return 2;
+    }
+    return 1;
+    
+}
+
 -(void) setCellForDetailView:(UITableViewCell *) cell WithTableView:(UITableView *) tableView index:(int) index
 {    
     cell.textLabel.text = @"";
@@ -203,31 +214,55 @@ const int reportBtnWidth = 60;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 
-    if ( [selectedRowIndeices containsObject:indexPath] )
+    if (isDoubleExpendable && indexPath.row >= 1&& [selectedChildRow containsObject:[NSIndexPath indexPathForRow:indexPath.row/2 inSection:indexPath.section]]){
+        NSMutableArray *insert = [NSMutableArray arrayWithObject:[NSIndexPath indexPathForRow:[indexPath row]+1 inSection:indexPath.section]];
+        NSArray *reload = [NSArray arrayWithObjects:[NSIndexPath indexPathForRow:[indexPath row] inSection:indexPath.section],
+                           [NSIndexPath indexPathForRow:[indexPath row] inSection:indexPath.section+1], nil];
+        
+        [selectedChildRow addObject:indexPath];
+        [tableView beginUpdates];
+        //[tableView reloadData];
+        [tableView insertRowsAtIndexPaths:insert withRowAnimation:UITableViewRowAnimationTop];
+        [tableView reloadRowsAtIndexPaths:reload withRowAnimation:UITableViewRowAnimationNone];
+        [tableView endUpdates];
+        
+    }else if ( [selectedRowIndeices containsObject:indexPath] )
     {
-        //NSArray *delete = [NSArray arrayWithObject:[NSIndexPath indexPathForRow:[indexPath row] inSection:[indexPath section]] ];
+        NSMutableArray *delete = [NSMutableArray arrayWithObject:[NSIndexPath indexPathForRow:[indexPath row]+1 inSection:[indexPath section]] ];
         
         NSIndexPath *childCell = [NSIndexPath indexPathForRow:indexPath.row+1 inSection:indexPath.section];
+        
+        if (isDoubleExpendable){
+            for (int i = 1; i < [dataDict count]; i++)
+                [delete addObject:[NSIndexPath  indexPathForRow:i+1 inSection:indexPath.section]];
+        }
         
         [self removeSubviewsForIndexPath:childCell];
         
         [selectedRowIndeices removeObject:indexPath];
-        //[tableView beginUpdates];
-        //[tableView deleteRowsAtIndexPaths:delete withRowAnimation:UITableViewRowAnimationBottom];
-        [tableView reloadData];
-        //[tableView endUpdates];
+        [tableView beginUpdates];
+        [tableView deleteRowsAtIndexPaths:delete withRowAnimation:UITableViewRowAnimationBottom];
+        //[tableView reloadData];
+        [tableView endUpdates];
     }else if(indexPath.row == 0)
     {
         [selectedRowIndeices addObject:indexPath];
         
-        //NSArray *insert = [NSArray arrayWithObject:[NSIndexPath indexPathForRow:[indexPath row] inSection:indexPath.section+1]];
-                       
-        //[tableView beginUpdates];
-        [tableView reloadData];
-        //[tableView reloadRowsAtIndexPaths:insert withRowAnimation:UITableViewRowAnimationTop];
-        //[tableView endUpdates];
+        NSMutableArray *insert = [NSMutableArray arrayWithObject:[NSIndexPath indexPathForRow:[indexPath row]+1 inSection:indexPath.section]];
+        NSArray *reload = [NSArray arrayWithObjects:[NSIndexPath indexPathForRow:[indexPath row] inSection:indexPath.section],
+                           [NSIndexPath indexPathForRow:[indexPath row] inSection:indexPath.section+1], nil];
+        if (isDoubleExpendable){
+            for (int i = 1; i < [dataDict count]; i++)
+                [insert addObject:[NSIndexPath  indexPathForRow:i+1 inSection:indexPath.section]];
+        }
         
+        [tableView beginUpdates];
+        //[tableView reloadData];
+        [tableView insertRowsAtIndexPaths:insert withRowAnimation:UITableViewRowAnimationTop];
+        [tableView reloadRowsAtIndexPaths:reload withRowAnimation:UITableViewRowAnimationNone];
+        [tableView endUpdates];
     }
+    
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 
 }
