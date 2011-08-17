@@ -22,6 +22,7 @@
 		1330EDFD1375CE1100940DDB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1330EDFB1375CE1100940DDB /* InfoPlist.strings */; };
 		1330EE001375CE1100940DDB /* FindItNowTests.h in Resources */ = {isa = PBXBuildFile; fileRef = 1330EDFF1375CE1100940DDB /* FindItNowTests.h */; };
 		1330EE021375CE1100940DDB /* FindItNowTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1330EE011375CE1100940DDB /* FindItNowTests.m */; };
+		134432D713FB497E00EE6B2F /* ItemAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 134432D613FB497E00EE6B2F /* ItemAnnotation.m */; };
 		1346537C13E495C6009E6A53 /* BuildingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1346536E13E495C6009E6A53 /* BuildingViewController.m */; };
 		1346537D13E495C6009E6A53 /* BuildingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1346536F13E495C6009E6A53 /* BuildingViewController.xib */; };
 		1346537E13E495C6009E6A53 /* FindItNowViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1346537113E495C6009E6A53 /* FindItNowViewController.xib */; };
@@ -94,6 +95,8 @@
 		1330EDFF1375CE1100940DDB /* FindItNowTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FindItNowTests.h; sourceTree = "<group>"; };
 		1330EE011375CE1100940DDB /* FindItNowTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FindItNowTests.m; sourceTree = "<group>"; };
 		1330EE0B1375CE3E00940DDB /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		134432D513FB497E00EE6B2F /* ItemAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemAnnotation.h; sourceTree = "<group>"; };
+		134432D613FB497E00EE6B2F /* ItemAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemAnnotation.m; sourceTree = "<group>"; };
 		1346536D13E495C6009E6A53 /* BuildingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildingViewController.h; sourceTree = "<group>"; };
 		1346536E13E495C6009E6A53 /* BuildingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuildingViewController.m; sourceTree = "<group>"; };
 		1346536F13E495C6009E6A53 /* BuildingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BuildingViewController.xib; sourceTree = "<group>"; };
@@ -203,6 +206,8 @@
 		1330EDD81375CE1100940DDB /* FindItNow */ = {
 			isa = PBXGroup;
 			children = (
+				134432D513FB497E00EE6B2F /* ItemAnnotation.h */,
+				134432D613FB497E00EE6B2F /* ItemAnnotation.m */,
 				13EE3C0113E8BB290018A7C8 /* SQLiteManager.h */,
 				13EE3C0213E8BB290018A7C8 /* SQLiteManager.m */,
 				EA10F53F13E7CAA300908E24 /* FloorInfoTableViewController.h */,
@@ -442,6 +447,7 @@
 				13EE3C0313E8BB290018A7C8 /* SQLiteManager.m in Sources */,
 				EA6A606113E9210200386C8D /* MapViewController.m in Sources */,
 				EA3CC10D13F390BB004FEE88 /* SubcategoryListController.m in Sources */,
+				134432D713FB497E00EE6B2F /* ItemAnnotation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

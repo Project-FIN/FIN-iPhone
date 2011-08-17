@@ -13,19 +13,23 @@
 #import "MapKit/MapKit.h"
 #import "MapKit/MKGeometry.h"
 #import "MapKit/MKOverlayView.h"
+#import <Foundation/Foundation.h>
+#import <MapKit/MKAnnotation.h>
 
 @interface MapViewController : UIViewController {
     
     SQLiteManager *dbManager;
-    MKMapView *mapView;
+    NSMutableArray *mapAnnotations;
     NSString *mapCategory;
     NSString *building;
 }
+@property (nonatomic, retain) IBOutlet MKMapView *mapView;
+
 -(void) setCurrentCategory:(NSString*)category;
 -(IBAction)openPopup:(id)sender;
 -(IBAction) removeMap;
 -(void) saveItems;
--(MKMapPoint*) getItemsOfCategory:(const char*)category;
+-(NSMutableArray*) getItemsOfCategory:(const char*)category;
 -(void) setCurrentBuilding:(NSString*)build;
 
 @end

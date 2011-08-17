@@ -7,9 +7,11 @@
 //
 
 #import "MapViewController.h"
-#import "InfoPopUpView.h"
+#import "InfoPopUpView.h"	
+#import "ItemAnnotation.h"
 
 @implementation MapViewController
+@synthesize mapView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -33,6 +35,10 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
+-(void) viewDidAppear:(BOOL)animated
+{
+}
+
 #pragma mark - View lifecycle
 -(void) setCurrentCategory:(NSString*)category
 {
@@ -46,10 +52,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    mapView = [[MKMapView alloc] initWithFrame:self.view.bounds];
-    mapView.mapType = MKMapTypeHybrid;
-    
+        
     dbManager = [[SQLiteManager alloc] initWithDatabaseNamed:@"FIN_LOCAL.db"];
     
     NSError *error = [dbManager doQuery:@"CREATE TABLE IF NOT EXISTS items (item_id INTEGER PRIMARY KEY, rid INTEGER, latitude INTEGER, longitude INTEGER, special_info TEXT, fid INTEGER, not_found_count INTEGER, username TEXT, cat_id INTEGER, deleted INTEGER)"];
@@ -59,10 +62,49 @@
     
     [self saveItems];
     
+    [mapView setMapType:MKMapTypeStandard];
+    [mapView setZoomEnabled:YES];
+    [mapView setScrollEnabled:YES];
+    
+    // create out annotations array (in this example only 2)
+    mapAnnotations = [[NSMutableArray alloc] initWithCapacity:2];
+
+    MKCoordinateRegion region;
+    region.center.latitude = 47.654288;
+    region.center.longitude = -122.308044;
+    region.span.latitudeDelta = 0.005;
+    region.span.longitudeDelta = 0.004;
+    
+    // annotation for the City of Seattle
+    CLLocationCoordinate2D coord;
+    coord.latitude = 47.654288;
+    coord.longitude = -122.308044;
+    
+    NSMutableArray *points = [self getItemsOfCategory:"Coffee"];
+    for (CLLocation *loc in points) {
+        CLLocationCoordinate2D coord = [loc coordinate];
+        ItemAnnotation *itemAnnotation = [[ItemAnnotation alloc] initWithCoordinate:coord];
+        [mapView addAnnotation:itemAnnotation];
+    }
+    
+    [mapView setRegion:region animated:YES];
+    [mapView regionThatFits:region];
+            
     // Chanel: Here's how to get an array of 'geopoints'
     // sMKMapPoint* points = [self getItemsOfCategory:"Coffee"];
 }
 
+- (MKAnnotationView *) mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>) annotation {
+    MKPinAnnotationView *annView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"currentloc"];
+    
+    annView.pinColor = MKPinAnnotationColorPurple;
+    annView.animatesDrop = TRUE;
+    annView.canShowCallout = YES;
+    annView.calloutOffset = CGPointMake(-5, 5);
+    
+    return annView;
+}
+     
 - (void)saveItems
 {
     NSURL *URL=[[NSURL alloc] initWithString:@"http://www.fincdn.org/getItems.php?rid=1"];
@@ -90,7 +132,7 @@
     }
 }
 
-- (MKMapPoint*) getItemsOfCategory:(const char*)category {
+- (NSMutableArray*) getItemsOfCategory:(const char*)category {
     NSString *sqlStr = [NSString stringWithFormat:@"SELECT cat_id FROM categories WHERE full_name = '%s'", category];
     NSArray *arr = [dbManager getRowsForQuery:sqlStr];
     NSDictionary *cat_ids = [arr objectAtIndex:0];
@@ -100,17 +142,16 @@
     sqlStr = [NSString stringWithFormat:@"SELECT latitude, longitude FROM items WHERE cat_id = %d AND deleted = 0", cat_id];
     NSArray *itemsList = [dbManager getRowsForQuery:sqlStr];
     
-    MKMapPoint* pointArr = malloc(sizeof(CLLocationCoordinate2D) * itemsList.count);
+    NSMutableArray* pointArr = [[NSMutableArray alloc] init];
     for (int i = 0; i < itemsList.count; i++) {
         NSDictionary *dict = [itemsList objectAtIndex:i];
         CLLocationDegrees latitude = [[dict objectForKey:@"latitude"] doubleValue] / 1000000;
         printf("Latitude is %f", [[dict objectForKey:@"latitude"] doubleValue] / 1000000);
         CLLocationDegrees longitude = [[dict objectForKey:@"longitude"] doubleValue] / 1000000;
         
-        CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(latitude, longitude);
-        MKMapPoint point = MKMapPointForCoordinate(coordinate);
+        CLLocation* location = [[CLLocation alloc] initWithLatitude:latitude longitude:longitude];
         
-        pointArr[i] = point;
+        [pointArr addObject:location];
     }
     
     return pointArr;
