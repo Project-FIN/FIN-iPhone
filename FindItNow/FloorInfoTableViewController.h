@@ -12,6 +12,7 @@
 @interface FloorInfoTableViewController : UITableViewController {
     NSInteger numSection;
     NSMutableArray *selectedRowIndeices;
+    NSMutableArray *selectedChildRow;   //for double expendable only
     NSMutableDictionary *dataDict;
     NSMutableArray *floors;
     BOOL isDoubleExpendable;
