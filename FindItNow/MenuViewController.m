@@ -258,6 +258,7 @@
     
     if (subCategories.count == 0)
     {
+        mapView = [ [MapViewController alloc] initWithNibName:@"MapViewController" bundle:[mapView nibBundle]];
         [mapView setCurrentCategory:butt.titleLabel.text];
         [mapView setCurrentBuilding:@""];
         [self.tabBarController.view addSubview:mapView.view];
