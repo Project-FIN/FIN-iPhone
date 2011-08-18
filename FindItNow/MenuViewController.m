@@ -262,12 +262,11 @@
         [mapView setCurrentCategory:butt.titleLabel.text];
         [mapView setCurrentBuilding:@""];
         [self.tabBarController.view addSubview:mapView.view];
-    } else
-    {
-        SubcategoryListController *subCategoryList = [[SubcategoryListController alloc] initSubcategory:subCategories MapView:mapView];
-        [self.tabBarController.view addSubview:subCategoryList.view];
-        //[subCategoryList.naviBar.
-        [self.tabBarController.view addSubview:subCategoryList.naviBar];
+    } else{
+        SubcategoryListController *subCategoryList = [[SubcategoryListController alloc] initWithNibName:@"SubcategoryListController" bundle:[self nibBundle] initSubcategory:subCategories MapView:mapView];
+        [subCategoryList.allView addSubview:subCategoryList.naviBar];
+        [subCategoryList.allView addSubview:subCategoryList.view];
+        [self.tabBarController.view addSubview:subCategoryList.allView];
     }
 }
 
@@ -277,7 +276,5 @@
     [text setText:results ];
     [text setCenter:CGPointMake(100, 150)];
 }
-
-
 
 @end

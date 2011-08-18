@@ -11,19 +11,11 @@
 
 @implementation SubcategoryListController
 @synthesize naviBar;
-
-- (id)initWithStyle:(UITableViewStyle)style
+@synthesize allView;
+ 
+-(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil initSubcategory:(NSArray*) subcate MapView:(MapViewController*) map
 {
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
--(id) initSubcategory:(NSArray*) subcate MapView:(MapViewController*) map
-{
-    self = [super initWithNibName:@"SubcategoryListController" bundle:[map nibBundle]];
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self){
         subcategories = subcate;
         mapView = map;
@@ -113,15 +105,16 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self.tableView addSubview: mapView.view];
+    mapView = [ [MapViewController alloc] initWithNibName:@"MapViewController" bundle:[mapView nibBundle]];
     [mapView setCurrentBuilding:@""];
     [mapView setCurrentCategory: [subcategories objectAtIndex:[indexPath row]]];
+    [allView addSubview: mapView.view];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 -(IBAction) removeSelf
 {
-    [self.view removeFromSuperview];
+    [allView removeFromSuperview];
 }
 
 @end

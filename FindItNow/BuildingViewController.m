@@ -156,9 +156,10 @@
     InfoPopUpView *test = [ [InfoPopUpView alloc] initWithFrame:CGRectMake(10, 40, 150, 300) ];
     [overlay addSubview:test];
     [test addExitTapGesture];*/
-    [self.tabBarController.view addSubview: mapView.view];
-
-
+    mapView = [ [MapViewController alloc] initWithNibName:@"MapViewController" bundle:[mapView nibBundle]];
+    [mapView setCurrentCategory:@"Buildings"];
+    [mapView setCurrentBuilding:[buildings objectAtIndex: [indexPath row]]];
+    [self.tabBarController.view addSubview:mapView.view];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
