@@ -240,7 +240,7 @@
     
     NSInteger cat_id = [[[result objectAtIndex:0] objectForKey:@"cat_id"] intValue];
     
-    sqlStr = [NSString stringWithFormat:@"SELECT full_name FROM categories WHERE parent = %d", cat_id];
+    sqlStr = [NSString stringWithFormat:@"SELECT full_name FROM categories WHERE parent = %d AND deleted = 0", cat_id];
     result = [dbManager getRowsForQuery:sqlStr];
     
     NSArray *categoriesList = [dbManager getRowsForQuery:sqlStr];
