@@ -73,7 +73,7 @@
     coord.latitude = 47.654288;
     coord.longitude = -122.308044;
     
-    NSMutableArray *points = [self getItemsOfCategory:"Coffee"];
+    NSMutableArray *points = [self getItemsOfCategory:(const char*)[mapCategory UTF8String]];
     for (CLLocation *loc in points) {
         CLLocationCoordinate2D coord = [loc coordinate];
         ItemAnnotation *itemAnnotation = [[ItemAnnotation alloc] initWithCoordinate:coord];
@@ -89,8 +89,13 @@
 
 - (MKAnnotationView *) mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>) annotation {
     MKAnnotationView *annView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"currentloc"];
+    NSString *sqlStr = [NSString stringWithFormat:@"SELECT name FROM categories WHERE full_name = '%s'", (const char*)[mapCategory UTF8String]];
+    NSArray *arr = [dbManager getRowsForQuery:sqlStr];
+    NSDictionary *names = [arr objectAtIndex:0];
     
-    annView.image = [UIImage imageNamed:@"coffee.png"];
+    const char *name = (const char*)[[names objectForKey:@"name"] UTF8String];
+    
+    annView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%s.png", name]];
     
     return annView;
 }
