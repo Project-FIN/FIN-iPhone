@@ -35,6 +35,7 @@
 		136E920713ED93E8003799B6 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 136E91FF13ED9358003799B6 /* CoreLocation.framework */; };
 		136E920813ED93EA003799B6 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1365764613E4AF990074429F /* libsqlite3.dylib */; };
 		13EE3C0313E8BB290018A7C8 /* SQLiteManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 13EE3C0213E8BB290018A7C8 /* SQLiteManager.m */; };
+		13F801FE13FCA6D200817A5C /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 13F801FD13FCA6D200817A5C /* Default.png */; };
 		EA0D7C7113E514E900AE9E14 /* InfoPopUpView.m in Sources */ = {isa = PBXBuildFile; fileRef = EA0D7C7013E514E900AE9E14 /* InfoPopUpView.m */; };
 		EA10F54113E7CAA300908E24 /* FloorInfoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA10F54013E7CAA300908E24 /* FloorInfoTableViewController.m */; };
 		EA3CC10D13F390BB004FEE88 /* SubcategoryListController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA3CC10C13F390BB004FEE88 /* SubcategoryListController.m */; };
@@ -112,6 +113,7 @@
 		136E91FF13ED9358003799B6 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		13EE3C0113E8BB290018A7C8 /* SQLiteManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQLiteManager.h; sourceTree = "<group>"; };
 		13EE3C0213E8BB290018A7C8 /* SQLiteManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQLiteManager.m; sourceTree = "<group>"; };
+		13F801FD13FCA6D200817A5C /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		EA0D7C6F13E514E900AE9E14 /* InfoPopUpView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoPopUpView.h; sourceTree = "<group>"; };
 		EA0D7C7013E514E900AE9E14 /* InfoPopUpView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoPopUpView.m; sourceTree = "<group>"; };
 		EA10F53F13E7CAA300908E24 /* FloorInfoTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FloorInfoTableViewController.h; sourceTree = "<group>"; };
@@ -261,6 +263,7 @@
 				EA783DFF13F1116C00C5B918 /* restrooms.png */,
 				EA783E0013F1116C00C5B918 /* school_supplies_big.png */,
 				EA783E0113F1116C00C5B918 /* school_supplies.png */,
+				13F801FD13FCA6D200817A5C /* Default.png */,
 				EA783E0213F1116C00C5B918 /* vending_big.png */,
 				EA783E0313F1116C00C5B918 /* vending.png */,
 				1330EDDA1375CE1100940DDB /* FindItNow-Info.plist */,
@@ -401,6 +404,7 @@
 				EA783E1613F1116C00C5B918 /* school_supplies.png in Resources */,
 				EA783E1713F1116C00C5B918 /* vending_big.png in Resources */,
 				EA783E1813F1116C00C5B918 /* vending.png in Resources */,
+				13F801FE13FCA6D200817A5C /* Default.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

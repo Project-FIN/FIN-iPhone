@@ -28,7 +28,6 @@
 -(void) setCurrentCategory:(NSString*)category;
 -(IBAction)openPopup:(id)sender;
 -(IBAction) removeMap;
--(void) saveItems;
 -(NSMutableArray*) getItemsOfCategory:(const char*)category;
 -(void) setCurrentBuilding:(NSString*)build;
 

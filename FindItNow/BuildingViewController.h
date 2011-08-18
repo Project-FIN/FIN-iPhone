@@ -20,7 +20,6 @@
 }
 @property (nonatomic, retain) IBOutlet MapViewController *mapView;
 
-- (void) saveBuilding;
 - (NSArray*) getBuildingsList;
 
 @end

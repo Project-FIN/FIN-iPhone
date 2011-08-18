@@ -24,7 +24,11 @@
 - (IBAction) getCategory ;
 - (IBAction)map:(id) sender;
 - (void) initBtnGrid;
+
 - (void) saveCategory;
+- (void) saveBuilding;
+- (void) saveItems;
+
 - (NSArray*) getCategoryList;
 - (NSDictionary*) getCategoryIconDictionary;
 - (NSArray*) hasChildrenCategory:(NSString*) cate;
