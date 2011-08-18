@@ -264,10 +264,10 @@
         [self.tabBarController.view addSubview:mapView.view];
     } else
     {
-        UITableView *tableView = [ [UITableView alloc] initWithFrame:CGRectMake(0,0, CGRectGetWidth(self.tabBarController.view.frame),CGRectGetHeight(self.tabBarController.view.frame))];
-        SubcategoryListController *subCategoryList = [[SubcategoryListController alloc] initWithStyle:UITableViewStylePlain WithSubcategory:subCategories MapView:mapView];
-        subCategoryList.tableView = tableView;
-        [self.tabBarController.view addSubview:tableView];
+        SubcategoryListController *subCategoryList = [[SubcategoryListController alloc] initSubcategory:subCategories MapView:mapView];
+        [self.tabBarController.view addSubview:subCategoryList.view];
+        //[subCategoryList.naviBar.
+        [self.tabBarController.view addSubview:subCategoryList.naviBar];
     }
 }
 

@@ -39,6 +39,7 @@
 		EA0D7C7113E514E900AE9E14 /* InfoPopUpView.m in Sources */ = {isa = PBXBuildFile; fileRef = EA0D7C7013E514E900AE9E14 /* InfoPopUpView.m */; };
 		EA10F54113E7CAA300908E24 /* FloorInfoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA10F54013E7CAA300908E24 /* FloorInfoTableViewController.m */; };
 		EA3CC10D13F390BB004FEE88 /* SubcategoryListController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA3CC10C13F390BB004FEE88 /* SubcategoryListController.m */; };
+		EA56B81C13FCE60F004BA2D1 /* SubcategoryListController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA56B81B13FCE60F004BA2D1 /* SubcategoryListController.xib */; };
 		EA6A606113E9210200386C8D /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6A605F13E9210100386C8D /* MapViewController.m */; };
 		EA6A606213E9210200386C8D /* MapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA6A606013E9210200386C8D /* MapViewController.xib */; };
 		EA783E0413F1116C00C5B918 /* atms_big.png in Resources */ = {isa = PBXBuildFile; fileRef = EA783DEF13F1116C00C5B918 /* atms_big.png */; };
@@ -120,6 +121,7 @@
 		EA10F54013E7CAA300908E24 /* FloorInfoTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FloorInfoTableViewController.m; sourceTree = "<group>"; };
 		EA3CC10B13F390BB004FEE88 /* SubcategoryListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubcategoryListController.h; sourceTree = "<group>"; };
 		EA3CC10C13F390BB004FEE88 /* SubcategoryListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubcategoryListController.m; sourceTree = "<group>"; };
+		EA56B81B13FCE60F004BA2D1 /* SubcategoryListController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubcategoryListController.xib; sourceTree = "<group>"; };
 		EA6A605E13E9210100386C8D /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
 		EA6A605F13E9210100386C8D /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
 		EA6A606013E9210200386C8D /* MapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapViewController.xib; sourceTree = "<group>"; };
@@ -217,6 +219,7 @@
 				1346536D13E495C6009E6A53 /* BuildingViewController.h */,
 				EA3CC10B13F390BB004FEE88 /* SubcategoryListController.h */,
 				EA3CC10C13F390BB004FEE88 /* SubcategoryListController.m */,
+				EA56B81B13FCE60F004BA2D1 /* SubcategoryListController.xib */,
 				1346536E13E495C6009E6A53 /* BuildingViewController.m */,
 				1346536F13E495C6009E6A53 /* BuildingViewController.xib */,
 				1346537013E495C6009E6A53 /* en.lproj */,
@@ -405,6 +408,7 @@
 				EA783E1713F1116C00C5B918 /* vending_big.png in Resources */,
 				EA783E1813F1116C00C5B918 /* vending.png in Resources */,
 				13F801FE13FCA6D200817A5C /* Default.png in Resources */,
+				EA56B81C13FCE60F004BA2D1 /* SubcategoryListController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -14,5 +14,7 @@
     NSArray* subcategories;
     MapViewController *mapView;
 }
--(id) initWithStyle:(UITableViewStyle)style WithSubcategory:(NSArray*) subcate MapView:(MapViewController*) map;
+@property (nonatomic,retain) IBOutlet UINavigationBar* naviBar;
+-(id) initSubcategory:(NSArray*) subcate MapView:(MapViewController*) map;
+-(IBAction) removeSelf;
 @end

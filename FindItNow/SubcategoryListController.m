@@ -10,6 +10,7 @@
 #import "MapViewController.h"
 
 @implementation SubcategoryListController
+@synthesize naviBar;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -20,9 +21,9 @@
     return self;
 }
 
--(id) initWithStyle:(UITableViewStyle)style WithSubcategory:(NSArray*) subcate MapView:(MapViewController*) map
+-(id) initSubcategory:(NSArray*) subcate MapView:(MapViewController*) map
 {
-    self = [super initWithStyle:style];
+    self = [super initWithNibName:@"SubcategoryListController" bundle:[map nibBundle]];
     if (self){
         subcategories = subcate;
         mapView = map;
@@ -113,8 +114,14 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [self.tableView addSubview: mapView.view];
-    
+    [mapView setCurrentBuilding:@""];
+    [mapView setCurrentCategory: [subcategories objectAtIndex:[indexPath row]]];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+-(IBAction) removeSelf
+{
+    [self.view removeFromSuperview];
 }
 
 @end
