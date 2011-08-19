@@ -33,11 +33,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.view = tabBarController.view;
-    
-//    [menuViewController initOnStart]; w
 }
 
+-(void) viewDidAppear:(BOOL)animated
+{
+    [self.navigationController pushViewController:tabBarController animated:YES];
+    self.tabBarController.navigationController.navigationItem.backBarButtonItem = nil;
+}
 
 - (void)viewDidUnload
 {
@@ -50,6 +52,10 @@
 {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+-(void) pushView:(UIViewController*) viewController
+{
+    [self.navigationController pushViewController:viewController animated:YES];
 }
 
 

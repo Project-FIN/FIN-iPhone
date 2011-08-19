@@ -14,9 +14,8 @@
     NSArray* subcategories;
     MapViewController *mapView;
 }
-@property (nonatomic,retain) IBOutlet UINavigationBar* naviBar;
 @property (nonatomic,retain) IBOutlet UIView* allView;
 
--(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil initSubcategory:(NSArray*) subcate MapView:(MapViewController*) map;
+-(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil initSubcategory:(NSArray*) subcate MapView:(MapViewController*) map Category:(NSString*) cate;
 -(IBAction) removeSelf;
 @end

@@ -37,6 +37,7 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
+    self.tabBarController.navigationItem.title = @"Buildings";
     [super viewDidAppear:animated];
 }
 
@@ -159,7 +160,7 @@
     mapView = [ [MapViewController alloc] initWithNibName:@"MapViewController" bundle:[mapView nibBundle]];
     [mapView setCurrentCategory:@"Buildings"];
     [mapView setCurrentBuilding:[buildings objectAtIndex: [indexPath row]]];
-    [self.tabBarController.view addSubview:mapView.view];
+    [self.navigationController.view addSubview:mapView.view];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 

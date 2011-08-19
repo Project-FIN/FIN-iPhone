@@ -14,4 +14,5 @@
 }
 @property (nonatomic, retain) IBOutlet UITabBarController *tabBarController;
 
+-(void) pushView:(UIViewController*) viewController;
 @end

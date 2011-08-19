@@ -9,6 +9,7 @@
 #import "MenuViewController.h"
 #import "MapViewController.h"
 #import "SubcategoryListController.h"
+#import "FindItNowViewController.h"
 
 @implementation MenuViewController
 @synthesize mapView;
@@ -107,6 +108,11 @@
     [self saveItems];
     
     [self initBtnGrid];
+}
+
+-(void) viewDidAppear:(BOOL)animated
+{
+    self.tabBarController.title = @"FindItNowt";
 }
 
 - (void)saveCategory
@@ -261,12 +267,14 @@
         mapView = [ [MapViewController alloc] initWithNibName:@"MapViewController" bundle:[mapView nibBundle]];
         [mapView setCurrentCategory:butt.titleLabel.text];
         [mapView setCurrentBuilding:@""];
-        [self.tabBarController.view addSubview:mapView.view];
+        [self.tabBarController.navigationController pushViewController:mapView animated:YES];
     } else{
-        SubcategoryListController *subCategoryList = [[SubcategoryListController alloc] initWithNibName:@"SubcategoryListController" bundle:[self nibBundle] initSubcategory:subCategories MapView:mapView];
-        [subCategoryList.allView addSubview:subCategoryList.naviBar];
+        SubcategoryListController *subCategoryList = [[SubcategoryListController alloc] initWithNibName:@"SubcategoryListController" bundle:[self nibBundle] initSubcategory:subCategories MapView:mapView Category:butt.titleLabel.text];
         [subCategoryList.allView addSubview:subCategoryList.view];
-        [self.tabBarController.view addSubview:subCategoryList.allView];
+        
+        UIViewController *subCateView = [[UIViewController alloc] init];
+        subCateView.view = subCategoryList.allView;
+        [self.tabBarController.navigationController pushViewController:subCateView animated:YES];
     }
 }
 

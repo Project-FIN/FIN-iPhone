@@ -10,15 +10,15 @@
 #import "MapViewController.h"
 
 @implementation SubcategoryListController
-@synthesize naviBar;
 @synthesize allView;
  
--(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil initSubcategory:(NSArray*) subcate MapView:(MapViewController*) map
+-(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil initSubcategory:(NSArray*) subcate MapView:(MapViewController*) map Category:(NSString*) cate
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self){
         subcategories = subcate;
         mapView = map;
+        self.navigationItem.title = cate;
     }
     return self;
 }

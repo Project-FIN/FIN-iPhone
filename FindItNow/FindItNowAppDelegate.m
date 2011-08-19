@@ -12,16 +12,14 @@
 
 @implementation FindItNowAppDelegate
 
-
 @synthesize window=_window;
-
 @synthesize viewController=_viewController;
+@synthesize navigationController=_navigationController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-     
-    self.window.rootViewController = self.viewController;
+    self.window.rootViewController = self.navigationController;
     [self.window makeKeyAndVisible];
     return YES;
 }
@@ -68,7 +66,7 @@
 - (void)dealloc
 {
     [_window release];
-    [_viewController release];
+    [_navigationController release];
     [super dealloc];
 }
 
