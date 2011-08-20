@@ -10,7 +10,6 @@
 #import "MapViewController.h"
 
 @implementation SubcategoryListController
-@synthesize allView;
  
 -(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil initSubcategory:(NSArray*) subcate MapView:(MapViewController*) map Category:(NSString*) cate
 {
@@ -112,11 +111,6 @@
     [mapView setCurrentCategory: [subcategories objectAtIndex:[indexPath row]]];
     [self.navigationController pushViewController:mapView animated:YES];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-}
-
--(IBAction) removeSelf
-{
-    [allView removeFromSuperview];
 }
 
 @end

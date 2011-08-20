@@ -230,8 +230,6 @@
 - (IBAction) exit:(UITapGestureRecognizer *)recognizer
 {
     CGPoint location = [recognizer locationInView:self.superview];
-  //  NSLog(@"x: %f", location.x);
-  //  NSLog(@"y: %f", location.y);
 
     if ( CGRectContainsPoint(recognizer.view.frame, location) )
     {

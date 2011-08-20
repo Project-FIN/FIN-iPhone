@@ -15,8 +15,6 @@
     MapViewController *mapView;
     NSString* parentCategory;
 }
-@property (nonatomic,retain) IBOutlet UIView* allView;
-
 -(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil initSubcategory:(NSArray*) subcate MapView:(MapViewController*) map Category:(NSString*) cate;
--(IBAction) removeSelf;
+
 @end
