@@ -11,6 +11,7 @@
 #import "JSONKit.h"
 
 @class MapViewController;
+@class SubcategoryListController;
 
 @interface MenuViewController : UIViewController {
     

@@ -13,6 +13,7 @@
 @interface SubcategoryListController : UITableViewController {
     NSArray* subcategories;
     MapViewController *mapView;
+    NSString* parentCategory;
 }
 @property (nonatomic,retain) IBOutlet UIView* allView;
 

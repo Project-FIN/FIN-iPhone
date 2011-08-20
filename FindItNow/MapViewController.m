@@ -37,6 +37,8 @@
 
 -(void) viewDidAppear:(BOOL)animated
 {
+    [super viewDidAppear:animated];
+    self.title = @"Map";
 }
 
 #pragma mark - View lifecycle

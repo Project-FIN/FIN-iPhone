@@ -38,7 +38,7 @@
 -(void) viewDidAppear:(BOOL)animated
 {
     [self.navigationController pushViewController:tabBarController animated:YES];
-    self.tabBarController.navigationController.navigationItem.backBarButtonItem = nil;
+    self.tabBarController.navigationItem.backBarButtonItem = nil;
 }
 
 - (void)viewDidUnload

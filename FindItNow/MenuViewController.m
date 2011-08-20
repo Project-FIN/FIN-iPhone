@@ -112,7 +112,7 @@
 
 -(void) viewDidAppear:(BOOL)animated
 {
-    self.tabBarController.title = @"FindItNowt";
+    self.tabBarController.title = @"FindItNow";
 }
 
 - (void)saveCategory
@@ -267,14 +267,10 @@
         mapView = [ [MapViewController alloc] initWithNibName:@"MapViewController" bundle:[mapView nibBundle]];
         [mapView setCurrentCategory:butt.titleLabel.text];
         [mapView setCurrentBuilding:@""];
-        [self.tabBarController.navigationController pushViewController:mapView animated:YES];
+        [self.navigationController pushViewController:mapView animated:YES];
     } else{
-        SubcategoryListController *subCategoryList = [[SubcategoryListController alloc] initWithNibName:@"SubcategoryListController" bundle:[self nibBundle] initSubcategory:subCategories MapView:mapView Category:butt.titleLabel.text];
-        [subCategoryList.allView addSubview:subCategoryList.view];
-        
-        UIViewController *subCateView = [[UIViewController alloc] init];
-        subCateView.view = subCategoryList.allView;
-        [self.tabBarController.navigationController pushViewController:subCateView animated:YES];
+        SubcategoryListController *subCate = [[SubcategoryListController alloc] initWithNibName:@"SubcategoryListController" bundle:[self nibBundle] initSubcategory:subCategories MapView:mapView Category:butt.titleLabel.text];        
+        [self.navigationController pushViewController:subCate animated:YES];
     }
 }
 

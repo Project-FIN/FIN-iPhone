@@ -48,14 +48,13 @@
 						<string key="NSFrameSize">{320, 436}</string>
 						<reference key="NSSuperview" ref="710796330"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<bool key="IBUIMultipleTouchEnabled">YES</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<bool key="IBMKShowsUserLocation">YES</bool>
 					</object>
 				</object>
-				<string key="NSFrame">{{0, 44}, {320, 436}}</string>
+				<string key="NSFrameSize">{320, 436}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="844815448"/>
@@ -67,9 +66,6 @@
 					</object>
 				</object>
 				<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
-				<object class="IBUISimulatedNavigationBarMetrics" key="IBUISimulatedTopBarMetrics">
-					<bool key="IBUIPrompted">NO</bool>
-				</object>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 			</object>
 		</object>

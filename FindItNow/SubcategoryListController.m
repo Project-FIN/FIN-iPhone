@@ -18,7 +18,7 @@
     if (self){
         subcategories = subcate;
         mapView = map;
-        self.navigationItem.title = cate;
+        parentCategory = cate;
     }
     return self;
 }
@@ -41,6 +41,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.title = parentCategory;
 }
 
 - (void)viewDidUnload
@@ -58,6 +59,7 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    self.title= parentCategory;
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -108,7 +110,7 @@
     mapView = [ [MapViewController alloc] initWithNibName:@"MapViewController" bundle:[mapView nibBundle]];
     [mapView setCurrentBuilding:@""];
     [mapView setCurrentCategory: [subcategories objectAtIndex:[indexPath row]]];
-    [allView addSubview: mapView.view];
+    [self.navigationController pushViewController:mapView animated:YES];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 

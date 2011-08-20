@@ -158,9 +158,10 @@
     [overlay addSubview:test];
     [test addExitTapGesture];*/
     mapView = [ [MapViewController alloc] initWithNibName:@"MapViewController" bundle:[mapView nibBundle]];
-    [mapView setCurrentCategory:@"Buildings"];
+    [mapView setCurrentCategory:@"Coffee"];
     [mapView setCurrentBuilding:[buildings objectAtIndex: [indexPath row]]];
-    [self.navigationController.view addSubview:mapView.view];
+    //[self.navigationController.view addSubview:mapView.view];
+    [self.navigationController pushViewController:mapView animated:YES];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
