@@ -107,6 +107,9 @@
         annView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%s.png", name]];
     }
     
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openPopup:)];
+    [annView addGestureRecognizer:tap];
+    
     return annView;
 }
 
