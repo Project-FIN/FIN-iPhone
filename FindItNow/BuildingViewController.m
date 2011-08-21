@@ -87,7 +87,7 @@
 
 - (NSArray*)getBuildingsList
 {   
-    NSString *sqlStr = [NSString stringWithFormat:@"SELECT name FROM buildings WHERE deleted = 0"];
+    NSString *sqlStr = [NSString stringWithFormat:@"SELECT name FROM buildings WHERE deleted = 0 ORDER BY name ASC"];
     NSArray *buildingsList = [dbManager getRowsForQuery:sqlStr];
         
     NSMutableArray *building = [[NSMutableArray alloc] init];
@@ -158,7 +158,7 @@
     [overlay addSubview:test];
     [test addExitTapGesture];*/
     mapView = [ [MapViewController alloc] initWithNibName:@"MapViewController" bundle:[mapView nibBundle]];
-    [mapView setCurrentCategory:@"Coffee"];
+    [mapView setCurrentCategory:@""];
     [mapView setCurrentBuilding:[buildings objectAtIndex: [indexPath row]]];
     //[self.navigationController.view addSubview:mapView.view];
     [self.navigationController pushViewController:mapView animated:YES];

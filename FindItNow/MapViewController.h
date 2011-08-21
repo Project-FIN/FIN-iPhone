@@ -21,7 +21,7 @@
     SQLiteManager *dbManager;
     NSMutableArray *mapAnnotations;
     NSString *mapCategory;
-    NSString *building;
+    NSString *mapBuilding;
 }
 @property (nonatomic, retain) IBOutlet MKMapView *mapView;
 
@@ -29,6 +29,7 @@
 -(IBAction)openPopup:(id)sender;
 -(IBAction) removeMap;
 -(NSMutableArray*) getItemsOfCategory:(const char*)category;
+-(NSMutableArray*) getLocationOfBuilding:(const char*)building;
 -(void) setCurrentBuilding:(NSString*)build;
 
 @end

@@ -48,7 +48,7 @@
 }
 -(void) setCurrentBuilding:(NSString*)build
 {
-    building = build;
+    mapBuilding = build;
 }
 
 - (void)viewDidLoad
@@ -74,8 +74,12 @@
     CLLocationCoordinate2D coord;
     coord.latitude = 47.654288;
     coord.longitude = -122.308044;
-    
-    NSMutableArray *points = [self getItemsOfCategory:(const char*)[mapCategory UTF8String]];
+    NSMutableArray *points;
+    if ([mapCategory length] == 0) {
+        points = [self getLocationOfBuilding:(const char *)[mapBuilding UTF8String]];
+    } else {
+        points = [self getItemsOfCategory:(const char*)[mapCategory UTF8String]];
+    }
     for (CLLocation *loc in points) {
         CLLocationCoordinate2D coord = [loc coordinate];
         ItemAnnotation *itemAnnotation = [[ItemAnnotation alloc] initWithCoordinate:coord];
@@ -93,11 +97,15 @@
     MKAnnotationView *annView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"currentloc"];
     NSString *sqlStr = [NSString stringWithFormat:@"SELECT name FROM categories WHERE full_name = '%s'", (const char*)[mapCategory UTF8String]];
     NSArray *arr = [dbManager getRowsForQuery:sqlStr];
-    NSDictionary *names = [arr objectAtIndex:0];
+    if ([arr count] == 0) {
+        annView.image = [UIImage imageNamed:[NSString stringWithFormat:@"buildings.png"]];
+    } else {
+        NSDictionary *names = [arr objectAtIndex:0];
     
-    const char *name = (const char*)[[names objectForKey:@"name"] UTF8String];
+        const char *name = (const char*)[[names objectForKey:@"name"] UTF8String];
     
-    annView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%s.png", name]];
+        annView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%s.png", name]];
+    }
     
     return annView;
 }
@@ -123,6 +131,23 @@
         
         [pointArr addObject:location];
     }
+    
+    return pointArr;
+}
+                  
+- (NSMutableArray*) getLocationOfBuilding:(const char*)building {
+    NSString *sqlStr = [NSString stringWithFormat:@"SELECT latitude, longitude FROM buildings WHERE name = '%s' AND deleted = 0", building];
+    NSArray *itemsList = [dbManager getRowsForQuery:sqlStr];
+    
+    NSMutableArray* pointArr = [[NSMutableArray alloc] init];
+    NSDictionary *dict = [itemsList objectAtIndex:0];
+        
+    CLLocationDegrees latitude = [[dict objectForKey:@"latitude"] doubleValue] / 1000000;
+    CLLocationDegrees longitude = [[dict objectForKey:@"longitude"] doubleValue] / 1000000;
+        
+    CLLocation* location = [[CLLocation alloc] initWithLatitude:latitude longitude:longitude];
+        
+    [pointArr addObject:location];
     
     return pointArr;
 }
