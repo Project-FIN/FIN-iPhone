@@ -63,6 +63,10 @@
 		EA783E1613F1116C00C5B918 /* school_supplies.png in Resources */ = {isa = PBXBuildFile; fileRef = EA783E0113F1116C00C5B918 /* school_supplies.png */; };
 		EA783E1713F1116C00C5B918 /* vending_big.png in Resources */ = {isa = PBXBuildFile; fileRef = EA783E0213F1116C00C5B918 /* vending_big.png */; };
 		EA783E1813F1116C00C5B918 /* vending.png in Resources */ = {isa = PBXBuildFile; fileRef = EA783E0313F1116C00C5B918 /* vending.png */; };
+		EAD437FF1402242800BE6471 /* SetRegionTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = EAD437FD1402242800BE6471 /* SetRegionTableController.m */; };
+		EAD438001402242800BE6471 /* SetRegionTableController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAD437FE1402242800BE6471 /* SetRegionTableController.xib */; };
+		EAD4380D14022BFE00BE6471 /* SetRegionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EAD4380B14022BFD00BE6471 /* SetRegionViewController.m */; };
+		EAD4380E14022BFE00BE6471 /* SetRegionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAD4380C14022BFE00BE6471 /* SetRegionViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -146,6 +150,12 @@
 		EA783E0113F1116C00C5B918 /* school_supplies.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = school_supplies.png; sourceTree = "<group>"; };
 		EA783E0213F1116C00C5B918 /* vending_big.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = vending_big.png; sourceTree = "<group>"; };
 		EA783E0313F1116C00C5B918 /* vending.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = vending.png; sourceTree = "<group>"; };
+		EAD437FC1402242800BE6471 /* SetRegionTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetRegionTableController.h; sourceTree = "<group>"; };
+		EAD437FD1402242800BE6471 /* SetRegionTableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetRegionTableController.m; sourceTree = "<group>"; };
+		EAD437FE1402242800BE6471 /* SetRegionTableController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SetRegionTableController.xib; sourceTree = "<group>"; };
+		EAD4380A14022BFD00BE6471 /* SetRegionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetRegionViewController.h; sourceTree = "<group>"; };
+		EAD4380B14022BFD00BE6471 /* SetRegionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetRegionViewController.m; sourceTree = "<group>"; };
+		EAD4380C14022BFE00BE6471 /* SetRegionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SetRegionViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -230,6 +240,12 @@
 				1346537B13E495C6009E6A53 /* MenuViewController.xib */,
 				1330EDE11375CE1100940DDB /* FindItNowAppDelegate.h */,
 				1330EDE21375CE1100940DDB /* FindItNowAppDelegate.m */,
+				EAD437FC1402242800BE6471 /* SetRegionTableController.h */,
+				EAD4380A14022BFD00BE6471 /* SetRegionViewController.h */,
+				EAD4380B14022BFD00BE6471 /* SetRegionViewController.m */,
+				EAD4380C14022BFE00BE6471 /* SetRegionViewController.xib */,
+				EAD437FD1402242800BE6471 /* SetRegionTableController.m */,
+				EAD437FE1402242800BE6471 /* SetRegionTableController.xib */,
 				1330EDE41375CE1100940DDB /* MainWindow.xib */,
 				1330EDE71375CE1100940DDB /* FindItNowViewController.h */,
 				1330EDE81375CE1100940DDB /* FindItNowViewController.m */,
@@ -409,6 +425,8 @@
 				EA783E1813F1116C00C5B918 /* vending.png in Resources */,
 				13F801FE13FCA6D200817A5C /* Default.png in Resources */,
 				EA56B81C13FCE60F004BA2D1 /* SubcategoryListController.xib in Resources */,
+				EAD438001402242800BE6471 /* SetRegionTableController.xib in Resources */,
+				EAD4380E14022BFE00BE6471 /* SetRegionViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -456,6 +474,8 @@
 				EA6A606113E9210200386C8D /* MapViewController.m in Sources */,
 				EA3CC10D13F390BB004FEE88 /* SubcategoryListController.m in Sources */,
 				134432D713FB497E00EE6B2F /* ItemAnnotation.m in Sources */,
+				EAD437FF1402242800BE6471 /* SetRegionTableController.m in Sources */,
+				EAD4380D14022BFE00BE6471 /* SetRegionViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

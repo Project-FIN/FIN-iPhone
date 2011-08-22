@@ -7,7 +7,8 @@
 //
 
 #import "FindItNowAppDelegate.h"
-
+#import "SetRegionTableController.h"
+#import "SetRegionViewController.h"
 #import "FindItNowViewController.h"
 
 @implementation FindItNowAppDelegate
@@ -20,7 +21,16 @@
 {
     // Override point for customization after application launch.
     self.window.rootViewController = self.navigationController;
-    [self.window makeKeyAndVisible];
+    
+    /*SetRegionTableController *table = [ [SetRegionTableController alloc] initWithNibName:@"SetRegionTableController" bundle:[self.navigationController nibBundle]];
+    [table setWindow:self.window];
+    [self.window.rootViewController presentModalViewController:table animated:YES];*/
+    
+    SetRegionViewController *setRegion = [[SetRegionViewController alloc] initWithNibName:@"SetRegionViewController" bundle:[self.navigationController nibBundle]];
+    [setRegion setWindow:self.window];
+    [self.window.rootViewController presentModalViewController:setRegion animated:YES];
+    
+    //[self.window makeKeyAndVisible];
     return YES;
 }
 
