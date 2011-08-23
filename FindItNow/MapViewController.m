@@ -143,7 +143,7 @@
     return pointArr;
 }
 
-- (NSDictionary*) getItemsAtLocation:(int)latitude: (int)longitude {
+- (NSArray*) getItemsAtLocation:(int)latitude: (int)longitude {
     const char* str;
     if ([mapCategory length] != 0) {
         
@@ -164,7 +164,7 @@
     
     NSLog(@"%@", itemsList);
 
-    return NULL;
+    return itemsList;
 }
                   
 - (NSMutableArray*) getLocationOfBuilding:(const char*)building {
