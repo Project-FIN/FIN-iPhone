@@ -89,6 +89,7 @@
     
     [mapView setRegion:region animated:YES];
     [mapView regionThatFits:region];
+    [self getItemsAtLocation:47655790:-122308060];
             
     // Chanel: Here's how to get an array of 'geopoints'
     // sMKMapPoint* points = [self getItemsOfCategory:"Coffee"];
@@ -140,6 +141,30 @@
     }
     
     return pointArr;
+}
+
+- (NSDictionary*) getItemsAtLocation:(int)latitude: (int)longitude {
+    const char* str;
+    if ([mapCategory length] != 0) {
+        
+        NSString *sqlStr = [NSString stringWithFormat:@"SELECT cat_id FROM categories WHERE full_name = '%s'", (const char*)[mapCategory UTF8String]];
+        NSArray *itemsList = [dbManager getRowsForQuery:sqlStr];
+        NSDictionary *dict = [itemsList objectAtIndex:0];
+    
+        int cat_id = [[dict objectForKey:@"cat_id"] intValue];
+        printf("Cat id is %d", cat_id);
+    
+        str = (const char*)[[NSString stringWithFormat:@"AND cat_id = %d", cat_id] UTF8String];
+    } else {
+        str = "";
+    }
+    
+    NSString *sqlStr = [NSString stringWithFormat:@"SELECT * FROM items WHERE latitude = %d AND longitude = %d %s AND deleted = 0", latitude, longitude, str];
+    NSArray *itemsList = [dbManager getRowsForQuery:sqlStr];
+    
+    NSLog(@"%@", itemsList);
+
+    return NULL;
 }
                   
 - (NSMutableArray*) getLocationOfBuilding:(const char*)building {

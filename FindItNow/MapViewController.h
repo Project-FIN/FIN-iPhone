@@ -30,6 +30,7 @@
 -(IBAction) removeMap;
 -(NSMutableArray*) getItemsOfCategory:(const char*)category;
 -(NSMutableArray*) getLocationOfBuilding:(const char*)building;
+-(NSDictionary*) getItemsAtLocation:(int)latitude:(int)longitude;
 -(void) setCurrentBuilding:(NSString*)build;
 -(IBAction) scrollToUserLocation;
 -(IBAction) scrollToDefaultLocation;
