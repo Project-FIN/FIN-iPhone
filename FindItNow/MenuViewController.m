@@ -22,10 +22,10 @@
     NSDictionary *icons = [self getCategoryIconDictionary];
     
     NSMutableArray *buttons = [[NSMutableArray alloc] initWithCapacity:[categories count]];
-    int btnSize = ( CGRectGetWidth(btnGrid.frame) - 140 )/2;
+    int btnSize = ( CGRectGetWidth(btnGrid.frame) - 180 )/2;
     //int btnWidth = CGRectGetWidth(btnGrid.frame) / ([categories count
     for (int i=0; i < [categories count]; i = i+1) {
-        UIView *btnView = [[UIView alloc] initWithFrame:CGRectMake(((i%2)*(btnSize+80)), (10+(i/2)*(50+btnSize)), btnSize+60, btnSize+40)];
+        UIView *btnView = [[UIView alloc] initWithFrame:CGRectMake(((i%2)*(btnSize+80))+20, (10+(i/2)*(50+btnSize)), btnSize+60, btnSize+40)];
         [btnView setBackgroundColor:[UIColor colorWithRed:185/255.0 green:245/255.0 blue:108/255.0 alpha:1]];
         [btnGrid addSubview:btnView];
         
@@ -37,13 +37,14 @@
         
         UIButton *butt = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         butt.frame = CGRectMake(30, 30, btnSize, btnSize);
-        [butt setTitle:[categories objectAtIndex:i] forState:UIControlStateNormal];
+        [butt setTag:i];
         [butt.titleLabel setAlpha:0];
-        NSString *iconName = [NSString stringWithFormat:@"%@_big",  [icons objectForKey:[categories objectAtIndex:i]] ];
+        NSString *iconName = [NSString stringWithFormat:@"%@",  [icons objectForKey:[categories objectAtIndex:i]] ];
         UIImage *image = [UIImage imageNamed:iconName];
         
         [butt setImage:image forState:UIControlStateNormal];
         [butt.imageView setBackgroundColor:[UIColor clearColor]];
+        [butt setContentMode:UIViewContentModeRight];
         
         [butt addTarget:self action:@selector(map:) forControlEvents:UIControlEventTouchDown];
         [btnView addSubview:butt];
@@ -259,13 +260,13 @@
 }
 - (IBAction)map:(id) sender {
     UIButton *butt = sender;
-    
-    NSArray* subCategories = [self hasChildrenCategory:butt.titleLabel.text];
+    NSArray *categories = [self getCategoryList];
+    NSArray* subCategories = [self hasChildrenCategory:[categories objectAtIndex:butt.tag ]];
     
     if (subCategories.count == 0)
     {
         mapView = [ [MapViewController alloc] initWithNibName:@"MapViewController" bundle:[mapView nibBundle]];
-        [mapView setCurrentCategory:butt.titleLabel.text];
+        [mapView setCurrentCategory:[categories objectAtIndex:butt.tag ]];
         [mapView setCurrentBuilding:@""];
         [self.navigationController pushViewController:mapView animated:YES];
     } else{

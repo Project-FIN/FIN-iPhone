@@ -42,33 +42,22 @@
 				<int key="NSvFlags">274</int>
 				<object class="NSMutableArray" key="NSSubviews">
 					<bool key="EncodedWithXMLCoder">YES</bool>
-					<object class="IBUIScrollView" id="723489727">
+					<object class="IBUIScrollView" id="434710266">
 						<reference key="NSNextResponder" ref="930405662"/>
-						<int key="NSvFlags">268</int>
-						<string key="NSFrame">{{21, 61}, {279, 375}}</string>
+						<int key="NSvFlags">274</int>
+						<string key="NSFrameSize">{320, 410}</string>
 						<reference key="NSSuperview" ref="930405662"/>
 						<reference key="NSWindow"/>
-						<object class="NSColor" key="IBUIBackgroundColor">
-							<int key="NSColorSpace">1</int>
-							<bytes key="NSRGB">MC45NjQ3MDc0NjExIDAuOTg5MTMwNDM0OCAwLjk4OTEzMDQzNDgAA</bytes>
-						</object>
+						<reference key="NSNextKeyView"/>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<bool key="IBUIMultipleTouchEnabled">YES</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<double key="IBUIContentInset.top">2</double>
-						<double key="IBUIContentInset.bottom">2</double>
-						<double key="IBUIContentInset.left">2</double>
-						<double key="IBUIContentInset.right">0.0</double>
-						<bool key="IBUIShowsHorizontalScrollIndicator">NO</bool>
-						<double key="IBUIScrollIndicatorInsets.top">2</double>
-						<double key="IBUIScrollIndicatorInsets.bottom">2</double>
-						<double key="IBUIScrollIndicatorInsets.left">2</double>
-						<double key="IBUIScrollIndicatorInsets.right">2</double>
 					</object>
 				</object>
-				<string key="NSFrameSize">{320, 436}</string>
+				<string key="NSFrameSize">{320, 410}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
+				<reference key="NSNextKeyView" ref="434710266"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
 					<bytes key="NSWhite">MQA</bytes>
@@ -76,6 +65,7 @@
 						<int key="NSID">2</int>
 					</object>
 				</object>
+				<bool key="IBUIAutoresizesSubviews">NO</bool>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 			</object>
 		</object>
@@ -84,19 +74,19 @@
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">btnGrid</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="723489727"/>
-					</object>
-					<int key="connectionID">11</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">view</string>
 						<reference key="source" ref="372490531"/>
 						<reference key="destination" ref="930405662"/>
 					</object>
 					<int key="connectionID">15</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">btnGrid</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="434710266"/>
+					</object>
+					<int key="connectionID">27</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -124,16 +114,13 @@
 						<reference key="object" ref="930405662"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="723489727"/>
+							<reference ref="434710266"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">5</int>
-						<reference key="object" ref="723489727"/>
-						<object class="NSMutableArray" key="children">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-						</object>
+						<int key="objectID">26</int>
+						<reference key="object" ref="434710266"/>
 						<reference key="parent" ref="930405662"/>
 					</object>
 				</object>
@@ -144,16 +131,16 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>-1.CustomClassName</string>
 					<string>-2.CustomClassName</string>
+					<string>26.IBPluginDependency</string>
 					<string>4.IBEditorWindowLastContentRect</string>
 					<string>4.IBPluginDependency</string>
-					<string>5.IBPluginDependency</string>
 				</object>
 				<object class="NSMutableArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>MenuViewController</string>
 					<string>UIResponder</string>
-					<string>{{354, 412}, {320, 480}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<string>{{354, 412}, {320, 480}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				</object>
 			</object>
@@ -169,7 +156,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">21</int>
+			<int key="maxID">27</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -183,9 +170,13 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>openPopup:</string>
 							<string>removeMap</string>
+							<string>scrollToDefaultLocation</string>
+							<string>scrollToUserLocation</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 						</object>
@@ -196,6 +187,8 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>openPopup:</string>
 							<string>removeMap</string>
+							<string>scrollToDefaultLocation</string>
+							<string>scrollToUserLocation</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -205,6 +198,14 @@
 							</object>
 							<object class="IBActionInfo">
 								<string key="name">removeMap</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">scrollToDefaultLocation</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">scrollToUserLocation</string>
 								<string key="candidateClassName">id</string>
 							</object>
 						</object>
