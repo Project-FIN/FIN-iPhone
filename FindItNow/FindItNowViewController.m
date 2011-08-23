@@ -38,7 +38,7 @@
 -(void) viewDidAppear:(BOOL)animated
 {
     [self.navigationController pushViewController:tabBarController animated:YES];
-    self.tabBarController.navigationItem.backBarButtonItem = nil;
+    self.tabBarController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(showActionSheet:)];
 }
 
 - (void)viewDidUnload
@@ -53,13 +53,21 @@
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
--(void) pushView:(UIViewController*) viewController
-{
-    [self.navigationController pushViewController:viewController animated:YES];
+
+-(IBAction)showActionSheet:(id)sender {
+	UIActionSheet *popupQuery = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Back" destructiveButtonTitle:nil otherButtonTitles:@"Other Button 1", nil];
+	popupQuery.actionSheetStyle = UIActionSheetStyleDefault;
+	[popupQuery showInView:self.view];
+	[popupQuery release];
 }
 
-
-
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+	if (buttonIndex == 0) {
+		UIViewController *controller = [[UIViewController alloc] initWithNibName:@"HelpView" bundle:[self nibBundle]];
+        //[self presentModalViewController:controller animated:YES];
+        [self.tabBarController.navigationController pushViewController:controller animated:YES];
+	}
+}
 
 
 @end

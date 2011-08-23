@@ -67,6 +67,7 @@
 		EAD438001402242800BE6471 /* SetRegionTableController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAD437FE1402242800BE6471 /* SetRegionTableController.xib */; };
 		EAD4380D14022BFE00BE6471 /* SetRegionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EAD4380B14022BFD00BE6471 /* SetRegionViewController.m */; };
 		EAD4380E14022BFE00BE6471 /* SetRegionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAD4380C14022BFE00BE6471 /* SetRegionViewController.xib */; };
+		EADA33FE140385AA001D886C /* HelpView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EADA33FD140385A9001D886C /* HelpView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -156,6 +157,7 @@
 		EAD4380A14022BFD00BE6471 /* SetRegionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetRegionViewController.h; sourceTree = "<group>"; };
 		EAD4380B14022BFD00BE6471 /* SetRegionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetRegionViewController.m; sourceTree = "<group>"; };
 		EAD4380C14022BFE00BE6471 /* SetRegionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SetRegionViewController.xib; sourceTree = "<group>"; };
+		EADA33FD140385A9001D886C /* HelpView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HelpView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -249,6 +251,7 @@
 				1330EDE41375CE1100940DDB /* MainWindow.xib */,
 				1330EDE71375CE1100940DDB /* FindItNowViewController.h */,
 				1330EDE81375CE1100940DDB /* FindItNowViewController.m */,
+				EADA33FD140385A9001D886C /* HelpView.xib */,
 				1330EDEA1375CE1100940DDB /* FindItNowViewController.xib */,
 				EA0D7C6F13E514E900AE9E14 /* InfoPopUpView.h */,
 				EA0D7C7013E514E900AE9E14 /* InfoPopUpView.m */,
@@ -427,6 +430,7 @@
 				EA56B81C13FCE60F004BA2D1 /* SubcategoryListController.xib in Resources */,
 				EAD438001402242800BE6471 /* SetRegionTableController.xib in Resources */,
 				EAD4380E14022BFE00BE6471 /* SetRegionViewController.xib in Resources */,
+				EADA33FE140385AA001D886C /* HelpView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,10 +9,11 @@
 #import <UIKit/UIKit.h>
 @class MenuView;
 
-@interface FindItNowViewController : UIViewController {
+@interface FindItNowViewController : UIViewController <UIActionSheetDelegate> {
     
 }
 @property (nonatomic, retain) IBOutlet UITabBarController *tabBarController;
 
--(void) pushView:(UIViewController*) viewController;
+-(IBAction) showActionSheet:(id)sender;
+
 @end
