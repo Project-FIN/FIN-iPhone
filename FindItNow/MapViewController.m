@@ -72,9 +72,9 @@
     region.span.longitudeDelta = 0.004;
     
     // annotation for the City of Seattle
-    CLLocationCoordinate2D coord;
-    coord.latitude = 47.654288;
-    coord.longitude = -122.308044;
+    CLLocationCoordinate2D coord2;
+    coord2.latitude = 47.654288;
+    coord2.longitude = -122.308044;
     NSMutableArray *points;
     if ([mapCategory length] == 0) {
         points = [self getLocationOfBuilding:(const char *)[mapBuilding UTF8String]];
@@ -95,6 +95,9 @@
 }
 
 - (MKAnnotationView *) mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>) annotation {
+    if ([annotation isKindOfClass:[MKUserLocation class]])
+        return nil;
+
     MKAnnotationView *annView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"currentloc"];
     NSString *sqlStr = [NSString stringWithFormat:@"SELECT name FROM categories WHERE full_name = '%s'", (const char*)[mapCategory UTF8String]];
     NSArray *arr = [dbManager getRowsForQuery:sqlStr];
@@ -202,6 +205,11 @@
     [popup addExitTapGesture];
     [UIView setAnimationDelay: UIViewAnimationCurveEaseIn];
     [UIView commitAnimations];
+}
+
+-(IBAction) setToUserLocation
+{
+    [mapView setCenterCoordinate:mapView.userLocation.coordinate animated:YES];
 }
 
 @end

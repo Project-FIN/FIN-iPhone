@@ -31,5 +31,5 @@
 -(NSMutableArray*) getItemsOfCategory:(const char*)category;
 -(NSMutableArray*) getLocationOfBuilding:(const char*)building;
 -(void) setCurrentBuilding:(NSString*)build;
-
+-(IBAction) setToUserLocation;
 @end
