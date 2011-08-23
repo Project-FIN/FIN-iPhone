@@ -146,22 +146,36 @@
     
     if (!isInfoHidden)
     {
+        //perform animation
+        [UIView beginAnimations:@"" context:NULL];
+        [UIView setAnimationDuration:0.5];
         self.frame = CGRectMake(CGRectGetMinX(self.frame),CGRectGetMinY(self.frame)+(tableHeight/2), CGRectGetWidth(self.frame), CGRectGetHeight(self.frame)-tableHeight-20);
+        [infoTable setFrame:CGRectMake(10, 160, CGRectGetWidth(self.frame)-20, 0)];
+        [UIView setAnimationDelay: UIViewAnimationCurveEaseIn];
+        [UIView commitAnimations];
+        
         [infoTable removeFromSuperview];
         isInfoHidden = true;
     }
     else
     {
         isInfoHidden = false;
-        self.frame = CGRectMake(CGRectGetMinX(self.frame),CGRectGetMinY(self.frame)-(tableHeight/2), CGRectGetWidth(self.frame), CGRectGetHeight(self.frame)+tableHeight+20);
     
         //information table
-        infoTable = [ [UITableView alloc] initWithFrame:CGRectMake(10, 160, CGRectGetWidth(self.frame)-20, tableHeight)];
+        infoTable = [ [UITableView alloc] initWithFrame:CGRectMake(10, 160, CGRectGetWidth(self.frame)-20, 0)];
         FloorInfoTableViewController *infoTableCtrl = [ [FloorInfoTableViewController alloc] initWithDict:floorDetail andIsDoubleExpendable:YES];
         infoTableCtrl.tableView = infoTable;
         infoTable.alwaysBounceVertical = NO;
         [infoTable setBackgroundColor:[UIColor brownColor]];
         [self addSubview:infoTable];
+        
+        //perform animation
+        [UIView beginAnimations:@"" context:NULL];
+        [UIView setAnimationDuration:0.5];
+        self.frame = CGRectMake(CGRectGetMinX(self.frame),CGRectGetMinY(self.frame)-(tableHeight/2), CGRectGetWidth(self.frame), CGRectGetHeight(self.frame)+tableHeight+20);
+        [infoTable setFrame:CGRectMake(10, 160, CGRectGetWidth(self.frame)-20, tableHeight)];
+        [UIView setAnimationDelay: UIViewAnimationCurveEaseIn];
+        [UIView commitAnimations];
     }
     [self addExitTapGesture];
 }

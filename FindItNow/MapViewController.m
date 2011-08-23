@@ -9,6 +9,7 @@
 #import "MapViewController.h"
 #import "InfoPopUpView.h"	
 #import "ItemAnnotation.h"
+#import "SetRegionTableController.h"
 
 @implementation MapViewController
 @synthesize mapView;
@@ -175,14 +176,11 @@
 
 -(IBAction) openPopup:(id)sender
 {
-    //LOOK@
-    // www.applausible.com/blog/?p=489
-    
     //create a dark overlay over the map
     UIView *overlay = [ [UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame))];
     [overlay setBackgroundColor:[UIColor colorWithWhite:0 alpha:0.75]];
     [self.view addSubview:overlay];
-    
+
     //temporary data
     NSMutableDictionary *dataDict = [[NSMutableDictionary alloc] initWithCapacity:6 ];
     [dataDict setObject:@"This is a test" forKey:@"Floor A"];
@@ -194,14 +192,16 @@
     
     //Create a popup
     int yCoord = CGRectGetMidY(self.view.frame) - (160/2);
-    InfoPopUpView *popup = [ [InfoPopUpView alloc] initWithFrame:CGRectMake(20, yCoord, CGRectGetWidth(self.view.frame)-40, 160)WithBName:@"Test Building" category:@"Test Cate." distance:0.1334 walkTime:130 data:dataDict IsOutdoor:NO];
-    //Perform animation
-    //[popup appear];
-    //need a UIViewAppear class
-    
+    InfoPopUpView *popup = [ [InfoPopUpView alloc] initWithFrame:CGRectMake(20,0, CGRectGetWidth(self.view.frame)-40, 160)WithBName:@"Test Building" category:@"Test Cate." distance:0.1334 walkTime:130 data:dataDict IsOutdoor:NO];    
     [overlay addSubview:popup];
+    
+    //perform animation
+    [UIView beginAnimations:@"" context:NULL];
+    [UIView setAnimationDuration:0.8];
+    [popup setFrame:CGRectMake(20, yCoord, CGRectGetWidth(self.view.frame)-40, 160)];
     [popup addExitTapGesture];
-    //  [popup release];
+    [UIView setAnimationDelay: UIViewAnimationCurveEaseIn];
+    [UIView commitAnimations];
 }
 
 @end
