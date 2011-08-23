@@ -207,9 +207,21 @@
     [UIView commitAnimations];
 }
 
--(IBAction) setToUserLocation
+-(IBAction) scrollToUserLocation
 {
     [mapView setCenterCoordinate:mapView.userLocation.coordinate animated:YES];
 }
 
+
+-(IBAction) scrollToDefaultLocation
+{
+    MKCoordinateRegion region;
+    region.center.latitude = 47.654288;
+    region.center.longitude = -122.308044;
+    region.span.latitudeDelta = 0.005;
+    region.span.longitudeDelta = 0.004;
+    
+    [mapView setRegion:region animated:YES];
+    [mapView regionThatFits:region];
+}
 @end
