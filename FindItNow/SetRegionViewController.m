@@ -11,11 +11,79 @@
 
 @implementation SetRegionViewController
 
+- (void)saveRegions
+{
+    NSURL *URL=[[NSURL alloc] initWithString:@"http://www.fincdn.org/getRegions.php"];
+    NSString *results = [[NSString alloc] initWithContentsOfURL :URL];
+    
+    NSDictionary *regionsJson = [results objectFromJSONString];
+    
+    for (NSDictionary *region in regionsJson) {
+        int rid = [[region objectForKey:@"rid"] intValue];
+        const char *name = (const char *) [[region objectForKey:@"name"] UTF8String];
+        const char *full_name = (const char *) [[region objectForKey:@"full_name"] UTF8String];
+        int lat = [[region objectForKey:@"lat"] intValue];
+        int lon = [[region objectForKey:@"lon"] intValue];
+        const char *color1 = (const char *) [[region objectForKey:@"color1"] UTF8String];
+        const char *color2 = (const char *) [[region objectForKey:@"color2"] UTF8String];
+        int deleted = [[region objectForKey:@"deleted"] intValue];
+        
+        NSString *sqlStr = [NSString stringWithFormat:@"INSERT OR REPLACE INTO regions (rid, name, full_name, latitude, longitude, deleted) VALUES (%d, '%s', '%s', %d, %d, %d)", rid, name, full_name, lat, lon, deleted];
+        NSError *error = [dbManager doQuery:sqlStr];
+        if (error != nil) {
+            NSLog(@"Error: %@",[error localizedDescription]);
+        }
+        sqlStr = [NSString stringWithFormat:@"INSERT OR REPLACE INTO colors (rid, color1, color2) VALUES (%d, '%s', '%s')", rid, color1, color2];
+        error = [dbManager doQuery:sqlStr];
+        if (error != nil) {
+            NSLog(@"Error: %@",[error localizedDescription]);
+        }
+    }
+}
+
+- (NSMutableArray*) getRegionsList {
+    NSString *sqlStr = [NSString stringWithFormat:@"SELECT full_name FROM regions WHERE deleted = 0"];
+    NSArray *regionsArr = [dbManager getRowsForQuery:sqlStr];
+    
+    NSMutableArray* regionsList = [[NSMutableArray alloc] init];
+    for (NSDictionary *dict in regionsArr) {
+        [regionsList addObject:[dict objectForKey:@"full_name"]];
+    }
+    
+    return regionsList;
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSNumber *rid = [defaults objectForKey:@"rid"];
+    
+    if (rid != NULL) {
+        printf("RID is %d", [rid intValue]);
+    } else {
+        printf("No RID");
+    }
+    
+    // CHANEL See the above code.  If RID == NULL, we want to show the region select.  Else, load the categories
+    // Can you help with that?
+    
+    dbManager = [[SQLiteManager alloc] initWithDatabaseNamed:@"FIN_LOCAL.db"];
+
+    NSError *error = [dbManager doQuery:@"CREATE TABLE IF NOT EXISTS regions (rid INTEGER PRIMARY KEY, name TEXT, full_name TEXT, latitude INTEGER, longitude INTEGER, deleted INTEGER)"];
+    if (error != nil) {
+        NSLog(@"Error: %@",[error localizedDescription]);
+    }
+    
+    error = [dbManager doQuery:@"CREATE TABLE IF NOT EXISTS colors (rid INTEGER PRIMARY KEY, color1 TEXT, color2 TEXT)"];
+    if (error != nil) {
+        NSLog(@"Error: %@",[error localizedDescription]);
+    }
+    
+    [self saveRegions];
+    
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        data = [[NSMutableArray alloc] initWithObjects:@"",@"University of Washington", @"A test University", @"College of Nowhere", @"FIN school", nil];
+        data = [self getRegionsList];
     }
     return self;
 }
@@ -67,8 +135,22 @@
     return 1;
 }
 
-- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
+- (void)pickerView:(UIPickerView *)pv didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
+    NSString *selectedRegion = [[self getRegionsList] objectAtIndex:[pv selectedRowInComponent:0]];
+    
+    NSString *sqlStr = [NSString stringWithFormat:@"SELECT rid FROM regions WHERE full_name = '%s'", (const char*)[selectedRegion UTF8String]];
+    NSArray *ridArr = [dbManager getRowsForQuery:sqlStr];
+    NSDictionary *dict = [ridArr objectAtIndex:0];
+    int rid = [[dict objectForKey:@"rid"] intValue];
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *key = @"rid";
+    NSNumber *value = [NSNumber numberWithInt:rid];
+    
+    [defaults setObject:value forKey:key];
+    [defaults synchronize];
+                       
     [window makeKeyAndVisible];
     [self.view removeFromSuperview];
 }

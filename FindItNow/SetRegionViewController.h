@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SQLiteManager.h"
+#import "JSONKit.h"
 
 
 @interface SetRegionViewController : UIViewController<UIPickerViewDelegate, UIPickerViewDataSource>
@@ -14,6 +16,7 @@
     IBOutlet UIPickerView *pickerView;   
     NSArray *data;
     UIWindow *window;
+    SQLiteManager *dbManager;
 }
 - (void) setWindow:(UIWindow*) win;
 @end
