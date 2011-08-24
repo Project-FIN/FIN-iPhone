@@ -139,7 +139,7 @@
     return pointArr;
 }
 
-- (NSArray*) getItemsAtLocation:(int)latitude: (int)longitude {
+- (NSDictionary*) getItemsAtLocation:(int)latitude: (int)longitude {
     const char* str;
     if ([mapCategory length] != 0) {
         
@@ -155,12 +155,47 @@
         str = "";
     }
     
-    NSString *sqlStr = [NSString stringWithFormat:@"SELECT * FROM items WHERE latitude = %d AND longitude = %d %s AND deleted = 0", latitude, longitude, str];
-    NSArray *itemsList = [dbManager getRowsForQuery:sqlStr];
-    
-    NSLog(@"%@", itemsList);
+    NSString *sqlStr = [NSString stringWithFormat:@"SELECT fid FROM items WHERE latitude = %d AND longitude = %d %s AND deleted = 0", latitude, longitude, str];
+    NSArray *fList = [dbManager getRowsForQuery:sqlStr];
+    NSMutableDictionary *itemsMap = [[NSMutableDictionary alloc] init];
 
-    return itemsList;
+    for (NSDictionary *dict in fList) {
+        sqlStr = [NSString stringWithFormat:@"SELECT name FROM floors WHERE fid = %d", [[dict objectForKey:@"fid"] intValue]];
+        NSArray *fnames = [dbManager getRowsForQuery:sqlStr];
+        NSString *fname;
+        const char *str2;
+        if ([fnames count] == 0) {
+            fname = [NSString stringWithFormat:@"Outdoor Location"];
+            str2 = (const char*) [[NSString stringWithFormat:@"AND latitude = %d AND longitude = %d", latitude, longitude] UTF8String];
+        } else {
+            fname = [[fnames objectAtIndex:0] objectForKey:@"name"];
+            str2 = "";
+        }
+        
+        sqlStr = [NSString stringWithFormat:@"SELECT * FROM items WHERE fid = %d %s %s AND deleted = 0", [[dict objectForKey:@"fid"] intValue], str, str2];
+        NSArray *itemsOnFloor = [dbManager getRowsForQuery:sqlStr];
+        
+        NSMutableDictionary *itemsOnFloorMap = [[NSMutableDictionary alloc] init];
+        for (NSDictionary *dict in itemsOnFloor) {
+            int cat_id = [[dict objectForKey:@"cat_id"] intValue];
+            sqlStr = [NSString stringWithFormat:@"SELECT full_name FROM categories WHERE cat_id = %d", cat_id];
+            NSArray *cnames = [dbManager getRowsForQuery:sqlStr];
+            
+            NSString *cname = [[cnames objectAtIndex:0] objectForKey:@"full_name"];
+            NSString *sp_info = [NSString stringWithFormat:@"%s", (const char*)[[dict objectForKey:@"special_info"] UTF8String]];
+            
+            NSMutableDictionary *value = [[NSMutableDictionary alloc] init];
+            [value objectForKey:@"cname"];
+            [value setObject:sp_info forKey:cname];
+            
+            [itemsOnFloorMap setObject:sp_info  forKey:cname];
+        }
+        [itemsMap setObject:itemsOnFloorMap forKey:fname];
+    }
+    
+    NSLog(@"%@", itemsMap);
+
+    return itemsMap;
 }
                   
 - (NSMutableArray*) getLocationOfBuilding:(const char*)building {
@@ -204,7 +239,7 @@
     id <MKAnnotation> annot = [view annotation];
     int latitude = [annot coordinate].latitude*1000000 ;
     int longitude = [annot coordinate].longitude*1000000;
-    NSArray *data = [self getItemsAtLocation:latitude:longitude];
+    NSDictionary *data = [self getItemsAtLocation:latitude:longitude];
     
     //create a dark overlay over the map
     UIView *overlay = [ [UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame))];
@@ -216,17 +251,21 @@
     if ([mapBuilding isEqualToString:@""]){
         NSString *sqlStr = [NSString stringWithFormat:@"SELECT name FROM buildings WHERE latitude = %d AND longitude = %d", latitude, longitude];
         NSArray *itemsList = [dbManager getRowsForQuery:sqlStr];
-        NSDictionary *dict = [itemsList objectAtIndex:0];
-        building = [dict objectForKey:@"name"];
+        if ([itemsList count] == 0) {
+            building = [NSString stringWithFormat:@"Outdoor Location"];
+        } else {
+            NSDictionary *dict = [itemsList objectAtIndex:0];
+            building = [dict objectForKey:@"name"];
+        }
     }
-    NSString *sqlStr = [NSString stringWithFormat:@"SELECT * FROM buildings WHERE name = '%@' AND deleted = 0", building];
+  /*  NSString *sqlStr = [NSString stringWithFormat:@"SELECT * FROM buildings WHERE name = '%@' AND deleted = 0", building];
     NSArray *itemsList = [dbManager getRowsForQuery:sqlStr];
     NSDictionary *dict = [itemsList objectAtIndex:0];
-    NSDictionary *fidToFname = [ [NSDictionary alloc] initWithObjects:[dict objectForKey:@"floor_names"] forKeys:[dict objectForKey:@"fid"]];
+    NSDictionary *fidToFname = [ [NSDictionary alloc] initWithObjects:[dict objectForKey:@"floor_names"] forKeys:[dict objectForKey:@"fid"]];*/
     
     //Create a popup
     int yCoord = CGRectGetMidY(self.view.frame) - (160/2);
-    InfoPopUpView *popup = [ [InfoPopUpView alloc] initWithFrame:CGRectMake(20,0, CGRectGetWidth(self.view.frame)-40, 160)WithBName:@"Test Building" category:mapCategory distance:0.1334 walkTime:130 data:data IsOutdoor:NO];    
+    InfoPopUpView *popup = [ [InfoPopUpView alloc] initWithFrame:CGRectMake(20,0, CGRectGetWidth(self.view.frame)-40, 160)WithBName:building category:mapCategory distance:0.1334 walkTime:130 data:data IsOutdoor:NO];    
     [overlay addSubview:popup];
     
     //perform animation
