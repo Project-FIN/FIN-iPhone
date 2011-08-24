@@ -55,15 +55,6 @@
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSNumber *rid = [defaults objectForKey:@"rid"];
-    
-    if (rid != NULL) {
-        printf("RID is %d", [rid intValue]);
-    } else {
-        printf("No RID");
-    }
-    
     // CHANEL See the above code.  If RID == NULL, we want to show the region select.  Else, load the categories
     // Can you help with that?
     
@@ -84,6 +75,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         data = [self getRegionsList];
+        [self setModalPresentationStyle:UIModalPresentationFormSheet];
     }
     return self;
 }
@@ -137,22 +129,29 @@
 
 - (void)pickerView:(UIPickerView *)pv didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    NSString *selectedRegion = [[self getRegionsList] objectAtIndex:[pv selectedRowInComponent:0]];
-    
-    NSString *sqlStr = [NSString stringWithFormat:@"SELECT rid FROM regions WHERE full_name = '%s'", (const char*)[selectedRegion UTF8String]];
-    NSArray *ridArr = [dbManager getRowsForQuery:sqlStr];
-    NSDictionary *dict = [ridArr objectAtIndex:0];
-    int rid = [[dict objectForKey:@"rid"] intValue];
-    
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *key = @"rid";
-    NSNumber *value = [NSNumber numberWithInt:rid];
-    
-    [defaults setObject:value forKey:key];
-    [defaults synchronize];
-                       
-    [window makeKeyAndVisible];
-    [self.view removeFromSuperview];
+    UIAlertView *confirm = [[UIAlertView alloc] initWithTitle:nil message:[NSString stringWithFormat:@"You selected %@",[data objectAtIndex:row] ] delegate:self cancelButtonTitle:@"Select Again" otherButtonTitles:@"Yes", nil];
+    [confirm show];
+}
+
+-(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex != alertView.cancelButtonIndex){
+        NSString *selectedRegion = [data objectAtIndex:[pickerView selectedRowInComponent:0]];
+        
+        NSString *sqlStr = [NSString stringWithFormat:@"SELECT rid FROM regions WHERE full_name = '%s'", (const char*)[selectedRegion UTF8String]];
+        NSArray *ridArr = [dbManager getRowsForQuery:sqlStr];
+        NSDictionary *dict = [ridArr objectAtIndex:0];
+        int rid = [[dict objectForKey:@"rid"] intValue];
+        
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSString *key = @"rid";
+        NSNumber *value = [NSNumber numberWithInt:rid];
+        
+        [defaults setObject:value forKey:key];
+        [defaults synchronize];
+        [window makeKeyAndVisible];
+        [self.view removeFromSuperview];
+    }
 }
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component;

@@ -11,7 +11,7 @@
 #import "JSONKit.h"
 
 
-@interface SetRegionViewController : UIViewController<UIPickerViewDelegate, UIPickerViewDataSource>
+@interface SetRegionViewController : UIViewController<UIPickerViewDelegate, UIPickerViewDataSource, UIAlertViewDelegate>
 {
     IBOutlet UIPickerView *pickerView;   
     NSArray *data;
