@@ -26,7 +26,7 @@
 @property (nonatomic, retain) IBOutlet MKMapView *mapView;
 
 -(void) setCurrentCategory:(NSString*)category;
--(IBAction)openPopup:(id)sender;
+-(IBAction) openPopup:(UITapGestureRecognizer *)recognizer;
 -(IBAction) removeMap;
 -(NSMutableArray*) getItemsOfCategory:(const char*)category;
 -(NSMutableArray*) getLocationOfBuilding:(const char*)building;

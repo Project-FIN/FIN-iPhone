@@ -26,7 +26,7 @@ const int reportBtnWidth = 60;
     }
     return self;
 }
-- (id)initWithDict:(NSMutableDictionary*) data andIsDoubleExpendable:(BOOL) isDouble
+- (id)initWithDict:(NSArray*) data andIsDoubleExpendable:(BOOL) isDouble
 {
     self = [super init];
     if (self){
@@ -98,7 +98,7 @@ const int reportBtnWidth = 60;
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return [floors count];
+    return [dataArray count];
 }
 
 -(BOOL) selectionIncludesSection:(NSInteger) section
@@ -116,7 +116,7 @@ const int reportBtnWidth = 60;
     // Return the number of rows in the section.
     if ([self selectionIncludesSection:section])
     {
-        return (isDoubleExpendable)? [dataDict count]*2+1: 2;
+        return (isDoubleExpendable)? [dataArray count]*2+1: 2;
     }
     return 1;
 }
@@ -127,13 +127,15 @@ const int reportBtnWidth = 60;
         return 45;
     } else if ([self selectionIncludesSection:indexPath.section] && indexPath.row == 1 && !isDoubleExpendable)
     {
-        NSString *str = [dataDict objectForKey:[floors objectAtIndex:indexPath.section]];
+        NSDictionary *dict = [dataArray objectAtIndex:indexPath.section];
+        NSString *str = [dict objectForKey:@"special_info"];
         NSArray *textline = [str componentsSeparatedByString:@"\n"];
         return [textline count]*fontSizeSpace + reportBtnHeight + detailcellMargin;
     } else if ( isDoubleExpendable && [self selectionIncludesSection:indexPath.section] && indexPath.row % 2 == 1){
         return 45;
     } else if ([selectedChildRow containsObject:indexPath] && isDoubleExpendable){
-        NSString *str = [dataDict objectForKey:[floors objectAtIndex:(indexPath.row-1)/2]];
+        NSDictionary *dict = [dataArray objectAtIndex:(indexPath.row-1)/2];
+        NSString *str = [dict objectForKey:@"special_info"];
         NSArray *textline = [str componentsSeparatedByString:@"\n"];
         return [textline count]*fontSizeSpace + reportBtnHeight + detailcellMargin;
     }
@@ -156,11 +158,15 @@ const int reportBtnWidth = 60;
             [self removeSubviewsForIndexPath:indexPath];
             [self setCellForDetailView:cell WithTableView:tableView index:(indexPath.row-1)/2];
         }else{
-            cell.textLabel.text = [floors objectAtIndex:(indexPath.row-1)/2];
+            NSDictionary *dict = [dataArray objectAtIndex:(indexPath.row-1)/2];
+            NSString *str = [NSString stringWithFormat:@"%d", [dict objectForKey:@"cat_id"]];
+            cell.textLabel.text = str;
         }
     }
     else{
-        cell.textLabel.text =[floors objectAtIndex:indexPath.section];
+        NSDictionary *dict = [dataArray objectAtIndex:indexPath.section];
+        NSString *str = [NSString stringWithFormat:@"%d", [dict objectForKey:@"fid"]];
+        cell.textLabel.text =str;
     }
     return cell;
 }
@@ -182,7 +188,9 @@ const int reportBtnWidth = 60;
     [detail setBackgroundColor:[UIColor clearColor]];
     detail.textAlignment = UITextAlignmentLeft;
     detail.numberOfLines = 0;
-    NSString *str = [dataDict objectForKey:[floors objectAtIndex:index]];
+    
+    NSDictionary *dict = [dataArray objectAtIndex:index];
+    NSString *str = [dict objectForKey:@"special_info"];
     [detail setText:str];
     NSArray *textline = [str componentsSeparatedByString:@"\n"];
     detail.frame = CGRectMake(CGRectGetMinX(detail.frame), CGRectGetMinY(detail.frame), CGRectGetWidth(detail.frame),[textline count]*fontSizeSpace );
@@ -195,13 +203,13 @@ const int reportBtnWidth = 60;
     
 }
 
--(void) setData:(NSMutableDictionary*) data
+-(void) setData:(NSArray*) data
 {
-    dataDict = data;
-    for(NSString* str in [dataDict keyEnumerator])
+    dataArray = data;
+   /* for(NSString* str in [dataDict keyEnumerator])
     {
         [floors addObject:str];
-    }
+    }*/
 }
 -(void) removeSubviewsForIndexPath:(NSIndexPath*)indexPath
 {
@@ -241,12 +249,12 @@ const int reportBtnWidth = 60;
         NSMutableArray *reload = [NSMutableArray arrayWithObject:[NSIndexPath indexPathForRow:[indexPath row] inSection:indexPath.section]];
         NSIndexPath *childCell = [NSIndexPath indexPathForRow:indexPath.row+1 inSection:indexPath.section];
 
-        if ( !([indexPath section]+1 >= [dataDict count])){
+        if ( !([indexPath section]+1 >= [dataArray count])){
             [reload addObject:[NSIndexPath indexPathForRow:[indexPath row] inSection:indexPath.section+1]];
         }
         
         if (isDoubleExpendable){
-            for (int i = 1; i < [dataDict count]*2; i++)
+            for (int i = 1; i < [dataArray count]*2; i++)
                 [delete addObject:[NSIndexPath  indexPathForRow:i+1 inSection:indexPath.section]];
         }
         
@@ -264,12 +272,12 @@ const int reportBtnWidth = 60;
         NSMutableArray *insert = [NSMutableArray arrayWithObject:[NSIndexPath indexPathForRow:[indexPath row]+1 inSection:indexPath.section]];
         NSMutableArray *reload = [NSMutableArray arrayWithObject:[NSIndexPath indexPathForRow:[indexPath row] inSection:indexPath.section]];
         
-        if ( !([indexPath section]+1 >= [dataDict count])){
+        if ( !([indexPath section]+1 >= [dataArray count])){
             [reload addObject:[NSIndexPath indexPathForRow:[indexPath row] inSection:indexPath.section+1]];
         }
         if (isDoubleExpendable){
-            insert = [NSMutableArray arrayWithCapacity:[dataDict count]*2];
-            for (int i = 0; i < [dataDict count]*2; i++)
+            insert = [NSMutableArray arrayWithCapacity:[dataArray count]*2];
+            for (int i = 0; i < [dataArray count]*2; i++)
                 [insert addObject:[NSIndexPath  indexPathForRow:i+1 inSection:indexPath.section]];
         }
         

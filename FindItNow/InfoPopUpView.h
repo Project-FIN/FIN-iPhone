@@ -17,8 +17,8 @@
     NSString *category;
     double distance;
     int   walkingTime;
-    NSArray *floorName;
-    NSMutableDictionary *floorDetail;
+    NSDictionary *FidTofloorName;
+    NSArray *floorDetail;
     
 }
 -(void) addExitTapGesture;
@@ -28,6 +28,6 @@
 -(void) constructOutdoorView;
 
 - (id) initWithFrame:(CGRect)frame WithBName:(NSString*)building category:(NSString*)cat distance:(double)dist walkTime: (int)walk
-                data:(NSMutableDictionary*) data IsOutdoor:(BOOL) isOutdoor;
+                data:(NSArray*) data IsOutdoor:(BOOL) isOutdoor;
 
 @end

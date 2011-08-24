@@ -141,6 +141,8 @@
 -(IBAction) addRemInfoTable
 {
     int tableHeight = 180;  //about 4 cells' height
+    if ([floorDetail count] < 4)
+        tableHeight = [floorDetail count] * (180/2);
     
     [self removeExitTapArea];
     
@@ -163,7 +165,7 @@
     
         //information table
         infoTable = [ [UITableView alloc] initWithFrame:CGRectMake(10, 160, CGRectGetWidth(self.frame)-20, 0)];
-        FloorInfoTableViewController *infoTableCtrl = [ [FloorInfoTableViewController alloc] initWithDict:floorDetail andIsDoubleExpendable:YES];
+        FloorInfoTableViewController *infoTableCtrl = [ [FloorInfoTableViewController alloc] initWithDict:floorDetail andIsDoubleExpendable:[category isEqualToString:@""]];
         infoTableCtrl.tableView = infoTable;
         infoTable.alwaysBounceVertical = NO;
         [infoTable setBackgroundColor:[UIColor brownColor]];

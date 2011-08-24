@@ -13,13 +13,13 @@
     NSInteger numSection;
     NSMutableArray *selectedRowIndeices;
     NSMutableArray *selectedChildRow;   //for double expendable only
-    NSMutableDictionary *dataDict;
+    NSArray *dataArray;
     NSMutableArray *floors;
     BOOL isDoubleExpendable;
 }
 -(BOOL) selectionIncludesSection:(NSInteger)section;
--(void) setData:(NSMutableDictionary*) data;
-- (id)initWithDict:(NSMutableDictionary*) data andIsDoubleExpendable:(BOOL) isDouble;
+-(void) setData:(NSArray*) data;
+- (id)initWithDict:(NSArray*) data andIsDoubleExpendable:(BOOL) isDouble;
 -(void) removeSubviewsForIndexPath:(NSIndexPath*) indexPath;
 -(void) setCellForDetailView:(UITableViewCell *) cell WithTableView:(UITableView *) tableView index:(int) index;
 @end

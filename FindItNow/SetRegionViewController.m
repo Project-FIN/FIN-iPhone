@@ -55,9 +55,6 @@
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-    // CHANEL See the above code.  If RID == NULL, we want to show the region select.  Else, load the categories
-    // Can you help with that?
-    
     dbManager = [[SQLiteManager alloc] initWithDatabaseNamed:@"FIN_LOCAL.db"];
 
     NSError *error = [dbManager doQuery:@"CREATE TABLE IF NOT EXISTS regions (rid INTEGER PRIMARY KEY, name TEXT, full_name TEXT, latitude INTEGER, longitude INTEGER, deleted INTEGER)"];

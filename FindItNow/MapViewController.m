@@ -89,10 +89,6 @@
     
     [mapView setRegion:region animated:YES];
     [mapView regionThatFits:region];
-    [self getItemsAtLocation:47655790:-122308060];
-            
-    // Chanel: Here's how to get an array of 'geopoints'
-    // sMKMapPoint* points = [self getItemsOfCategory:"Coffee"];
 }
 
 - (MKAnnotationView *) mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>) annotation {
@@ -202,25 +198,35 @@
     [self.view removeFromSuperview];
 }
 
--(IBAction) openPopup:(id)sender
+-(IBAction) openPopup:(UITapGestureRecognizer *)recognizer
 {
+    MKAnnotationView *view = [recognizer view];
+    id <MKAnnotation> annot = [view annotation];
+    int latitude = [annot coordinate].latitude*1000000 ;
+    int longitude = [annot coordinate].longitude*1000000;
+    NSArray *data = [self getItemsAtLocation:latitude:longitude];
+    
     //create a dark overlay over the map
     UIView *overlay = [ [UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame))];
     [overlay setBackgroundColor:[UIColor colorWithWhite:0 alpha:0.75]];
     [self.view addSubview:overlay];
-
-    //temporary data
-    NSMutableDictionary *dataDict = [[NSMutableDictionary alloc] initWithCapacity:6 ];
-    [dataDict setObject:@"This is a test" forKey:@"Floor A"];
-    [dataDict setObject:@"This is a test\nSecond Line" forKey:@"Floor B"];
-    [dataDict setObject:@"This is a test\nwith lot of text and so this is fun" forKey:@"Floor C"];
-    [dataDict setObject:@"This is a test\n\n\nt fourth line?" forKey:@"Floor D"];
-    [dataDict setObject:@"" forKey:@"Floor E"];
-    [dataDict setObject:@"hour:??" forKey:@"Floor F"];
+    
+    //temporary, johnson hall's restroom crashes and some other
+    NSString *building = mapBuilding; 
+    if ([mapBuilding isEqualToString:@""]){
+        NSString *sqlStr = [NSString stringWithFormat:@"SELECT name FROM buildings WHERE latitude = %d AND longitude = %d", latitude, longitude];
+        NSArray *itemsList = [dbManager getRowsForQuery:sqlStr];
+        NSDictionary *dict = [itemsList objectAtIndex:0];
+        building = [dict objectForKey:@"name"];
+    }
+    NSString *sqlStr = [NSString stringWithFormat:@"SELECT * FROM buildings WHERE name = '%@' AND deleted = 0", building];
+    NSArray *itemsList = [dbManager getRowsForQuery:sqlStr];
+    NSDictionary *dict = [itemsList objectAtIndex:0];
+    NSDictionary *fidToFname = [ [NSDictionary alloc] initWithObjects:[dict objectForKey:@"floor_names"] forKeys:[dict objectForKey:@"fid"]];
     
     //Create a popup
     int yCoord = CGRectGetMidY(self.view.frame) - (160/2);
-    InfoPopUpView *popup = [ [InfoPopUpView alloc] initWithFrame:CGRectMake(20,0, CGRectGetWidth(self.view.frame)-40, 160)WithBName:@"Test Building" category:@"Test Cate." distance:0.1334 walkTime:130 data:dataDict IsOutdoor:NO];    
+    InfoPopUpView *popup = [ [InfoPopUpView alloc] initWithFrame:CGRectMake(20,0, CGRectGetWidth(self.view.frame)-40, 160)WithBName:@"Test Building" category:mapCategory distance:0.1334 walkTime:130 data:data IsOutdoor:NO];    
     [overlay addSubview:popup];
     
     //perform animation
