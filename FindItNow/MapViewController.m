@@ -66,15 +66,11 @@
     mapAnnotations = [[NSMutableArray alloc] initWithCapacity:2];
 
     MKCoordinateRegion region;
-    region.center.latitude = 47.654288;
-    region.center.longitude = -122.308044;
+    region.center.latitude = [self getRegionLatitude];
+    region.center.longitude = [self getRegionLongitude];
     region.span.latitudeDelta = 0.005;
     region.span.longitudeDelta = 0.004;
     
-    // annotation for the City of Seattle
-    CLLocationCoordinate2D coord2;
-    coord2.latitude = 47.654288;
-    coord2.longitude = -122.308044;
     NSMutableArray *points;
     if ([mapCategory length] == 0) {
         points = [self getLocationOfBuilding:(const char *)[mapBuilding UTF8String]];
@@ -137,6 +133,28 @@
     }
     
     return pointArr;
+}
+
+- (double) getRegionLatitude {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSNumber *rid = [defaults objectForKey:@"rid"];
+    
+    NSString *sqlStr = [NSString stringWithFormat:@"SELECT latitude FROM regions WHERE rid = %d", [rid intValue]];
+    NSArray *arr = [dbManager getRowsForQuery:sqlStr];
+    NSDictionary *lats = [arr objectAtIndex:0];
+    
+    return [[lats objectForKey:@"latitude"] doubleValue] / 1000000;
+}
+
+- (double) getRegionLongitude {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSNumber *rid = [defaults objectForKey:@"rid"];
+    
+    NSString *sqlStr = [NSString stringWithFormat:@"SELECT longitude FROM regions WHERE rid = %d", [rid intValue]];
+    NSArray *arr = [dbManager getRowsForQuery:sqlStr];
+    NSDictionary *lons = [arr objectAtIndex:0];
+    
+    return [[lons objectForKey:@"longitude"] doubleValue] / 1000000;
 }
 
 - (NSDictionary*) getItemsAtLocation:(int)latitude: (int)longitude {
@@ -286,8 +304,8 @@
 -(IBAction) scrollToDefaultLocation
 {
     MKCoordinateRegion region;
-    region.center.latitude = 47.654288;
-    region.center.longitude = -122.308044;
+    region.center.latitude = [self getRegionLatitude];
+    region.center.longitude = [self getRegionLongitude];
     region.span.latitudeDelta = 0.005;
     region.span.longitudeDelta = 0.004;
     

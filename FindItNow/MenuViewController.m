@@ -140,7 +140,10 @@
 
 - (void)saveBuilding
 {
-    NSURL *URL=[[NSURL alloc] initWithString:@"http://www.fincdn.org/getBuildings.php?rid=1"];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSNumber *rid = [defaults objectForKey:@"rid"];
+    
+    NSURL *URL=[[NSURL alloc] initWithString:[NSString stringWithFormat:@"http://www.fincdn.org/getBuildings.php?rid=%d", [rid intValue]]];
     NSString *results = [[NSString alloc] initWithContentsOfURL :URL];
     
     NSDictionary *buildingsJson = [results objectFromJSONString];
@@ -177,7 +180,10 @@
 
 - (void)saveItems
 {
-    NSURL *URL=[[NSURL alloc] initWithString:@"http://www.fincdn.org/getItems.php?rid=1"];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSNumber *rid = [defaults objectForKey:@"rid"];
+    
+    NSURL *URL=[[NSURL alloc] initWithString:[NSString stringWithFormat:@"http://www.fincdn.org/getItems.php?rid=%d", [rid intValue]]];
     NSString *results = [[NSString alloc] initWithContentsOfURL :URL];
     
     NSDictionary *itemsJson = [results objectFromJSONString];
