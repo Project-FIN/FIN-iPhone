@@ -66,8 +66,9 @@
     mapAnnotations = [[NSMutableArray alloc] initWithCapacity:2];
 
     MKCoordinateRegion region;
-    region.center.latitude = [self getRegionLatitude];
-    region.center.longitude = [self getRegionLongitude];
+    CLLocationCoordinate2D center = [self getRegionCenter];
+    region.center.latitude = center.latitude;
+    region.center.longitude = center.longitude;
     region.span.latitudeDelta = 0.005;
     region.span.longitudeDelta = 0.004;
     
@@ -85,6 +86,17 @@
     
     [mapView setRegion:region animated:YES];
     [mapView regionThatFits:region];
+}
+
+- (int) walkingTime:(double)distance :(int)mile_time {
+    return (int)round(mile_time * distance);
+}
+
+- (double) distanceBetween:(CLLocationCoordinate2D)point1:(CLLocationCoordinate2D)point2 {
+    CLLocation *loc1 = [[CLLocation alloc] initWithLatitude:point1.latitude longitude:point1.longitude];
+    CLLocation *loc2 = [[CLLocation alloc] initWithLatitude:point2.latitude longitude:point2.longitude];
+    
+    return [loc1 distanceFromLocation:loc2] * .000621371192;
 }
 
 - (MKAnnotationView *) mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>) annotation {
@@ -135,26 +147,19 @@
     return pointArr;
 }
 
-- (double) getRegionLatitude {
+- (CLLocationCoordinate2D) getRegionCenter {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSNumber *rid = [defaults objectForKey:@"rid"];
     
-    NSString *sqlStr = [NSString stringWithFormat:@"SELECT latitude FROM regions WHERE rid = %d", [rid intValue]];
+    NSString *sqlStr = [NSString stringWithFormat:@"SELECT latitude, longitude FROM regions WHERE rid = %d", [rid intValue]];
     NSArray *arr = [dbManager getRowsForQuery:sqlStr];
     NSDictionary *lats = [arr objectAtIndex:0];
     
-    return [[lats objectForKey:@"latitude"] doubleValue] / 1000000;
-}
-
-- (double) getRegionLongitude {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSNumber *rid = [defaults objectForKey:@"rid"];
+    CLLocationCoordinate2D coord;
+    coord.latitude = [[lats objectForKey:@"latitude"] doubleValue] / 1000000;
+    coord.longitude = [[lats objectForKey:@"longitude"] doubleValue] / 1000000;
     
-    NSString *sqlStr = [NSString stringWithFormat:@"SELECT longitude FROM regions WHERE rid = %d", [rid intValue]];
-    NSArray *arr = [dbManager getRowsForQuery:sqlStr];
-    NSDictionary *lons = [arr objectAtIndex:0];
-    
-    return [[lons objectForKey:@"longitude"] doubleValue] / 1000000;
+    return coord;
 }
 
 - (NSDictionary*) getItemsAtLocation:(int)latitude: (int)longitude {
@@ -283,7 +288,10 @@
     
     //Create a popup
     int yCoord = CGRectGetMidY(self.view.frame) - (160/2);
-    InfoPopUpView *popup = [ [InfoPopUpView alloc] initWithFrame:CGRectMake(20,0, CGRectGetWidth(self.view.frame)-40, 160)WithBName:building category:mapCategory distance:0.1334 walkTime:130 data:data IsOutdoor:NO];    
+    double dist = [self distanceBetween:[annot coordinate]:mapView.userLocation.coordinate];
+    int walkTime = [self walkingTime:dist:35];
+
+    InfoPopUpView *popup = [ [InfoPopUpView alloc] initWithFrame:CGRectMake(20,0, CGRectGetWidth(self.view.frame)-40, 160)WithBName:building category:mapCategory distance:dist walkTime:walkTime data:data IsOutdoor:NO];    
     [overlay addSubview:popup];
     
     //perform animation
@@ -304,8 +312,9 @@
 -(IBAction) scrollToDefaultLocation
 {
     MKCoordinateRegion region;
-    region.center.latitude = [self getRegionLatitude];
-    region.center.longitude = [self getRegionLongitude];
+    CLLocationCoordinate2D center = [self getRegionCenter];
+    region.center.latitude = center.latitude;
+    region.center.longitude = center.longitude;
     region.span.latitudeDelta = 0.005;
     region.span.longitudeDelta = 0.004;
     

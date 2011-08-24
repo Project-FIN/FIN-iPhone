@@ -32,8 +32,9 @@
 -(NSMutableArray*) getLocationOfBuilding:(const char*)building;
 -(NSDictionary*) getItemsAtLocation:(int)latitude:(int)longitude;
 -(void) setCurrentBuilding:(NSString*)build;
--(double) getRegionLatitude;
--(double) getRegionLongitude;
+-(CLLocationCoordinate2D) getRegionCenter;
 -(IBAction) scrollToUserLocation;
 -(IBAction) scrollToDefaultLocation;
+-(int) walkingTime:(double)distance:(int)mile_time;
+-(double) distanceBetween:(CLLocationCoordinate2D)point1: (CLLocationCoordinate2D)point2;
 @end

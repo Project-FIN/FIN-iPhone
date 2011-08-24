@@ -83,7 +83,7 @@
     //Distance
     UILabel *distanceLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, detailHeight + 70, CGRectGetWidth(self.frame)-20, 20)];
     distanceLabel.font = [UIFont systemFontOfSize:14.0f];
-    [distanceLabel setText:[NSString stringWithFormat:@"Distance to here: %f mi", distance]];
+    [distanceLabel setText:[NSString stringWithFormat:@"Distance to here: %.1f mi", distance]];
     [self addSubview:distanceLabel];
     [distanceLabel release];
     
@@ -118,7 +118,7 @@
     //Distance
     UILabel *distanceLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 70, CGRectGetWidth(self.frame)-20, 20)];
     distanceLabel.font = [UIFont systemFontOfSize:14.0f];
-    [distanceLabel setText:[NSString stringWithFormat:@"Distance to here: %f mi", distance]];
+    [distanceLabel setText:[NSString stringWithFormat:@"Distance to here: %.1f mi", distance]];
     [self addSubview:distanceLabel];
     [distanceLabel release];
     
