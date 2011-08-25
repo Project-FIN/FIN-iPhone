@@ -130,14 +130,16 @@ const int reportBtnWidth = 0;//60;
     {
         NSDictionary *cateItem = [dataDict objectForKey:[floors objectAtIndex:indexPath.section]];
         NSString *str = [cateItem objectForKey:[[cateItem keyEnumerator] nextObject]] ;
-        NSArray *textline = [str componentsSeparatedByString:@"\n"];
+        NSArray *textline = [str componentsSeparatedByString:@"\\n"];
+        str = [str stringByReplacingOccurrencesOfString:@"\\n" withString:@"\n"];
         return [textline count]*fontSizeSpace + reportBtnHeight + detailcellMargin;
     } else if ( isDoubleExpendable && [self selectionIncludesSection:indexPath.section] && indexPath.row % 2 == 1){
         return 45;
     } else if ([selectedChildRow containsObject:indexPath] && isDoubleExpendable){
         NSDictionary *cateItem = [dataDict objectForKey:[floors objectAtIndex:indexPath.section]];
         NSString *str = [cateItem objectForKey:[[self subCategory:cateItem] objectAtIndex:(indexPath.row-1)/2]];
-        NSArray *textline = [str componentsSeparatedByString:@"\n"];
+        NSArray *textline = [str componentsSeparatedByString:@"\\n"];
+        str = [str stringByReplacingOccurrencesOfString:@"\\n" withString:@"\n"];
         return [textline count]*fontSizeSpace + reportBtnHeight + detailcellMargin;
     }
     return 0;
@@ -159,6 +161,7 @@ const int reportBtnWidth = 0;//60;
             [self removeSubviewsForIndexPath:indexPath];
             NSDictionary *cateItem = [dataDict objectForKey:[floors objectAtIndex:indexPath.section]];
             NSString *str = [cateItem objectForKey:[[self subCategory:cateItem] objectAtIndex:(indexPath.row-1)/2]];
+            str = [str stringByReplacingOccurrencesOfString:@"\\n" withString:@"\n"];
             [self setCellForDetailView:cell WithTableView:tableView data:[[NSDictionary alloc] initWithObjects:[[NSArray alloc] initWithObjects:str,nil] forKeys:[[NSArray alloc] initWithObjects:@"",nil]]];
         }else{
             NSDictionary *cateItem = [dataDict objectForKey:[floors objectAtIndex:indexPath.section]];
@@ -190,9 +193,9 @@ const int reportBtnWidth = 0;//60;
     detail.numberOfLines = 0;
     
     NSString *str = [data objectForKey:[[data keyEnumerator] nextObject]] ;
-    
+    NSArray *textline = [str componentsSeparatedByString:@"\\n"];
+    str = [str stringByReplacingOccurrencesOfString:@"\\n" withString:@"\n"];
     [detail setText:str];
-    NSArray *textline = [str componentsSeparatedByString:@"\n"];
     detail.frame = CGRectMake(CGRectGetMinX(detail.frame), CGRectGetMinY(detail.frame), CGRectGetWidth(detail.frame),[textline count]*fontSizeSpace );
     [cell.contentView addSubview:detail];
     

@@ -68,9 +68,11 @@
     CGFloat detailHeight = 0;
     if (![str isEqualToString:@""])
     {
-        NSArray *textline = [str componentsSeparatedByString:@"\n"];
+        NSArray *textline = [str componentsSeparatedByString:@"\\n"];
+        str = [str stringByReplacingOccurrencesOfString:@"\\n" withString:@"\n"];
         detailHeight = [textline count]*20;
         UILabel *detailLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 50, CGRectGetWidth(self.frame)-20, detailHeight)];
+        detailLabel.lineBreakMode = UILineBreakModeWordWrap;
         detailLabel.font = [UIFont systemFontOfSize:14.0f];
         detailLabel.textAlignment = UITextAlignmentLeft;
         detailLabel.numberOfLines = 0;    
