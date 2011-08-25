@@ -64,8 +64,7 @@
     
     
     //Indoor Detail
-    NSString *key = [[[floorDetail keyEnumerator] allObjects] objectAtIndex:0];
-    NSString *str = [floorDetail objectForKey: key];
+    NSString *str = [[floorDetail objectForKey: buildingName] objectForKey:category];
     CGFloat detailHeight = 0;
     if (![str isEqualToString:@""])
     {

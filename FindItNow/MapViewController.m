@@ -291,7 +291,7 @@
     double dist = [self distanceBetween:[annot coordinate]:mapView.userLocation.coordinate];
     int walkTime = [self walkingTime:dist:35];
 
-    InfoPopUpView *popup = [ [InfoPopUpView alloc] initWithFrame:CGRectMake(20,0, CGRectGetWidth(self.view.frame)-40, 160)WithBName:building category:mapCategory distance:dist walkTime:walkTime data:data IsOutdoor:NO];    
+    InfoPopUpView *popup = [ [InfoPopUpView alloc] initWithFrame:CGRectMake(20,0, CGRectGetWidth(self.view.frame)-40, 160)WithBName:building category:mapCategory distance:dist walkTime:walkTime data:data IsOutdoor:[building isEqualToString:@"Outdoor Location"]];    
     [overlay addSubview:popup];
     
     //perform animation
