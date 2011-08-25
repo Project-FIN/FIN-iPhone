@@ -99,12 +99,35 @@
     return [loc1 distanceFromLocation:loc2] * .000621371192;
 }
 
+- (BOOL) isSubcategory:(NSString *) cat {
+    NSString *sqlStr = [NSString stringWithFormat:@"SELECT parent FROM categories WHERE full_name = '%s'", (const char*)[cat UTF8String]];
+    NSArray *arr = [dbManager getRowsForQuery:sqlStr];
+    NSDictionary *parents = [arr objectAtIndex:0];
+    
+    return ([[parents objectForKey:@"parent"] intValue] != 0);
+}
+
 - (MKAnnotationView *) mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>) annotation {
     if ([annotation isKindOfClass:[MKUserLocation class]])
         return nil;
+    
+    NSString *str = mapCategory;
+    if ([self isSubcategory:str]) {
+        NSString *sqlStr = [NSString stringWithFormat:@"SELECT parent FROM categories WHERE full_name = '%s'", (const char*)[str UTF8String]];
+        NSArray *arr = [dbManager getRowsForQuery:sqlStr];
+        NSDictionary *parents = [arr objectAtIndex:0];
 
+        int parent_id = [[parents objectForKey:@"parent"] intValue];
+        
+        sqlStr = [NSString stringWithFormat:@"SELECT full_name FROM categories WHERE cat_id = %d", parent_id];
+        arr = [dbManager getRowsForQuery:sqlStr];
+        parents = [arr objectAtIndex:0];
+        
+        str = [parents objectForKey:@"full_name"];
+    }
+        
     MKAnnotationView *annView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"currentloc"];
-    NSString *sqlStr = [NSString stringWithFormat:@"SELECT name FROM categories WHERE full_name = '%s'", (const char*)[mapCategory UTF8String]];
+    NSString *sqlStr = [NSString stringWithFormat:@"SELECT name FROM categories WHERE full_name = '%s'", (const char*)[str UTF8String]];
     NSArray *arr = [dbManager getRowsForQuery:sqlStr];
     if ([arr count] == 0) {
         annView.image = [UIImage imageNamed:[NSString stringWithFormat:@"buildings_small.png"]];
