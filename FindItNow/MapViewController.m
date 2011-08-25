@@ -107,13 +107,13 @@
     NSString *sqlStr = [NSString stringWithFormat:@"SELECT name FROM categories WHERE full_name = '%s'", (const char*)[mapCategory UTF8String]];
     NSArray *arr = [dbManager getRowsForQuery:sqlStr];
     if ([arr count] == 0) {
-        annView.image = [UIImage imageNamed:[NSString stringWithFormat:@"buildings.png"]];
+        annView.image = [UIImage imageNamed:[NSString stringWithFormat:@"buildings_small.png"]];
     } else {
         NSDictionary *names = [arr objectAtIndex:0];
     
         const char *name = (const char*)[[names objectForKey:@"name"] UTF8String];
     
-        annView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%s.png", name]];
+        annView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%s_small.png", name]];
     }
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openPopup:)];
