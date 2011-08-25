@@ -112,7 +112,7 @@
         return nil;
     
     NSString *str = mapCategory;
-    if ([self isSubcategory:str]) {
+    if ([mapCategory length] > 0 && [self isSubcategory:str]) {
         NSString *sqlStr = [NSString stringWithFormat:@"SELECT parent FROM categories WHERE full_name = '%s'", (const char*)[str UTF8String]];
         NSArray *arr = [dbManager getRowsForQuery:sqlStr];
         NSDictionary *parents = [arr objectAtIndex:0];
