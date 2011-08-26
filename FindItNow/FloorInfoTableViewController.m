@@ -26,16 +26,15 @@ const int reportBtnWidth = 0;//60;
     }
     return self;
 }
-- (id)initWithDict:(NSMutableDictionary*) data andIsDoubleExpendable:(BOOL) isDouble
+- (id)initWithDict:(NSMutableDictionary*) data Floors:(NSArray*) flr andIsDoubleExpendable:(BOOL) isDouble
 {
     self = [super init];
     if (self){
         selectedRowIndeices = [[NSMutableArray alloc] initWithCapacity:numSection];
         selectedChildRow = [[NSMutableArray alloc] initWithCapacity:numSection];
-        floors = [[NSMutableArray alloc] initWithCapacity:20];
+        floors = flr;
         isDoubleExpendable = isDouble;
         dataDict = data;
-        [self setFloors:data];
     }
     return self;
 }
@@ -206,13 +205,6 @@ const int reportBtnWidth = 0;//60;
     
 }
 
--(void) setFloors:(NSMutableDictionary*) data
-{
-    for(NSString* str in [data keyEnumerator])
-    {
-        [floors addObject:str];
-    }
-}
 -(NSArray*) subCategory:(NSDictionary*) data
 {
     NSMutableArray *result = [[NSMutableArray alloc] initWithCapacity:5];
@@ -266,7 +258,8 @@ const int reportBtnWidth = 0;//60;
         }
         
         if (isDoubleExpendable){
-            for (int i = 1; i < [[dataDict objectForKey:[floors objectAtIndex:indexPath.section]] count]*2; i++){
+            delete = [[NSMutableArray alloc] initWithCapacity:3];
+            for (int i = 0; i < [[dataDict objectForKey:[floors objectAtIndex:indexPath.section]] count]*2; i++){
                 [delete addObject:[NSIndexPath indexPathForRow:i+1 inSection:indexPath.section]];
                 [self removeSubviewsForIndexPath:[NSIndexPath indexPathForRow:i+1 inSection:indexPath.section]];
             }
@@ -303,7 +296,12 @@ const int reportBtnWidth = 0;//60;
     }
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [tableView layoutIfNeeded];
+    [self.tableView.superview setFrame:CGRectMake(CGRectGetMinX(self.tableView.superview.frame), CGRectGetMinY(self.tableView.superview.frame), CGRectGetWidth(self.tableView.superview.frame), CGRectGetHeight(self.tableView.superview.frame)-self.tableView.frame.size.height+self.tableView.contentSize.height)];
     
+    [self.tableView setFrame:CGRectMake(CGRectGetMinX(self.tableView.frame), CGRectGetMinY(self.tableView.frame), CGRectGetWidth(self.tableView.frame), self.tableView.contentSize.height)];
+                              
+    NSLog(@"%f", self.tableView.contentSize.height);
 }
 
 @end
