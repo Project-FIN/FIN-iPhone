@@ -44,6 +44,7 @@
 		1347642714069951007CA179 /* school_supplies_small.png in Resources */ = {isa = PBXBuildFile; fileRef = 1347641B14069951007CA179 /* school_supplies_small.png */; };
 		1347642814069951007CA179 /* vending_small.png in Resources */ = {isa = PBXBuildFile; fileRef = 1347641C14069951007CA179 /* vending_small.png */; };
 		134D100114069D3E00A9B318 /* coffee.png in Resources */ = {isa = PBXBuildFile; fileRef = 134D100014069D3E00A9B318 /* coffee.png */; };
+		134D10031406C1DB00A9B318 /* Default_hires.png in Resources */ = {isa = PBXBuildFile; fileRef = 134D10021406C1DB00A9B318 /* Default_hires.png */; };
 		136E920613ED93E5003799B6 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1330EE0B1375CE3E00940DDB /* MapKit.framework */; };
 		136E920713ED93E8003799B6 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 136E91FF13ED9358003799B6 /* CoreLocation.framework */; };
 		136E920813ED93EA003799B6 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1365764613E4AF990074429F /* libsqlite3.dylib */; };
@@ -140,6 +141,7 @@
 		1347641B14069951007CA179 /* school_supplies_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = school_supplies_small.png; sourceTree = "<group>"; };
 		1347641C14069951007CA179 /* vending_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = vending_small.png; sourceTree = "<group>"; };
 		134D100014069D3E00A9B318 /* coffee.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = coffee.png; sourceTree = "<group>"; };
+		134D10021406C1DB00A9B318 /* Default_hires.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default_hires.png; sourceTree = "<group>"; };
 		1365764613E4AF990074429F /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		136E91FF13ED9358003799B6 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		13EE3C0113E8BB290018A7C8 /* SQLiteManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQLiteManager.h; sourceTree = "<group>"; };
@@ -291,6 +293,7 @@
 		1330EDD91375CE1100940DDB /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				134D10021406C1DB00A9B318 /* Default_hires.png */,
 				134D100014069D3E00A9B318 /* coffee.png */,
 				1347640D14069951007CA179 /* atms_small.png */,
 				1347640E14069951007CA179 /* bike_racks_small.png */,
@@ -488,6 +491,7 @@
 				1347642714069951007CA179 /* school_supplies_small.png in Resources */,
 				1347642814069951007CA179 /* vending_small.png in Resources */,
 				134D100114069D3E00A9B318 /* coffee.png in Resources */,
+				134D10031406C1DB00A9B318 /* Default_hires.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
