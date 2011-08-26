@@ -17,7 +17,6 @@
     NSString *category;
     double distance;
     int   walkingTime;
-    NSDictionary *FidTofloorName;
     NSDictionary *floorDetail;
     
 }
@@ -29,5 +28,5 @@
 
 - (id) initWithFrame:(CGRect)frame WithBName:(NSString*)building category:(NSString*)cat distance:(double)dist walkTime: (int)walk
                 data:(NSDictionary*) data IsOutdoor:(BOOL) isOutdoor;
-
+-(NSArray*) getDesendFloor;
 @end

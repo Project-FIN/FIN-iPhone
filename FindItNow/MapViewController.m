@@ -304,10 +304,6 @@
             building = [dict objectForKey:@"name"];
         }
     }
-  /*  NSString *sqlStr = [NSString stringWithFormat:@"SELECT * FROM buildings WHERE name = '%@' AND deleted = 0", building];
-    NSArray *itemsList = [dbManager getRowsForQuery:sqlStr];
-    NSDictionary *dict = [itemsList objectAtIndex:0];
-    NSDictionary *fidToFname = [ [NSDictionary alloc] initWithObjects:[dict objectForKey:@"floor_names"] forKeys:[dict objectForKey:@"fid"]];*/
     
     //Create a popup
     int yCoord = CGRectGetMidY(self.view.frame) - (160/2);

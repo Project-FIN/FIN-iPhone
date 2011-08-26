@@ -18,8 +18,7 @@
     BOOL isDoubleExpendable;
 }
 -(BOOL) selectionIncludesSection:(NSInteger)section;
--(void) setFloors:(NSDictionary*) data;
-- (id)initWithDict:(NSDictionary*) data andIsDoubleExpendable:(BOOL) isDouble;
+- (id)initWithDict:(NSDictionary*) data Floors:(NSArray*) flr andIsDoubleExpendable:(BOOL) isDouble;
 -(void) removeSubviewsForIndexPath:(NSIndexPath*) indexPath;
 -(void) setCellForDetailView:(UITableViewCell *) cell WithTableView:(UITableView *) tableView data:(NSDictionary*) data;
 -(NSArray*) subCategory:(NSDictionary*) data;

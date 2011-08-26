@@ -8,7 +8,7 @@
 
 #import "InfoPopUpView.h"
 #import "FloorInfoTableViewController.h"
-
+#import "SQLiteManager.h"
 @implementation InfoPopUpView
 
 
@@ -143,7 +143,7 @@
 {
     int tableHeight = 180;  //about 4 cells' height
     if ([floorDetail count] < 4)
-        tableHeight = [floorDetail count] * (180/2);
+        tableHeight = [floorDetail count] * (180/4);
     
     [self removeExitTapArea];
     
@@ -163,10 +163,11 @@
     else
     {
         isInfoHidden = false;
-    
+        NSArray* floors = [self getDesendFloor];
+
         //information table
         infoTable = [ [UITableView alloc] initWithFrame:CGRectMake(10, 160, CGRectGetWidth(self.frame)-20, 0)];
-        FloorInfoTableViewController *infoTableCtrl = [ [FloorInfoTableViewController alloc] initWithDict:floorDetail andIsDoubleExpendable:[category isEqualToString:@""]];
+        FloorInfoTableViewController *infoTableCtrl = [ [FloorInfoTableViewController alloc] initWithDict:floorDetail Floors:floors andIsDoubleExpendable:[category isEqualToString:@""]];
         infoTableCtrl.tableView = infoTable;
         infoTable.alwaysBounceVertical = NO;
         [infoTable setBackgroundColor:[UIColor brownColor]];
@@ -181,6 +182,47 @@
         [UIView commitAnimations];
     }
     [self addExitTapGesture];
+}
+
+-(NSArray*) getDesendFloor
+{
+    SQLiteManager *dbManager = [[SQLiteManager alloc] initWithDatabaseNamed:@"FIN_LOCAL.db"];
+    NSMutableArray *flr = [[NSMutableArray alloc] initWithCapacity:[floorDetail count]];
+    NSMutableDictionary *fnumToName = [[NSMutableDictionary alloc] initWithCapacity:[floorDetail count]];
+
+    NSString *sqlStr = [NSString stringWithFormat:@"SELECT bid FROM buildings WHERE name = '%@'", buildingName];
+    NSArray *itemsList = [dbManager getRowsForQuery:sqlStr]; 
+    NSInteger bid = [[[itemsList objectAtIndex:0] objectForKey:@"bid"] intValue];
+    if ([category isEqualToString:@""]){
+        sqlStr = [NSString stringWithFormat:@"SELECT name,fnum FROM floors WHERE bid = %d", bid];
+        itemsList = [dbManager getRowsForQuery:sqlStr];
+        for (NSDictionary *dict in itemsList){
+            [flr addObject:[dict objectForKey:@"fnum"]];
+            [fnumToName setValue:[dict objectForKey:@"name"] forKey:[NSString stringWithFormat:@"%d",[dict objectForKey:@"fnum"] ] ];
+        }
+        [flr sortUsingSelector:@selector(compare:)];
+        flr = [[NSMutableArray alloc] initWithArray:[[flr reverseObjectEnumerator] allObjects]];
+        NSMutableArray *desendFlr = [[NSMutableArray alloc] initWithCapacity:[itemsList count]];
+        for (NSString *fnum in flr){
+            [desendFlr addObject:[fnumToName objectForKey:[NSString stringWithFormat:@"%d", fnum]]];
+        }
+        return desendFlr;
+    }else {
+        for(NSString* str in [floorDetail keyEnumerator]){
+            sqlStr = [NSString stringWithFormat:@"SELECT fnum FROM floors WHERE name = '%@' AND bid = %d", str, bid];
+            itemsList = [dbManager getRowsForQuery:sqlStr];
+            [fnumToName setValue:str forKey:[NSString stringWithFormat:@"%d",[[[itemsList objectAtIndex:0] objectForKey:@"fnum"] intValue]]];
+            [flr addObject:[NSString stringWithFormat:@"%d",[[[itemsList objectAtIndex:0] objectForKey:@"fnum"] intValue]]];
+        }
+        [flr sortUsingSelector:@selector(compare:)];
+        flr = [[NSMutableArray alloc] initWithArray:[[flr reverseObjectEnumerator] allObjects]];
+        
+    }
+    NSMutableArray *desendFlr = [[NSMutableArray alloc] initWithCapacity:[flr count]];
+    for (NSString *fnum in flr){
+        [desendFlr addObject:[fnumToName objectForKey:fnum]];
+    }
+    return desendFlr;
 }
 
 -(void) addExitTapGesture{  
