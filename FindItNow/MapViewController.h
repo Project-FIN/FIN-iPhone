@@ -16,7 +16,7 @@
 #import <Foundation/Foundation.h>
 #import <MapKit/MKAnnotation.h>
 
-@interface MapViewController : UIViewController {
+@interface MapViewController : UIViewController <MKMapViewDelegate> {
     
     SQLiteManager *dbManager;
     NSMutableArray *mapAnnotations;
