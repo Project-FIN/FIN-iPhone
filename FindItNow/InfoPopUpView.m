@@ -141,9 +141,11 @@
 
 -(IBAction) addRemInfoTable
 {
-    int tableHeight = 180;  //about 4 cells' height
-    if ([floorDetail count] < 4)
-        tableHeight = [floorDetail count] * (180/4);
+    NSArray* floors = [self getDesendFloor];
+    int tableHeight = MAX([floorDetail count] * (180/4),[floors count] * (180/4));  //about 4 cells' height
+
+    if (tableHeight > 180)
+        tableHeight = 180;
     
     [self removeExitTapArea];
     
@@ -163,7 +165,6 @@
     else
     {
         isInfoHidden = false;
-        NSArray* floors = [self getDesendFloor];
 
         //information table
         infoTable = [ [UITableView alloc] initWithFrame:CGRectMake(10, 160, CGRectGetWidth(self.frame)-20, 0)];

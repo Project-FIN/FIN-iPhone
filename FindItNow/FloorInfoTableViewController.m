@@ -7,7 +7,7 @@
 //
 
 #import "FloorInfoTableViewController.h"
-
+#import "InfoPopUpView.h"
 
 @implementation FloorInfoTableViewController
 
@@ -320,11 +320,13 @@ const int reportBtnWidth = 0;//60;
     else if (baseHeight > 180)
         baseHeight = 180;
     
-    [self.tableView.superview setFrame:CGRectMake(CGRectGetMinX(self.tableView.superview.frame), CGRectGetMinY(self.tableView.superview.frame), CGRectGetWidth(self.tableView.superview.frame), CGRectGetHeight(self.tableView.superview.frame)-self.tableView.frame.size.height+baseHeight)];
+    [self.tableView.superview setFrame:CGRectMake(CGRectGetMinX(self.tableView.superview.frame), CGRectGetMinY(self.tableView.superview.frame)+(self.tableView.frame.size.height/2)-(baseHeight/2), CGRectGetWidth(self.tableView.superview.frame), CGRectGetHeight(self.tableView.superview.frame)-self.tableView.frame.size.height+baseHeight)];
     
     [self.tableView setFrame:CGRectMake(CGRectGetMinX(self.tableView.frame), CGRectGetMinY(self.tableView.frame), CGRectGetWidth(self.tableView.frame), baseHeight)];
                               
-    NSLog(@"%f", self.tableView.contentSize.height);
+    InfoPopUpView *superView = self.tableView.superview;
+    [superView removeExitTapArea];
+    [superView addExitTapGesture];
 }
 
 @end
