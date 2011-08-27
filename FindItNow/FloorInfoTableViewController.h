@@ -22,4 +22,5 @@
 -(void) removeSubviewsForIndexPath:(NSIndexPath*) indexPath;
 -(void) setCellForDetailView:(UITableViewCell *) cell WithTableView:(UITableView *) tableView data:(NSDictionary*) data;
 -(NSArray*) subCategory:(NSDictionary*) data;
+-(CGFloat) heightBaseOnContent:(NSString*) data;
 @end

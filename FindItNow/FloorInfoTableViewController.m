@@ -121,6 +121,13 @@ const int reportBtnWidth = 0;//60;
     return 1;
 }
 
+-(CGFloat) heightBaseOnContent:(NSString*) str
+{
+    NSArray *textline = [str componentsSeparatedByString:@"\\n"];
+    //str = [str stringByReplacingOccurrencesOfString:@"\\n" withString:@"\n"];
+    return [textline count]*fontSizeSpace + reportBtnHeight + detailcellMargin;
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ( indexPath.row == 0){
@@ -129,17 +136,13 @@ const int reportBtnWidth = 0;//60;
     {
         NSDictionary *cateItem = [dataDict objectForKey:[floors objectAtIndex:indexPath.section]];
         NSString *str = [cateItem objectForKey:[[cateItem keyEnumerator] nextObject]] ;
-        NSArray *textline = [str componentsSeparatedByString:@"\\n"];
-        str = [str stringByReplacingOccurrencesOfString:@"\\n" withString:@"\n"];
-        return [textline count]*fontSizeSpace + reportBtnHeight + detailcellMargin;
+        return [self heightBaseOnContent:str];
     } else if ( isDoubleExpendable && [self selectionIncludesSection:indexPath.section] && indexPath.row % 2 == 1){
         return 45;
     } else if ([selectedChildRow containsObject:indexPath] && isDoubleExpendable){
         NSDictionary *cateItem = [dataDict objectForKey:[floors objectAtIndex:indexPath.section]];
         NSString *str = [cateItem objectForKey:[[self subCategory:cateItem] objectAtIndex:(indexPath.row-1)/2]];
-        NSArray *textline = [str componentsSeparatedByString:@"\\n"];
-        str = [str stringByReplacingOccurrencesOfString:@"\\n" withString:@"\n"];
-        return [textline count]*fontSizeSpace + reportBtnHeight + detailcellMargin;
+        return [self heightBaseOnContent:str];
     }
     return 0;
 }
@@ -226,6 +229,7 @@ const int reportBtnWidth = 0;//60;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    float baseHeight = self.tableView.frame.size.height;
     
     if (isDoubleExpendable && indexPath.row >= 1 && indexPath.row%2 == 1){
         NSMutableArray *insert = [NSMutableArray arrayWithObject:[NSIndexPath indexPathForRow:[indexPath row]+1 inSection:indexPath.section]];
@@ -233,6 +237,7 @@ const int reportBtnWidth = 0;//60;
         //[NSIndexPath indexPathForRow:[indexPath row]+2 inSection:indexPath.section], nil];
         
         if ([selectedChildRow containsObject:[insert objectAtIndex:0]]){
+            baseHeight -= [self.tableView cellForRowAtIndexPath:[insert objectAtIndex:0]].frame.size.height;
             [self removeSubviewsForIndexPath:[insert objectAtIndex:0]];
             [selectedChildRow removeObject:[insert objectAtIndex:0]];
             [tableView beginUpdates];
@@ -241,10 +246,11 @@ const int reportBtnWidth = 0;//60;
         } else{
             [selectedChildRow addObject:[insert objectAtIndex:0]];
             [tableView beginUpdates];
-            //[tableView reloadData];
             [tableView reloadRowsAtIndexPaths:insert withRowAnimation:UITableViewRowAnimationTop];
-            //[tableView reloadRowsAtIndexPaths:reload withRowAnimation:UITableViewRowAnimationNone];
             [tableView endUpdates];
+            NSDictionary *cateItem = [dataDict objectForKey:[floors objectAtIndex:indexPath.section]];
+            NSString *str = [cateItem objectForKey:[[self subCategory:cateItem] objectAtIndex:(indexPath.row)/2]];
+            baseHeight += [self heightBaseOnContent:str];
         }
         
     }else if ( [selectedRowIndeices containsObject:indexPath] )
@@ -263,7 +269,13 @@ const int reportBtnWidth = 0;//60;
                 [delete addObject:[NSIndexPath indexPathForRow:i+1 inSection:indexPath.section]];
                 [self removeSubviewsForIndexPath:[NSIndexPath indexPathForRow:i+1 inSection:indexPath.section]];
             }
+            baseHeight -= [delete count]*45;
+        }else{
+            NSDictionary *cateItem = [dataDict objectForKey:[floors objectAtIndex:indexPath.section]];
+            NSString *str = [cateItem objectForKey:[[cateItem keyEnumerator] nextObject]] ;
+            baseHeight -= [self heightBaseOnContent:str];
         }
+        
         selectedChildRow = [[NSMutableArray alloc] initWithCapacity:5];
         [self removeSubviewsForIndexPath:childCell];
         
@@ -286,6 +298,11 @@ const int reportBtnWidth = 0;//60;
             insert = [NSMutableArray arrayWithCapacity:[dataDict count]*2];
             for (int i = 0; i < [[dataDict objectForKey:[floors objectAtIndex:indexPath.section]] count]*2; i++)
                 [insert addObject:[NSIndexPath indexPathForRow:i+1 inSection:indexPath.section]];
+            baseHeight += [insert count]*45;
+        }else{
+            NSDictionary *cateItem = [dataDict objectForKey:[floors objectAtIndex:indexPath.section]];
+            NSString *str = [cateItem objectForKey:[[cateItem keyEnumerator] nextObject]] ;
+            baseHeight += [self heightBaseOnContent:str];
         }
         
         [tableView beginUpdates];
@@ -293,13 +310,19 @@ const int reportBtnWidth = 0;//60;
         [tableView insertRowsAtIndexPaths:insert withRowAnimation:UITableViewRowAnimationTop];
         [tableView reloadRowsAtIndexPaths:reload withRowAnimation:UITableViewRowAnimationNone];
         [tableView endUpdates];
+        
     }
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    [tableView layoutIfNeeded];
-    [self.tableView.superview setFrame:CGRectMake(CGRectGetMinX(self.tableView.superview.frame), CGRectGetMinY(self.tableView.superview.frame), CGRectGetWidth(self.tableView.superview.frame), CGRectGetHeight(self.tableView.superview.frame)-self.tableView.frame.size.height+self.tableView.contentSize.height)];
+
+    if (baseHeight <= 0)
+        baseHeight = 45;
+    else if (baseHeight > 180)
+        baseHeight = 180;
     
-    [self.tableView setFrame:CGRectMake(CGRectGetMinX(self.tableView.frame), CGRectGetMinY(self.tableView.frame), CGRectGetWidth(self.tableView.frame), self.tableView.contentSize.height)];
+    [self.tableView.superview setFrame:CGRectMake(CGRectGetMinX(self.tableView.superview.frame), CGRectGetMinY(self.tableView.superview.frame), CGRectGetWidth(self.tableView.superview.frame), CGRectGetHeight(self.tableView.superview.frame)-self.tableView.frame.size.height+baseHeight)];
+    
+    [self.tableView setFrame:CGRectMake(CGRectGetMinX(self.tableView.frame), CGRectGetMinY(self.tableView.frame), CGRectGetWidth(self.tableView.frame), baseHeight)];
                               
     NSLog(@"%f", self.tableView.contentSize.height);
 }
