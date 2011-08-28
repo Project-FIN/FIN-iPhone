@@ -72,9 +72,12 @@
     region.span.latitudeDelta = 0.005;
     region.span.longitudeDelta = 0.004;
     
+    [mapView setRegion:region];
+    
     NSMutableArray *points;
     if ([mapCategory length] == 0) {
         points = [self getLocationOfBuilding:(const char *)[mapBuilding UTF8String]];
+        [mapView setCenterCoordinate:[[points objectAtIndex:0] coordinate]];
     } else {
         points = [self getItemsOfCategory:(const char*)[mapCategory UTF8String]];
     }
@@ -83,9 +86,12 @@
         ItemAnnotation *itemAnnotation = [[ItemAnnotation alloc] initWithCoordinate:coord];
         [mapView addAnnotation:itemAnnotation];
     }
-    
-    [mapView setRegion:region animated:YES];
-    [mapView regionThatFits:region];
+}
+
+- (void)mapView:(MKMapView *)aMapView didUpdateUserLocation:(MKUserLocation *)userLocation {
+    if ([mapCategory length] != 0) {
+        [aMapView setCenterCoordinate:userLocation.coordinate];
+    }
 }
 
 - (int) walkingTime:(double)distance :(int)mile_time {
@@ -330,14 +336,6 @@
 
 -(IBAction) scrollToDefaultLocation
 {
-    MKCoordinateRegion region;
-    CLLocationCoordinate2D center = [self getRegionCenter];
-    region.center.latitude = center.latitude;
-    region.center.longitude = center.longitude;
-    region.span.latitudeDelta = 0.005;
-    region.span.longitudeDelta = 0.004;
-    
-    [mapView setRegion:region animated:YES];
-    [mapView regionThatFits:region];
+    [mapView setCenterCoordinate:[self getRegionCenter]];
 }
 @end

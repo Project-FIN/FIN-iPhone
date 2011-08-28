@@ -55,7 +55,7 @@
 }
 
 -(IBAction)showActionSheet:(id)sender {
-	UIActionSheet *popupQuery = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Back" destructiveButtonTitle:nil otherButtonTitles:@"Other Button 1", nil];
+	UIActionSheet *popupQuery = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Back" destructiveButtonTitle:nil otherButtonTitles:@"Help", @"Region", nil];
 	popupQuery.actionSheetStyle = UIActionSheetStyleDefault;
 	[popupQuery showInView:self.view];
 	[popupQuery release];
@@ -67,6 +67,11 @@
         //[self presentModalViewController:controller animated:YES];
         [self.tabBarController.navigationController pushViewController:controller animated:YES];
 	}
+    if (buttonIndex == 1) {
+        UIViewController *controller = [[UIViewController alloc] initWithNibName:@"SetRegionViewController" bundle:[self nibBundle]];
+        //[self presentModalViewController:controller animated:YES];
+        [self.tabBarController.navigationController pushViewController:controller animated:YES];
+    }
 }
 
 
