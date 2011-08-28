@@ -18,6 +18,11 @@ const int reportBtnHeight = 0;//30;
 const int reportBtnWidth = 0;//60;
 
 
+#define DETAIL_TAG 1
+#define DETAIL_BUTTON 2
+#define CATEIMG_START 2
+#define FLR_TITLE 1
+
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -165,47 +170,81 @@ const int reportBtnWidth = 0;//60;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cells";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-    }
-    
-    [self removeSubviewsForIndexPath:indexPath];
+    UITableViewCell *cell;
     if ( [self selectionIncludesSection:indexPath.section] && 1 == indexPath.row && !isDoubleExpendable){
+        NSString *CellIdentifier = @"DetailCell";
+        cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (cell == nil) {
+            cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+            UILabel *detail = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, CGRectGetWidth(tableView.frame)-10, 45)];
+            detail.tag = DETAIL_TAG;
+            [cell.contentView addSubview:detail];
+        }
         [self setCellForDetailView:cell WithTableView:tableView data:[dataDict objectForKey:[floors objectAtIndex:indexPath.section]]];
     }else if ([self selectionIncludesSection:indexPath.section] && isDoubleExpendable && 1 <= indexPath.row)
     {
         if ([selectedChildRow containsObject:indexPath]){
+            NSString *CellIdentifier = @"DetailCell";
+            cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            if (cell == nil) {
+                cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+                UILabel *detail = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, CGRectGetWidth(tableView.frame)-10, 45)];
+                detail.tag = DETAIL_TAG;
+                [cell.contentView addSubview:detail];
+            }
             NSDictionary *cateItem = [dataDict objectForKey:[floors objectAtIndex:indexPath.section]];
             NSString *str = [cateItem objectForKey:[[self subCategory:cateItem] objectAtIndex:(indexPath.row-1)/2]];
-            str = [str stringByReplacingOccurrencesOfString:@"\\n" withString:@"\n"];
             [self setCellForDetailView:cell WithTableView:tableView data:[[NSDictionary alloc] initWithObjects:[[NSArray alloc] initWithObjects:str,nil] forKeys:[[NSArray alloc] initWithObjects:@"",nil]]];
         }else{
+            NSString *CellIdentifier = @"CateCell";
+            cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            if (cell == nil) {
+                cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+            }
             NSDictionary *cateItem = [dataDict objectForKey:[floors objectAtIndex:indexPath.section]];
             cell.textLabel.text = [[self subCategory:cateItem] objectAtIndex:(indexPath.row-1)/2];
         }
     }
     else{
+        NSString *CellIdentifier = @"FlrCell";
+        cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (cell == nil) {
+            cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+            [cell setContentMode:UIViewContentModeCenter];
+            
+            for (int i = 0; i < 5; i++){
+                UIImageView *imageView = [[[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetWidth(tableView.frame)-((i+1)*40), 5, 36, 36)] autorelease];
+                [imageView setContentMode:UIViewContentModeCenter];
+                [imageView setBackgroundColor:[UIColor clearColor]];
+                imageView.tag = i+CATEIMG_START;
+                [cell.contentView addSubview:imageView];
+            }
+            UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(10,0,CGRectGetWidth(tableView.frame), 45)];
+            [title setFont:[UIFont boldSystemFontOfSize:20.0f]];
+            [title setBackgroundColor:[UIColor clearColor]];
+            title.tag = FLR_TITLE;
+            title.text = @"Temp";
+            [cell.contentView addSubview:title];
+        }
         NSString *str =[floors objectAtIndex:indexPath.section];
-        cell.textLabel.text = str;
-        /*NSString *iconName = [NSString stringWithFormat:@"%@_small",  [cateNameToIcon objectForKey:cate]];
-        UIImage *image = [UIImage imageNamed:iconName];
-        UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
-        imageView.center = CGPointMake(CGRectGetWidth(tableView.frame)-10-(image.size.width/2), (image.size.height/2)+5);
-        cell.accessoryView=imageView;*/
+        cell.textLabel.text = @"";
         
         NSDictionary *cateItem = [dataDict objectForKey:[floors objectAtIndex:indexPath.section]];
+        for (int i = 0; i < 5; i++){
+            UIImageView *imageView = (UIImageView *)[cell.contentView viewWithTag:i+CATEIMG_START];
+            imageView.image = nil;
+        }
         int i = 0;
+
         for (NSString* cate in [cateItem keyEnumerator]){
             NSString *iconName = [NSString stringWithFormat:@"%@_small",  [cateNameToIcon objectForKey:cate]];
             UIImage *image = [UIImage imageNamed:iconName];
-            UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
-            imageView.center = CGPointMake(CGRectGetWidth(tableView.frame)-(10+i)-(image.size.width/2), (image.size.height/2)+5);
-            
-            [cell.contentView addSubview:imageView];
-            i += 40;//image.size.width+5;
-        }
+            UIImageView *imageView = (UIImageView *)[cell.contentView viewWithTag:i+CATEIMG_START];
+            [imageView setImage:image];
+            i++;
+        }        
+        UILabel *title = (UILabel*)[cell.contentView viewWithTag:FLR_TITLE];
+        title.text=str;
     }
     return cell;
 }
@@ -222,7 +261,7 @@ const int reportBtnWidth = 0;//60;
 -(void) setCellForDetailView:(UITableViewCell *) cell WithTableView:(UITableView *) tableView data:(NSDictionary*) data
 {
     cell.textLabel.text = @"";
-    UILabel *detail = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, CGRectGetWidth(tableView.frame)-10, 45)];
+    UILabel *detail = (UILabel*)[cell.contentView viewWithTag:DETAIL_TAG];
     detail.font = [UIFont systemFontOfSize:12.0f];
     [detail setBackgroundColor:[UIColor clearColor]];
     detail.textAlignment = UITextAlignmentLeft;
@@ -233,7 +272,6 @@ const int reportBtnWidth = 0;//60;
     str = [str stringByReplacingOccurrencesOfString:@"\\n" withString:@"\n"];
     [detail setText:str];
     detail.frame = CGRectMake(CGRectGetMinX(detail.frame), CGRectGetMinY(detail.frame), CGRectGetWidth(detail.frame),[textline count]*fontSizeSpace );
-    [cell.contentView addSubview:detail];
     
     /*UIButton *butt = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     butt.frame = CGRectMake(CGRectGetMaxX(tableView.frame)-(reportBtnWidth+detailcellMargin), CGRectGetMaxY(detail.frame), reportBtnWidth, reportBtnHeight);
@@ -252,13 +290,13 @@ const int reportBtnWidth = 0;//60;
     return result;
 }
 
--(void) removeSubviewsForIndexPath:(NSIndexPath*)indexPath
+/*-(void) removeSubviewsForCell:(UITableViewCell *)cell
 {
-    for(UIView *subView in [self.tableView cellForRowAtIndexPath:indexPath].contentView.subviews)
+    for(UIView *subView in cell.contentView.subviews)
     {
         [subView removeFromSuperview];
     }
-}
+}*/
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -273,7 +311,7 @@ const int reportBtnWidth = 0;//60;
         if ([selectedChildRow containsObject:[insert objectAtIndex:0]]){
             baseHeight -= [self.tableView cellForRowAtIndexPath:[insert objectAtIndex:0]].frame.size.height;
             baseHeight = MAX(baseHeight, [floors count]*45);
-            [self removeSubviewsForIndexPath:[insert objectAtIndex:0]];
+            //[self removeSubviewsForCell:[tableView cellForRowAtIndexPath:[insert objectAtIndex:0]]];
             [selectedChildRow removeObject:[insert objectAtIndex:0]];
             [tableView beginUpdates];
             [tableView reloadRowsAtIndexPaths:insert withRowAnimation:UITableViewRowAnimationBottom];
@@ -292,7 +330,7 @@ const int reportBtnWidth = 0;//60;
     {
         NSMutableArray *delete = [NSMutableArray arrayWithObject:[NSIndexPath indexPathForRow:[indexPath row]+1 inSection:[indexPath section]] ];
         NSMutableArray *reload = [NSMutableArray arrayWithObject:[NSIndexPath indexPathForRow:[indexPath row] inSection:indexPath.section]];
-        NSIndexPath *childCell = [NSIndexPath indexPathForRow:indexPath.row+1 inSection:indexPath.section];
+        //NSIndexPath *childCell = [NSIndexPath indexPathForRow:indexPath.row+1 inSection:indexPath.section];
         
         if ( !([indexPath section]+1 >= [dataDict count])){
             [reload addObject:[NSIndexPath indexPathForRow:[indexPath row] inSection:indexPath.section+1]];
@@ -302,7 +340,7 @@ const int reportBtnWidth = 0;//60;
             delete = [[NSMutableArray alloc] initWithCapacity:3];
             for (int i = 0; i < [[dataDict objectForKey:[floors objectAtIndex:indexPath.section]] count]*2; i++){
                 [delete addObject:[NSIndexPath indexPathForRow:i+1 inSection:indexPath.section]];
-                [self removeSubviewsForIndexPath:[NSIndexPath indexPathForRow:i+1 inSection:indexPath.section]];
+                //[self removeSubviewsForCell:[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i+1 inSection:indexPath.section]]];
             }
             baseHeight -= [delete count]*45;
             baseHeight = MAX(baseHeight, [floors count]*45);
@@ -314,7 +352,7 @@ const int reportBtnWidth = 0;//60;
         }
         
         selectedChildRow = [[NSMutableArray alloc] initWithCapacity:5];
-        [self removeSubviewsForIndexPath:childCell];
+        //[self removeSubviewsForCell:[tableView cellForRowAtIndexPath:childCell]];
         
         [selectedRowIndeices removeObject:indexPath];
         [tableView beginUpdates];
@@ -343,7 +381,6 @@ const int reportBtnWidth = 0;//60;
         }
         
         [tableView beginUpdates];
-        [tableView reloadData];
         [tableView insertRowsAtIndexPaths:insert withRowAnimation:UITableViewRowAnimationTop];
         //[tableView reloadRowsAtIndexPaths:reload withRowAnimation:UITableViewRowAnimationNone];
         [tableView endUpdates];
@@ -364,6 +401,7 @@ const int reportBtnWidth = 0;//60;
     InfoPopUpView *superView = self.tableView.superview;
     [superView removeExitTapArea];
     [superView addExitTapGesture];
+
 }
 
 @end

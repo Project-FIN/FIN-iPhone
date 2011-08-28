@@ -20,7 +20,7 @@
 }
 -(BOOL) selectionIncludesSection:(NSInteger)section;
 - (id)initWithDict:(NSDictionary*) data Floors:(NSArray*) flr andIsDoubleExpendable:(BOOL) isDouble;
--(void) removeSubviewsForIndexPath:(NSIndexPath*) indexPath;
+//-(void) removeSubviewsForCell:(UITableViewCell*) cell;
 -(void) setCellForDetailView:(UITableViewCell *) cell WithTableView:(UITableView *) tableView data:(NSDictionary*) data;
 -(NSArray*) subCategory:(NSDictionary*) data;
 -(CGFloat) heightBaseOnContent:(NSString*) data;
