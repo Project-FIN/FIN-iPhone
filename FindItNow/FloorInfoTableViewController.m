@@ -8,6 +8,7 @@
 
 #import "FloorInfoTableViewController.h"
 #import "InfoPopUpView.h"
+#import "SQLiteManager.h"
 
 @implementation FloorInfoTableViewController
 
@@ -35,6 +36,7 @@ const int reportBtnWidth = 0;//60;
         floors = flr;
         isDoubleExpendable = isDouble;
         dataDict = data;
+        cateNameToIcon = [self getCategoryIconDictionary];
     }
     return self;
 }
@@ -93,6 +95,20 @@ const int reportBtnWidth = 0;//60;
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+- (NSDictionary*) getCategoryIconDictionary
+{    
+    SQLiteManager *dbManager = [[SQLiteManager alloc] initWithDatabaseNamed:@"FIN_LOCAL.db"];
+
+    NSString *sqlStr = [NSString stringWithFormat:@"SELECT name, full_name FROM categories WHERE parent = 0 AND deleted = 0"];
+    NSArray *categoriesList = [dbManager getRowsForQuery:sqlStr];
+    
+    NSMutableDictionary *icons = [[NSMutableDictionary alloc] init];
+    for (NSDictionary *dict in categoriesList) {
+        [icons setObject:[dict objectForKey:@"name"] forKey:[dict objectForKey:@"full_name"]];
+    }
+    return icons;
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -149,18 +165,18 @@ const int reportBtnWidth = 0;//60;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *CellIdentifier = @"Cells";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
+    
+    [self removeSubviewsForIndexPath:indexPath];
     if ( [self selectionIncludesSection:indexPath.section] && 1 == indexPath.row && !isDoubleExpendable){
-        [self removeSubviewsForIndexPath:indexPath];
         [self setCellForDetailView:cell WithTableView:tableView data:[dataDict objectForKey:[floors objectAtIndex:indexPath.section]]];
     }else if ([self selectionIncludesSection:indexPath.section] && isDoubleExpendable && 1 <= indexPath.row)
     {
         if ([selectedChildRow containsObject:indexPath]){
-            [self removeSubviewsForIndexPath:indexPath];
             NSDictionary *cateItem = [dataDict objectForKey:[floors objectAtIndex:indexPath.section]];
             NSString *str = [cateItem objectForKey:[[self subCategory:cateItem] objectAtIndex:(indexPath.row-1)/2]];
             str = [str stringByReplacingOccurrencesOfString:@"\\n" withString:@"\n"];
@@ -171,7 +187,25 @@ const int reportBtnWidth = 0;//60;
         }
     }
     else{
-        cell.textLabel.text =[floors objectAtIndex:indexPath.section];
+        NSString *str =[floors objectAtIndex:indexPath.section];
+        cell.textLabel.text = str;
+        /*NSString *iconName = [NSString stringWithFormat:@"%@_small",  [cateNameToIcon objectForKey:cate]];
+        UIImage *image = [UIImage imageNamed:iconName];
+        UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
+        imageView.center = CGPointMake(CGRectGetWidth(tableView.frame)-10-(image.size.width/2), (image.size.height/2)+5);
+        cell.accessoryView=imageView;*/
+        
+        NSDictionary *cateItem = [dataDict objectForKey:[floors objectAtIndex:indexPath.section]];
+        int i = 0;
+        for (NSString* cate in [cateItem keyEnumerator]){
+            NSString *iconName = [NSString stringWithFormat:@"%@_small",  [cateNameToIcon objectForKey:cate]];
+            UIImage *image = [UIImage imageNamed:iconName];
+            UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
+            imageView.center = CGPointMake(CGRectGetWidth(tableView.frame)-(10+i)-(image.size.width/2), (image.size.height/2)+5);
+            
+            [cell.contentView addSubview:imageView];
+            i += 40;//image.size.width+5;
+        }
     }
     return cell;
 }
@@ -309,9 +343,9 @@ const int reportBtnWidth = 0;//60;
         }
         
         [tableView beginUpdates];
-        //[tableView reloadData];
+        [tableView reloadData];
         [tableView insertRowsAtIndexPaths:insert withRowAnimation:UITableViewRowAnimationTop];
-        [tableView reloadRowsAtIndexPaths:reload withRowAnimation:UITableViewRowAnimationNone];
+        //[tableView reloadRowsAtIndexPaths:reload withRowAnimation:UITableViewRowAnimationNone];
         [tableView endUpdates];
         
     }

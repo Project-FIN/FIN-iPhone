@@ -16,6 +16,7 @@
     NSDictionary *dataDict;
     NSArray *floors;
     BOOL isDoubleExpendable;
+    NSDictionary *cateNameToIcon;
 }
 -(BOOL) selectionIncludesSection:(NSInteger)section;
 - (id)initWithDict:(NSDictionary*) data Floors:(NSArray*) flr andIsDoubleExpendable:(BOOL) isDouble;
@@ -23,4 +24,5 @@
 -(void) setCellForDetailView:(UITableViewCell *) cell WithTableView:(UITableView *) tableView data:(NSDictionary*) data;
 -(NSArray*) subCategory:(NSDictionary*) data;
 -(CGFloat) heightBaseOnContent:(NSString*) data;
+- (NSDictionary*) getCategoryIconDictionary;
 @end
