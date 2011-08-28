@@ -238,6 +238,7 @@ const int reportBtnWidth = 0;//60;
         
         if ([selectedChildRow containsObject:[insert objectAtIndex:0]]){
             baseHeight -= [self.tableView cellForRowAtIndexPath:[insert objectAtIndex:0]].frame.size.height;
+            baseHeight = MAX(baseHeight, [floors count]*45);
             [self removeSubviewsForIndexPath:[insert objectAtIndex:0]];
             [selectedChildRow removeObject:[insert objectAtIndex:0]];
             [tableView beginUpdates];
@@ -270,10 +271,12 @@ const int reportBtnWidth = 0;//60;
                 [self removeSubviewsForIndexPath:[NSIndexPath indexPathForRow:i+1 inSection:indexPath.section]];
             }
             baseHeight -= [delete count]*45;
+            baseHeight = MAX(baseHeight, [floors count]*45);
         }else{
             NSDictionary *cateItem = [dataDict objectForKey:[floors objectAtIndex:indexPath.section]];
             NSString *str = [cateItem objectForKey:[[cateItem keyEnumerator] nextObject]] ;
             baseHeight -= [self heightBaseOnContent:str];
+            baseHeight = MAX(baseHeight, [floors count]*45);
         }
         
         selectedChildRow = [[NSMutableArray alloc] initWithCapacity:5];
