@@ -100,17 +100,43 @@ const int reportBtnWidth = 0;//60;
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+- (BOOL) isSubcategory:(NSString *) cat {
+    SQLiteManager *dbManager = [[SQLiteManager alloc] initWithDatabaseNamed:@"FIN_LOCAL.db"];
+
+    NSString *sqlStr = [NSString stringWithFormat:@"SELECT parent FROM categories WHERE full_name = '%s'", (const char*)[cat UTF8String]];
+    NSArray *arr = [dbManager getRowsForQuery:sqlStr];
+    NSDictionary *parents = [arr objectAtIndex:0];
+    
+    return ([[parents objectForKey:@"parent"] intValue] != 0);
+}
+
 - (NSDictionary*) getCategoryIconDictionary
 {    
     SQLiteManager *dbManager = [[SQLiteManager alloc] initWithDatabaseNamed:@"FIN_LOCAL.db"];
 
-    NSString *sqlStr = [NSString stringWithFormat:@"SELECT name, full_name FROM categories WHERE parent = 0 AND deleted = 0"];
+    NSString *sqlStr = [NSString stringWithFormat:@"SELECT name, full_name FROM categories WHERE deleted = 0"];
     NSArray *categoriesList = [dbManager getRowsForQuery:sqlStr];
     
     NSMutableDictionary *icons = [[NSMutableDictionary alloc] init];
     for (NSDictionary *dict in categoriesList) {
-        [icons setObject:[dict objectForKey:@"name"] forKey:[dict objectForKey:@"full_name"]];
+        NSString *mapName = [dict objectForKey:@"name"];
+        if ([self isSubcategory:[dict objectForKey:@"full_name"]]) {
+            sqlStr = [NSString stringWithFormat:@"SELECT parent FROM categories WHERE full_name = '%s'", (const char*)[[dict objectForKey:@"full_name"] UTF8String]];
+            NSArray *arr = [dbManager getRowsForQuery:sqlStr];
+            NSDictionary *parents = [arr objectAtIndex:0];
+            
+            int parent_id = [[parents objectForKey:@"parent"] intValue];
+            
+            sqlStr = [NSString stringWithFormat:@"SELECT name FROM categories WHERE cat_id = %d", parent_id];
+            arr = [dbManager getRowsForQuery:sqlStr];
+            parents = [arr objectAtIndex:0];
+            
+            mapName = [parents objectForKey:@"name"];
+            NSLog(@"%@", mapName);
+        }
+        [icons setObject:mapName forKey:[dict objectForKey:@"full_name"]];
     }
+    NSLog(@"%@", icons);
     return icons;
 }
 
