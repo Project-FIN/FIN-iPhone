@@ -7,6 +7,7 @@
 //
 
 #import "FindItNowViewController.h"
+#import "SetRegionViewController.h"
 
 @implementation FindItNowViewController
 
@@ -68,7 +69,7 @@
         [self.tabBarController.navigationController pushViewController:controller animated:YES];
 	}
     if (buttonIndex == 1) {
-        UIViewController *controller = [[UIViewController alloc] initWithNibName:@"SetRegionViewController" bundle:[self nibBundle]];
+        SetRegionViewController *controller = [[SetRegionViewController alloc] initWithNibName:@"SetRegionViewController" bundle:[self nibBundle]];
         //[self presentModalViewController:controller animated:YES];
         [self.tabBarController.navigationController pushViewController:controller animated:YES];
     }
