@@ -47,6 +47,7 @@
 		136E920613ED93E5003799B6 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1330EE0B1375CE3E00940DDB /* MapKit.framework */; };
 		136E920713ED93E8003799B6 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 136E91FF13ED9358003799B6 /* CoreLocation.framework */; };
 		136E920813ED93EA003799B6 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1365764613E4AF990074429F /* libsqlite3.dylib */; };
+		138B7547140FFB70006F8018 /* FINDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 138B7546140FFB70006F8018 /* FINDatabase.m */; };
 		13EE3C0313E8BB290018A7C8 /* SQLiteManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 13EE3C0213E8BB290018A7C8 /* SQLiteManager.m */; };
 		13F801FE13FCA6D200817A5C /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 13F801FD13FCA6D200817A5C /* Default.png */; };
 		EA0D7C7113E514E900AE9E14 /* InfoPopUpView.m in Sources */ = {isa = PBXBuildFile; fileRef = EA0D7C7013E514E900AE9E14 /* InfoPopUpView.m */; };
@@ -142,6 +143,8 @@
 		134D100014069D3E00A9B318 /* coffee.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = coffee.png; sourceTree = "<group>"; };
 		1365764613E4AF990074429F /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		136E91FF13ED9358003799B6 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		138B7545140FFB70006F8018 /* FINDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FINDatabase.h; sourceTree = "<group>"; };
+		138B7546140FFB70006F8018 /* FINDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FINDatabase.m; sourceTree = "<group>"; };
 		13EE3C0113E8BB290018A7C8 /* SQLiteManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQLiteManager.h; sourceTree = "<group>"; };
 		13EE3C0213E8BB290018A7C8 /* SQLiteManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQLiteManager.m; sourceTree = "<group>"; };
 		13F801FD13FCA6D200817A5C /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
@@ -255,6 +258,8 @@
 				EA10F54013E7CAA300908E24 /* FloorInfoTableViewController.m */,
 				1346536D13E495C6009E6A53 /* BuildingViewController.h */,
 				1346536E13E495C6009E6A53 /* BuildingViewController.m */,
+				138B7545140FFB70006F8018 /* FINDatabase.h */,
+				138B7546140FFB70006F8018 /* FINDatabase.m */,
 				1346536F13E495C6009E6A53 /* BuildingViewController.xib */,
 				EA3CC10B13F390BB004FEE88 /* SubcategoryListController.h */,
 				EA3CC10C13F390BB004FEE88 /* SubcategoryListController.m */,
@@ -537,6 +542,7 @@
 				134432D713FB497E00EE6B2F /* ItemAnnotation.m in Sources */,
 				EAD437FF1402242800BE6471 /* SetRegionTableController.m in Sources */,
 				EAD4380D14022BFE00BE6471 /* SetRegionViewController.m in Sources */,
+				138B7547140FFB70006F8018 /* FINDatabase.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

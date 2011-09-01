@@ -11,63 +11,13 @@
 
 @implementation SetRegionViewController
 
-- (void)saveRegions
-{
-    NSURL *URL=[[NSURL alloc] initWithString:@"http://www.fincdn.org/getRegions.php"];
-    NSString *results = [[NSString alloc] initWithContentsOfURL :URL];
-    
-    NSDictionary *regionsJson = [results objectFromJSONString];
-    
-    for (NSDictionary *region in regionsJson) {
-        int rid = [[region objectForKey:@"rid"] intValue];
-        const char *name = (const char *) [[region objectForKey:@"name"] UTF8String];
-        const char *full_name = (const char *) [[region objectForKey:@"full_name"] UTF8String];
-        int lat = [[region objectForKey:@"lat"] intValue];
-        int lon = [[region objectForKey:@"lon"] intValue];
-        const char *color1 = (const char *) [[region objectForKey:@"color1"] UTF8String];
-        const char *color2 = (const char *) [[region objectForKey:@"color2"] UTF8String];
-        int deleted = [[region objectForKey:@"deleted"] intValue];
-        
-        NSString *sqlStr = [NSString stringWithFormat:@"INSERT OR REPLACE INTO regions (rid, name, full_name, latitude, longitude, deleted) VALUES (%d, '%s', '%s', %d, %d, %d)", rid, name, full_name, lat, lon, deleted];
-        NSError *error = [dbManager doQuery:sqlStr];
-        if (error != nil) {
-            NSLog(@"Error: %@",[error localizedDescription]);
-        }
-        sqlStr = [NSString stringWithFormat:@"INSERT OR REPLACE INTO colors (rid, color1, color2) VALUES (%d, '%s', '%s')", rid, color1, color2];
-        error = [dbManager doQuery:sqlStr];
-        if (error != nil) {
-            NSLog(@"Error: %@",[error localizedDescription]);
-        }
-    }
-}
-
-- (NSMutableArray*) getRegionsList {
-    NSString *sqlStr = [NSString stringWithFormat:@"SELECT full_name FROM regions WHERE deleted = 0"];
-    NSArray *regionsArr = [dbManager getRowsForQuery:sqlStr];
-    
-    NSMutableArray* regionsList = [[NSMutableArray alloc] init];
-    for (NSDictionary *dict in regionsArr) {
-        [regionsList addObject:[dict objectForKey:@"full_name"]];
-    }
-    
-    return regionsList;
-}
-
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
+    db = [[FINDatabase alloc] init];
+    [db createDB];
+    [db saveRegions];
+    
     dbManager = [[SQLiteManager alloc] initWithDatabaseNamed:@"FIN_LOCAL.db"];
-
-    NSError *error = [dbManager doQuery:@"CREATE TABLE IF NOT EXISTS regions (rid INTEGER PRIMARY KEY, name TEXT, full_name TEXT, latitude INTEGER, longitude INTEGER, deleted INTEGER)"];
-    if (error != nil) {
-        NSLog(@"Error: %@",[error localizedDescription]);
-    }
-    
-    error = [dbManager doQuery:@"CREATE TABLE IF NOT EXISTS colors (rid INTEGER PRIMARY KEY, color1 TEXT, color2 TEXT)"];
-    if (error != nil) {
-        NSLog(@"Error: %@",[error localizedDescription]);
-    }
-    
-    [self saveRegions];
     
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
@@ -137,10 +87,7 @@
     if (buttonIndex != alertView.cancelButtonIndex){
         NSString *selectedRegion = [data objectAtIndex:[pickerView selectedRowInComponent:0]-1];
         
-        NSString *sqlStr = [NSString stringWithFormat:@"SELECT rid FROM regions WHERE full_name = '%s'", (const char*)[selectedRegion UTF8String]];
-        NSArray *ridArr = [dbManager getRowsForQuery:sqlStr];
-        NSDictionary *dict = [ridArr objectAtIndex:0];
-        int rid = [[dict objectForKey:@"rid"] intValue];
+        int rid = [[self getRIDFromRegion:selectedRegion] intValue];
         
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         NSString *key = @"rid";
@@ -148,9 +95,36 @@
         
         [defaults setObject:value forKey:key];
         [defaults synchronize];
+        
+        [db deleteDB];
+        
+        [db saveCategory];
+        [db saveBuildings];
+        [db saveItems];
+        
         [window makeKeyAndVisible];
         [self dismissModalViewControllerAnimated:YES];
     }
+}
+
+- (NSMutableArray*) getRegionsList {
+    NSString *sqlStr = [NSString stringWithFormat:@"SELECT full_name FROM regions WHERE deleted = 0"];
+    NSArray *regionsArr = [dbManager getRowsForQuery:sqlStr];
+    
+    NSMutableArray* regionsList = [[NSMutableArray alloc] init];
+    for (NSDictionary *dict in regionsArr) {
+        [regionsList addObject:[dict objectForKey:@"full_name"]];
+    }
+    
+    return regionsList;
+}
+
+- (NSNumber*) getRIDFromRegion:(NSString*) regionName {
+    NSString *sqlStr = [NSString stringWithFormat:@"SELECT rid FROM regions WHERE full_name = '%s'", (const char*)[regionName UTF8String]];
+    NSArray *ridArr = [dbManager getRowsForQuery:sqlStr];
+    NSDictionary *dict = [ridArr objectAtIndex:0];
+    
+    return [dict objectForKey:@"rid"];
 }
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component;

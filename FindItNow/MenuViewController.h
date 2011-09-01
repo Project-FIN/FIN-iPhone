@@ -16,7 +16,6 @@
 @interface MenuViewController : UIViewController {
     
     SQLiteManager *dbManager;
-    
 }
 @property (nonatomic, retain) IBOutlet MapViewController *mapView;
 @property (nonatomic, retain) IBOutlet UILabel *text;
@@ -25,10 +24,6 @@
 - (IBAction) getCategory ;
 - (IBAction)map:(id) sender;
 - (void) initBtnGrid;
-
-- (void) saveCategory;
-- (void) saveBuilding;
-- (void) saveItems;
 
 - (NSArray*) getCategoryList;
 - (NSDictionary*) getCategoryIconDictionary;
