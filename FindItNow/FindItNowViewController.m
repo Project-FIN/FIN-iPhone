@@ -71,7 +71,7 @@
     if (buttonIndex == 1) {
         SetRegionViewController *controller = [[SetRegionViewController alloc] initWithNibName:@"SetRegionViewController" bundle:[self nibBundle]];
         //[self presentModalViewController:controller animated:YES];
-        [self.tabBarController.navigationController pushViewController:controller animated:YES];
+        [self.tabBarController presentModalViewController:controller animated:YES];
     }
 }
 

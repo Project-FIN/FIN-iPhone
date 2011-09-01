@@ -149,7 +149,7 @@
         [defaults setObject:value forKey:key];
         [defaults synchronize];
         [window makeKeyAndVisible];
-        [self.view removeFromSuperview];
+        [self dismissModalViewControllerAnimated:YES];
     }
 }
 
