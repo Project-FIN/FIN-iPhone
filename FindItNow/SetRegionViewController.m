@@ -126,14 +126,16 @@
 
 - (void)pickerView:(UIPickerView *)pv didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    UIAlertView *confirm = [[UIAlertView alloc] initWithTitle:nil message:[NSString stringWithFormat:@"You selected %@",[data objectAtIndex:row] ] delegate:self cancelButtonTitle:@"Select Again" otherButtonTitles:@"Yes", nil];
-    [confirm show];
+    if (row != 0){
+        UIAlertView *confirm = [[UIAlertView alloc] initWithTitle:nil message:[NSString stringWithFormat:@"You selected %@",[data objectAtIndex:row-1] ] delegate:self cancelButtonTitle:@"Select Again" otherButtonTitles:@"Yes", nil];
+        [confirm show];
+    }
 }
 
 -(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex != alertView.cancelButtonIndex){
-        NSString *selectedRegion = [data objectAtIndex:[pickerView selectedRowInComponent:0]];
+        NSString *selectedRegion = [data objectAtIndex:[pickerView selectedRowInComponent:0]-1];
         
         NSString *sqlStr = [NSString stringWithFormat:@"SELECT rid FROM regions WHERE full_name = '%s'", (const char*)[selectedRegion UTF8String]];
         NSArray *ridArr = [dbManager getRowsForQuery:sqlStr];
@@ -153,12 +155,14 @@
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component;
 {
-    return [data count];
+    return [data count]+1;
 }
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component;
 {
-    return [data objectAtIndex:row];
+    if (row == 0)
+        return @" ";
+    return [data objectAtIndex:row-1];
 }
 
 @end
