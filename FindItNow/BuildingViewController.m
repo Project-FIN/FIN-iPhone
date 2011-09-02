@@ -28,8 +28,10 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    self.tabBarController.navigationItem.title = @"Buildings";
     [super viewDidAppear:animated];
+    self.tabBarController.navigationItem.title = @"Buildings";
+    buildings = [self getBuildingsList];
+    [self.tableView reloadData];
 }
 
 - (void)viewWillDisappear:(BOOL)animated

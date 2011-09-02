@@ -88,7 +88,13 @@
 
 -(void) viewDidAppear:(BOOL)animated
 {
+    [super viewDidAppear:animated];
     self.tabBarController.title = @"FindItNow";
+    for (UIView* subView in btnGrid.subviews){
+        [subView removeFromSuperview];
+    }
+    [self initBtnGrid];
+    NSLog(@"Temp");
 }
 
 - (NSArray*)getCategoryList
