@@ -24,14 +24,33 @@
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSNumber *rid = [defaults objectForKey:@"rid"];
+    NSNumber *lastOpened = [defaults objectForKey:@"lastOpened"];
     
     if (rid != NULL) {
+        
+        db = [[FINDatabase alloc] init];
+        
+        [db saveRegions:[lastOpened intValue]];
+        [db saveCategory:[lastOpened intValue]];
+        [db saveBuildings:[lastOpened intValue]];
+        [db saveItems:[lastOpened intValue]];
+
         [self.window makeKeyAndVisible];
     } else {
         SetRegionViewController *setRegion = [[SetRegionViewController alloc] initWithNibName:@"SetRegionViewController" bundle:[self.navigationController nibBundle]];
         [setRegion setWindow:self.window];
         [self.window.rootViewController presentModalViewController:setRegion animated:YES];
     }
+    
+    NSDate *date = [NSDate date];
+    NSTimeInterval interval = [date timeIntervalSince1970];
+    
+    NSString *key = @"lastOpened";
+    NSNumber *value = [NSNumber numberWithInt:(int)interval];
+    
+    [defaults setObject:value forKey:key];
+    [defaults synchronize];
+    
     return YES;
 }
 

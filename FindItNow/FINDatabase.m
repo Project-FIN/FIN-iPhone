@@ -63,9 +63,9 @@
     error = [dbManager doQuery:@"DELETE FROM items"];
 }
 
-- (void)saveRegions
+- (void)saveRegions:(int)timestamp
 {
-    NSURL *URL=[[NSURL alloc] initWithString:@"http://www.fincdn.org/getRegions.php"];
+    NSURL *URL=[[NSURL alloc] initWithString:[NSString stringWithFormat:@"http://www.fincdn.org/getRegions.php?timestamp=%d", timestamp]];
     NSString *results = [[NSString alloc] initWithContentsOfURL :URL];
     
     NSDictionary *regionsJson = [results objectFromJSONString];
@@ -93,9 +93,9 @@
     }
 }
 
-- (void)saveCategory
+- (void)saveCategory:(int)timestamp
 {
-    NSURL *URL=[[NSURL alloc] initWithString:@"http://www.fincdn.org/getCategories.php"];
+    NSURL *URL=[[NSURL alloc] initWithString:[NSString stringWithFormat:@"http://www.fincdn.org/getCategories.php?timestamp=%d", timestamp]];
     NSString *results = [[NSString alloc] initWithContentsOfURL :URL];
     
     NSDictionary *categoriesJson = [results objectFromJSONString];
@@ -115,12 +115,12 @@
     }
 }
 
-- (void)saveBuildings
+- (void)saveBuildings:(int)timestamp
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSNumber *rid = [defaults objectForKey:@"rid"];
     
-    NSURL *URL=[[NSURL alloc] initWithString:[NSString stringWithFormat:@"http://www.fincdn.org/getBuildings.php?rid=%d", [rid intValue]]];
+    NSURL *URL=[[NSURL alloc] initWithString:[NSString stringWithFormat:@"http://www.fincdn.org/getBuildings.php?rid=%d&timestamp=%d", [rid intValue], timestamp]];
     NSString *results = [[NSString alloc] initWithContentsOfURL :URL];
     
     NSDictionary *buildingsJson = [results objectFromJSONString];
@@ -155,12 +155,12 @@
     }
 }
 
-- (void)saveItems
+- (void)saveItems:(int)timestamp
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSNumber *rid = [defaults objectForKey:@"rid"];
     
-    NSURL *URL=[[NSURL alloc] initWithString:[NSString stringWithFormat:@"http://www.fincdn.org/getItems.php?rid=%d", [rid intValue]]];
+    NSURL *URL=[[NSURL alloc] initWithString:[NSString stringWithFormat:@"http://www.fincdn.org/getItems.php?rid=%d&timestamp=%d", [rid intValue], timestamp]];
     NSString *results = [[NSString alloc] initWithContentsOfURL :URL];
     
     NSDictionary *itemsJson = [results objectFromJSONString];
@@ -183,6 +183,7 @@
             NSLog(@"Error: %@",[error localizedDescription]);
         }
     }
+    NSLog(@"%d", timestamp);
 }
 
 

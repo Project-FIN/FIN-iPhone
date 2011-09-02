@@ -16,9 +16,9 @@
 
 -(void) createDB;
 -(void) deleteDB;
--(void) saveRegions;
--(void) saveCategory;
--(void) saveBuildings;
--(void) saveItems;
+-(void) saveRegions:(int)timestamp;
+-(void) saveCategory:(int)timestamp;
+-(void) saveBuildings:(int)timestamp;
+-(void) saveItems:(int)timestamp;
 
 @end

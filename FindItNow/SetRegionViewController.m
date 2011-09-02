@@ -15,7 +15,7 @@
 {
     db = [[FINDatabase alloc] init];
     [db createDB];
-    [db saveRegions];
+    [db saveRegions:0];
     
     dbManager = [[SQLiteManager alloc] initWithDatabaseNamed:@"FIN_LOCAL.db"];
     
@@ -98,9 +98,9 @@
         
         [db deleteDB];
         
-        [db saveCategory];
-        [db saveBuildings];
-        [db saveItems];
+        [db saveCategory:0];
+        [db saveBuildings:0];
+        [db saveItems:0];
         
         [window makeKeyAndVisible];
         [self dismissModalViewControllerAnimated:YES];

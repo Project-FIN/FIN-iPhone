@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FINDatabase.h"
 
 @class FindItNowViewController;
 
 @interface FindItNowAppDelegate : NSObject <UIApplicationDelegate> {
-
+    FINDatabase *db;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
