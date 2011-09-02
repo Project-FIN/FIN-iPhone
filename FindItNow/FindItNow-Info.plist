@@ -36,5 +36,10 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UIRequiredDeviceCapabilities</key>
+	<array>
+		<string>wifi</string>
+		<string>location-services</string>
+	</array>
 </dict>
 </plist>
