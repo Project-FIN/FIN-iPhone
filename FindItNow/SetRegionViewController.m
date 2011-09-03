@@ -51,7 +51,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSNumber *rid = [defaults objectForKey:@"rid"];
+    
+    if (rid != NULL) {
+        NSString *sqlStr = [NSString stringWithFormat:@"SELECT full_name FROM regions WHERE rid = %d",[rid intValue]];
+        NSArray *regionsArr = [dbManager getRowsForQuery:sqlStr];
+        
+        [pickerView selectRow:[data indexOfObject:[[regionsArr objectAtIndex:0] objectForKey:@"full_name"]]+1 inComponent:0 animated:YES];
+    }
 }
 
 - (void)viewDidUnload
