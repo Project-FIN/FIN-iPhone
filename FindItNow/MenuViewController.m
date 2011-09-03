@@ -89,7 +89,7 @@
 -(void) viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    self.tabBarController.title = @"FindItNow";
+    self.tabBarController.navigationItem.title = @"FindItNow";
     for (UIView* subView in btnGrid.subviews){
         [subView removeFromSuperview];
     }
