@@ -84,35 +84,33 @@
 
 - (void)pickerView:(UIPickerView *)pv didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    if (row != 0){
+/*    if (row != 0){
         UIAlertView *confirm = [[UIAlertView alloc] initWithTitle:nil message:[NSString stringWithFormat:@"You selected %@",[data objectAtIndex:row-1] ] delegate:self cancelButtonTitle:@"Select Again" otherButtonTitles:@"Yes", nil];
         [confirm show];
-    }
+    }*/
 }
 
--(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+-(IBAction) confirmSelection:(id) sender
 {
-    if (buttonIndex != alertView.cancelButtonIndex){
-        NSString *selectedRegion = [data objectAtIndex:[pickerView selectedRowInComponent:0]-1];
-        
-        int rid = [[self getRIDFromRegion:selectedRegion] intValue];
-        
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        NSString *key = @"rid";
-        NSNumber *value = [NSNumber numberWithInt:rid];
-        
-        [defaults setObject:value forKey:key];
-        [defaults synchronize];
-        
-        [db deleteDB];
-        
-        [db saveCategory:0];
-        [db saveBuildings:0];
-        [db saveItems:0];
-        
-        [window makeKeyAndVisible];
-        [self dismissModalViewControllerAnimated:YES];
-    }
+    NSString *selectedRegion = [data objectAtIndex:[pickerView selectedRowInComponent:0]-1];
+    
+    int rid = [[self getRIDFromRegion:selectedRegion] intValue];
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *key = @"rid";
+    NSNumber *value = [NSNumber numberWithInt:rid];
+    
+    [defaults setObject:value forKey:key];
+    [defaults synchronize];
+    
+    [db deleteDB];
+    
+    [db saveCategory:0];
+    [db saveBuildings:0];
+    [db saveItems:0];
+    
+    [window makeKeyAndVisible];
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 - (NSMutableArray*) getRegionsList {

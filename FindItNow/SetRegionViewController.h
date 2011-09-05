@@ -18,9 +18,11 @@
     UIWindow *window;
     FINDatabase *db;
     SQLiteManager *dbManager;
+    IBOutlet UIButton *confirmBtn;
 }
 - (void) setWindow:(UIWindow*) win;
 - (NSMutableArray*) getRegionsList;
 - (NSNumber*) getRIDFromRegion:(NSString*)region;
+-(IBAction) confirmSelection:(id) sender;
 
 @end
