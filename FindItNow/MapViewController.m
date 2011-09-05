@@ -39,7 +39,7 @@
 -(void) viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    self.title = @"Map";
+    self.title = ([mapCategory length] == 0)? mapBuilding: mapCategory;
 }
 
 #pragma mark - View lifecycle

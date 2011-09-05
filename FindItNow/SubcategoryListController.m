@@ -40,7 +40,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.title = parentCategory;
 }
 
 - (void)viewDidUnload
@@ -58,7 +57,7 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    self.title= parentCategory;
+    self.navigationItem.title = parentCategory;
 }
 
 - (void)viewWillDisappear:(BOOL)animated

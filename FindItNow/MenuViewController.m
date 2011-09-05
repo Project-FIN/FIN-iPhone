@@ -23,7 +23,6 @@
     
     NSMutableArray *buttons = [[NSMutableArray alloc] initWithCapacity:[categories count]];
     int btnSize = ( CGRectGetWidth(btnGrid.frame) - 180 )/3;
-    //int btnWidth = CGRectGetWidth(btnGrid.frame) / ([categories count
     for (int i=0; i < [categories count]; i = i+1) {
         UIButton *btnView = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         [btnView setFrame:CGRectMake(((i%3)*(btnSize+55))+20, (20+(i/3)*(40+btnSize)), btnSize+30, btnSize+30)];
@@ -35,7 +34,7 @@
         [cat setText:[categories objectAtIndex:i]];
         [cat setBackgroundColor:[UIColor clearColor]];
         [cat setTextAlignment:UITextAlignmentCenter];
-        [cat setFont:[UIFont systemFontOfSize:12.0f]];
+        [cat setFont:[UIFont systemFontOfSize:11.0f]];
         [btnView addSubview:cat];
         
         NSString *iconName = [NSString stringWithFormat:@"%@_small",  [icons objectForKey:[categories objectAtIndex:i]] ];
@@ -158,11 +157,11 @@
     if (subCategories.count == 0)
     {
         mapView = [ [MapViewController alloc] initWithNibName:@"MapViewController" bundle:[mapView nibBundle]];
-        [mapView setCurrentCategory:[categories objectAtIndex:butt.tag ]];
+        [mapView setCurrentCategory:[categories objectAtIndex:butt.tag]];
         [mapView setCurrentBuilding:@""];
         [self.navigationController pushViewController:mapView animated:YES];
     } else{
-        SubcategoryListController *subCate = [[SubcategoryListController alloc] initWithNibName:@"SubcategoryListController" bundle:[self nibBundle] initSubcategory:subCategories MapView:mapView Category:butt.titleLabel.text];        
+        SubcategoryListController *subCate = [[SubcategoryListController alloc] initWithNibName:@"SubcategoryListController" bundle:[self nibBundle] initSubcategory:subCategories MapView:mapView Category:[categories objectAtIndex:butt.tag]];        
         [self.navigationController pushViewController:subCate animated:YES];
     }
 }
