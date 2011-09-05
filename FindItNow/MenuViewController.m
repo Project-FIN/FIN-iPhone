@@ -16,36 +16,73 @@
 @synthesize btnGrid;
 @synthesize text;
 
+- (UIColor*) getColorForRegion:(NSString*)full_name {
+    NSString *sqlStr = [NSString stringWithFormat:@"SELECT rid FROM regions WHERE full_name = '%@'", full_name];
+    NSArray *regionsArr = [dbManager getRowsForQuery:sqlStr];
+    int rid = [[[regionsArr objectAtIndex:0] objectForKey:@"rid"] intValue];
+    
+    sqlStr = [NSString stringWithFormat:@"SELECT color1 FROM colors WHERE rid = %d", rid];
+    NSArray *colorsArr = [dbManager getRowsForQuery:sqlStr];
+    NSString *color = [[colorsArr objectAtIndex:0] objectForKey:@"color1"];
+    
+    if ([color isEqualToString:@"purple"]) {
+        return [UIColor colorWithRed:.8 green:0 blue:.8 alpha:.2];
+    } else if ([color isEqualToString:@"blue"]) {
+        return [UIColor colorWithRed:0 green:0 blue:.8 alpha:.2];
+    } else if ([color isEqualToString:@"red"]) {
+        return [UIColor colorWithRed:.8 green:0 blue:0 alpha:.2];
+    } else {
+        return [UIColor colorWithRed:0 green:.05 blue:.3 alpha:.1];
+    }
+}
+
 - (void) initBtnGrid
 {
     NSArray *categories = [self getCategoryList];
     NSDictionary *icons = [self getCategoryIconDictionary];
     
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSNumber *rid = [defaults objectForKey:@"rid"];
+    
+    NSString *sqlStr = [NSString stringWithFormat:@"SELECT full_name FROM regions WHERE rid = %d",[rid intValue]];
+    NSArray *regionsArr = [dbManager getRowsForQuery:sqlStr];
+    NSString *region_name = [[regionsArr objectAtIndex:0] objectForKey:@"full_name"];
+    
     NSMutableArray *buttons = [[NSMutableArray alloc] initWithCapacity:[categories count]];
     int btnSize = ( CGRectGetWidth(btnGrid.frame) - 180 )/3;
+    int labelOffset = 8;
+
     for (int i=0; i < [categories count]; i = i+1) {
         UIButton *btnView = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        [btnView setFrame:CGRectMake(((i%3)*(btnSize+55))+20, (20+(i/3)*(40+btnSize)), btnSize+30, btnSize+30)];
+        [btnView setFrame:CGRectMake(((i%3)*(btnSize + 51))+29, ((i/3)*(51+btnSize))+20, btnSize+22, btnSize+22)];
         [btnView setShowsTouchWhenHighlighted:YES];
         [btnView setTag:i];
         [btnGrid addSubview:btnView];   
         
-        UILabel *cat = [[UILabel alloc] initWithFrame:CGRectMake(0,5,btnSize+30,15)];
+        UILabel *cat = [[UILabel alloc] initWithFrame:CGRectMake(((i%3)*(btnSize + 51))+20, ((i/3)*(51+btnSize))+(btnSize + 29 + labelOffset) + labelOffset,btnSize+40,15)];
         [cat setText:[categories objectAtIndex:i]];
         [cat setBackgroundColor:[UIColor clearColor]];
         [cat setTextAlignment:UITextAlignmentCenter];
-        [cat setFont:[UIFont systemFontOfSize:11.0f]];
-        [btnView addSubview:cat];
+        [cat setFont:[UIFont fontWithName:@"Helvetica-Bold" size:11]];
+        [cat setTextColor:[UIColor darkTextColor]];
+        [btnGrid addSubview:cat];
         
-        NSString *iconName = [NSString stringWithFormat:@"%@_small",  [icons objectForKey:[categories objectAtIndex:i]] ];
+        NSString *iconName = [NSString stringWithFormat:@"%@",  [icons objectForKey:[categories objectAtIndex:i]] ];
         UIImage *image = [UIImage imageNamed:iconName];
         UIImageView *img = [[UIImageView alloc] initWithImage:image];
-        [img setCenter:CGPointMake( btnSize/2+15, btnSize/2+15+5)];
+        [img setCenter:CGPointMake(btnSize/2+11, btnSize/2+11)];
         
         [btnView addTarget:self action:@selector(map:) forControlEvents:UIControlEventTouchUpInside];
         [btnView addSubview:img];
         [buttons addObject:img];
     }
+    UILabel *regionLabel = [[UILabel alloc] initWithFrame:CGRectMake(29, CGRectGetWidth(btnGrid.frame), 262, 20)];
+    [regionLabel setFont:[UIFont fontWithName:@"Helvetica" size:12]];
+    [regionLabel setTextAlignment:UITextAlignmentCenter];
+    [regionLabel setText:[NSString stringWithFormat:@"Current Region: %@", region_name]];
+    [btnGrid addSubview:regionLabel];
+
+    btnGrid.backgroundColor = [self getColorForRegion:region_name];
     btnGrid.contentSize = CGSizeMake( 2*(btnSize+60), [buttons count]*(btnSize+40));
 }
 

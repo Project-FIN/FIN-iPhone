@@ -245,8 +245,6 @@
         [itemsMap setObject:itemsOnFloorMap forKey:fname];
     }
     
-    NSLog(@"%@", itemsMap);
-
     return itemsMap;
 }
                   
