@@ -12,18 +12,12 @@
 @implementation SetRegionViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    db = [[FINDatabase alloc] init];
-    [db createDB];
-    [db saveRegions:0];
-    
-    dbManager = [[SQLiteManager alloc] initWithDatabaseNamed:@"FIN_LOCAL.db"];
-    
+{        
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        data = [self getRegionsList];
         [self setModalPresentationStyle:UIModalPresentationFormSheet];
     }
+        
     return self;
 }
 
@@ -31,6 +25,7 @@
 {
     window = win;
 }
+
 
 
 - (void)dealloc
@@ -51,8 +46,19 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    dbManager = [[SQLiteManager alloc] initWithDatabaseNamed:@"FIN_LOCAL.db"];
+    db = [[FINDatabase alloc] init];
+    
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSNumber *rid = [defaults objectForKey:@"rid"];
+    NSNumber *lastOpened = [defaults objectForKey:@"lastOpened"];
+    if (lastOpened == nil) {
+        [db createDB];
+        [db saveRegions:0];
+    }
+    
+    data = [self getRegionsList];
     
     if (rid != NULL) {
         NSString *sqlStr = [NSString stringWithFormat:@"SELECT full_name FROM regions WHERE rid = %d",[rid intValue]];
@@ -92,25 +98,27 @@
 
 -(IBAction) confirmSelection:(id) sender
 {
-    NSString *selectedRegion = [data objectAtIndex:[pickerView selectedRowInComponent:0]-1];
+    if ([pickerView selectedRowInComponent:0]-1 != -1) {
+        NSString *selectedRegion = [data objectAtIndex:[pickerView selectedRowInComponent:0]-1];
+        
+        int rid = [[self getRIDFromRegion:selectedRegion] intValue];
     
-    int rid = [[self getRIDFromRegion:selectedRegion] intValue];
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSString *key = @"rid";
+        NSNumber *value = [NSNumber numberWithInt:rid];
     
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *key = @"rid";
-    NSNumber *value = [NSNumber numberWithInt:rid];
+        [defaults setObject:value forKey:key];
+        [defaults synchronize];
     
-    [defaults setObject:value forKey:key];
-    [defaults synchronize];
+        [db deleteDB];
     
-    [db deleteDB];
+        [db saveCategory:0];
+        [db saveBuildings:0];
+        [db saveItems:0];
     
-    [db saveCategory:0];
-    [db saveBuildings:0];
-    [db saveItems:0];
-    
-    [window makeKeyAndVisible];
-    [self dismissModalViewControllerAnimated:YES];
+        [window makeKeyAndVisible];
+        [self dismissModalViewControllerAnimated:YES];
+    }
 }
 
 - (NSMutableArray*) getRegionsList {
