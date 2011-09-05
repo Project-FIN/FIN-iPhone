@@ -10,6 +10,7 @@
 
 
 @implementation SetRegionViewController
+@synthesize indicator;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {        
@@ -71,8 +72,6 @@
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -95,18 +94,20 @@
         [confirm show];
     }*/
 }
-
--(IBAction) confirmSelection:(id) sender
+-(void) updateDB:(id) sender
 {
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+
     if ([pickerView selectedRowInComponent:0]-1 != -1) {
+        
         NSString *selectedRegion = [data objectAtIndex:[pickerView selectedRowInComponent:0]-1];
         
         int rid = [[self getRIDFromRegion:selectedRegion] intValue];
-    
+        
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         NSString *key = @"rid";
         NSNumber *value = [NSNumber numberWithInt:rid];
-    
+        
         [defaults setObject:value forKey:key];
         [defaults synchronize];
         
@@ -115,10 +116,30 @@
         [db saveCategory:0];
         [db saveBuildings:0];
         [db saveItems:0];
-        
-        [window makeKeyAndVisible];
-        [self dismissModalViewControllerAnimated:YES];
+        [self performSelectorOnMainThread:@selector(removeIndicator:) withObject:nil waitUntilDone:NO];
+
     }
+    [pool release];
+}
+-(void) removeIndicator:(id) sender
+{
+    [indicator stopAnimating];
+    [[indicator superview] removeFromSuperview];
+    [window makeKeyAndVisible];
+    [self dismissModalViewControllerAnimated:YES];
+}
+
+-(IBAction) confirmSelection:(id) sender
+{
+    UIView *overlay = [[ [UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame))] autorelease];
+    [overlay setBackgroundColor:[UIColor colorWithWhite:0 alpha:0.75]];
+    [self.view addSubview:overlay];
+    
+    indicator = [[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge] autorelease];
+    [indicator setCenter:self.view.center];
+    [overlay addSubview:indicator];
+    [indicator startAnimating];
+    [self performSelectorInBackground:@selector(updateDB:) withObject:nil];
 }
 
 - (NSMutableArray*) getRegionsList {

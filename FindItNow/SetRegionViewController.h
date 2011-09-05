@@ -20,9 +20,11 @@
     SQLiteManager *dbManager;
     IBOutlet UIButton *confirmBtn;
 }
+@property (nonatomic, retain) UIActivityIndicatorView *indicator;
 - (void) setWindow:(UIWindow*) win;
 - (NSMutableArray*) getRegionsList;
 - (NSNumber*) getRIDFromRegion:(NSString*)region;
 -(IBAction) confirmSelection:(id) sender;
-
+-(void) updateDB:(id) sender;
+-(void) removeIndicator:(id) sender;
 @end
