@@ -109,13 +109,13 @@
     
         [defaults setObject:value forKey:key];
         [defaults synchronize];
-    
+        
         [db deleteDB];
-    
+        
         [db saveCategory:0];
         [db saveBuildings:0];
         [db saveItems:0];
-    
+        
         [window makeKeyAndVisible];
         [self dismissModalViewControllerAnimated:YES];
     }
