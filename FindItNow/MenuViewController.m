@@ -22,33 +22,30 @@
     NSDictionary *icons = [self getCategoryIconDictionary];
     
     NSMutableArray *buttons = [[NSMutableArray alloc] initWithCapacity:[categories count]];
-    int btnSize = ( CGRectGetWidth(btnGrid.frame) - 180 )/2;
+    int btnSize = ( CGRectGetWidth(btnGrid.frame) - 180 )/3;
     //int btnWidth = CGRectGetWidth(btnGrid.frame) / ([categories count
     for (int i=0; i < [categories count]; i = i+1) {
-        UIView *btnView = [[UIView alloc] initWithFrame:CGRectMake(((i%2)*(btnSize+80))+20, (10+(i/2)*(50+btnSize)), btnSize+60, btnSize+40)];
-        [btnView setBackgroundColor:[UIColor colorWithRed:185/255.0 green:245/255.0 blue:108/255.0 alpha:1]];
-        [btnGrid addSubview:btnView];
+        UIButton *btnView = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        [btnView setFrame:CGRectMake(((i%3)*(btnSize+55))+20, (20+(i/3)*(40+btnSize)), btnSize+30, btnSize+30)];
+        [btnView setShowsTouchWhenHighlighted:YES];
+        [btnView setTag:i];
+        [btnGrid addSubview:btnView];   
         
-        UILabel *cat = [[UILabel alloc] initWithFrame:CGRectMake(0,5,btnSize+60,20)];
+        UILabel *cat = [[UILabel alloc] initWithFrame:CGRectMake(0,5,btnSize+30,15)];
         [cat setText:[categories objectAtIndex:i]];
         [cat setBackgroundColor:[UIColor clearColor]];
         [cat setTextAlignment:UITextAlignmentCenter];
+        [cat setFont:[UIFont systemFontOfSize:12.0f]];
         [btnView addSubview:cat];
         
-        UIButton *butt = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        butt.frame = CGRectMake(30, 30, btnSize, btnSize);
-        [butt setTag:i];
-        [butt.titleLabel setAlpha:0];
-        NSString *iconName = [NSString stringWithFormat:@"%@",  [icons objectForKey:[categories objectAtIndex:i]] ];
+        NSString *iconName = [NSString stringWithFormat:@"%@_small",  [icons objectForKey:[categories objectAtIndex:i]] ];
         UIImage *image = [UIImage imageNamed:iconName];
+        UIImageView *img = [[UIImageView alloc] initWithImage:image];
+        [img setCenter:CGPointMake( btnSize/2+15, btnSize/2+15+5)];
         
-        [butt setImage:image forState:UIControlStateNormal];
-        [butt.imageView setBackgroundColor:[UIColor clearColor]];
-        [butt setContentMode:UIViewContentModeRight];
-        
-        [butt addTarget:self action:@selector(map:) forControlEvents:UIControlEventTouchDown];
-        [btnView addSubview:butt];
-        [buttons addObject:butt];
+        [btnView addTarget:self action:@selector(map:) forControlEvents:UIControlEventTouchUpInside];
+        [btnView addSubview:img];
+        [buttons addObject:img];
     }
     btnGrid.contentSize = CGSizeMake( 2*(btnSize+60), [buttons count]*(btnSize+40));
 }
