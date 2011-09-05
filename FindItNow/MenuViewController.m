@@ -26,9 +26,9 @@
     NSString *color = [[colorsArr objectAtIndex:0] objectForKey:@"color1"];
     
     if ([color isEqualToString:@"purple"]) {
-        return [UIColor colorWithRed:.8 green:0 blue:.8 alpha:.2];
+        return [UIColor colorWithRed:.4 green:0 blue:.8 alpha:.2];
     } else if ([color isEqualToString:@"blue"]) {
-        return [UIColor colorWithRed:0 green:0 blue:.8 alpha:.2];
+        return [UIColor colorWithRed:0 green:.1 blue:.8 alpha:.25];
     } else if ([color isEqualToString:@"red"]) {
         return [UIColor colorWithRed:.8 green:0 blue:0 alpha:.2];
     } else {
@@ -77,9 +77,9 @@
         [buttons addObject:img];
     }
     UILabel *regionLabel = [[UILabel alloc] initWithFrame:CGRectMake(29, CGRectGetWidth(btnGrid.frame), 262, 20)];
-    [regionLabel setFont:[UIFont fontWithName:@"Helvetica" size:12]];
+    [regionLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:14]];
     [regionLabel setTextAlignment:UITextAlignmentCenter];
-    [regionLabel setText:[NSString stringWithFormat:@"Current Region: %@", region_name]];
+    [regionLabel setText:[NSString stringWithFormat:@"%@", region_name]];
     [btnGrid addSubview:regionLabel];
 
     btnGrid.backgroundColor = [self getColorForRegion:region_name];
