@@ -97,28 +97,25 @@
 -(void) updateDB:(id) sender
 {
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+        
+    NSString *selectedRegion = [data objectAtIndex:[pickerView selectedRowInComponent:0]-1];
+        
+    int rid = [[self getRIDFromRegion:selectedRegion] intValue];
+        
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *key = @"rid";
+    NSNumber *value = [NSNumber numberWithInt:rid];
+        
+    [defaults setObject:value forKey:key];
+    [defaults synchronize];
+        
+    [db deleteDB];
+        
+    [db saveCategory:0];
+    [db saveBuildings:0];
+    [db saveItems:0];
+    [self performSelectorOnMainThread:@selector(removeIndicator:) withObject:nil waitUntilDone:NO];
 
-    if ([pickerView selectedRowInComponent:0]-1 != -1) {
-        
-        NSString *selectedRegion = [data objectAtIndex:[pickerView selectedRowInComponent:0]-1];
-        
-        int rid = [[self getRIDFromRegion:selectedRegion] intValue];
-        
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        NSString *key = @"rid";
-        NSNumber *value = [NSNumber numberWithInt:rid];
-        
-        [defaults setObject:value forKey:key];
-        [defaults synchronize];
-        
-        [db deleteDB];
-        
-        [db saveCategory:0];
-        [db saveBuildings:0];
-        [db saveItems:0];
-        [self performSelectorOnMainThread:@selector(removeIndicator:) withObject:nil waitUntilDone:NO];
-
-    }
     [pool release];
 }
 -(void) removeIndicator:(id) sender
@@ -131,15 +128,18 @@
 
 -(IBAction) confirmSelection:(id) sender
 {
-    UIView *overlay = [[ [UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame))] autorelease];
-    [overlay setBackgroundColor:[UIColor colorWithWhite:0 alpha:0.75]];
-    [self.view addSubview:overlay];
+    if ([pickerView selectedRowInComponent:0]-1 != -1) {
+
+        UIView *overlay = [[ [UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame))] autorelease];
+        [overlay setBackgroundColor:[UIColor colorWithWhite:0 alpha:0.75]];
+        [self.view addSubview:overlay];
     
-    indicator = [[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge] autorelease];
-    [indicator setCenter:self.view.center];
-    [overlay addSubview:indicator];
-    [indicator startAnimating];
-    [self performSelectorInBackground:@selector(updateDB:) withObject:nil];
+        indicator = [[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge] autorelease];
+        [indicator setCenter:self.view.center];
+        [overlay addSubview:indicator];
+        [indicator startAnimating];
+        [self performSelectorInBackground:@selector(updateDB:) withObject:nil];
+    }
 }
 
 - (NSMutableArray*) getRegionsList {
