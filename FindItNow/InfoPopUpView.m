@@ -148,7 +148,7 @@
     //Show Info Button:
     isInfoHidden = true;
     UIButton *showHide = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [showHide setTitle:@"Show Table" forState:UIControlStateNormal];
+    [showHide setTitle:@"Show Floors" forState:UIControlStateNormal];
     [showHide addTarget:self action:@selector(addRemInfoTable) forControlEvents:UIControlEventTouchDown];
     showHide.frame = CGRectMake(CGRectGetMaxX(self.frame)-150, 120, 120, 30);
     [self addSubview:showHide];
