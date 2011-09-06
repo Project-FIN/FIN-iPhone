@@ -35,7 +35,7 @@
     floorDetail = data;
     if ((self = [super initWithFrame:frame]))
     {
-        [self setBackgroundColor:[UIColor whiteColor]];
+        [self setBackgroundColor:[UIColor clearColor]];
         if (isOutdoor)
             [self constructOutdoorView];
         else
@@ -51,7 +51,7 @@
     buildingNameLabel.font = [UIFont boldSystemFontOfSize:16.0f];
     [buildingNameLabel setText:buildingName];
     [buildingNameLabel setBackgroundColor:[UIColor clearColor]];
-    [buildingNameLabel setTextColor:[UIColor purpleColor]];
+    [buildingNameLabel setTextColor:[UIColor whiteColor]];
     [self addSubview:buildingNameLabel];
     [buildingNameLabel release];
     
@@ -59,6 +59,8 @@
     UILabel *categoryLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 30, CGRectGetWidth(self.frame)-20, 15)];
     categoryLabel.font = [UIFont boldSystemFontOfSize:14.0f];
     [categoryLabel setText:category];
+    [categoryLabel setBackgroundColor:[UIColor clearColor]];
+    [categoryLabel setTextColor:[UIColor whiteColor]];
     [self addSubview:categoryLabel];
     [categoryLabel release];
     
@@ -74,6 +76,8 @@
         UILabel *detailLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 50, CGRectGetWidth(self.frame)-20, detailHeight)];
         detailLabel.lineBreakMode = UILineBreakModeWordWrap;
         detailLabel.font = [UIFont systemFontOfSize:14.0f];
+        [detailLabel setTextColor:[UIColor whiteColor]];
+        [detailLabel setBackgroundColor:[UIColor clearColor]];
         detailLabel.textAlignment = UITextAlignmentLeft;
         detailLabel.numberOfLines = 0;    
         [detailLabel setText:str];
@@ -85,12 +89,16 @@
     UILabel *distanceLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, detailHeight + 70, CGRectGetWidth(self.frame)-20, 20)];
     distanceLabel.font = [UIFont systemFontOfSize:14.0f];
     [distanceLabel setText:[NSString stringWithFormat:@"Distance to here: %.1f mi", distance]];
+    [distanceLabel setBackgroundColor:[UIColor clearColor]];
+    [distanceLabel setTextColor:[UIColor whiteColor]];
     [self addSubview:distanceLabel];
     [distanceLabel release];
     
     //Walking Time
     UILabel *walkingLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, detailHeight + 90, CGRectGetWidth(self.frame)-20, 20)];
     walkingLabel.font = [UIFont systemFontOfSize:14.0f];
+    [walkingLabel setTextColor:[UIColor whiteColor]];
+    [walkingLabel setBackgroundColor:[UIColor clearColor]];
     [walkingLabel setText:[NSString stringWithFormat:@"Walking Time: %d Minutes", walkingTime]];
     [self addSubview:walkingLabel];
     [walkingLabel release];
@@ -105,7 +113,8 @@
     buildingNameLabel.font = [UIFont boldSystemFontOfSize:16.0f];
     [buildingNameLabel setText:buildingName];
     [buildingNameLabel setBackgroundColor:[UIColor clearColor]];
-    [buildingNameLabel setTextColor:[UIColor purpleColor]];
+    [buildingNameLabel setBackgroundColor:[UIColor clearColor]];
+    [buildingNameLabel setTextColor:[UIColor whiteColor]];
     [self addSubview:buildingNameLabel];
     [buildingNameLabel release];
     
@@ -113,6 +122,8 @@
     UILabel *categoryLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 30, CGRectGetWidth(self.frame)-20, 15)];
     categoryLabel.font = [UIFont boldSystemFontOfSize:14.0f];
     [categoryLabel setText:category];
+    [categoryLabel setBackgroundColor:[UIColor clearColor]];
+    [categoryLabel setTextColor:[UIColor whiteColor]];
     [self addSubview:categoryLabel];
     [categoryLabel release];
     
@@ -121,12 +132,16 @@
     distanceLabel.font = [UIFont systemFontOfSize:14.0f];
     [distanceLabel setText:[NSString stringWithFormat:@"Distance to here: %.1f mi", distance]];
     [self addSubview:distanceLabel];
+    [distanceLabel setBackgroundColor:[UIColor clearColor]];
+    [distanceLabel setTextColor:[UIColor whiteColor]];
     [distanceLabel release];
     
     //Walking Time
     UILabel *walkingLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 90, CGRectGetWidth(self.frame)-20, 20)];
     walkingLabel.font = [UIFont systemFontOfSize:14.0f];
     [walkingLabel setText:[NSString stringWithFormat:@"Walking Time: %d Minutes", walkingTime]];
+    [walkingLabel setTextColor:[UIColor whiteColor]];
+    [walkingLabel setBackgroundColor:[UIColor clearColor]];
     [self addSubview:walkingLabel];
     [walkingLabel release];
     
@@ -171,7 +186,7 @@
         FloorInfoTableViewController *infoTableCtrl = [ [FloorInfoTableViewController alloc] initWithDict:floorDetail Floors:floors andIsDoubleExpendable:[category isEqualToString:@""]];
         infoTableCtrl.tableView = infoTable;
         infoTable.alwaysBounceVertical = NO;
-        [infoTable setBackgroundColor:[UIColor brownColor]];
+        [infoTable setBackgroundColor:[UIColor clearColor]];
         [self addSubview:infoTable];
         
         //perform animation
@@ -298,6 +313,75 @@
         [self removeFromSuperview];
         [overlay removeFromSuperview];
     }
+}
+
+- (void)drawRect:(CGRect)dirtyRect {
+	// Drawing code
+    
+	// Get the context
+	CGContextRef ctx = UIGraphicsGetCurrentContext();
+	
+	// Set the drop shadow
+	CGContextSaveGState(ctx);
+	CGContextSetShadow(ctx, CGSizeMake(0, 0), 0);
+	
+	// Generate a rect
+	CGRect rect = CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height); 
+    
+	// Draw the background
+	float radius = 5.0f;
+	CGContextBeginPath(ctx);
+	CGContextSetFillColor(ctx, CGColorGetComponents([[UIColor colorWithRed:43/255.0 green:57/255.0 blue:96/255.0 alpha:0.9 ] CGColor]) );
+	CGContextMoveToPoint(ctx, CGRectGetMinX(rect) + radius, CGRectGetMinY(rect));		
+	CGContextAddArc(ctx, CGRectGetMaxX(rect) - radius, CGRectGetMinY(rect) + radius, radius, 3 * M_PI / 2, 0, 0);
+	CGContextAddArc(ctx, CGRectGetMaxX(rect) - radius, CGRectGetMaxY(rect) - radius, radius, 0, M_PI / 2, 0);
+	CGContextAddArc(ctx, CGRectGetMinX(rect) + radius, CGRectGetMaxY(rect) - radius, radius, M_PI / 2, M_PI, 0);
+	CGContextAddArc(ctx, CGRectGetMinX(rect) + radius, CGRectGetMinY(rect) + radius, radius, M_PI, 3 * M_PI / 2, 0);
+	CGContextClosePath(ctx);
+	CGContextFillPath(ctx);
+    
+	// Restore state drawing the shadow
+	CGContextRestoreGState(ctx);
+    
+	// Add Gradient
+	CGGradientRef glossGradient;
+    CGColorSpaceRef rgbColorspace;
+    size_t num_locations = 3;
+    CGFloat locations[3] = { 0.0, 0.5, 1.0 };
+    CGFloat components[8] = { 1.0, 1.0, 1.0, 0.25,  // Start color
+		1.0, 1.0, 1.0, 0.06 }; // End color
+	
+    rgbColorspace = CGColorSpaceCreateDeviceRGB();
+    glossGradient = CGGradientCreateWithColorComponents(rgbColorspace, components, locations, num_locations);
+	
+    CGRect currentBounds = self.bounds;
+    CGPoint topCenter = CGPointMake(CGRectGetMidX(currentBounds), 0.0f);
+	CGPoint bottomCenter = CGPointMake(CGRectGetMidX(currentBounds), CGRectGetMaxY(currentBounds));
+    CGContextDrawLinearGradient(ctx, glossGradient, topCenter, bottomCenter, 0);
+	
+    CGGradientRelease(glossGradient);
+    CGColorSpaceRelease(rgbColorspace);
+	
+	// Add top grey line ( to give nice effect)
+	float lineYOffset = 1.5;
+	CGContextBeginPath(ctx);
+	CGContextSetStrokeColor(ctx, CGColorGetComponents([[UIColor colorWithRed:0.862 green:0.862 blue:0.862 alpha:0.3 ] CGColor]) );
+	CGContextSetLineWidth(ctx, 1.0);
+	CGContextMoveToPoint(ctx, CGRectGetMinX(rect) + 1, CGRectGetMinY(rect) + lineYOffset);		
+	CGContextAddLineToPoint(ctx, CGRectGetMaxX(rect) - 1, CGRectGetMinY(rect) + lineYOffset);
+	CGContextStrokePath(ctx);
+	
+	// Stroke outline
+	CGContextBeginPath(ctx);
+	CGContextSetStrokeColor(ctx, CGColorGetComponents([[UIColor colorWithRed:0.7 green:0.7 blue:0.7 alpha:1 ] CGColor]) );
+	CGContextSetLineWidth(ctx, 2.0);
+	CGContextMoveToPoint(ctx, CGRectGetMinX(rect) + radius, CGRectGetMinY(rect));		
+	CGContextAddArc(ctx, CGRectGetMaxX(rect) - radius, CGRectGetMinY(rect) + radius, radius, 3 * M_PI / 2, 0, 0);
+	CGContextAddArc(ctx, CGRectGetMaxX(rect) - radius, CGRectGetMaxY(rect) - radius, radius, 0, M_PI / 2, 0);
+	CGContextAddArc(ctx, CGRectGetMinX(rect) + radius, CGRectGetMaxY(rect) - radius, radius, M_PI / 2, M_PI, 0);
+	CGContextAddArc(ctx, CGRectGetMinX(rect) + radius, CGRectGetMinY(rect) + radius, radius, M_PI, 3 * M_PI / 2, 0);
+	CGContextClosePath(ctx);
+	CGContextStrokePath(ctx);
 }
 
 @end

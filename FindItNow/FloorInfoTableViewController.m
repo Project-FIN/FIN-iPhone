@@ -202,8 +202,9 @@ const int reportBtnWidth = 0;//60;
         cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (cell == nil) {
             cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-            UILabel *detail = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, CGRectGetWidth(tableView.frame)-10, 45)];
+            UILabel *detail = [[[UILabel alloc] initWithFrame:CGRectMake(10, 0, CGRectGetWidth(tableView.frame)-10, 45)] autorelease];
             detail.tag = DETAIL_TAG;
+            [detail setTextColor:[UIColor whiteColor]];
             [cell.contentView addSubview:detail];
         }
         [self setCellForDetailView:cell WithTableView:tableView data:[dataDict objectForKey:[floors objectAtIndex:indexPath.section]]];
@@ -214,8 +215,9 @@ const int reportBtnWidth = 0;//60;
             cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (cell == nil) {
                 cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-                UILabel *detail = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, CGRectGetWidth(tableView.frame)-10, 45)];
+                UILabel *detail = [[[UILabel alloc] initWithFrame:CGRectMake(10, 0, CGRectGetWidth(tableView.frame)-10, 45)] autorelease];
                 detail.tag = DETAIL_TAG;
+                [detail setTextColor:[UIColor whiteColor]];
                 [cell.contentView addSubview:detail];
             }
             NSDictionary *cateItem = [dataDict objectForKey:[floors objectAtIndex:indexPath.section]];
@@ -226,6 +228,7 @@ const int reportBtnWidth = 0;//60;
             cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (cell == nil) {
                 cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+                [cell.textLabel setTextColor:[UIColor whiteColor]];
             }
             NSDictionary *cateItem = [dataDict objectForKey:[floors objectAtIndex:indexPath.section]];
             cell.textLabel.text = [[self subCategory:cateItem] objectAtIndex:(indexPath.row-1)/2];
@@ -237,7 +240,6 @@ const int reportBtnWidth = 0;//60;
         if (cell == nil) {
             cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
             [cell setContentMode:UIViewContentModeCenter];
-            
             for (int i = 0; i < 5; i++){
                 UIImageView *imageView = [[[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetWidth(tableView.frame)-((i+1)*40), 5, 36, 36)] autorelease];
                 [imageView setContentMode:UIViewContentModeCenter];
@@ -245,11 +247,11 @@ const int reportBtnWidth = 0;//60;
                 imageView.tag = i+CATEIMG_START;
                 [cell.contentView addSubview:imageView];
             }
-            UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(10,0,CGRectGetWidth(tableView.frame), 45)];
+            UILabel *title = [[[UILabel alloc] initWithFrame:CGRectMake(10,0,CGRectGetWidth(tableView.frame), 45)] autorelease];
             [title setFont:[UIFont boldSystemFontOfSize:20.0f]];
             [title setBackgroundColor:[UIColor clearColor]];
+            [title setTextColor:[UIColor whiteColor]];
             title.tag = FLR_TITLE;
-            title.text = @"Temp";
             [cell.contentView addSubview:title];
         }
         NSString *str =[floors objectAtIndex:indexPath.section];
