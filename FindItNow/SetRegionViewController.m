@@ -126,21 +126,36 @@
     [self dismissModalViewControllerAnimated:YES];
 }
 
+- (BOOL) connectedToInternet
+{
+    NSURL *URL = [[NSURL alloc] initWithString:@"http://www.google.com"];
+    NSString *results = [[NSString alloc] initWithContentsOfURL :URL];
+
+    return ( results != NULL ) ? YES : NO;
+}
+
 -(IBAction) confirmSelection:(id) sender
 {
     if ([pickerView selectedRowInComponent:0]-1 != -1) {
+        if ([self connectedToInternet]) {
 
-        UIView *overlay = [[ [UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame))] autorelease];
-        [overlay setBackgroundColor:[UIColor colorWithWhite:0 alpha:0.75]];
-        [self.view addSubview:overlay];
+            UIView *overlay = [[ [UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame))] autorelease];
+            [overlay setBackgroundColor:[UIColor colorWithWhite:0 alpha:0.75]];
+            [self.view addSubview:overlay];
     
-        indicator = [[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge] autorelease];
-        [indicator setCenter:self.view.center];
-        [overlay addSubview:indicator];
-        [indicator startAnimating];
-        [self performSelectorInBackground:@selector(updateDB:) withObject:nil];
+            indicator = [[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge] autorelease];
+            [indicator setCenter:self.view.center];
+            [overlay addSubview:indicator];
+            [indicator startAnimating];
+            [self performSelectorInBackground:@selector(updateDB:) withObject:nil];
+        } else {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error: No Internet Connection" message:@"Please ensure that your data/wifi connection is enabled and working" delegate:self cancelButtonTitle:@"Close" otherButtonTitles:nil];
+            [alertView show];
+            [alertView release];
+        }
     }
 }
+
 
 - (NSMutableArray*) getRegionsList {
     NSString *sqlStr = [NSString stringWithFormat:@"SELECT full_name FROM regions WHERE deleted = 0"];

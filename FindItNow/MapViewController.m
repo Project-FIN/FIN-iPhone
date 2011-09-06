@@ -331,7 +331,14 @@
 
 -(IBAction) scrollToUserLocation
 {
-    [mapView setCenterCoordinate:mapView.userLocation.coordinate animated:YES];
+    MKUserLocation *myLoc = mapView.userLocation;
+    if (myLoc != nil) {
+        [mapView setCenterCoordinate:myLoc.coordinate animated:YES];
+    } else {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error: Location Not Detected" message:@"Could not detect your location" delegate:self cancelButtonTitle:@"Close" otherButtonTitles:nil];
+        [alertView show];
+        [alertView release];
+    }
 }
 
 
