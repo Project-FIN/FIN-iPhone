@@ -70,6 +70,7 @@
 	if (buttonIndex == 0) {
 		UIViewController *controller = [[UIViewController alloc] initWithNibName:@"HelpView" bundle:[self nibBundle]];
         //[self presentModalViewController:controller animated:YES];
+        controller.title = @"Help";
         [self.tabBarController.navigationController pushViewController:controller animated:YES];
 	}
     if (buttonIndex == 1) {

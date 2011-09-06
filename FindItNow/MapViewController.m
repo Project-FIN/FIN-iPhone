@@ -58,6 +58,8 @@
         
     dbManager = [[SQLiteManager alloc] initWithDatabaseNamed:@"FIN_LOCAL.db"];
     
+    hasCenteredOnLoc = FALSE;
+    
     [mapView setMapType:MKMapTypeStandard];
     [mapView setZoomEnabled:YES];
     [mapView setScrollEnabled:YES];
@@ -89,8 +91,9 @@
 }
 
 - (void)mapView:(MKMapView *)aMapView didUpdateUserLocation:(MKUserLocation *)userLocation {
-    if ([mapCategory length] != 0) {
+    if ([mapCategory length] != 0 && !hasCenteredOnLoc) {
         [aMapView setCenterCoordinate:userLocation.coordinate];
+        hasCenteredOnLoc = TRUE;
     }
 }
 
