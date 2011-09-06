@@ -39,7 +39,11 @@
 -(void) viewDidAppear:(BOOL)animated
 {
     [self.navigationController pushViewController:tabBarController animated:YES];
-    self.tabBarController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(showActionSheet:)];
+    UIButton *info = [UIButton buttonWithType:UIButtonTypeInfoLight];
+    self.tabBarController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:info];
+    [info addTarget:self action:@selector(showActionSheet:) forControlEvents:UIControlEventTouchUpInside];
+    
+    //self.tabBarController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonItemStyleBordered target:self action:@selector(showActionSheet:)];
 }
 
 - (void)viewDidUnload
