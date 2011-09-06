@@ -22,6 +22,7 @@
     NSMutableArray *mapAnnotations;
     NSString *mapCategory;
     NSString *mapBuilding;
+    BOOL hasCenteredOnLoc;
 }
 @property (nonatomic, retain) IBOutlet MKMapView *mapView;
 
