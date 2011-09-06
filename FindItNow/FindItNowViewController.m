@@ -73,11 +73,15 @@
         //[self presentModalViewController:controller animated:YES];
         controller.title = @"Help";
         [self.tabBarController.navigationController pushViewController:controller animated:YES];
+        
+        [controller release];
 	}
     if (buttonIndex == 1) {
         SetRegionViewController *controller = [[SetRegionViewController alloc] initWithNibName:@"SetRegionViewController" bundle:[self nibBundle]];
         //[self presentModalViewController:controller animated:YES];
         [self.tabBarController presentModalViewController:controller animated:YES];
+        
+        [controller release];
     }
 }
 

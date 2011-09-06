@@ -75,6 +75,9 @@
         [btnView addTarget:self action:@selector(map:) forControlEvents:UIControlEventTouchUpInside];
         [btnView addSubview:img];
         [buttons addObject:img];
+        
+        [cat release];
+        [img release];
     }
     UILabel *regionLabel = [[UILabel alloc] initWithFrame:CGRectMake(29, CGRectGetWidth(btnGrid.frame), 262, 20)];
     [regionLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:14]];
@@ -84,6 +87,9 @@
 
     btnGrid.backgroundColor = [self getColorForRegion:region_name];
     btnGrid.contentSize = CGSizeMake( 2*(btnSize+60), [buttons count]*(btnSize+40));
+    
+    [regionLabel release];
+    [buttons release];
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -127,7 +133,6 @@
         [subView removeFromSuperview];
     }
     [self initBtnGrid];
-    NSLog(@"Temp");
 }
 
 - (NSArray*)getCategoryList
@@ -139,7 +144,7 @@
     for (NSDictionary *dict in categoriesList) {
         [categories addObject:[dict objectForKey:@"full_name"]];
     }
-        
+            
     return categories;
 }
 
@@ -176,7 +181,6 @@
     NSInteger cat_id = [[[result objectAtIndex:0] objectForKey:@"cat_id"] intValue];
     
     sqlStr = [NSString stringWithFormat:@"SELECT full_name FROM categories WHERE parent = %d AND deleted = 0", cat_id];
-    result = [dbManager getRowsForQuery:sqlStr];
     
     NSArray *categoriesList = [dbManager getRowsForQuery:sqlStr];
     NSMutableArray *categories = [[NSMutableArray alloc] init];
@@ -200,14 +204,9 @@
     } else{
         SubcategoryListController *subCate = [[SubcategoryListController alloc] initWithNibName:@"SubcategoryListController" bundle:[self nibBundle] initSubcategory:subCategories MapView:mapView Category:[categories objectAtIndex:butt.tag]];        
         [self.navigationController pushViewController:subCate animated:YES];
+        
+        [subCate release];
     }
-}
-
-- (IBAction) getCategory {
-    NSURL *URL=[[NSURL alloc] initWithString:@"http://www.fincdn.org/getCategories.php"];
-    NSString *results = [[NSString alloc] initWithContentsOfURL :URL];
-    [text setText:results ];
-    [text setCenter:CGPointMake(100, 150)];
 }
 
 @end

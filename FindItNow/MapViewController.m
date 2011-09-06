@@ -157,6 +157,8 @@
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openPopup:)];
     [annView addGestureRecognizer:tap];
     
+    [tap release];
+    
     return annView;
 }
 
