@@ -1,9 +1,9 @@
 //
-//  InfoPopUpView.m
-//  FindItNow
+// InfoPopUpView.m
+// FindItNow
 //
-//  Created by Chanel Huang on 2011/7/30.
-//  Copyright 2011年 University of Washington. All rights reserved.
+// Created by Chanel Huang on 2011/7/30.
+// Copyright 2011年 University of Washington. All rights reserved.
 //
 
 #import "InfoPopUpView.h"
@@ -79,10 +79,10 @@
         [detailLabel setTextColor:[UIColor whiteColor]];
         [detailLabel setBackgroundColor:[UIColor clearColor]];
         detailLabel.textAlignment = UITextAlignmentLeft;
-        detailLabel.numberOfLines = 0;    
+        detailLabel.numberOfLines = 0;
         [detailLabel setText:str];
         [self addSubview:detailLabel];
-        [detailLabel release];    
+        [detailLabel release];
     }
     
     //Distance
@@ -148,7 +148,7 @@
     //Show Info Button:
     isInfoHidden = true;
     UIButton *showHide = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [showHide setTitle:@"Show Table" forState:UIControlStateNormal];
+    [showHide setTitle:@"Show Floors" forState:UIControlStateNormal];
     [showHide addTarget:self action:@selector(addRemInfoTable) forControlEvents:UIControlEventTouchDown];
     showHide.frame = CGRectMake(CGRectGetMaxX(self.frame)-150, 120, 120, 30);
     [self addSubview:showHide];
@@ -157,8 +157,8 @@
 -(IBAction) addRemInfoTable
 {
     NSArray* floors = [self getDesendFloor];
-    int tableHeight = MAX([floorDetail count] * (180/4),[floors count] * (180/4));  //about 4 cells' height
-
+    int tableHeight = MAX([floorDetail count] * (180/4),[floors count] * (180/4)); //about 4 cells' height
+    
     if (tableHeight > 180)
         tableHeight = 180;
     
@@ -167,20 +167,19 @@
     if (!isInfoHidden)
     {
         //perform animation
-        [UIView beginAnimations:@"" context:NULL];
-        [UIView setAnimationDuration:0.5];
-        self.frame = CGRectMake(CGRectGetMinX(self.frame),CGRectGetMinY(self.frame)+(tableHeight/2), CGRectGetWidth(self.frame), CGRectGetHeight(self.frame)-tableHeight-20);
-        [infoTable setFrame:CGRectMake(10, 160, CGRectGetWidth(self.frame)-20, 0)];
-        [UIView setAnimationDelay: UIViewAnimationCurveEaseIn];
-        [UIView commitAnimations];
-        
-        [infoTable removeFromSuperview];
+        [UIView animateWithDuration:0.4 delay:0.0 options:UIViewAnimationOptionCurveLinear
+                         animations:^{
+                             self.frame = CGRectMake(CGRectGetMinX(self.frame),CGRectGetMinY(self.frame)+(tableHeight/2), CGRectGetWidth(self.frame), CGRectGetHeight(self.frame)-tableHeight-20);
+                             [infoTable setFrame:CGRectMake(10, 160, CGRectGetWidth(self.frame)-20, 0)];
+                         }completion:^(BOOL finished) {
+                                     [infoTable removeFromSuperview];
+                         }];
         isInfoHidden = true;
     }
     else
     {
         isInfoHidden = false;
-
+        
         //information table
         infoTable = [ [UITableView alloc] initWithFrame:CGRectMake(10, 160, CGRectGetWidth(self.frame)-20, 0)];
         FloorInfoTableViewController *infoTableCtrl = [ [FloorInfoTableViewController alloc] initWithDict:floorDetail Floors:floors andIsDoubleExpendable:[category isEqualToString:@""]];
@@ -205,9 +204,9 @@
     SQLiteManager *dbManager = [[SQLiteManager alloc] initWithDatabaseNamed:@"FIN_LOCAL.db"];
     NSMutableArray *flr = [[NSMutableArray alloc] initWithCapacity:[floorDetail count]];
     NSMutableDictionary *fnumToName = [[NSMutableDictionary alloc] initWithCapacity:[floorDetail count]];
-
+    
     NSString *sqlStr = [NSString stringWithFormat:@"SELECT bid FROM buildings WHERE name = '%@'", buildingName];
-    NSArray *itemsList = [dbManager getRowsForQuery:sqlStr]; 
+    NSArray *itemsList = [dbManager getRowsForQuery:sqlStr];
     NSInteger bid = [[[itemsList objectAtIndex:0] objectForKey:@"bid"] intValue];
     if ([category isEqualToString:@""]){
         sqlStr = [NSString stringWithFormat:@"SELECT name,fnum FROM floors WHERE bid = %d", bid];
@@ -241,11 +240,11 @@
     return desendFlr;
 }
 
--(void) addExitTapGesture{  
-        
+-(void) addExitTapGesture{
+    
     exitAreas = [[NSMutableArray alloc] initWithCapacity:4];
     //the top block
-    UITapGestureRecognizer *exitTap = 
+    UITapGestureRecognizer *exitTap =
     [[UITapGestureRecognizer alloc] initWithTarget:self
                                             action:@selector(exitAnimation:)];
     UIView *topTapArea = [ [UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.superview.frame), CGRectGetMinY(self.frame)) ];
@@ -257,7 +256,7 @@
     
     //the left block
     exitTap = [[UITapGestureRecognizer alloc] initWithTarget:self
-                                            action:@selector(exitAnimation:)];
+                                                      action:@selector(exitAnimation:)];
     UIView *leftTapArea = [ [UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMinY(self.frame), CGRectGetMinX(self.frame), CGRectGetHeight(self.frame)) ];
     [leftTapArea setBackgroundColor:[UIColor clearColor]];
     [leftTapArea addGestureRecognizer:exitTap];
@@ -268,9 +267,9 @@
     //the right block
     exitTap = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                       action:@selector(exitAnimation:)];
-    UIView *rightTapArea = [ [UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.frame), CGRectGetMinY(self.frame), 
-        CGRectGetMaxX(self.superview.frame) - CGRectGetMaxX(self.frame), 
-        CGRectGetHeight(self.frame)) ];
+    UIView *rightTapArea = [ [UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.frame), CGRectGetMinY(self.frame),
+                                                                     CGRectGetMaxX(self.superview.frame) - CGRectGetMaxX(self.frame),
+                                                                     CGRectGetHeight(self.frame)) ];
     [rightTapArea setBackgroundColor:[UIColor clearColor]];
     [rightTapArea addGestureRecognizer:exitTap];
     [self.superview addSubview:rightTapArea];
@@ -280,14 +279,14 @@
     //the bottom block
     exitTap = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                       action:@selector(exitAnimation:)];
-    UIView *bottomTapArea = [ [UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.frame), CGRectGetWidth(self.superview.frame), 
-        CGRectGetMaxY(self.superview.frame) - CGRectGetMaxY(self.frame) )];
+    UIView *bottomTapArea = [ [UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.frame), CGRectGetWidth(self.superview.frame),
+                                                                      CGRectGetMaxY(self.superview.frame) - CGRectGetMaxY(self.frame) )];
     [bottomTapArea setBackgroundColor:[UIColor clearColor]];
     [bottomTapArea addGestureRecognizer:exitTap];
     [self.superview addSubview:bottomTapArea];
     [exitAreas addObject:bottomTapArea];
     [exitTap release];
-
+    
 }
 
 -(void) removeExitTapArea
@@ -308,89 +307,89 @@
     if ( CGRectContainsPoint(recognizer.view.frame, location) )
     {
         UIView *overlay = self.superview;
-
+        
         //perform animation
         [UIView animateWithDuration:0.5
                               delay:0.0
                             options:UIViewAnimationCurveEaseInOut
                          animations:^{
-                             [self setFrame:CGRectMake(20, CGRectGetHeight(overlay.frame), CGRectGetWidth(self.frame), CGRectGetHeight(self.frame))];              
+                             [self setFrame:CGRectMake(20, CGRectGetHeight(overlay.frame), CGRectGetWidth(self.frame), CGRectGetHeight(self.frame))];
                          }
                          completion:^(BOOL finished) {
                              [self removeExitTapArea];
                              [self removeFromSuperview];
                              [overlay removeFromSuperview];
-                         }]; 
+                         }];
     }
 }
 
 - (void)drawRect:(CGRect)dirtyRect {
-	// Drawing code
+    // Drawing code
     
-	// Get the context
-	CGContextRef ctx = UIGraphicsGetCurrentContext();
-	
-	// Set the drop shadow
-	CGContextSaveGState(ctx);
-	CGContextSetShadow(ctx, CGSizeMake(0, 0), 0);
-	
-	// Generate a rect
-	CGRect rect = CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height); 
+    // Get the context
+    CGContextRef ctx = UIGraphicsGetCurrentContext();
     
-	// Draw the background
-	float radius = 5.0f;
-	CGContextBeginPath(ctx);
-	CGContextSetFillColor(ctx, CGColorGetComponents([[UIColor colorWithRed:43/255.0 green:57/255.0 blue:96/255.0 alpha:0.9 ] CGColor]) );
-	CGContextMoveToPoint(ctx, CGRectGetMinX(rect) + radius, CGRectGetMinY(rect));		
-	CGContextAddArc(ctx, CGRectGetMaxX(rect) - radius, CGRectGetMinY(rect) + radius, radius, 3 * M_PI / 2, 0, 0);
-	CGContextAddArc(ctx, CGRectGetMaxX(rect) - radius, CGRectGetMaxY(rect) - radius, radius, 0, M_PI / 2, 0);
-	CGContextAddArc(ctx, CGRectGetMinX(rect) + radius, CGRectGetMaxY(rect) - radius, radius, M_PI / 2, M_PI, 0);
-	CGContextAddArc(ctx, CGRectGetMinX(rect) + radius, CGRectGetMinY(rect) + radius, radius, M_PI, 3 * M_PI / 2, 0);
-	CGContextClosePath(ctx);
-	CGContextFillPath(ctx);
+    // Set the drop shadow
+    CGContextSaveGState(ctx);
+    CGContextSetShadow(ctx, CGSizeMake(0, 0), 0);
     
-	// Restore state drawing the shadow
-	CGContextRestoreGState(ctx);
+    // Generate a rect
+    CGRect rect = CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height);
     
-	// Add Gradient
-	CGGradientRef glossGradient;
+    // Draw the background
+    float radius = 5.0f;
+    CGContextBeginPath(ctx);
+    CGContextSetFillColor(ctx, CGColorGetComponents([[UIColor colorWithRed:43/255.0 green:57/255.0 blue:96/255.0 alpha:0.9 ] CGColor]) );
+    CGContextMoveToPoint(ctx, CGRectGetMinX(rect) + radius, CGRectGetMinY(rect));
+    CGContextAddArc(ctx, CGRectGetMaxX(rect) - radius, CGRectGetMinY(rect) + radius, radius, 3 * M_PI / 2, 0, 0);
+    CGContextAddArc(ctx, CGRectGetMaxX(rect) - radius, CGRectGetMaxY(rect) - radius, radius, 0, M_PI / 2, 0);
+    CGContextAddArc(ctx, CGRectGetMinX(rect) + radius, CGRectGetMaxY(rect) - radius, radius, M_PI / 2, M_PI, 0);
+    CGContextAddArc(ctx, CGRectGetMinX(rect) + radius, CGRectGetMinY(rect) + radius, radius, M_PI, 3 * M_PI / 2, 0);
+    CGContextClosePath(ctx);
+    CGContextFillPath(ctx);
+    
+    // Restore state drawing the shadow
+    CGContextRestoreGState(ctx);
+    
+    // Add Gradient
+    CGGradientRef glossGradient;
     CGColorSpaceRef rgbColorspace;
     size_t num_locations = 3;
     CGFloat locations[3] = { 0.0, 0.5, 1.0 };
-    CGFloat components[8] = { 1.0, 1.0, 1.0, 0.25,  // Start color
-		1.0, 1.0, 1.0, 0.06 }; // End color
-	
+    CGFloat components[8] = { 1.0, 1.0, 1.0, 0.25, // Start color
+        1.0, 1.0, 1.0, 0.06 }; // End color
+    
     rgbColorspace = CGColorSpaceCreateDeviceRGB();
     glossGradient = CGGradientCreateWithColorComponents(rgbColorspace, components, locations, num_locations);
-	
+    
     CGRect currentBounds = self.bounds;
     CGPoint topCenter = CGPointMake(CGRectGetMidX(currentBounds), 0.0f);
-	CGPoint bottomCenter = CGPointMake(CGRectGetMidX(currentBounds), CGRectGetMaxY(currentBounds));
+    CGPoint bottomCenter = CGPointMake(CGRectGetMidX(currentBounds), CGRectGetMaxY(currentBounds));
     CGContextDrawLinearGradient(ctx, glossGradient, topCenter, bottomCenter, 0);
-	
+    
     CGGradientRelease(glossGradient);
     CGColorSpaceRelease(rgbColorspace);
-	
-	// Add top grey line ( to give nice effect)
-	float lineYOffset = 1.5;
-	CGContextBeginPath(ctx);
-	CGContextSetStrokeColor(ctx, CGColorGetComponents([[UIColor colorWithRed:0.862 green:0.862 blue:0.862 alpha:0.3 ] CGColor]) );
-	CGContextSetLineWidth(ctx, 1.0);
-	CGContextMoveToPoint(ctx, CGRectGetMinX(rect) + 1, CGRectGetMinY(rect) + lineYOffset);		
-	CGContextAddLineToPoint(ctx, CGRectGetMaxX(rect) - 1, CGRectGetMinY(rect) + lineYOffset);
-	CGContextStrokePath(ctx);
-	
-	// Stroke outline
-	CGContextBeginPath(ctx);
-	CGContextSetStrokeColor(ctx, CGColorGetComponents([[UIColor colorWithRed:0.7 green:0.7 blue:0.7 alpha:1 ] CGColor]) );
-	CGContextSetLineWidth(ctx, 2.0);
-	CGContextMoveToPoint(ctx, CGRectGetMinX(rect) + radius, CGRectGetMinY(rect));		
-	CGContextAddArc(ctx, CGRectGetMaxX(rect) - radius, CGRectGetMinY(rect) + radius, radius, 3 * M_PI / 2, 0, 0);
-	CGContextAddArc(ctx, CGRectGetMaxX(rect) - radius, CGRectGetMaxY(rect) - radius, radius, 0, M_PI / 2, 0);
-	CGContextAddArc(ctx, CGRectGetMinX(rect) + radius, CGRectGetMaxY(rect) - radius, radius, M_PI / 2, M_PI, 0);
-	CGContextAddArc(ctx, CGRectGetMinX(rect) + radius, CGRectGetMinY(rect) + radius, radius, M_PI, 3 * M_PI / 2, 0);
-	CGContextClosePath(ctx);
-	CGContextStrokePath(ctx);
+    
+    // Add top grey line ( to give nice effect)
+    float lineYOffset = 1.5;
+    CGContextBeginPath(ctx);
+    CGContextSetStrokeColor(ctx, CGColorGetComponents([[UIColor colorWithRed:0.862 green:0.862 blue:0.862 alpha:0.3 ] CGColor]) );
+    CGContextSetLineWidth(ctx, 1.0);
+    CGContextMoveToPoint(ctx, CGRectGetMinX(rect) + 1, CGRectGetMinY(rect) + lineYOffset);
+    CGContextAddLineToPoint(ctx, CGRectGetMaxX(rect) - 1, CGRectGetMinY(rect) + lineYOffset);
+    CGContextStrokePath(ctx);
+    
+    // Stroke outline
+    CGContextBeginPath(ctx);
+    CGContextSetStrokeColor(ctx, CGColorGetComponents([[UIColor colorWithRed:0.7 green:0.7 blue:0.7 alpha:1 ] CGColor]) );
+    CGContextSetLineWidth(ctx, 2.0);
+    CGContextMoveToPoint(ctx, CGRectGetMinX(rect) + radius, CGRectGetMinY(rect));
+    CGContextAddArc(ctx, CGRectGetMaxX(rect) - radius, CGRectGetMinY(rect) + radius, radius, 3 * M_PI / 2, 0, 0);
+    CGContextAddArc(ctx, CGRectGetMaxX(rect) - radius, CGRectGetMaxY(rect) - radius, radius, 0, M_PI / 2, 0);
+    CGContextAddArc(ctx, CGRectGetMinX(rect) + radius, CGRectGetMaxY(rect) - radius, radius, M_PI / 2, M_PI, 0);
+    CGContextAddArc(ctx, CGRectGetMinX(rect) + radius, CGRectGetMinY(rect) + radius, radius, M_PI, 3 * M_PI / 2, 0);
+    CGContextClosePath(ctx);
+    CGContextStrokePath(ctx);
 }
 
 @end

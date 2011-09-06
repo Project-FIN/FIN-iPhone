@@ -64,7 +64,7 @@ const int reportBtnWidth = 0;//60;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
 }
 
 - (void)viewDidUnload
@@ -102,7 +102,7 @@ const int reportBtnWidth = 0;//60;
 
 - (BOOL) isSubcategory:(NSString *) cat {
     SQLiteManager *dbManager = [[SQLiteManager alloc] initWithDatabaseNamed:@"FIN_LOCAL.db"];
-
+    
     NSString *sqlStr = [NSString stringWithFormat:@"SELECT parent FROM categories WHERE full_name = '%s'", (const char*)[cat UTF8String]];
     NSArray *arr = [dbManager getRowsForQuery:sqlStr];
     NSDictionary *parents = [arr objectAtIndex:0];
@@ -111,9 +111,9 @@ const int reportBtnWidth = 0;//60;
 }
 
 - (NSDictionary*) getCategoryIconDictionary
-{    
+{
     SQLiteManager *dbManager = [[SQLiteManager alloc] initWithDatabaseNamed:@"FIN_LOCAL.db"];
-
+    
     NSString *sqlStr = [NSString stringWithFormat:@"SELECT name, full_name FROM categories WHERE deleted = 0"];
     NSArray *categoriesList = [dbManager getRowsForQuery:sqlStr];
     
@@ -263,14 +263,14 @@ const int reportBtnWidth = 0;//60;
             imageView.image = nil;
         }
         int i = 0;
-
+        
         for (NSString* cate in [cateItem keyEnumerator]){
-            NSString *iconName = [NSString stringWithFormat:@"%@_small",  [cateNameToIcon objectForKey:cate]];
+            NSString *iconName = [NSString stringWithFormat:@"%@_small", [cateNameToIcon objectForKey:cate]];
             UIImage *image = [UIImage imageNamed:iconName];
             UIImageView *imageView = (UIImageView *)[cell.contentView viewWithTag:i+CATEIMG_START];
             [imageView setImage:image];
             i++;
-        }        
+        }
         UILabel *title = (UILabel*)[cell.contentView viewWithTag:FLR_TITLE];
         title.text=str;
     }
@@ -302,9 +302,9 @@ const int reportBtnWidth = 0;//60;
     detail.frame = CGRectMake(CGRectGetMinX(detail.frame), CGRectGetMinY(detail.frame), CGRectGetWidth(detail.frame),[textline count]*fontSizeSpace );
     
     /*UIButton *butt = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    butt.frame = CGRectMake(CGRectGetMaxX(tableView.frame)-(reportBtnWidth+detailcellMargin), CGRectGetMaxY(detail.frame), reportBtnWidth, reportBtnHeight);
-    [butt setTitle:@"Report!" forState:UIControlStateNormal];
-    [cell.contentView addSubview:butt];*/
+     butt.frame = CGRectMake(CGRectGetMaxX(tableView.frame)-(reportBtnWidth+detailcellMargin), CGRectGetMaxY(detail.frame), reportBtnWidth, reportBtnHeight);
+     [butt setTitle:@"Report!" forState:UIControlStateNormal];
+     [cell.contentView addSubview:butt];*/
     
 }
 
@@ -319,12 +319,12 @@ const int reportBtnWidth = 0;//60;
 }
 
 /*-(void) removeSubviewsForCell:(UITableViewCell *)cell
-{
-    for(UIView *subView in cell.contentView.subviews)
-    {
-        [subView removeFromSuperview];
-    }
-}*/
+ {
+ for(UIView *subView in cell.contentView.subviews)
+ {
+ [subView removeFromSuperview];
+ }
+ }*/
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -416,7 +416,7 @@ const int reportBtnWidth = 0;//60;
     }
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-
+    
     if (baseHeight <= 0)
         baseHeight = 45;
     else if (baseHeight > 180)
@@ -425,12 +425,11 @@ const int reportBtnWidth = 0;//60;
     [self.tableView.superview setFrame:CGRectMake(CGRectGetMinX(self.tableView.superview.frame), CGRectGetMinY(self.tableView.superview.frame)+(self.tableView.frame.size.height/2)-(baseHeight/2), CGRectGetWidth(self.tableView.superview.frame), CGRectGetHeight(self.tableView.superview.frame)-self.tableView.frame.size.height+baseHeight)];
     
     [self.tableView setFrame:CGRectMake(CGRectGetMinX(self.tableView.frame), CGRectGetMinY(self.tableView.frame), CGRectGetWidth(self.tableView.frame), baseHeight)];
-                              
+    
     InfoPopUpView *superView = self.tableView.superview;
     [superView removeExitTapArea];
     [superView addExitTapGesture];
-
+    
 }
 
 @end
-
