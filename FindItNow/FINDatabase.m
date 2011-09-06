@@ -57,10 +57,10 @@
 
 - (void)deleteDB
 {
-    NSError *error = [dbManager doQuery:@"DELETE FROM categories"];
-    error = [dbManager doQuery:@"DELETE FROM buildings"];
-    error = [dbManager doQuery:@"DELETE FROM floors"];
-    error = [dbManager doQuery:@"DELETE FROM items"];
+    [dbManager doQuery:@"DELETE FROM categories"];
+    [dbManager doQuery:@"DELETE FROM buildings"];
+    [dbManager doQuery:@"DELETE FROM floors"];
+    [dbManager doQuery:@"DELETE FROM items"];
 }
 
 - (void)saveRegions:(int)timestamp
@@ -91,6 +91,9 @@
             NSLog(@"Error: %@",[error localizedDescription]);
         }
     }
+    
+    [URL release];
+    [results release];
 }
 
 - (void)saveCategory:(int)timestamp
@@ -113,6 +116,9 @@
             NSLog(@"Error: %@",[error localizedDescription]);
         }
     }
+    
+    [URL release];
+    [results release];
 }
 
 - (void)saveBuildings:(int)timestamp
@@ -153,6 +159,9 @@
             NSLog(@"Error: %@",[error localizedDescription]);
         }
     }
+    
+    [URL release];
+    [results release];
 }
 
 - (void)saveItems:(int)timestamp
@@ -183,7 +192,9 @@
             NSLog(@"Error: %@",[error localizedDescription]);
         }
     }
-    NSLog(@"%d", timestamp);
+
+    [URL release];
+    [results release];
 }
 
 

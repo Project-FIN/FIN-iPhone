@@ -87,6 +87,7 @@
         CLLocationCoordinate2D coord = [loc coordinate];
         ItemAnnotation *itemAnnotation = [[ItemAnnotation alloc] initWithCoordinate:coord];
         [mapView addAnnotation:itemAnnotation];
+        [itemAnnotation release];
     }
 }
 
@@ -105,7 +106,12 @@
     CLLocation *loc1 = [[CLLocation alloc] initWithLatitude:point1.latitude longitude:point1.longitude];
     CLLocation *loc2 = [[CLLocation alloc] initWithLatitude:point2.latitude longitude:point2.longitude];
     
-    return [loc1 distanceFromLocation:loc2] * .000621371192;
+    double distance = [loc1 distanceFromLocation:loc2] * .000621371192;
+    
+    [loc1 release];
+    [loc2 release];
+    
+    return distance;
 }
 
 - (BOOL) isSubcategory:(NSString *) cat {
@@ -147,7 +153,7 @@
     
         annView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%s_small.png", name]];
     }
-    
+        
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openPopup:)];
     [annView addGestureRecognizer:tap];
     
@@ -174,6 +180,8 @@
         CLLocation* location = [[CLLocation alloc] initWithLatitude:latitude longitude:longitude];
         
         [pointArr addObject:location];
+        
+        [location release];
     }
     
     return pointArr;
@@ -244,8 +252,11 @@
             [value setObject:sp_info forKey:cname];
             
             [itemsOnFloorMap setObject:sp_info  forKey:cname];
+            
+            [value release];
         }
         [itemsMap setObject:itemsOnFloorMap forKey:fname];
+        [itemsOnFloorMap release];
     }
     
     return itemsMap;
@@ -264,6 +275,8 @@
     CLLocation* location = [[CLLocation alloc] initWithLatitude:latitude longitude:longitude];
         
     [pointArr addObject:location];
+    
+    [location release];
     
     return pointArr;
 }
@@ -319,6 +332,8 @@
 
     InfoPopUpView *popup = [ [InfoPopUpView alloc] initWithFrame:CGRectMake(20,0, CGRectGetWidth(self.view.frame)-40, 160)WithBName:building category:mapCategory distance:dist walkTime:walkTime data:data IsOutdoor:[building isEqualToString:@"Outdoor Location"]];    
     [overlay addSubview:popup];
+    
+    [overlay release];
     
     //perform animation
     [UIView animateWithDuration:0.5 delay:0.0 options:UIViewAnimationOptionCurveEaseIn

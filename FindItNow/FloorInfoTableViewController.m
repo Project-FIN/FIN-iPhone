@@ -140,7 +140,6 @@ const int reportBtnWidth = 0;//60;
         }
         [icons setObject:mapName forKey:[dict objectForKey:@"full_name"]];
     }
-    NSLog(@"%@", icons);
     return icons;
 }
 
