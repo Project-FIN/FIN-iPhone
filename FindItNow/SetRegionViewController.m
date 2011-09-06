@@ -13,12 +13,12 @@
 @synthesize indicator;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{        
+{   
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         [self setModalPresentationStyle:UIModalPresentationFormSheet];
     }
-        
+    
     return self;
 }
 
@@ -53,11 +53,6 @@
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSNumber *rid = [defaults objectForKey:@"rid"];
-    NSNumber *lastOpened = [defaults objectForKey:@"lastOpened"];
-    if (lastOpened == nil) {
-        [db createDB];
-        [db saveRegions:0];
-    }
     
     data = [self getRegionsList];
     
@@ -67,6 +62,46 @@
         
         [pickerView selectRow:[data indexOfObject:[[regionsArr objectAtIndex:0] objectForKey:@"full_name"]]+1 inComponent:0 animated:YES];
     }
+}
+
+- (void) checkNetworkStatus:(NSNotification *)notice {
+    NetworkStatus internetStatus = [internetReachable currentReachabilityStatus];
+    NetworkStatus hostStatus = [hostReachable currentReachabilityStatus];
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSNumber *rid = [defaults objectForKey:@"rid"];
+    
+    if (internetStatus != NotReachable && hostStatus != NotReachable) {
+        if (rid == nil) {
+            [db createDB];
+            [db saveRegions:0];
+        }
+        data = [self getRegionsList];
+        [pickerView reloadAllComponents];
+    }
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSNumber *rid = [defaults objectForKey:@"rid"];
+    if (rid == nil) {
+        cancelBtn.hidden = YES;
+    }
+}
+
+- (void) viewWillAppear:(BOOL)animated {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkNetworkStatus:) name:kReachabilityChangedNotification object:nil];
+    
+    internetReachable = [[Reachability reachabilityForInternetConnection] retain];
+    [internetReachable startNotifier];
+    
+    // check if a pathway to a random host exists
+    hostReachable = [[Reachability reachabilityWithHostName: @"www.apple.com"] retain];
+    [hostReachable startNotifier];
+}
+
+- (void) viewWillDisappear:(BOOL)animated {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)viewDidUnload
@@ -126,18 +161,13 @@
     [self dismissModalViewControllerAnimated:YES];
 }
 
-- (BOOL) connectedToInternet
-{
-    NSURL *URL = [[NSURL alloc] initWithString:@"http://www.google.com"];
-    NSString *results = [[NSString alloc] initWithContentsOfURL :URL];
-
-    return ( results != NULL ) ? YES : NO;
-}
-
 -(IBAction) confirmSelection:(id) sender
 {
     if ([pickerView selectedRowInComponent:0]-1 != -1) {
-        if ([self connectedToInternet]) {
+        NetworkStatus internetStatus = [internetReachable currentReachabilityStatus];
+        NetworkStatus hostStatus = [hostReachable currentReachabilityStatus];
+        
+        if (internetStatus != NotReachable && hostStatus != NotReachable) {
 
             UIView *overlay = [[ [UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame))] autorelease];
             [overlay setBackgroundColor:[UIColor colorWithWhite:0 alpha:0.75]];
@@ -149,11 +179,20 @@
             [indicator startAnimating];
             [self performSelectorInBackground:@selector(updateDB:) withObject:nil];
         } else {
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error: No Internet Connection" message:@"Please ensure that your data/wifi connection is enabled and working" delegate:self cancelButtonTitle:@"Close" otherButtonTitles:nil];
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error: No Internet Connection" message:@"Please ensure your data connection is active and working" delegate:self cancelButtonTitle:@"Close" otherButtonTitles:nil];
             [alertView show];
             [alertView release];
         }
+    } else {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error: Region Not Selected" message:@"Please select a region from the list" delegate:self cancelButtonTitle:@"Close" otherButtonTitles:nil];
+        [alertView show];
+        [alertView release];
     }
+}
+
+-(IBAction) cancelSelection:(id) sender
+{
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 
