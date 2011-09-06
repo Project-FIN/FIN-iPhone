@@ -190,12 +190,12 @@
         [self addSubview:infoTable];
         
         //perform animation
-        [UIView beginAnimations:@"" context:NULL];
-        [UIView setAnimationDuration:0.5];
-        self.frame = CGRectMake(CGRectGetMinX(self.frame),CGRectGetMinY(self.frame)-(tableHeight/2), CGRectGetWidth(self.frame), CGRectGetHeight(self.frame)+tableHeight+20);
-        [infoTable setFrame:CGRectMake(10, 160, CGRectGetWidth(self.frame)-20, tableHeight)];
-        [UIView setAnimationDelay: UIViewAnimationCurveEaseIn];
-        [UIView commitAnimations];
+        [UIView animateWithDuration:0.4 delay:0.0 options:UIViewAnimationOptionCurveLinear
+                         animations:^{
+                             self.frame = CGRectMake(CGRectGetMinX(self.frame),CGRectGetMinY(self.frame)-(tableHeight/2), CGRectGetWidth(self.frame), CGRectGetHeight(self.frame)+tableHeight+20);
+                             [infoTable setFrame:CGRectMake(10, 160, CGRectGetWidth(self.frame)-20, tableHeight)];
+                         }completion:^(BOOL finished) {
+                         }];
     }
     [self addExitTapGesture];
 }
@@ -247,7 +247,7 @@
     //the top block
     UITapGestureRecognizer *exitTap = 
     [[UITapGestureRecognizer alloc] initWithTarget:self
-                                            action:@selector(exit:)];
+                                            action:@selector(exitAnimation:)];
     UIView *topTapArea = [ [UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.superview.frame), CGRectGetMinY(self.frame)) ];
     [topTapArea setBackgroundColor:[UIColor clearColor]];
     [topTapArea addGestureRecognizer:exitTap];
@@ -257,7 +257,7 @@
     
     //the left block
     exitTap = [[UITapGestureRecognizer alloc] initWithTarget:self
-                                            action:@selector(exit:)];
+                                            action:@selector(exitAnimation:)];
     UIView *leftTapArea = [ [UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMinY(self.frame), CGRectGetMinX(self.frame), CGRectGetHeight(self.frame)) ];
     [leftTapArea setBackgroundColor:[UIColor clearColor]];
     [leftTapArea addGestureRecognizer:exitTap];
@@ -267,7 +267,7 @@
     
     //the right block
     exitTap = [[UITapGestureRecognizer alloc] initWithTarget:self
-                                                      action:@selector(exit:)];
+                                                      action:@selector(exitAnimation:)];
     UIView *rightTapArea = [ [UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.frame), CGRectGetMinY(self.frame), 
         CGRectGetMaxX(self.superview.frame) - CGRectGetMaxX(self.frame), 
         CGRectGetHeight(self.frame)) ];
@@ -279,7 +279,7 @@
     
     //the bottom block
     exitTap = [[UITapGestureRecognizer alloc] initWithTarget:self
-                                                      action:@selector(exit:)];
+                                                      action:@selector(exitAnimation:)];
     UIView *bottomTapArea = [ [UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.frame), CGRectGetWidth(self.superview.frame), 
         CGRectGetMaxY(self.superview.frame) - CGRectGetMaxY(self.frame) )];
     [bottomTapArea setBackgroundColor:[UIColor clearColor]];
@@ -301,17 +301,26 @@
         }
     }
 }
-
-- (IBAction) exit:(UITapGestureRecognizer *)recognizer
+- (IBAction) exitAnimation:(UITapGestureRecognizer *)recognizer
 {
     CGPoint location = [recognizer locationInView:self.superview];
-
+    
     if ( CGRectContainsPoint(recognizer.view.frame, location) )
     {
         UIView *overlay = self.superview;
-        [self removeExitTapArea];
-        [self removeFromSuperview];
-        [overlay removeFromSuperview];
+
+        //perform animation
+        [UIView animateWithDuration:0.5
+                              delay:0.0
+                            options:UIViewAnimationCurveEaseInOut
+                         animations:^{
+                             [self setFrame:CGRectMake(20, CGRectGetHeight(overlay.frame), CGRectGetWidth(self.frame), CGRectGetHeight(self.frame))];              
+                         }
+                         completion:^(BOOL finished) {
+                             [self removeExitTapArea];
+                             [self removeFromSuperview];
+                             [overlay removeFromSuperview];
+                         }]; 
     }
 }
 

@@ -318,12 +318,12 @@
     [overlay addSubview:popup];
     
     //perform animation
-    [UIView beginAnimations:@"" context:NULL];
-    [UIView setAnimationDuration:0.8];
-    [popup setFrame:CGRectMake(20, yCoord, CGRectGetWidth(self.view.frame)-40, 160)];
-    [popup addExitTapGesture];
-    [UIView setAnimationDelay: UIViewAnimationCurveEaseIn];
-    [UIView commitAnimations];
+    [UIView animateWithDuration:0.5 delay:0.0 options:UIViewAnimationOptionCurveEaseIn
+                     animations:^{
+                         [popup setFrame:CGRectMake(20, yCoord, CGRectGetWidth(self.view.frame)-40, 160)];
+                         [popup addExitTapGesture];
+                     }completion:^(BOOL finished) {
+                     }];
 }
 
 -(IBAction) scrollToUserLocation

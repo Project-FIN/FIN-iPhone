@@ -25,7 +25,7 @@
 -(void) removeExitTapArea;
 -(void) constructIndoorView;
 -(void) constructOutdoorView;
-
+- (IBAction) exitAnimation:(UITapGestureRecognizer *)recognizer;
 - (id) initWithFrame:(CGRect)frame WithBName:(NSString*)building category:(NSString*)cat distance:(double)dist walkTime: (int)walk
                 data:(NSDictionary*) data IsOutdoor:(BOOL) isOutdoor;
 -(NSArray*) getDesendFloor;
