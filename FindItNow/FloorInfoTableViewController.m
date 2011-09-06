@@ -48,6 +48,9 @@ const int reportBtnWidth = 0;//60;
 
 - (void)dealloc
 {
+    [cateNameToIcon release];
+    [selectedChildRow release];
+    [selectedRowIndeices release];
     [super dealloc];
 }
 
@@ -101,7 +104,7 @@ const int reportBtnWidth = 0;//60;
 }
 
 - (BOOL) isSubcategory:(NSString *) cat {
-    SQLiteManager *dbManager = [[SQLiteManager alloc] initWithDatabaseNamed:@"FIN_LOCAL.db"];
+    SQLiteManager *dbManager = [[[SQLiteManager alloc] initWithDatabaseNamed:@"FIN_LOCAL.db"] autorelease];
     
     NSString *sqlStr = [NSString stringWithFormat:@"SELECT parent FROM categories WHERE full_name = '%s'", (const char*)[cat UTF8String]];
     NSArray *arr = [dbManager getRowsForQuery:sqlStr];
@@ -112,11 +115,12 @@ const int reportBtnWidth = 0;//60;
 
 - (NSDictionary*) getCategoryIconDictionary
 {
-    SQLiteManager *dbManager = [[SQLiteManager alloc] initWithDatabaseNamed:@"FIN_LOCAL.db"];
+    SQLiteManager *dbManager = [[[SQLiteManager alloc] initWithDatabaseNamed:@"FIN_LOCAL.db"] autorelease];
     
     NSString *sqlStr = [NSString stringWithFormat:@"SELECT name, full_name FROM categories WHERE deleted = 0"];
     NSArray *categoriesList = [dbManager getRowsForQuery:sqlStr];
     
+    //don't auto release icon as well;
     NSMutableDictionary *icons = [[NSMutableDictionary alloc] init];
     for (NSDictionary *dict in categoriesList) {
         NSString *mapName = [dict objectForKey:@"name"];
@@ -221,8 +225,12 @@ const int reportBtnWidth = 0;//60;
                 [cell.contentView addSubview:detail];
             }
             NSDictionary *cateItem = [dataDict objectForKey:[floors objectAtIndex:indexPath.section]];
-            NSString *str = [cateItem objectForKey:[[self subCategory:cateItem] objectAtIndex:(indexPath.row-1)/2]];
-            [self setCellForDetailView:cell WithTableView:tableView data:[[NSDictionary alloc] initWithObjects:[[NSArray alloc] initWithObjects:str,nil] forKeys:[[NSArray alloc] initWithObjects:@"",nil]]];
+            NSArray *subCate = [self subCategory:cateItem];            
+            NSString *str = [cateItem objectForKey:[subCate objectAtIndex:(indexPath.row-1)/2]];
+            NSArray *obj = [NSArray arrayWithObjects:str,nil];
+            NSArray *key = [NSArray arrayWithObjects:@"",nil];
+            NSDictionary *data = [NSDictionary dictionaryWithObjects:obj forKeys:key];
+            [self setCellForDetailView:cell WithTableView:tableView data:data];
         }else{
             NSString *CellIdentifier = @"CateCell";
             cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -231,7 +239,8 @@ const int reportBtnWidth = 0;//60;
                 [cell.textLabel setTextColor:[UIColor whiteColor]];
             }
             NSDictionary *cateItem = [dataDict objectForKey:[floors objectAtIndex:indexPath.section]];
-            cell.textLabel.text = [[self subCategory:cateItem] objectAtIndex:(indexPath.row-1)/2];
+            NSArray *subCate = [self subCategory:cateItem];
+            cell.textLabel.text = [subCate objectAtIndex:(indexPath.row-1)/2];
         }
     }
     else{
@@ -310,7 +319,7 @@ const int reportBtnWidth = 0;//60;
 
 -(NSArray*) subCategory:(NSDictionary*) data
 {
-    NSMutableArray *result = [[NSMutableArray alloc] initWithCapacity:5];
+    NSMutableArray *result = [NSMutableArray arrayWithCapacity:3];
     for(NSString* str in [data keyEnumerator])
     {
         [result addObject:str];
@@ -365,7 +374,7 @@ const int reportBtnWidth = 0;//60;
         }
         
         if (isDoubleExpendable){
-            delete = [[NSMutableArray alloc] initWithCapacity:3];
+            delete = [NSMutableArray arrayWithCapacity:3];
             for (int i = 0; i < [[dataDict objectForKey:[floors objectAtIndex:indexPath.section]] count]*2; i++){
                 [delete addObject:[NSIndexPath indexPathForRow:i+1 inSection:indexPath.section]];
                 //[self removeSubviewsForCell:[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i+1 inSection:indexPath.section]]];

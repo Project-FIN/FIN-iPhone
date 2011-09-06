@@ -201,9 +201,9 @@
 
 -(NSArray*) getDesendFloor
 {
-    SQLiteManager *dbManager = [[SQLiteManager alloc] initWithDatabaseNamed:@"FIN_LOCAL.db"];
-    NSMutableArray *flr = [[NSMutableArray alloc] initWithCapacity:[floorDetail count]];
-    NSMutableDictionary *fnumToName = [[NSMutableDictionary alloc] initWithCapacity:[floorDetail count]];
+    SQLiteManager *dbManager = [[[SQLiteManager alloc] initWithDatabaseNamed:@"FIN_LOCAL.db"] autorelease];
+    NSMutableArray *flr = [[[NSMutableArray alloc] initWithCapacity:[floorDetail count]] autorelease];
+    NSMutableDictionary *fnumToName = [[[NSMutableDictionary alloc] initWithCapacity:[floorDetail count]] autorelease];
     
     NSString *sqlStr = [NSString stringWithFormat:@"SELECT bid FROM buildings WHERE name = '%@'", buildingName];
     NSArray *itemsList = [dbManager getRowsForQuery:sqlStr];
@@ -216,7 +216,8 @@
             [fnumToName setValue:[dict objectForKey:@"name"] forKey:[NSString stringWithFormat:@"%d",[dict objectForKey:@"fnum"] ] ];
         }
         [flr sortUsingSelector:@selector(compare:)];
-        flr = [[NSMutableArray alloc] initWithArray:[[flr reverseObjectEnumerator] allObjects]];
+        flr = [[[NSMutableArray alloc] initWithArray:[[flr reverseObjectEnumerator] allObjects]] autorelease];
+        //don't auto relase desendFlr, it'll crash.
         NSMutableArray *desendFlr = [[NSMutableArray alloc] initWithCapacity:[itemsList count]];
         for (NSString *fnum in flr){
             [desendFlr addObject:[fnumToName objectForKey:[NSString stringWithFormat:@"%d", fnum]]];
@@ -230,14 +231,13 @@
             [flr addObject:[NSString stringWithFormat:@"%d",[[[itemsList objectAtIndex:0] objectForKey:@"fnum"] intValue]]];
         }
         [flr sortUsingSelector:@selector(compare:)];
-        flr = [[NSMutableArray alloc] initWithArray:[[flr reverseObjectEnumerator] allObjects]];
-        
+        flr = [[[NSMutableArray alloc] initWithArray:[[flr reverseObjectEnumerator] allObjects]] autorelease];
+        NSMutableArray *desendFlr = [[NSMutableArray alloc] initWithCapacity:[flr count]];
+        for (NSString *fnum in flr){
+            [desendFlr addObject:[fnumToName objectForKey:fnum]];
+        }
+        return desendFlr;
     }
-    NSMutableArray *desendFlr = [[NSMutableArray alloc] initWithCapacity:[flr count]];
-    for (NSString *fnum in flr){
-        [desendFlr addObject:[fnumToName objectForKey:fnum]];
-    }
-    return desendFlr;
 }
 
 -(void) addExitTapGesture{
@@ -247,7 +247,7 @@
     UITapGestureRecognizer *exitTap =
     [[UITapGestureRecognizer alloc] initWithTarget:self
                                             action:@selector(exitAnimation:)];
-    UIView *topTapArea = [ [UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.superview.frame), CGRectGetMinY(self.frame)) ];
+    UIView *topTapArea = [[ [UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.superview.frame), CGRectGetMinY(self.frame)) ] autorelease];
     [topTapArea setBackgroundColor:[UIColor clearColor]];
     [topTapArea addGestureRecognizer:exitTap];
     [self.superview addSubview:topTapArea];
@@ -257,7 +257,7 @@
     //the left block
     exitTap = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                       action:@selector(exitAnimation:)];
-    UIView *leftTapArea = [ [UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMinY(self.frame), CGRectGetMinX(self.frame), CGRectGetHeight(self.frame)) ];
+    UIView *leftTapArea = [[ [UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMinY(self.frame), CGRectGetMinX(self.frame), CGRectGetHeight(self.frame)) ] autorelease];
     [leftTapArea setBackgroundColor:[UIColor clearColor]];
     [leftTapArea addGestureRecognizer:exitTap];
     [self.superview addSubview:leftTapArea];
@@ -267,9 +267,9 @@
     //the right block
     exitTap = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                       action:@selector(exitAnimation:)];
-    UIView *rightTapArea = [ [UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.frame), CGRectGetMinY(self.frame),
+    UIView *rightTapArea = [[ [UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.frame), CGRectGetMinY(self.frame),
                                                                      CGRectGetMaxX(self.superview.frame) - CGRectGetMaxX(self.frame),
-                                                                     CGRectGetHeight(self.frame)) ];
+                                                                     CGRectGetHeight(self.frame)) ] autorelease];
     [rightTapArea setBackgroundColor:[UIColor clearColor]];
     [rightTapArea addGestureRecognizer:exitTap];
     [self.superview addSubview:rightTapArea];
@@ -279,8 +279,8 @@
     //the bottom block
     exitTap = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                       action:@selector(exitAnimation:)];
-    UIView *bottomTapArea = [ [UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.frame), CGRectGetWidth(self.superview.frame),
-                                                                      CGRectGetMaxY(self.superview.frame) - CGRectGetMaxY(self.frame) )];
+    UIView *bottomTapArea = [[ [UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.frame), CGRectGetWidth(self.superview.frame),
+                                                                      CGRectGetMaxY(self.superview.frame) - CGRectGetMaxY(self.frame) )] autorelease];
     [bottomTapArea setBackgroundColor:[UIColor clearColor]];
     [bottomTapArea addGestureRecognizer:exitTap];
     [self.superview addSubview:bottomTapArea];
