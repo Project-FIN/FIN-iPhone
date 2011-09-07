@@ -10,6 +10,9 @@
 #import "SQLiteManager.h"
 #import "FINDatabase.h"
 #import "JSONKit.h"
+#import "Reachability.h"
+
+@class Reachability;
 
 @interface SetRegionViewController : UIViewController<UIPickerViewDelegate, UIPickerViewDataSource, UIAlertViewDelegate>
 {
@@ -19,12 +22,18 @@
     FINDatabase *db;
     SQLiteManager *dbManager;
     IBOutlet UIButton *confirmBtn;
+    IBOutlet UIButton *cancelBtn;
+        
+    Reachability *internetReachable;
+    Reachability *hostReachable;
 }
 @property (nonatomic, retain) UIActivityIndicatorView *indicator;
 - (void) setWindow:(UIWindow*) win;
 - (NSMutableArray*) getRegionsList;
 - (NSNumber*) getRIDFromRegion:(NSString*)region;
 -(IBAction) confirmSelection:(id) sender;
+-(IBAction) cancelSelection:(id) sender;
 -(void) updateDB:(id) sender;
 -(void) removeIndicator:(id) sender;
+-(void) checkNetworkStatus:(NSNotification *)notice;
 @end

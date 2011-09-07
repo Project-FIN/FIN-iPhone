@@ -140,7 +140,6 @@ const int reportBtnWidth = 0;//60;
         }
         [icons setObject:mapName forKey:[dict objectForKey:@"full_name"]];
     }
-    NSLog(@"%@", icons);
     return icons;
 }
 
@@ -288,8 +287,10 @@ const int reportBtnWidth = 0;//60;
 
 - (NSInteger)tableView:(UITableView *)tableView indentationLevelForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if ( indexPath.row >= 1 ) {
+    if ( indexPath.row == 1 ) {
         return 1;
+    } else if (indexPath.row >= 2){
+        return 3;
     }
     return 0;
     

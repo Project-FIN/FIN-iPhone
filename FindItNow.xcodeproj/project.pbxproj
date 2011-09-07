@@ -43,6 +43,8 @@
 		1347642614069951007CA179 /* restrooms_small.png in Resources */ = {isa = PBXBuildFile; fileRef = 1347641A14069951007CA179 /* restrooms_small.png */; };
 		1347642714069951007CA179 /* school_supplies_small.png in Resources */ = {isa = PBXBuildFile; fileRef = 1347641B14069951007CA179 /* school_supplies_small.png */; };
 		1347642814069951007CA179 /* vending_small.png in Resources */ = {isa = PBXBuildFile; fileRef = 1347641C14069951007CA179 /* vending_small.png */; };
+		134CF5851416AD99007321C1 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 134CF5841416AD99007321C1 /* SystemConfiguration.framework */; };
+		134CF5891416ADF8007321C1 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 134CF5881416ADF8007321C1 /* Reachability.m */; };
 		134D100114069D3E00A9B318 /* coffee.png in Resources */ = {isa = PBXBuildFile; fileRef = 134D100014069D3E00A9B318 /* coffee.png */; };
 		136E920613ED93E5003799B6 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1330EE0B1375CE3E00940DDB /* MapKit.framework */; };
 		136E920713ED93E8003799B6 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 136E91FF13ED9358003799B6 /* CoreLocation.framework */; };
@@ -140,6 +142,9 @@
 		1347641A14069951007CA179 /* restrooms_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = restrooms_small.png; sourceTree = "<group>"; };
 		1347641B14069951007CA179 /* school_supplies_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = school_supplies_small.png; sourceTree = "<group>"; };
 		1347641C14069951007CA179 /* vending_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = vending_small.png; sourceTree = "<group>"; };
+		134CF5841416AD99007321C1 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		134CF5871416ADF8007321C1 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		134CF5881416ADF8007321C1 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		134D100014069D3E00A9B318 /* coffee.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = coffee.png; sourceTree = "<group>"; };
 		1365764613E4AF990074429F /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		136E91FF13ED9358003799B6 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -192,6 +197,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				134CF5851416AD99007321C1 /* SystemConfiguration.framework in Frameworks */,
 				136E920613ED93E5003799B6 /* MapKit.framework in Frameworks */,
 				136E920813ED93EA003799B6 /* libsqlite3.dylib in Frameworks */,
 				1330EDD31375CE1100940DDB /* UIKit.framework in Frameworks */,
@@ -217,6 +223,7 @@
 		1330EDC31375CE1000940DDB = {
 			isa = PBXGroup;
 			children = (
+				134CF5841416AD99007321C1 /* SystemConfiguration.framework */,
 				1347641214069951007CA179 /* en.lproj */,
 				1330EDD81375CE1100940DDB /* FindItNow */,
 				1330EDF81375CE1100940DDB /* FindItNowTests */,
@@ -250,6 +257,8 @@
 		1330EDD81375CE1100940DDB /* FindItNow */ = {
 			isa = PBXGroup;
 			children = (
+				134CF5871416ADF8007321C1 /* Reachability.h */,
+				134CF5881416ADF8007321C1 /* Reachability.m */,
 				134432D513FB497E00EE6B2F /* ItemAnnotation.h */,
 				134432D613FB497E00EE6B2F /* ItemAnnotation.m */,
 				13EE3C0113E8BB290018A7C8 /* SQLiteManager.h */,
@@ -543,6 +552,7 @@
 				EAD437FF1402242800BE6471 /* SetRegionTableController.m in Sources */,
 				EAD4380D14022BFE00BE6471 /* SetRegionViewController.m in Sources */,
 				138B7547140FFB70006F8018 /* FINDatabase.m in Sources */,
+				134CF5891416ADF8007321C1 /* Reachability.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

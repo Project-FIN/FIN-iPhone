@@ -40,10 +40,11 @@
 {
     [self.navigationController pushViewController:tabBarController animated:YES];
     UIButton *info = [UIButton buttonWithType:UIButtonTypeInfoLight];
-    self.tabBarController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:info];
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:info];
+    self.tabBarController.navigationItem.leftBarButtonItem = item;
     [info addTarget:self action:@selector(showActionSheet:) forControlEvents:UIControlEventTouchUpInside];
     
-    //self.tabBarController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonItemStyleBordered target:self action:@selector(showActionSheet:)];
+    [item release];
 }
 
 - (void)viewDidUnload
@@ -72,11 +73,15 @@
         //[self presentModalViewController:controller animated:YES];
         controller.title = @"Help";
         [self.tabBarController.navigationController pushViewController:controller animated:YES];
+        
+        [controller release];
 	}
     if (buttonIndex == 1) {
         SetRegionViewController *controller = [[SetRegionViewController alloc] initWithNibName:@"SetRegionViewController" bundle:[self nibBundle]];
         //[self presentModalViewController:controller animated:YES];
         [self.tabBarController presentModalViewController:controller animated:YES];
+        
+        [controller release];
     }
 }
 

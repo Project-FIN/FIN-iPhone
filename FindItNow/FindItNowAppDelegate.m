@@ -40,6 +40,8 @@
         SetRegionViewController *setRegion = [[SetRegionViewController alloc] initWithNibName:@"SetRegionViewController" bundle:[self.navigationController nibBundle]];
         [setRegion setWindow:self.window];
         [self.window.rootViewController presentModalViewController:setRegion animated:YES];
+        
+        [setRegion release];
     }
     
     NSDate *date = [NSDate date];
