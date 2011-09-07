@@ -50,6 +50,7 @@
 		136E920713ED93E8003799B6 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 136E91FF13ED9358003799B6 /* CoreLocation.framework */; };
 		136E920813ED93EA003799B6 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1365764613E4AF990074429F /* libsqlite3.dylib */; };
 		138B7547140FFB70006F8018 /* FINDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 138B7546140FFB70006F8018 /* FINDatabase.m */; };
+		13C3BEC91417D3710097AFC2 /* AppStoreFINIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 13C3BEC81417D3710097AFC2 /* AppStoreFINIcon.png */; };
 		13EE3C0313E8BB290018A7C8 /* SQLiteManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 13EE3C0213E8BB290018A7C8 /* SQLiteManager.m */; };
 		13F801FE13FCA6D200817A5C /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 13F801FD13FCA6D200817A5C /* Default.png */; };
 		EA0D7C7113E514E900AE9E14 /* InfoPopUpView.m in Sources */ = {isa = PBXBuildFile; fileRef = EA0D7C7013E514E900AE9E14 /* InfoPopUpView.m */; };
@@ -150,6 +151,7 @@
 		136E91FF13ED9358003799B6 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		138B7545140FFB70006F8018 /* FINDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FINDatabase.h; sourceTree = "<group>"; };
 		138B7546140FFB70006F8018 /* FINDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FINDatabase.m; sourceTree = "<group>"; };
+		13C3BEC81417D3710097AFC2 /* AppStoreFINIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppStoreFINIcon.png; sourceTree = "<group>"; };
 		13EE3C0113E8BB290018A7C8 /* SQLiteManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQLiteManager.h; sourceTree = "<group>"; };
 		13EE3C0213E8BB290018A7C8 /* SQLiteManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQLiteManager.m; sourceTree = "<group>"; };
 		13F801FD13FCA6D200817A5C /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
@@ -337,6 +339,7 @@
 				EA783E0213F1116C00C5B918 /* vending_big.png */,
 				EA783E0313F1116C00C5B918 /* vending.png */,
 				1330EDDA1375CE1100940DDB /* FindItNow-Info.plist */,
+				13C3BEC81417D3710097AFC2 /* AppStoreFINIcon.png */,
 				1330EDDB1375CE1100940DDB /* InfoPlist.strings */,
 				1330EDDE1375CE1100940DDB /* FindItNow-Prefix.pch */,
 				1330EDDF1375CE1100940DDB /* main.m */,
@@ -502,6 +505,7 @@
 				1347642714069951007CA179 /* school_supplies_small.png in Resources */,
 				1347642814069951007CA179 /* vending_small.png in Resources */,
 				134D100114069D3E00A9B318 /* coffee.png in Resources */,
+				13C3BEC91417D3710097AFC2 /* AppStoreFINIcon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -671,7 +675,7 @@
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
@@ -682,16 +686,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Eric Hare";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Eric Hare";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "FA037B31-1795-47E8-B81B-29DCED95A127";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "FA037B31-1795-47E8-B81B-29DCED95A127";
 				SDKROOT = iphoneos;
 			};
 			name = Release;
