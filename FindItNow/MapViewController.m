@@ -92,7 +92,7 @@
 }
 
 - (void)mapView:(MKMapView *)aMapView didUpdateUserLocation:(MKUserLocation *)userLocation {
-    if ([mapCategory length] != 0 && !hasCenteredOnLoc) {
+    if ([mapCategory length] != 0 && !hasCenteredOnLoc && userLocation.coordinate.latitude > -180) {
         [aMapView setCenterCoordinate:userLocation.coordinate];
         hasCenteredOnLoc = TRUE;
     }
