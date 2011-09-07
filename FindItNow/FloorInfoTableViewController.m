@@ -48,6 +48,8 @@ const int reportBtnWidth = 0;//60;
 
 - (void)dealloc
 {
+    [floors release];
+    [dataDict release];
     [cateNameToIcon release];
     [selectedChildRow release];
     [selectedRowIndeices release];

@@ -108,6 +108,7 @@
 - (void)dealloc
 {
     [buildingTable release];
+    [buildings release];
     [super dealloc];
 }
 

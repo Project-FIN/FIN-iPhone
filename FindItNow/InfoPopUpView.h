@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class FloorInfoTableViewController;
 
 @interface InfoPopUpView : UIView {
     BOOL isInfoHidden;
-    UITableView *infoTable;
+    FloorInfoTableViewController *infoTable;
     NSMutableArray *exitAreas;
     NSString *buildingName;
     NSString *category;
