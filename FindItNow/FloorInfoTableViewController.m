@@ -209,8 +209,9 @@ const int reportBtnWidth = 0;//60;
             detail.tag = DETAIL_TAG;
             [detail setTextColor:[UIColor whiteColor]];
             [cell.contentView addSubview:detail];
+            cell.textLabel.text = @"";
         }
-        [self setCellForDetailView:cell WithTableView:tableView data:[dataDict objectForKey:[floors objectAtIndex:indexPath.section]]];
+        [self setCellForDetailView:cell WithTableView:tableView data:[dataDict objectForKey:[floors objectAtIndex:indexPath.section]] indexPath:indexPath];
     }else if ([self selectionIncludesSection:indexPath.section] && isDoubleExpendable && 1 <= indexPath.row)
     {
         if ([selectedChildRow containsObject:indexPath]){
@@ -222,6 +223,7 @@ const int reportBtnWidth = 0;//60;
                 detail.tag = DETAIL_TAG;
                 [detail setTextColor:[UIColor whiteColor]];
                 [cell.contentView addSubview:detail];
+                cell.textLabel.text = @"";
             }
             NSDictionary *cateItem = [dataDict objectForKey:[floors objectAtIndex:indexPath.section]];
             NSArray *subCate = [self subCategory:cateItem];            
@@ -229,7 +231,7 @@ const int reportBtnWidth = 0;//60;
             NSArray *obj = [NSArray arrayWithObjects:str,nil];
             NSArray *key = [NSArray arrayWithObjects:@"",nil];
             NSDictionary *data = [NSDictionary dictionaryWithObjects:obj forKeys:key];
-            [self setCellForDetailView:cell WithTableView:tableView data:data];
+            [self setCellForDetailView:cell WithTableView:tableView data:data indexPath:indexPath];
         }else{
             NSString *CellIdentifier = @"CateCell";
             cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -287,17 +289,14 @@ const int reportBtnWidth = 0;//60;
 
 - (NSInteger)tableView:(UITableView *)tableView indentationLevelForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if ( indexPath.row == 1 ) {
-        return 1;
-    } else if (indexPath.row >= 2){
-        return 3;
+    if ( indexPath.row >= 1 ) {
+        return (indexPath.row % 2) == 1 ? 1:2;
     }
-    return 0;
+    return 1;
     
 }
 
--(void) setCellForDetailView:(UITableViewCell *) cell WithTableView:(UITableView *) tableView data:(NSDictionary*) data
-{
+-(void) setCellForDetailView:(UITableViewCell *) cell WithTableView:(UITableView *) tableView data:(NSDictionary*) data indexPath:(NSIndexPath*)indexPath{
     cell.textLabel.text = @"";
     UILabel *detail = (UILabel*)[cell.contentView viewWithTag:DETAIL_TAG];
     detail.font = [UIFont systemFontOfSize:12.0f];
@@ -309,8 +308,8 @@ const int reportBtnWidth = 0;//60;
     NSArray *textline = [str componentsSeparatedByString:@"\\n"];
     str = [str stringByReplacingOccurrencesOfString:@"\\n" withString:@"\n"];
     [detail setText:str];
-    detail.frame = CGRectMake(CGRectGetMinX(detail.frame), CGRectGetMinY(detail.frame), CGRectGetWidth(detail.frame),[textline count]*fontSizeSpace );
-    
+    detail.frame = CGRectMake(CGRectGetMinX(detail.frame)*(1+[self tableView:tableView indentationLevelForRowAtIndexPath:indexPath])
+                              , CGRectGetMinY(detail.frame), CGRectGetWidth(detail.frame),[textline count]*fontSizeSpace );
     /*UIButton *butt = [UIButton buttonWithType:UIButtonTypeRoundedRect];
      butt.frame = CGRectMake(CGRectGetMaxX(tableView.frame)-(reportBtnWidth+detailcellMargin), CGRectGetMaxY(detail.frame), reportBtnWidth, reportBtnHeight);
      [butt setTitle:@"Report!" forState:UIControlStateNormal];
