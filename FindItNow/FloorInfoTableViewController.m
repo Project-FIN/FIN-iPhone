@@ -308,7 +308,7 @@ const int reportBtnWidth = 0;//60;
     NSArray *textline = [str componentsSeparatedByString:@"\\n"];
     str = [str stringByReplacingOccurrencesOfString:@"\\n" withString:@"\n"];
     [detail setText:str];
-    detail.frame = CGRectMake(CGRectGetMinX(detail.frame)*(1+[self tableView:tableView indentationLevelForRowAtIndexPath:indexPath])
+    detail.frame = CGRectMake(10*(1+[self tableView:tableView indentationLevelForRowAtIndexPath:indexPath])
                               , CGRectGetMinY(detail.frame), CGRectGetWidth(detail.frame),[textline count]*fontSizeSpace );
     /*UIButton *butt = [UIButton buttonWithType:UIButtonTypeRoundedRect];
      butt.frame = CGRectMake(CGRectGetMaxX(tableView.frame)-(reportBtnWidth+detailcellMargin), CGRectGetMaxY(detail.frame), reportBtnWidth, reportBtnHeight);
