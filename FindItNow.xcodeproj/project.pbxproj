@@ -223,7 +223,6 @@
 		1330EDC31375CE1000940DDB = {
 			isa = PBXGroup;
 			children = (
-				134CF5841416AD99007321C1 /* SystemConfiguration.framework */,
 				1347641214069951007CA179 /* en.lproj */,
 				1330EDD81375CE1100940DDB /* FindItNow */,
 				1330EDF81375CE1100940DDB /* FindItNowTests */,
@@ -244,6 +243,7 @@
 		1330EDD11375CE1000940DDB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				134CF5841416AD99007321C1 /* SystemConfiguration.framework */,
 				1365764613E4AF990074429F /* libsqlite3.dylib */,
 				1330EE0B1375CE3E00940DDB /* MapKit.framework */,
 				136E91FF13ED9358003799B6 /* CoreLocation.framework */,
@@ -662,7 +662,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Eric Hare";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
@@ -671,7 +671,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "0CF2E5E9-D658-4F06-B97E-FDD793E36010";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -680,14 +680,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Eric Hare";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "55E303E2-B0A9-4790-8951-493A098F44C5";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 			};
 			name = Release;
