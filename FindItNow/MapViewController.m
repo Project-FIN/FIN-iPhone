@@ -349,7 +349,7 @@
 -(IBAction) scrollToUserLocation
 {
     MKUserLocation *myLoc = mapView.userLocation;
-    if (myLoc != nil) {
+    if (myLoc.coordinate.latitude > -180 && [CLLocationManager authorizationStatus] != kCLAuthorizationStatusDenied && myLoc != nil) {
         [mapView setCenterCoordinate:myLoc.coordinate animated:YES];
     } else {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error: Location Not Detected" message:@"Could not detect your location" delegate:self cancelButtonTitle:@"Close" otherButtonTitles:nil];
