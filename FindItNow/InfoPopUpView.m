@@ -195,6 +195,8 @@
                              [infoTable setFrame:CGRectMake(10, 160, CGRectGetWidth(self.frame)-20, tableHeight)];
                          }completion:^(BOOL finished) {
                          }];
+        
+        [infoTableCtrl release];
     }
     [self addExitTapGesture];
 }
