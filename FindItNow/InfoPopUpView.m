@@ -196,7 +196,6 @@
                          }completion:^(BOOL finished) {
                          }];
         
-        [infoTableCtrl release];
     }
     [self addExitTapGesture];
 }
