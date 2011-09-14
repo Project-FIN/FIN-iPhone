@@ -47,6 +47,7 @@
 						<int key="NSvFlags">274</int>
 						<string key="NSFrameSize">{320, 460}</string>
 						<reference key="NSSuperview" ref="191373211"/>
+						<reference key="NSWindow"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MSAxIDEAA</bytes>
@@ -91,9 +92,9 @@ IGRhdGFiYXNlLgoKQWJvdXQKRmluZEl0Tm93IDEuMCwgR05VIEdQTCB2MwpGaW5kSXROb3cgaXMgYW4g
 aU9TIGFwcGxpY2F0aW9uIGRldmVsb3BlZCBmb3IgYSBzb2Z0d2FyZSBlbmdpbmVlcmluZyBwcm9qZWN0
 IGF0IHRoZSBVbml2ZXJzaXR5IG9mIFdhc2hpbmd0b24uCkNvbnRyaWJ1dG9yczogRHVzdGluIEFicmFt
 c29uLCBNYWkgRGFuZywgTWljaGFlbCBGYWxjb25lLCBFcmljIEhhcmUsIENoYW5lbCBIdWFuZywgSmls
-bHluIEpvaG5zb24sIEphcmVkIEpvbmVzLCBhbmQgU3BlbmNlciAKClZpc2l0IG91ciBwcm9qZWN0IHNp
-dGUgdG8gbGVhcm4gbW9yZSBhdDogaHR0cDovL3d3dy5naXRodWIuY29tL1Byb2plY3QtRklOL0ZJTi1p
-UGhvbmU</bytes>
+bHluIEpvaG5zb24sIEphcmVkIEpvbmVzLCBhbmQgU3BlbmNlciBUaG9tYXMuCgpWaXNpdCBvdXIgcHJv
+amVjdCBzaXRlIHRvIGxlYXJuIG1vcmUgYXQ6IGh0dHA6Ly93d3cuZ2l0aHViLmNvbS9Qcm9qZWN0LUZJ
+Ti9GSU4taVBob25lA</bytes>
 						</object>
 						<object class="NSFont" key="IBUIFont">
 							<string key="NSName">Helvetica</string>
@@ -108,6 +109,7 @@ UGhvbmU</bytes>
 				</object>
 				<string key="NSFrame">{{0, 20}, {320, 460}}</string>
 				<reference key="NSSuperview"/>
+				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="233952967"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
