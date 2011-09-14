@@ -138,7 +138,6 @@ const int reportBtnWidth = 0;//60;
             parents = [arr objectAtIndex:0];
             
             mapName = [parents objectForKey:@"name"];
-            NSLog(@"%@", mapName);
         }
         [icons setObject:mapName forKey:[dict objectForKey:@"full_name"]];
     }

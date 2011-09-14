@@ -46,6 +46,8 @@
 		134CF5851416AD99007321C1 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 134CF5841416AD99007321C1 /* SystemConfiguration.framework */; };
 		134CF5891416ADF8007321C1 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 134CF5881416ADF8007321C1 /* Reachability.m */; };
 		134D100114069D3E00A9B318 /* coffee.png in Resources */ = {isa = PBXBuildFile; fileRef = 134D100014069D3E00A9B318 /* coffee.png */; };
+		1350DA0F14215CE100E56389 /* default_location.png in Resources */ = {isa = PBXBuildFile; fileRef = 1350DA0E14215CE100E56389 /* default_location.png */; };
+		1350DA1214215D6200E56389 /* my_location.png in Resources */ = {isa = PBXBuildFile; fileRef = 1350DA1114215D6200E56389 /* my_location.png */; };
 		136E920613ED93E5003799B6 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1330EE0B1375CE3E00940DDB /* MapKit.framework */; };
 		136E920713ED93E8003799B6 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 136E91FF13ED9358003799B6 /* CoreLocation.framework */; };
 		136E920813ED93EA003799B6 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1365764613E4AF990074429F /* libsqlite3.dylib */; };
@@ -147,6 +149,8 @@
 		134CF5871416ADF8007321C1 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		134CF5881416ADF8007321C1 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		134D100014069D3E00A9B318 /* coffee.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = coffee.png; sourceTree = "<group>"; };
+		1350DA0E14215CE100E56389 /* default_location.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = default_location.png; sourceTree = "<group>"; };
+		1350DA1114215D6200E56389 /* my_location.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = my_location.png; sourceTree = "<group>"; };
 		1365764613E4AF990074429F /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		136E91FF13ED9358003799B6 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		138B7545140FFB70006F8018 /* FINDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FINDatabase.h; sourceTree = "<group>"; };
@@ -307,6 +311,8 @@
 		1330EDD91375CE1100940DDB /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				1350DA1114215D6200E56389 /* my_location.png */,
+				1350DA0E14215CE100E56389 /* default_location.png */,
 				134D100014069D3E00A9B318 /* coffee.png */,
 				1347640D14069951007CA179 /* atms_small.png */,
 				1347640E14069951007CA179 /* bike_racks_small.png */,
@@ -506,6 +512,8 @@
 				1347642814069951007CA179 /* vending_small.png in Resources */,
 				134D100114069D3E00A9B318 /* coffee.png in Resources */,
 				13C3BEC91417D3710097AFC2 /* AppStoreFINIcon.png in Resources */,
+				1350DA0F14215CE100E56389 /* default_location.png in Resources */,
+				1350DA1214215D6200E56389 /* my_location.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
