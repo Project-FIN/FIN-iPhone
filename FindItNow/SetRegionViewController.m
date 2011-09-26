@@ -54,7 +54,7 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSNumber *rid = [defaults objectForKey:@"rid"];
     
-    data = [self getRegionsList];
+    [self getRegionsList];
     
     if (rid != NULL) {
         NSString *sqlStr = [NSString stringWithFormat:@"SELECT full_name FROM regions WHERE rid = %d",[rid intValue]];
@@ -76,7 +76,7 @@
             [db createDB];
             [db saveRegions:0];
         }
-        data = [self getRegionsList];
+        [self getRegionsList];
         [pickerView reloadAllComponents];
     }
 }
@@ -149,16 +149,22 @@
     [db saveCategory:0];
     [db saveBuildings:0];
     [db saveItems:0];
-    [self performSelectorOnMainThread:@selector(removeIndicator:) withObject:nil waitUntilDone:NO];
+    [self performSelectorOnMainThread:@selector(removeIndicatorForUpdate:) withObject:nil waitUntilDone:NO];
 
     [pool release];
 }
--(void) removeIndicator:(id) sender
+-(void) removeIndicatorForUpdate:(id) sender
 {
     [indicator stopAnimating];
     [[indicator superview] removeFromSuperview];
     [window makeKeyAndVisible];
     [self dismissModalViewControllerAnimated:YES];
+}
+-(void) removeIndicatorForRegion:(id)sender
+{
+    [indicator stopAnimating];
+    [[indicator superview] removeFromSuperview];
+    [pickerView reloadAllComponents];
 }
 
 -(IBAction) confirmSelection:(id) sender
@@ -196,7 +202,19 @@
 }
 
 
-- (NSMutableArray*) getRegionsList {
+- (void) getRegionsList {
+    UIView *overlay = [[ [UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame))] autorelease];
+    [overlay setBackgroundColor:[UIColor colorWithWhite:0 alpha:0.75]];
+    [self.view addSubview:overlay];
+    
+    indicator = [[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge] autorelease];
+    [indicator setCenter:self.view.center];
+    [overlay addSubview:indicator];
+    [indicator startAnimating];
+    [self performSelectorInBackground:@selector(performGetRegion:) withObject:nil];
+}
+-(void) performGetRegion:(id)sender
+{
     NSString *sqlStr = [NSString stringWithFormat:@"SELECT full_name FROM regions WHERE deleted = 0"];
     NSArray *regionsArr = [dbManager getRowsForQuery:sqlStr];
     
@@ -205,7 +223,8 @@
         [regionsList addObject:[dict objectForKey:@"full_name"]];
     }
     
-    return regionsList;
+    data = regionsList;
+    [self performSelectorOnMainThread:@selector(removeIndicatorForRegion:) withObject:nil waitUntilDone:NO];
 }
 
 - (NSNumber*) getRIDFromRegion:(NSString*) regionName {

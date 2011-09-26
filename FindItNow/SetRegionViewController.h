@@ -29,11 +29,13 @@
 }
 @property (nonatomic, retain) UIActivityIndicatorView *indicator;
 - (void) setWindow:(UIWindow*) win;
-- (NSMutableArray*) getRegionsList;
+- (void) getRegionsList;
 - (NSNumber*) getRIDFromRegion:(NSString*)region;
 -(IBAction) confirmSelection:(id) sender;
 -(IBAction) cancelSelection:(id) sender;
 -(void) updateDB:(id) sender;
--(void) removeIndicator:(id) sender;
+-(void) removeIndicatorForUpdate:(id) sender;
+-(void) removeIndicatorForRegion:(id) sender;
 -(void) checkNetworkStatus:(NSNotification *)notice;
+-(void) performGetRegion:(id) sender;
 @end
