@@ -20,8 +20,11 @@ const int reportBtnWidth = 0;//60;
 
 #define DETAIL_TAG 1
 #define DETAIL_BUTTON 2
-#define CATEIMG_START 2
+#define CATE_TITLE 1
+#define CATE_DETAILBTN 2
 #define FLR_TITLE 1
+#define FLR_DETAILBTN 2
+#define CATEIMG_START 3
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -198,6 +201,21 @@ const int reportBtnWidth = 0;//60;
     return 0;
 }
 
+-(UITableViewCell*) createDetailCellwithTableView:(UITableView *)tableView
+{
+    UITableViewCell *cell =[[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"DetailCell"] autorelease];
+    UILabel *detail = [[[UILabel alloc] initWithFrame:CGRectMake(10, 0, CGRectGetWidth(tableView.frame)-10, 45)] autorelease];
+    detail.tag = DETAIL_TAG;
+    detail.font = [UIFont systemFontOfSize:12.0f];
+    [detail setBackgroundColor:[UIColor clearColor]];
+    detail.textAlignment = UITextAlignmentLeft;
+    detail.numberOfLines = 0;
+    [detail setTextColor:[UIColor whiteColor]];
+    [cell.contentView addSubview:detail];
+    cell.textLabel.text = @"";
+    return cell;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell;
@@ -205,44 +223,59 @@ const int reportBtnWidth = 0;//60;
         NSString *CellIdentifier = @"DetailCell";
         cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (cell == nil) {
-            cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-            UILabel *detail = [[[UILabel alloc] initWithFrame:CGRectMake(10, 0, CGRectGetWidth(tableView.frame)-10, 45)] autorelease];
-            detail.tag = DETAIL_TAG;
-            [detail setTextColor:[UIColor whiteColor]];
-            [cell.contentView addSubview:detail];
-            cell.textLabel.text = @"";
+            cell = [self createDetailCellwithTableView:tableView];
         }
         [self setCellForDetailView:cell WithTableView:tableView data:[dataDict objectForKey:[floors objectAtIndex:indexPath.section]] indexPath:indexPath];
     }else if ([self selectionIncludesSection:indexPath.section] && isDoubleExpendable && 1 <= indexPath.row)
     {
-        if ([selectedChildRow containsObject:indexPath]){
+        if (indexPath.row % 2 ==0){
             NSString *CellIdentifier = @"DetailCell";
             cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (cell == nil) {
-                cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-                UILabel *detail = [[[UILabel alloc] initWithFrame:CGRectMake(10, 0, CGRectGetWidth(tableView.frame)-10, 45)] autorelease];
-                detail.tag = DETAIL_TAG;
-                [detail setTextColor:[UIColor whiteColor]];
-                [cell.contentView addSubview:detail];
-                cell.textLabel.text = @"";
+                cell = [self createDetailCellwithTableView:tableView];
             }
-            NSDictionary *cateItem = [dataDict objectForKey:[floors objectAtIndex:indexPath.section]];
-            NSArray *subCate = [self subCategory:cateItem];            
-            NSString *str = [cateItem objectForKey:[subCate objectAtIndex:(indexPath.row-1)/2]];
-            NSArray *obj = [NSArray arrayWithObjects:str,nil];
-            NSArray *key = [NSArray arrayWithObjects:@"",nil];
-            NSDictionary *data = [NSDictionary dictionaryWithObjects:obj forKeys:key];
-            [self setCellForDetailView:cell WithTableView:tableView data:data indexPath:indexPath];
+            if ([selectedChildRow containsObject:indexPath]){
+                NSDictionary *cateItem = [dataDict objectForKey:[floors objectAtIndex:indexPath.section]];
+                NSArray *subCate = [self subCategory:cateItem];            
+                NSString *str = [cateItem objectForKey:[subCate objectAtIndex:(indexPath.row-1)/2]];
+                NSArray *obj = [NSArray arrayWithObjects:str,nil];
+                NSArray *key = [NSArray arrayWithObjects:@"",nil];
+                NSDictionary *data = [NSDictionary dictionaryWithObjects:obj forKeys:key];
+                [self setCellForDetailView:cell WithTableView:tableView data:data indexPath:indexPath];
+            } else{
+                UILabel *detail = (UILabel*)[cell.contentView viewWithTag:DETAIL_TAG];
+                detail.text = @"";
+            }
         }else{
             NSString *CellIdentifier = @"CateCell";
             cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (cell == nil) {
                 cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-                [cell.textLabel setTextColor:[UIColor whiteColor]];
+                
+                UIButton *detail = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+                [detail setFrame:CGRectMake(10, 5,CGRectGetWidth(detail.frame), CGRectGetHeight(detail.frame))];
+                [cell.contentView addSubview:detail];
+                detail.tag = CATE_DETAILBTN;
+                
+                UILabel *title = [[[UILabel alloc] initWithFrame:CGRectMake(20+detail.frame.size.width,0,CGRectGetWidth(tableView.frame), 45)] autorelease];
+                [title setFont:[UIFont boldSystemFontOfSize:20.0f]];
+                [title setBackgroundColor:[UIColor clearColor]];
+                [title setTextColor:[UIColor whiteColor]];
+                title.tag = CATE_TITLE;
+                [cell.contentView addSubview:title];
             }
+            cell.textLabel.text = @"";
             NSDictionary *cateItem = [dataDict objectForKey:[floors objectAtIndex:indexPath.section]];
             NSArray *subCate = [self subCategory:cateItem];
-            cell.textLabel.text = [subCate objectAtIndex:(indexPath.row-1)/2];
+            UILabel *title = (UILabel*)[cell.contentView viewWithTag:CATE_TITLE];
+            title.text=[subCate objectAtIndex:(indexPath.row-1)/2];
+            
+            UIView *detail = [cell.contentView viewWithTag:CATE_DETAILBTN];
+            if ([self selectionIncludesSection:indexPath.section]){
+                detail.transform = CGAffineTransformRotate(CGAffineTransformIdentity,0.5* M_PI);
+            }else{
+                detail.transform = CGAffineTransformIdentity;
+            }
         }
     }
     else{
@@ -251,6 +284,12 @@ const int reportBtnWidth = 0;//60;
         if (cell == nil) {
             cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
             [cell setContentMode:UIViewContentModeCenter];
+            
+            UIButton *detail = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+            [detail setFrame:CGRectMake(0, 5,CGRectGetWidth(detail.frame), CGRectGetHeight(detail.frame))];
+            [cell.contentView addSubview:detail];
+            detail.tag = FLR_DETAILBTN;
+            
             for (int i = 0; i < 5; i++){
                 UIImageView *imageView = [[[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetWidth(tableView.frame)-((i+1)*40), 5, 36, 36)] autorelease];
                 [imageView setContentMode:UIViewContentModeCenter];
@@ -258,7 +297,7 @@ const int reportBtnWidth = 0;//60;
                 imageView.tag = i+CATEIMG_START;
                 [cell.contentView addSubview:imageView];
             }
-            UILabel *title = [[[UILabel alloc] initWithFrame:CGRectMake(10,0,CGRectGetWidth(tableView.frame), 45)] autorelease];
+            UILabel *title = [[[UILabel alloc] initWithFrame:CGRectMake(10+detail.frame.size.width,0,CGRectGetWidth(tableView.frame), 45)] autorelease];
             [title setFont:[UIFont boldSystemFontOfSize:20.0f]];
             [title setBackgroundColor:[UIColor clearColor]];
             [title setTextColor:[UIColor whiteColor]];
@@ -284,6 +323,19 @@ const int reportBtnWidth = 0;//60;
         }
         UILabel *title = (UILabel*)[cell.contentView viewWithTag:FLR_TITLE];
         title.text=str;
+        
+        UIView *detail = [cell.contentView viewWithTag:FLR_DETAILBTN];
+        if (!isDoubleExpendable || [[dataDict allKeys] containsObject:[floors objectAtIndex:indexPath.section]]){
+            if ([self selectionIncludesSection:indexPath.section]){
+                detail.transform = CGAffineTransformRotate(CGAffineTransformIdentity,0.5* M_PI);
+            }else{
+                detail.transform = CGAffineTransformIdentity;
+            }
+            [detail setAlpha:1];
+        }else{
+            [detail setAlpha:0];
+        }
+
     }
     return cell;
 }
@@ -300,10 +352,6 @@ const int reportBtnWidth = 0;//60;
 -(void) setCellForDetailView:(UITableViewCell *) cell WithTableView:(UITableView *) tableView data:(NSDictionary*) data indexPath:(NSIndexPath*)indexPath{
     cell.textLabel.text = @"";
     UILabel *detail = (UILabel*)[cell.contentView viewWithTag:DETAIL_TAG];
-    detail.font = [UIFont systemFontOfSize:12.0f];
-    [detail setBackgroundColor:[UIColor clearColor]];
-    detail.textAlignment = UITextAlignmentLeft;
-    detail.numberOfLines = 0;
     
     NSString *str = [data objectForKey:[[data keyEnumerator] nextObject]] ;
     NSArray *textline = [str componentsSeparatedByString:@"\\n"];
@@ -343,8 +391,8 @@ const int reportBtnWidth = 0;//60;
     
     if (isDoubleExpendable && indexPath.row >= 1 && indexPath.row%2 == 1){
         NSMutableArray *insert = [NSMutableArray arrayWithObject:[NSIndexPath indexPathForRow:[indexPath row]+1 inSection:indexPath.section]];
-        // NSArray *reload = [NSArray arrayWithObjects:[NSIndexPath indexPathForRow:[indexPath row] inSection:indexPath.section],
-        //[NSIndexPath indexPathForRow:[indexPath row]+2 inSection:indexPath.section], nil];
+        //NSArray *reload = [NSArray arrayWithObjects:[NSIndexPath indexPathForRow:[indexPath row] inSection:indexPath.section],
+               // [NSIndexPath indexPathForRow:[indexPath row]+2 inSection:indexPath.section], nil];
         
         if ([selectedChildRow containsObject:[insert objectAtIndex:0]]){
             baseHeight -= [self.tableView cellForRowAtIndexPath:[insert objectAtIndex:0]].frame.size.height;
@@ -420,7 +468,7 @@ const int reportBtnWidth = 0;//60;
         
         [tableView beginUpdates];
         [tableView insertRowsAtIndexPaths:insert withRowAnimation:UITableViewRowAnimationTop];
-        //[tableView reloadRowsAtIndexPaths:reload withRowAnimation:UITableViewRowAnimationNone];
+        [tableView reloadRowsAtIndexPaths:reload withRowAnimation:UITableViewRowAnimationNone];
         [tableView endUpdates];
         
     }

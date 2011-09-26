@@ -18,7 +18,6 @@
     SQLiteManager *dbManager;
 }
 @property (nonatomic, retain) IBOutlet MapViewController *mapView;
-@property (nonatomic, retain) IBOutlet UILabel *text;
 @property (nonatomic, retain) IBOutlet UIScrollView *btnGrid;
 
 - (IBAction)map:(id) sender;

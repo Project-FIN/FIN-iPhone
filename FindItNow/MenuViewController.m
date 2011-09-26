@@ -14,7 +14,6 @@
 @implementation MenuViewController
 @synthesize mapView;
 @synthesize btnGrid;
-@synthesize text;
 
 - (UIColor*) getColorForRegion:(NSString*)full_name {
     NSString *sqlStr = [NSString stringWithFormat:@"SELECT rid FROM regions WHERE full_name = '%@'", full_name];
@@ -48,7 +47,7 @@
     NSArray *regionsArr = [dbManager getRowsForQuery:sqlStr];
     NSString *region_name = [[regionsArr objectAtIndex:0] objectForKey:@"full_name"];
     
-    NSMutableArray *buttons = [[NSMutableArray alloc] initWithCapacity:[categories count]];
+    //NSMutableArray *buttons = [[NSMutableArray alloc] initWithCapacity:[categories count]];
     int btnSize = ( CGRectGetWidth(btnGrid.frame) - 180 )/3;
     int labelOffset = 8;
 
@@ -74,7 +73,7 @@
         
         [btnView addTarget:self action:@selector(map:) forControlEvents:UIControlEventTouchUpInside];
         [btnView addSubview:img];
-        [buttons addObject:img];
+        //[buttons addObject:img];
         
         [cat release];
         [img release];
@@ -86,10 +85,9 @@
     [btnGrid addSubview:regionLabel];
 
     btnGrid.backgroundColor = [self getColorForRegion:region_name];
-    btnGrid.contentSize = CGSizeMake( 2*(btnSize+60), [buttons count]*(btnSize+40));
+    btnGrid.contentSize = CGSizeMake( 2*(btnSize+60), [categories count]*(btnSize+40));
     
     [regionLabel release];
-    [buttons release];
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -165,6 +163,9 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+    [dbManager release];
+    [mapView release];
+    [btnGrid release];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 
-@interface FloorInfoTableViewController : UITableViewController {
+@interface FloorInfoTableViewController : UITableViewController/*<UISearchDisplayDelegate, UISearchBarDelegate>*/ {
     NSInteger numSection;
     NSMutableArray *selectedRowIndeices;
     NSMutableArray *selectedChildRow;   //for double expendable only
@@ -17,6 +17,14 @@
     NSArray *floors;
     BOOL isDoubleExpendable;
     NSDictionary *cateNameToIcon;
+    
+   /* NSArray         *listContent;           // The master content.
+    NSMutableArray  *filteredListContent;   // The content filtered as a result of a search.
+    
+    // The saved state of the search UI if a memory warning removed the view.
+    NSString        *savedSearchTerm;
+    NSInteger       savedScopeButtonIndex;
+    BOOL            searchWasActive;*/
 }
 -(BOOL) selectionIncludesSection:(NSInteger)section;
 - (id)initWithDict:(NSDictionary*) data Floors:(NSArray*) flr andIsDoubleExpendable:(BOOL) isDouble;
@@ -25,4 +33,5 @@
 -(NSArray*) subCategory:(NSDictionary*) data;
 -(CGFloat) heightBaseOnContent:(NSString*) data;
 - (NSDictionary*) getCategoryIconDictionary;
+-(UITableViewCell*) createDetailCellwithTableView:(UITableView *)tableView;
 @end
