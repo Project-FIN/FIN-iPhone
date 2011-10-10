@@ -13,6 +13,8 @@
 #import "Reachability.h"
 
 @class Reachability;
+@protocol RegionViewControllerDelegate;
+
 @protocol RegionViewControllerDelegate <NSObject>
 - (void)didDismissRegionSelectView;
 @end
@@ -26,13 +28,13 @@
     SQLiteManager *dbManager;
     IBOutlet UIButton *confirmBtn;
     IBOutlet UIButton *cancelBtn;
-    id<RegionViewControllerDelegate> *delegate;
+    id<RegionViewControllerDelegate> delegate;
         
     Reachability *internetReachable;
     Reachability *hostReachable;
 }
 @property (nonatomic, retain) UIActivityIndicatorView *indicator;
-@property (nonatomic, assign) id<RegionViewControllerDelegate> *delegate;
+@property (nonatomic, assign) id<RegionViewControllerDelegate> delegate;
 
 - (void) setWindow:(UIWindow*) win;
 - (void) getRegionsList;
