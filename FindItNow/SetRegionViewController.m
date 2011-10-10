@@ -11,6 +11,7 @@
 
 @implementation SetRegionViewController
 @synthesize indicator;
+@synthesize delegate;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {   
@@ -18,6 +19,8 @@
     if (self) {
         [self setModalPresentationStyle:UIModalPresentationFormSheet];
     }
+    dbManager = [[SQLiteManager alloc] initWithDatabaseNamed:@"FIN_LOCAL.db"];
+    db = [[FINDatabase alloc] init];
     
     return self;
 }
@@ -26,8 +29,6 @@
 {
     window = win;
 }
-
-
 
 - (void)dealloc
 {
@@ -46,21 +47,20 @@
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
-    
-    dbManager = [[SQLiteManager alloc] initWithDatabaseNamed:@"FIN_LOCAL.db"];
-    db = [[FINDatabase alloc] init];
+    [super viewDidLoad]; 
+    NetworkStatus internetStatus = [internetReachable currentReachabilityStatus];
+    NetworkStatus hostStatus = [hostReachable currentReachabilityStatus];
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSNumber *rid = [defaults objectForKey:@"rid"];
     
-    [self getRegionsList];
-    
-    if (rid != NULL) {
-        NSString *sqlStr = [NSString stringWithFormat:@"SELECT full_name FROM regions WHERE rid = %d",[rid intValue]];
-        NSArray *regionsArr = [dbManager getRowsForQuery:sqlStr];
-        
-        [pickerView selectRow:[data indexOfObject:[[regionsArr objectAtIndex:0] objectForKey:@"full_name"]]+1 inComponent:0 animated:YES];
+    if (internetStatus != NotReachable && hostStatus != NotReachable) {
+        if (rid == nil) {
+            [db createDB];
+            [db saveRegions:0];
+        }
+        [self getRegionsList];
+        [pickerView reloadAllComponents];
     }
 }
 
@@ -153,18 +153,33 @@
 
     [pool release];
 }
+
 -(void) removeIndicatorForUpdate:(id) sender
 {
     [indicator stopAnimating];
     [[indicator superview] removeFromSuperview];
     [window makeKeyAndVisible];
-    [self dismissModalViewControllerAnimated:YES];
+    [delegate didDismissRegionSelectView];
 }
+
 -(void) removeIndicatorForRegion:(id)sender
 {
     [indicator stopAnimating];
     [[indicator superview] removeFromSuperview];
     [pickerView reloadAllComponents];
+    [self setPickerViewDefault];
+}
+
+-(void) setPickerViewDefault
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSNumber *rid = [defaults objectForKey:@"rid"];
+    if (rid != NULL) {
+        NSString *sqlStr = [NSString stringWithFormat:@"SELECT full_name FROM regions WHERE rid = %d",[rid intValue]];
+        NSArray *regionsArr = [dbManager getRowsForQuery:sqlStr];
+        
+        [pickerView selectRow:[data indexOfObject:[[regionsArr objectAtIndex:0] objectForKey:@"full_name"]]+1 inComponent:0 animated:YES];
+    }
 }
 
 -(IBAction) confirmSelection:(id) sender
@@ -198,7 +213,7 @@
 
 -(IBAction) cancelSelection:(id) sender
 {
-    [self dismissModalViewControllerAnimated:YES];
+    [delegate didDismissRegionSelectView];
 }
 
 
@@ -213,6 +228,7 @@
     [indicator startAnimating];
     [self performSelectorInBackground:@selector(performGetRegion:) withObject:nil];
 }
+
 -(void) performGetRegion:(id)sender
 {
     NSString *sqlStr = [NSString stringWithFormat:@"SELECT full_name FROM regions WHERE deleted = 0"];

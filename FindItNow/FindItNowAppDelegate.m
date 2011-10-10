@@ -38,6 +38,8 @@
         [self.window makeKeyAndVisible];
     } else {
         SetRegionViewController *setRegion = [[SetRegionViewController alloc] initWithNibName:@"SetRegionViewController" bundle:[self.navigationController nibBundle]];
+        setRegion.delegate = self;
+        
         [setRegion setWindow:self.window];
         [self.window.rootViewController presentModalViewController:setRegion animated:YES];
         
@@ -54,6 +56,11 @@
     [defaults synchronize];
     
     return YES;
+}
+
+-(void) didDismissRegionSelectView
+{
+    [self.window.rootViewController dismissModalViewControllerAnimated:YES];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

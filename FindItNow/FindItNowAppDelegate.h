@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SetRegionViewController.h"
 #import "FINDatabase.h"
 
 @class FindItNowViewController;
 
-@interface FindItNowAppDelegate : NSObject <UIApplicationDelegate> {
+@interface FindItNowAppDelegate : NSObject <UIApplicationDelegate, RegionViewControllerDelegate> {
     FINDatabase *db;
 }
 

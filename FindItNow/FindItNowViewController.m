@@ -63,27 +63,35 @@
 -(IBAction)showActionSheet:(id)sender {
 	UIActionSheet *popupQuery = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Back" destructiveButtonTitle:nil otherButtonTitles:@"Help", @"Region", nil];
 	popupQuery.actionSheetStyle = UIActionSheetStyleDefault;
-	[popupQuery showInView:self.view];
+	[popupQuery showInView:self.navigationController.view];
 	[popupQuery release];
 }
 
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-	if (buttonIndex == 0) {
-		UIViewController *controller = [[UIViewController alloc] initWithNibName:@"HelpView" bundle:[self nibBundle]];
-        //[self presentModalViewController:controller animated:YES];
-        controller.title = @"Help";
-        [self.tabBarController.navigationController pushViewController:controller animated:YES];
+    if (buttonIndex != actionSheet.destructiveButtonIndex && buttonIndex != actionSheet.cancelButtonIndex){
+        NSString *title = [actionSheet buttonTitleAtIndex:buttonIndex];
+        if ([title isEqualToString:@"Help"]) {
+            UIViewController *controller = [[UIViewController alloc] initWithNibName:@"HelpView" bundle:[self nibBundle]];
+            //[self presentModalViewController:controller animated:YES];
+            controller.title = @"Help";
+            [self.tabBarController.navigationController pushViewController:controller animated:YES];
         
-        [controller release];
-	}
-    if (buttonIndex == 1) {
-        SetRegionViewController *controller = [[SetRegionViewController alloc] initWithNibName:@"SetRegionViewController" bundle:[self nibBundle]];
-        //[self presentModalViewController:controller animated:YES];
-        [self.tabBarController presentModalViewController:controller animated:YES];
+            [controller release];
+        }
+        else if ([title isEqualToString:@"Region"]) {
+            SetRegionViewController *controller = [[SetRegionViewController alloc] initWithNibName:@"SetRegionViewController" bundle:[self nibBundle]];
+            controller.delegate = self;
+            //[self presentModalViewController:controller animated:YES];
+            [self.tabBarController presentModalViewController:controller animated:YES];
         
-        [controller release];
+            [controller release];
+        }
     }
 }
 
+-(void) didDismissRegionSelectView
+{
+    [self.tabBarController dismissModalViewControllerAnimated:YES];
+}
 
 @end

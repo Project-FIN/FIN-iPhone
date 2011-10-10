@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SetRegionViewController.h"
 @class MenuView;
 
-@interface FindItNowViewController : UIViewController <UIActionSheetDelegate> {
+@interface FindItNowViewController : UIViewController <UIActionSheetDelegate, RegionViewControllerDelegate> {
     
 }
 @property (nonatomic, retain) IBOutlet UITabBarController *tabBarController;

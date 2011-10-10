@@ -13,6 +13,9 @@
 #import "Reachability.h"
 
 @class Reachability;
+@protocol RegionViewControllerDelegate <NSObject>
+- (void)didDismissRegionSelectView;
+@end
 
 @interface SetRegionViewController : UIViewController<UIPickerViewDelegate, UIPickerViewDataSource, UIAlertViewDelegate>
 {
@@ -23,11 +26,14 @@
     SQLiteManager *dbManager;
     IBOutlet UIButton *confirmBtn;
     IBOutlet UIButton *cancelBtn;
+    id<RegionViewControllerDelegate> *delegate;
         
     Reachability *internetReachable;
     Reachability *hostReachable;
 }
 @property (nonatomic, retain) UIActivityIndicatorView *indicator;
+@property (nonatomic, assign) id<RegionViewControllerDelegate> *delegate;
+
 - (void) setWindow:(UIWindow*) win;
 - (void) getRegionsList;
 - (NSNumber*) getRIDFromRegion:(NSString*)region;
@@ -38,4 +44,5 @@
 -(void) removeIndicatorForRegion:(id) sender;
 -(void) checkNetworkStatus:(NSNotification *)notice;
 -(void) performGetRegion:(id) sender;
+-(void) setPickerViewDefault;
 @end
