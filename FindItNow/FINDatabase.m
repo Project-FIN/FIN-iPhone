@@ -1,6 +1,6 @@
 //
 //  FINDatabase.m
-//  FindItNow
+//  FIN
 //
 //  Created by Eric Hare on 9/1/11.
 //  Copyright 2011 University of Washington. All rights reserved.

@@ -1,6 +1,6 @@
 //
 // FloorInfoTableViewController.m
-// FindItNow
+// FIN
 //
 // Created by Chanel Huang on 2011/8/1.
 // Copyright 2011ๅนด University of Washington. All rights reserved.

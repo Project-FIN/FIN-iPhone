@@ -1,6 +1,6 @@
 //
 //  MapViewController.m
-//  FindItNow
+//  FIN
 //
 //  Created by Chanel Huang on 2011/8/2.
 //  Copyright 2011年 University of Washington. All rights reserved.
@@ -9,7 +9,6 @@
 #import "MapViewController.h"
 #import "InfoPopUpView.h"	
 #import "ItemAnnotation.h"
-#import "SetRegionTableController.h"
 
 @implementation MapViewController
 @synthesize mapView;

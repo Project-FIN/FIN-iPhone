@@ -1,6 +1,6 @@
 //
 //  MenuViewController.m
-//  FindItNow
+//  FIN
 //
 //  Created by Chanel Huang on 2011/7/26.
 //  Copyright 2011年 University of Washington. All rights reserved.
@@ -126,7 +126,7 @@
 -(void) viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    self.tabBarController.navigationItem.title = @"FindItNow";
+    self.tabBarController.navigationItem.title = @"FIN";
     for (UIView* subView in btnGrid.subviews){
         [subView removeFromSuperview];
     }

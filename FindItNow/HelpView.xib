@@ -2,13 +2,13 @@
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="7.10">
 	<data>
 		<int key="IBDocument.SystemTarget">1056</int>
-		<string key="IBDocument.SystemVersion">11B26</string>
-		<string key="IBDocument.InterfaceBuilderVersion">1617</string>
-		<string key="IBDocument.AppKitVersion">1138</string>
-		<string key="IBDocument.HIToolboxVersion">566.00</string>
+		<string key="IBDocument.SystemVersion">10K549</string>
+		<string key="IBDocument.InterfaceBuilderVersion">1305</string>
+		<string key="IBDocument.AppKitVersion">1038.36</string>
+		<string key="IBDocument.HIToolboxVersion">461.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-			<string key="NS.object.0">534</string>
+			<string key="NS.object.0">300</string>
 		</object>
 		<object class="NSArray" key="IBDocument.IntegratedClassDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -47,7 +47,6 @@
 						<int key="NSvFlags">274</int>
 						<string key="NSFrameSize">{320, 460}</string>
 						<reference key="NSSuperview" ref="191373211"/>
-						<reference key="NSWindow"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MSAxIDEAA</bytes>
@@ -56,8 +55,7 @@
 						<bool key="IBUIMultipleTouchEnabled">YES</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<bool key="IBUIEditable">NO</bool>
-						<object class="NSMutableString" key="IBUIText">
-							<bytes key="NS.bytes">UXVlc3Rpb25zCgpIb3cgZG8gSSBmaW5kIGFuIGl0ZW0/CuKAqFN0YXJ0IG9uIHRoZSBDYXRlZ29yeSB0
+						<string type="base64-UTF8" key="IBUIText">UXVlc3Rpb25zCgpIb3cgZG8gSSBmaW5kIGFuIGl0ZW0/CuKAqFN0YXJ0IG9uIHRoZSBDYXRlZ29yeSB0
 YWIgb24gdGhlIEhvbWUgc2NyZWVuLiAgU2VsZWN0IGEgY2F0ZWdvcnkgYnV0dG9uICh5b3UgbWF5IGJl
 IHByb21wdGVkIHRvIHNlbGVjdCBhIHNlY29uZGFyeSBpdGVtIHR5cGUpLCBhbmQgdGhlIG1hcCB3aWxs
 IGxhdW5jaC4gIFRoZSBtYXAgaWNvbnMgcmVwcmVzZW50IHRoZSBtdWx0aXBsZSBsb2NhdGlvbnMgd2hl
@@ -71,31 +69,29 @@ SWYgeW91J3JlIHNlYXJjaGluZyBieSBjYXRlZ29yeSwgdGhlIHBvcHVwIHdpbGwgb25seSBzaG93IGZs
 b29ycyB0aGF0IGN1cnJlbnRseSBob3VzZSBpdGVtcyBvZiB0aGF0IGNhdGVnb3J5LiAgSWYgeW91IHdp
 c2ggdG8gdmlldyBhbGwgZmxvb3JzIGZvciBhIGJ1aWxkaW5nLCByZXR1cm4gdG8gdGhlIEhvbWUgc2Ny
 ZWVuLCBzd2l0Y2ggdG8gdGhlIEJ1aWxkaW5ncyB0YWIsIGFuZCBzZWFyY2ggYnkgYnVpbGRpbmcgbmFt
-ZSBpbnN0ZWFkLgoKQ2FuIEkgc3VibWl0IGFuIGlzc3VlIG9yIGZlZWRiYWNrIGFib3V0IEZpbmRJdE5v
-dz8KV2UgZGVmaW5pdGVseSBhcHByZWNpYXRlIGZlZWRiYWNrIG9mIGFueSBraW5kLiAgVmlzaXQgb3Vy
-IGdpdGh1YiBwcm9qZWN0IHNpdGUgKGxpbmsgbG9jYXRlZCBhdCB0aGUgYm90dG9tIG9mIHRoaXMgcGFn
-ZSksIGFuZCBmaWxlIHlvdXIgaXNzdWUgb3IgZmVlZGJhY2sgdW5kZXIgSXNzdWVzLiIKCuKAqFRyb3Vi
-bGVzaG9vdGluZwoKTG9jYXRpb24gZGV0ZWN0aW9uIHNlZW1zIG9mZgpZb3UgbWF5IGJlIGluIGFuIGFy
-ZWEgd2l0aCBwb29yIFdpRmkgY292ZXJhZ2UuICBGb3IgYmVzdCByZXN1bHRzLCB0cnkgbGF1bmNoaW5n
-IHRoZSBtYXAgd2l0aGluIGEgV2lGaSBob3RzcG90LCBsaWtlIGluc2lkZSBhIGJ1aWxkaW5nLgoK4oCo
-RGlzY2xhaW1lcnMKCkFjY3VyYWN5CkZJTiBkb2VzIG5vdCBndWFyYW50ZWUgdGhhdCBhbGwgbG9jYXRp
-b25zIG9uIHRoZSBtYXAgZXhpc3Qgb3IgY29udGFpbiBhY2N1cmF0ZSBpbmZvcm1hdGlvbi4gIEZvciBl
-eGFtcGxlLCBtYWlsYm94IHBpY2t1cCB0aW1lcyBvciBjb2ZmZWUgc3RhbmQgaG91cnMgYXJlIHN1Ympl
-Y3QgdG8gY2hhbmdlIGFuZCBtYXkgZGVwZW5kIG9uIGNsYXNzZXMgYmVpbmcgaW4gc2Vzc2lvbi4gIENl
-cnRhaW4gYnVpbGRpbmdzIG1heSBiZSBpbmFjY2Vzc2libGUgZHVlIHRvIG9uZ29pbmcgY29uc3RydWN0
-aW9uLiAgRGlzdGFuY2VzIHRvIGxvY2F0aW9ucyBhbmQgd2Fsa2luZyB0aW1lcyBhcmUgcHVyZWx5IGVz
-dGltYXRlcy4KCkV4Y2x1c2lvbiBvZiBjZXJ0YWluIGl0ZW0gbG9jYXRpb25zIGFuZCBzZXJ2aWNlcwpG
-SU4gaGFzIHB1cnBvc2VseSBleGNsdWRlZCBjZXJ0YWluIGl0ZW1zIGFuZCBzZXJ2aWNlcyAoc3VjaCBh
-cyBwcml2YXRlIHJlc3Ryb29tcykgdGhhdCBhcmUgaW5hY2Nlc3NpYmxlIHRvIHRoZSBnZW5lcmFsIHB1
-YmxpYy4gIFdlIGRvIG5vdCByZWNvbW1lbmQgc3VibWl0dGluZyB0aGVzZSBsb2NhdGlvbnMgdG8gdGhl
-IGRhdGFiYXNlLgoKQWJvdXQKRmluZEl0Tm93IDEuMCwgR05VIEdQTCB2MwpGaW5kSXROb3cgaXMgYW4g
-aU9TIGFwcGxpY2F0aW9uIGRldmVsb3BlZCBmb3IgYSBzb2Z0d2FyZSBlbmdpbmVlcmluZyBwcm9qZWN0
-IGF0IHRoZSBVbml2ZXJzaXR5IG9mIFdhc2hpbmd0b24uCkNvbnRyaWJ1dG9yczogRHVzdGluIEFicmFt
-c29uLCBNYWkgRGFuZywgTWljaGFlbCBGYWxjb25lLCBFcmljIEhhcmUsIENoYW5lbCBIdWFuZywgSmls
-bHluIEpvaG5zb24sIEphcmVkIEpvbmVzLCBhbmQgU3BlbmNlciBUaG9tYXMuCgpWaXNpdCBvdXIgcHJv
-amVjdCBzaXRlIHRvIGxlYXJuIG1vcmUgYXQ6IGh0dHA6Ly93d3cuZ2l0aHViLmNvbS9Qcm9qZWN0LUZJ
-Ti9GSU4taVBob25lA</bytes>
-						</object>
+ZSBpbnN0ZWFkLgoKQ2FuIEkgc3VibWl0IGFuIGlzc3VlIG9yIGZlZWRiYWNrIGFib3V0IEZJTj8KV2Ug
+ZGVmaW5pdGVseSBhcHByZWNpYXRlIGZlZWRiYWNrIG9mIGFueSBraW5kLiAgVmlzaXQgb3VyIGdpdGh1
+YiBwcm9qZWN0IHNpdGUgKGxpbmsgbG9jYXRlZCBhdCB0aGUgYm90dG9tIG9mIHRoaXMgcGFnZSksIGFu
+ZCBmaWxlIHlvdXIgaXNzdWUgb3IgZmVlZGJhY2sgdW5kZXIgSXNzdWVzLiIKCuKAqFRyb3VibGVzaG9v
+dGluZwoKTG9jYXRpb24gZGV0ZWN0aW9uIHNlZW1zIG9mZgpZb3UgbWF5IGJlIGluIGFuIGFyZWEgd2l0
+aCBwb29yIFdpRmkgY292ZXJhZ2UuICBGb3IgYmVzdCByZXN1bHRzLCB0cnkgbGF1bmNoaW5nIHRoZSBt
+YXAgd2l0aGluIGEgV2lGaSBob3RzcG90LCBsaWtlIGluc2lkZSBhIGJ1aWxkaW5nLgoK4oCoRGlzY2xh
+aW1lcnMKCkFjY3VyYWN5CkZJTiBkb2VzIG5vdCBndWFyYW50ZWUgdGhhdCBhbGwgbG9jYXRpb25zIG9u
+IHRoZSBtYXAgZXhpc3Qgb3IgY29udGFpbiBhY2N1cmF0ZSBpbmZvcm1hdGlvbi4gIEZvciBleGFtcGxl
+LCBtYWlsYm94IHBpY2t1cCB0aW1lcyBvciBjb2ZmZWUgc3RhbmQgaG91cnMgYXJlIHN1YmplY3QgdG8g
+Y2hhbmdlIGFuZCBtYXkgZGVwZW5kIG9uIGNsYXNzZXMgYmVpbmcgaW4gc2Vzc2lvbi4gIENlcnRhaW4g
+YnVpbGRpbmdzIG1heSBiZSBpbmFjY2Vzc2libGUgZHVlIHRvIG9uZ29pbmcgY29uc3RydWN0aW9uLiAg
+RGlzdGFuY2VzIHRvIGxvY2F0aW9ucyBhbmQgd2Fsa2luZyB0aW1lcyBhcmUgcHVyZWx5IGVzdGltYXRl
+cy4KCkV4Y2x1c2lvbiBvZiBjZXJ0YWluIGl0ZW0gbG9jYXRpb25zIGFuZCBzZXJ2aWNlcwpGSU4gaGFz
+IHB1cnBvc2VseSBleGNsdWRlZCBjZXJ0YWluIGl0ZW1zIGFuZCBzZXJ2aWNlcyAoc3VjaCBhcyBwcml2
+YXRlIHJlc3Ryb29tcykgdGhhdCBhcmUgaW5hY2Nlc3NpYmxlIHRvIHRoZSBnZW5lcmFsIHB1YmxpYy4g
+IFdlIGRvIG5vdCByZWNvbW1lbmQgc3VibWl0dGluZyB0aGVzZSBsb2NhdGlvbnMgdG8gdGhlIGRhdGFi
+YXNlLgoKQWJvdXQKRklOIDEuMCwgR05VIEdQTCB2MwpGSU4gaXMgYW4gaU9TIGFwcGxpY2F0aW9uIGRl
+dmVsb3BlZCBmb3IgYSBzb2Z0d2FyZSBlbmdpbmVlcmluZyBwcm9qZWN0IGF0IHRoZSBVbml2ZXJzaXR5
+IG9mIFdhc2hpbmd0b24uCkNvbnRyaWJ1dG9yczogRHVzdGluIEFicmFtc29uLCBNYWkgRGFuZywgTWlj
+aGFlbCBGYWxjb25lLCBFcmljIEhhcmUsIENoYW5lbCBIdWFuZywgSmlsbHluIEpvaG5zb24sIEphcmVk
+IEpvbmVzLCBhbmQgU3BlbmNlciBUaG9tYXMuCgpWaXNpdCBvdXIgcHJvamVjdCBzaXRlIHRvIGxlYXJu
+IG1vcmUgYXQ6IGh0dHA6Ly93d3cuZ2l0aHViLmNvbS9Qcm9qZWN0LUZJTi9GSU4taVBob25lA</string>
 						<object class="NSFont" key="IBUIFont">
 							<string key="NSName">Helvetica</string>
 							<double key="NSSize">15</double>
@@ -109,7 +105,6 @@ Ti9GSU4taVBob25lA</bytes>
 				</object>
 				<string key="NSFrame">{{0, 20}, {320, 460}}</string>
 				<reference key="NSSuperview"/>
-				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="233952967"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
@@ -214,6 +209,6 @@ Ti9GSU4taVBob25lA</bytes>
 		</object>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
-		<string key="IBCocoaTouchPluginVersion">534</string>
+		<string key="IBCocoaTouchPluginVersion">300</string>
 	</data>
 </archive>

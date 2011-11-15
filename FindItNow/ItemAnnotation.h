@@ -1,6 +1,6 @@
 //
 //  ItemAnnotation.h
-//  FindItNow
+//  FIN
 //
 //  Created by Eric Hare on 8/16/11.
 //  Copyright 2011 University of Washington. All rights reserved.
